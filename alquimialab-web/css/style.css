@@ -133,19 +133,25 @@ img { max-width: 100%; display: block; }
 /* === BOTÓN DE IDIOMA === */
 .lang-toggle {
   display: inline-flex; align-items: center; justify-content: center;
-  min-width: 46px; height: 36px; padding: 0 14px;
+  min-width: 46px; height: 36px; padding: 0 10px;
   margin-left: 12px;
-  font-family: inherit; font-size: 13px; font-weight: 700;
+  font-family: inherit; font-size: 12px; font-weight: 600;
   color: var(--purple); background: var(--surface);
   border: 1.5px solid var(--lavender); border-radius: 99px;
   cursor: pointer;
   transition: background .25s ease, transform .25s ease, box-shadow .25s ease;
+  letter-spacing: .02em;
 }
 .lang-toggle:hover {
   background: var(--lavender-light);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px var(--shadow);
 }
+/* Resalta el idioma activo dentro del texto "ES | EN" */
+.lang-toggle[data-lang="es"] { color: var(--bg); background: var(--purple); border-color: var(--purple); }
+.lang-toggle[data-lang="en"] { color: var(--purple); background: var(--surface); }
+.lang-toggle .cur { font-weight: 800; }
+.lang-toggle .sep { opacity: .45; margin: 0 3px; font-weight: 400; }
 
 /* === CONTENIDO PRINCIPAL === */
 .page { padding-top: 80px; }

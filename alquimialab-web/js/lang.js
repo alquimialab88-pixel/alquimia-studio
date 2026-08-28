@@ -81,7 +81,7 @@
     "Illustration": "Ilustración",
     "Print & Packaging": "Impreso y Empaques",
     "Character": "Personaje",
-    "View project": "Ver proyecto",
+    "View project": "Ver",
     "Brand Identity Exploration": "Exploración de Identidad de Marca",
     "User Experience Design": "Diseño de Experiencia de Usuario",
     "Social Media Campaign": "Campaña de Redes Sociales",
@@ -242,13 +242,29 @@
       document.documentElement.setAttribute("lang", "en");
     }
     var btn = document.getElementById("langToggle");
-    if (btn) btn.textContent = l === "es" ? "EN" : "ES";
+    if (btn) {
+      btn.setAttribute("data-lang", l);
+      btn.innerHTML = '<span class="cur" data-cur>ES</span><span class="sep">|</span><span class="cur" data-cur>EN</span>';
+      var cur = btn.querySelectorAll("[data-cur]");
+      cur[0].style.opacity = l === "es" ? "1" : ".45";
+      cur[1].style.opacity = l === "en" ? "1" : ".45";
+      btn.setAttribute("aria-label", l === "es" ? "Switch to English" : "Cambiar a Español");
+    }
     try { localStorage.setItem(STORE_KEY, l); } catch (e) { /* ignore */ }
   }
 
-  var lang = "es";
+  function detectLang() {
+    try {
+      var n = (navigator.language || navigator.userLanguage || "es").toLowerCase();
+      // Preferimos inglés para hispanohablantes de EE.UU./posibles angloparlantes
+      if (n.indexOf("en") === 0) return "en";
+      return "es";
+    } catch (e) { return "es"; }
+  }
+
+  var lang = null;
   try { lang = localStorage.getItem(STORE_KEY); } catch (e) { /* ignore */ }
-  if (lang !== "es" && lang !== "en") lang = "es";
+  if (lang !== "es" && lang !== "en") lang = detectLang();
   applyLang(lang);
 
   document.addEventListener("click", function (e) {
