@@ -723,6 +723,9 @@ img { max-width: 100%; display: block; }
     box-shadow: 0 8px 20px var(--shadow);
   }
   .nav-toggle { display: block; }
+  .nav-links.open .nav-dd-menu { left: 0; transform: translateY(6px); }
+  .nav-links.open .nav-dd:hover .nav-dd-menu,
+  .nav-links.open .nav-dd:focus-within .nav-dd-menu { transform: translateY(0); }
 
   .hero h1 { font-size: 30px; }
   .hero p { font-size: 16px; }
