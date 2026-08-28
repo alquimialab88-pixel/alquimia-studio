@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Alquimia Lab Portfolio — User Experience Design.">
+  <meta name="theme-color" content="#f2f2f2">
+  <title>User Experience Design · Alquimia Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">Alquimia Lab</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <div class="nav-dd">
+        <a href="portafolio.html" class="active">Portfolio <span class="nav-dd-arrow">▾</span></a>
+        <div class="nav-dd-menu">
+          <a href="portafolio.html#projects" class="nav-dd-featured">Projects <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          <a href="portafolio.html#about">About Me</a>
+          <a href="portafolio.html#experience">Work Experience</a>
+          <a href="portafolio.html#education">Education</a>
+        </div>
+      </div>
+      <a href="productos.html">Products</a>
+      <a href="contacto.html">Contact</a>
+    </div>
+    <button id="langToggle" class="lang-toggle" type="button" aria-label="Switch language" title="ES / EN">EN</button>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="page">
+
+    <!-- PROJECT HEADER -->
+    <section class="section" style="padding-top:60px;">
+      <div class="project-back">
+        <a href="portafolio.html" class="btn-primary btn-sm">&larr; Back to Portfolio</a>
+      </div>
+      <div class="section-title anim"><span>USER EXPERIENCE DESIGN</span></div>
+      <p class="section-intro anim d1">Landing pages and a mobile app designed with a focus on usability, clarity, and delightful interactions.</p>
+      <p class="modal-hint anim d1" style="margin-top:12px;text-align:center;">Tap on each project to preview it.</p>
+
+      <!-- UX GRID -->
+      <div class="ux-grid anim d2">
+        <div class="ux-card" onclick="openModal('modal-dual')">
+          <div class="ux-card-thumb"><img src="ux-dual.png" alt="Dual"></div>
+          <h3>Dual</h3>
+          <div class="ux-tag">Landing</div>
+        </div>
+        <div class="ux-card" onclick="openModal('modal-syngular')">
+          <div class="ux-card-thumb"><img src="ux-syngular.png" alt="Syngular"></div>
+          <h3>Syngular</h3>
+          <div class="ux-tag">Landing</div>
+        </div>
+        <div class="ux-card" onclick="openModal('modal-blink')">
+          <div class="ux-card-thumb"><img src="ux-blink.png" alt="Blink Spanish"></div>
+          <h3>Blink Spanish</h3>
+          <div class="ux-tag">Landing</div>
+        </div>
+        <div class="ux-card" onclick="openModal('modal-okuo')">
+          <div class="ux-card-thumb"><img src="ux-okuo.png" alt="Okuo"></div>
+          <h3>Okuo</h3>
+          <div class="ux-tag">Landing</div>
+        </div>
+        <div class="ux-card" onclick="openModal('modal-aqua')">
+          <div class="ux-card-thumb"><img src="ux-aqua.png" alt="Aqua"></div>
+          <h3>Aqua</h3>
+          <div class="ux-tag">Landing</div>
+        </div>
+        <div class="ux-card" onclick="openModal('modal-faith')">
+          <div class="ux-card-thumb"><img src="ux-faith.png" alt="Faith and Roots"></div>
+          <h3>Faith and Roots</h3>
+          <div class="ux-tag">Landing</div>
+        </div>
+        <div class="ux-card" onclick="openModal('modal-petsgo')">
+          <div class="ux-card-thumb"><img src="ux-petsgo.png" alt="PetsGo"></div>
+          <h3>PetsGo</h3>
+          <div class="ux-tag">App</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">&copy; 2026 Alquimia Lab &middot; Made with calm &amp; coffee</footer>
+
+  <!-- WHATSAPP -->
+  <a href="https://wa.me/573104108483" target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <!-- MODAL: Dual -->
+  <div class="modal-overlay" id="modal-dual" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" aria-label="Close" onclick="closeModal('modal-dual')">&times;</button>
+      <h3 class="modal-title">Dual</h3>
+      <div class="ux-frame">
+        <div class="ux-frame-bar"><span></span><span></span><span></span></div>
+        <div class="ux-frame-body"><img src="dual-landing.jpg" alt="Dual landing"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Syngular -->
+  <div class="modal-overlay" id="modal-syngular" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" aria-label="Close" onclick="closeModal('modal-syngular')">&times;</button>
+      <h3 class="modal-title">Syngular</h3>
+      <div class="ux-frame">
+        <div class="ux-frame-bar"><span></span><span></span><span></span></div>
+        <div class="ux-frame-body"><img src="syngular-landing.jpg" alt="Syngular landing"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Blink Spanish -->
+  <div class="modal-overlay" id="modal-blink" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" aria-label="Close" onclick="closeModal('modal-blink')">&times;</button>
+      <h3 class="modal-title">Blink Spanish</h3>
+      <div class="ux-frame">
+        <div class="ux-frame-bar"><span></span><span></span><span></span></div>
+        <div class="ux-frame-body"><img src="blink-landing.png" alt="Blink Spanish landing"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Okuo -->
+  <div class="modal-overlay" id="modal-okuo" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" aria-label="Close" onclick="closeModal('modal-okuo')">&times;</button>
+      <h3 class="modal-title">Okuo</h3>
+      <div class="ux-frame">
+        <div class="ux-frame-bar"><span></span><span></span><span></span></div>
+        <div class="ux-frame-body"><img src="okuo-landing.jpg" alt="Okuo landing"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Aqua -->
+  <div class="modal-overlay" id="modal-aqua" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" aria-label="Close" onclick="closeModal('modal-aqua')">&times;</button>
+      <h3 class="modal-title">Aqua</h3>
+      <div class="ux-frame">
+        <div class="ux-frame-bar"><span></span><span></span><span></span></div>
+        <div class="ux-frame-body"><img src="aqua-landing.jpg" alt="Aqua landing"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Faith and Roots -->
+  <div class="modal-overlay" id="modal-faith" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" aria-label="Close" onclick="closeModal('modal-faith')">&times;</button>
+      <h3 class="modal-title">Faith and Roots</h3>
+      <p class="modal-note anim d1">This design was a practice piece — not created for a client.</p>
+      <div class="ux-frame">
+        <div class="ux-frame-bar"><span></span><span></span><span></span></div>
+        <div class="ux-frame-body"><img src="faith-landing.png" alt="Faith and Roots landing"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: PetsGo (App) -->
+  <div class="modal-overlay" id="modal-petsgo" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" aria-label="Close" onclick="closeModal('modal-petsgo')">&times;</button>
+      <h3 class="modal-title">PetsGo</h3>
+      <div class="ux-figma-embed">
+        <iframe id="petsgo-figma" title="PetsGo App prototype" loading="lazy" allowfullscreen></iframe>
+      </div>
+      <div class="ux-figma-link">
+        <a href="https://www.figma.com/proto/OMlN6UZHsY7cvdrsLk9rYh/PetsGo-App?node-id=949-14763&p=f&viewport=513%2C690%2C0.15&t=uCe6I8f8dgmuVeY9-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=949%3A14763&show-proto-sidebar=1&page-id=0%3A1" target="_blank" rel="noopener" class="btn-primary btn-sm">Open in Figma</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('scroll', function() {
+      document.querySelector('.nav').classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    function openModal(id) {
+      document.getElementById(id).classList.add('show');
+      document.getElementById(id).setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('show');
+      document.getElementById(id).setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    document.querySelectorAll('.modal-overlay').forEach(function(ov) {
+      ov.addEventListener('click', function(e) {
+        if (e.target === ov) closeModal(ov.id);
+      });
+    });
+
+    var figmaProto = 'https://www.figma.com/proto/OMlN6UZHsY7cvdrsLk9rYh/PetsGo-App?node-id=949-14763&p=f&viewport=513%2C690%2C0.15&t=uCe6I8f8dgmuVeY9-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=949%3A14763&show-proto-sidebar=1&page-id=0%3A1';
+    document.getElementById('petsgo-figma').src = 'https://www.figma.com/embed?embed_host=share&url=' + encodeURIComponent(figmaProto);
+  </script>
+
+<script src="js/lang.js"></script>
+</body>
+</html>

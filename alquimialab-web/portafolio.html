@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Alquimia Lab Portfolio — Visual designer, branding, UI/UX, illustration, and packaging.">
+  <meta name="theme-color" content="#f2f2f2">
+  <title>Portfolio · Alquimia Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">Alquimia Lab</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <div class="nav-dd">
+        <a href="portafolio.html" class="active">Portfolio <span class="nav-dd-arrow">▾</span></a>
+        <div class="nav-dd-menu">
+          <a href="portafolio.html#projects" class="nav-dd-featured">Projects <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          <a href="portafolio.html#about">About Me</a>
+          <a href="portafolio.html#experience">Work Experience</a>
+          <a href="portafolio.html#education">Education</a>
+        </div>
+      </div>
+      <a href="productos.html">Products</a>
+      <a href="contacto.html">Contact</a>
+    </div>
+    <button id="langToggle" class="lang-toggle" type="button" aria-label="Switch language" title="ES / EN">EN</button>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="page">
+
+    <!-- ABOUT + SKILLS + TOOLS -->
+    <section class="section" id="about">
+      <div class="section-title anim"><span>About Me</span></div>
+
+      <div class="about-card anim d1">
+        <!-- PHOTO + BIO -->
+        <div class="about-top">
+          <div class="about-photo">
+            <img src="foto-isabel.jpg" alt="Isabel Boder">
+          </div>
+          <div class="about-text">
+            <h2>Isabel Correa Boder</h2>
+            <div class="role">Graphic Designer &amp; Visual Content Curator</div>
+            <p>
+              Hi! I'm Isabel Boder, a 30-year-old passionate graphic designer. I thrive in both collaborative and independent environments, bringing a strong sense of responsibility and discipline to successfully tackle every project.
+            </p>
+            <p>
+              In the fast-paced world of design, I believe in staying curious, continuously learning, and keeping up with the latest tools, trends, and creative strategies. I'm committed to growing every day to consistently deliver work that exceeds expectations.
+            </p>
+          </div>
+        </div>
+
+        <div class="about-divider"></div>
+
+        <!-- SKILLS -->
+        <div class="about-section-label">Skills</div>
+        <div class="skills-row">
+          <div class="skill-item">
+            <div class="skill-circle">
+              <svg viewBox="0 0 36 36">
+                <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#eee" stroke-width="2.5"/>
+                <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#6462ab" stroke-width="2.5" stroke-dasharray="90, 100" stroke-linecap="round"/>
+              </svg>
+              <span class="skill-pct">90%</span>
+            </div>
+            <span class="skill-name">Time Management</span>
+          </div>
+          <div class="skill-item">
+            <div class="skill-circle">
+              <svg viewBox="0 0 36 36">
+                <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#eee" stroke-width="2.5"/>
+                <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#6462ab" stroke-width="2.5" stroke-dasharray="90, 100" stroke-linecap="round"/>
+              </svg>
+              <span class="skill-pct">90%</span>
+            </div>
+            <span class="skill-name">Planning</span>
+          </div>
+          <div class="skill-item">
+            <div class="skill-circle">
+              <svg viewBox="0 0 36 36">
+                <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#eee" stroke-width="2.5"/>
+                <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#a29de0" stroke-width="2.5" stroke-dasharray="80, 100" stroke-linecap="round"/>
+              </svg>
+              <span class="skill-pct">80%</span>
+            </div>
+            <span class="skill-name">Teamwork</span>
+          </div>
+          <div class="skill-item">
+            <div class="skill-circle">
+              <svg viewBox="0 0 36 36">
+                <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#eee" stroke-width="2.5"/>
+                <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#a29de0" stroke-width="2.5" stroke-dasharray="80, 100" stroke-linecap="round"/>
+              </svg>
+              <span class="skill-pct">80%</span>
+            </div>
+            <span class="skill-name">Communication</span>
+          </div>
+        </div>
+
+        <div class="about-divider"></div>
+
+        <!-- TOOLS -->
+        <div class="about-section-label">Tools</div>
+        <div class="tools-list">
+          <div class="tool-bar">
+            <div class="tool-info"><span class="tool-icon">Ai</span><span>Adobe Illustrator</span></div>
+            <div class="tool-track"><div class="tool-fill" style="width:90%;"></div></div>
+            <span class="tool-pct">90%</span>
+          </div>
+          <div class="tool-bar">
+            <div class="tool-info"><span class="tool-icon">Fi</span><span>Figma</span></div>
+            <div class="tool-track"><div class="tool-fill" style="width:70%;"></div></div>
+            <span class="tool-pct">70%</span>
+          </div>
+          <div class="tool-bar">
+            <div class="tool-info"><span class="tool-icon">Ae</span><span>After Effects</span></div>
+            <div class="tool-track"><div class="tool-fill" style="width:70%;"></div></div>
+            <span class="tool-pct">70%</span>
+          </div>
+          <div class="tool-bar">
+            <div class="tool-info"><span class="tool-icon">Ps</span><span>Photoshop</span></div>
+            <div class="tool-track"><div class="tool-fill" style="width:70%;"></div></div>
+            <span class="tool-pct">70%</span>
+          </div>
+          <div class="tool-bar">
+            <div class="tool-info"><span class="tool-icon">Pr</span><span>Premiere Pro</span></div>
+            <div class="tool-track"><div class="tool-fill" style="width:50%;"></div></div>
+            <span class="tool-pct">50%</span>
+          </div>
+          <div class="tool-bar">
+            <div class="tool-info"><span class="tool-icon">Id</span><span>InDesign</span></div>
+            <div class="tool-track"><div class="tool-fill" style="width:50%;"></div></div>
+            <span class="tool-pct">50%</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK EXPERIENCE -->
+    <section class="section" id="experience" style="padding-top: 0;">
+      <div class="section-title anim"><span>Work Experience</span></div>
+      <div class="timeline anim d1">
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-year">2023 — Now</span>
+            <h3>Freepik Company</h3>
+            <div class="timeline-role">Visual Content Curator</div>
+            <p>Select and evaluate graphic resources (vectors &amp; photos) for publishing on Freepik.com</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-year">2023 — Now</span>
+            <h3>Freelance Designer</h3>
+            <div class="timeline-role">Various clients (Ongoing)</div>
+            <p>Branding, digital content, and visual design for web and social media</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-year">2021 — 2023</span>
+            <h3>Dual Content &amp; Marketing</h3>
+            <div class="timeline-role">Digital Graphic Designer</div>
+            <p>Created short animations in After Effects. Developed branding, visual identity, and social media layouts. Designed websites in Figma, including structure and sitemap. Created digital catalogs and print pieces: billboards, photo calls, flyers, stationery.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-year">2020</span>
+            <h3>La Company — Advertising Agency</h3>
+            <div class="timeline-role">Graphic Design Intern</div>
+            <p>Created mailings, banners for Instagram &amp; Facebook. Edited short videos and photo content. Designed and laid out the full real estate magazine EME.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-year">2020</span>
+            <h3>Blink Spanish Immersion</h3>
+            <div class="timeline-role">Graphic Designer</div>
+            <p>Updated the brand using the newly designed logo. Designed learning books to help improve Spanish skills. Handled the design and layout of the website: www.blinkspanish.com</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section class="section" id="education" style="padding-top: 0;">
+      <div class="section-title anim"><span>Education</span></div>
+      <div class="timeline anim d1">
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-year">2016 — 2020</span>
+            <h3>Institución Universitaria Pascual Bravo</h3>
+            <div class="timeline-role">Associate Degree in Graphic Design Management</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-year">2020 — 2024</span>
+            <h3>Institución Universitaria Pascual Bravo</h3>
+            <div class="timeline-role">Bachelor's Degree in Graphic Design</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-year">2023</span>
+            <h3>Coderhouse</h3>
+            <div class="timeline-role">UI/UX Design Certificate</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-year">2026</span>
+            <h3>EducaciónIT</h3>
+            <div class="timeline-role">User Research</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
+    <section class="section" style="padding-top: 0;">
+      <div class="section-title anim"><span>Certifications</span></div>
+      <div class="timeline anim d1">
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-year">2026</span>
+            <h3>Notion Advanced Badge</h3>
+            <div class="timeline-role">Notion</div>
+            <p>Credential ID: 9jeajmszyggp</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-year">2026</span>
+            <h3>Notion Workflows Badge</h3>
+            <div class="timeline-role">Notion</div>
+            <p>Credential ID: tdreqsssjkra</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-year">2026</span>
+            <h3>Notion Essentials Badge</h3>
+            <div class="timeline-role">Notion</div>
+            <p>Credential ID: 2n6z7wwujeow</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="section" style="padding-top: 0;">
+      <div class="section-title anim"><span>Services</span></div>
+
+      <div class="services-grid anim d1">
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c1.1 0 2-.9 2-2 0-.51-.19-.98-.52-1.34-.3-.33-.48-.76-.48-1.16 0-.88.72-1.6 1.6-1.6H16c3.31 0 6-2.69 6-6 0-5.52-4.48-9.8-10-9.8z"/><circle cx="7.5" cy="11.5" r="1.5"/><circle cx="10.5" cy="7.5" r="1.5"/><circle cx="15.5" cy="7.5" r="1.5"/><circle cx="17.5" cy="11.5" r="1.5"/></svg>
+          </div>
+          <h3>Branding</h3>
+          <p>Creation of unique brand identities, including logos, visual systems, and brand guidelines.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><circle cx="12" cy="10" r="3" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          </div>
+          <h3>UI/UX Design</h3>
+          <p>Design of intuitive and user-centered digital experiences, including user research, wireframing, interface design, and interactive prototyping.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18" stroke-linecap="round"/><circle cx="12" cy="10" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          </div>
+          <h3>Social Media Design</h3>
+          <p>Creation of engaging social media visuals, campaign graphics, post templates, and story designs that help brands connect with their audience online.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">
+            <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <h3>Visual Design</h3>
+          <p>Development of creative visual assets including editorial design, packaging, illustrations, and motion graphics for digital and print media.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section" id="projects" style="padding-top: 0;">
+      <div class="section-title anim"><span>Projects</span></div>
+
+      <div class="portfolio-grid anim d1">
+        <div class="portfolio-card">
+          <div class="thumb" style="position:relative;">
+            <span style="position:absolute;top:12px;left:12px;background:rgba(255,255,255,.9);color:#6462ab;font-size:10px;font-weight:700;padding:4px 10px;border-radius:99px;z-index:1;">Branding</span>
+            <img src="proj-branding.png" alt="Brand Identity Exploration" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <span class="view-project" onclick="window.open('branding.html','_self')">View project <span class="arrow">→</span></span>
+          </div>
+          <div class="info"><h3>Brand Identity Exploration</h3></div>
+        </div>
+        <div class="portfolio-card">
+          <div class="thumb" style="position:relative;">
+            <span style="position:absolute;top:12px;left:12px;background:rgba(255,255,255,.9);color:#6462ab;font-size:10px;font-weight:700;padding:4px 10px;border-radius:99px;z-index:1;">UI/UX Design</span>
+            <img src="proj-landing.png" alt="User Experience Design" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <span class="view-project" onclick="window.open('ux.html','_self')">View project <span class="arrow">→</span></span>
+          </div>
+          <div class="info"><h3>User Experience Design</h3></div>
+        </div>
+        <div class="portfolio-card">
+          <div class="thumb" style="position:relative;">
+            <span style="position:absolute;top:12px;left:12px;background:rgba(255,255,255,.9);color:#6462ab;font-size:10px;font-weight:700;padding:4px 10px;border-radius:99px;z-index:1;">Social Media</span>
+            <img src="proj-social.png" alt="Social Media Campaign" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <span class="view-project" onclick="window.open('social.html','_self')">View project <span class="arrow">→</span></span>
+          </div>
+          <div class="info"><h3>Social Media Campaign</h3></div>
+        </div>
+        <div class="portfolio-card">
+          <div class="thumb" style="position:relative;">
+            <span style="position:absolute;top:12px;left:12px;background:rgba(255,255,255,.9);color:#6462ab;font-size:10px;font-weight:700;padding:4px 10px;border-radius:99px;z-index:1;">Illustration</span>
+            <img src="proj-illustration.png" alt="Creative Illustration" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <span class="view-project" onclick="openModal('modal-illustration')">View project <span class="arrow">→</span></span>
+          </div>
+          <div class="info"><h3>Creative Illustration</h3></div>
+        </div>
+        <div class="portfolio-card">
+          <div class="thumb" style="position:relative;">
+            <span style="position:absolute;top:12px;left:12px;background:rgba(255,255,255,.9);color:#6462ab;font-size:10px;font-weight:700;padding:4px 10px;border-radius:99px;z-index:1;">Print &amp; Packaging</span>
+            <img src="proj-packaging.png" alt="Packaging &amp; Editorial" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <span class="view-project" onclick="openModal('modal-packaging')">View project <span class="arrow">→</span></span>
+          </div>
+          <div class="info"><h3>Packaging &amp; Editorial</h3></div>
+        </div>
+        <div class="portfolio-card">
+          <div class="thumb" style="position:relative;">
+            <span style="position:absolute;top:12px;left:12px;background:rgba(255,255,255,.9);color:#6462ab;font-size:10px;font-weight:700;padding:4px 10px;border-radius:99px;z-index:1;">Character</span>
+            <img src="proj-ai-characters.jpeg" alt="AI Characters" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <span class="view-project" onclick="window.open('ai-characters.html','_self')">View project <span class="arrow">→</span></span>
+          </div>
+          <div class="info"><h3>AI Characters</h3></div>
+        </div>
+        <div class="portfolio-card">
+          <div class="thumb" style="position:relative;">
+            <span style="position:absolute;top:12px;left:12px;background:rgba(255,255,255,.9);color:#6462ab;font-size:10px;font-weight:700;padding:4px 10px;border-radius:99px;z-index:1;">Email Marketing</span>
+            <img src="proj-email.png" alt="Email Marketing" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <span class="view-project" onclick="openModal('modal-email')">View project <span class="arrow">→</span></span>
+          </div>
+          <div class="info"><h3>Email Marketing</h3></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">&copy; 2026 Alquimia Lab &middot; Made with calm &amp; coffee</footer>
+
+  <!-- WHATSAPP -->
+  <a href="https://wa.me/573104108483" target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+<!-- MODAL: Packaging & Editorial -->
+  <div class="modal-overlay" id="modal-packaging" aria-hidden="true">
+    <div class="modal modal-wide" role="dialog" aria-modal="true">
+      <button class="modal-close" aria-label="Close" onclick="closeModal('modal-packaging')">&times;</button>
+      <h3 class="modal-title">Packaging &amp; Editorial</h3>
+      <h4 class="pack-section-title">Packaging</h4>
+      <div class="car-panel">
+        <button class="car-arrow prev" onclick="packNav(-1)">&larr;</button>
+        <div class="car-view"><img id="pack-big" src="pack-1.png" alt="Packaging piece"></div>
+        <button class="car-arrow next" onclick="packNav(1)">&rarr;</button>
+      </div>
+      <div class="car-counter" id="pack-counter">1 / 5</div>
+      <h4 class="pack-section-title">Editorial</h4>
+      <div class="car-panel">
+        <button class="car-arrow prev" onclick="edNav(-1)">&larr;</button>
+        <div class="car-view"><img id="ed-big" src="ed-1.png" alt="Editorial piece"></div>
+        <button class="car-arrow next" onclick="edNav(1)">&rarr;</button>
+      </div>
+      <div class="car-counter" id="ed-counter">1 / 5</div>
+    </div>
+  </div>
+
+  <!-- MODAL: Creative Illustration -->
+  <div class="modal-overlay" id="modal-illustration" aria-hidden="true">
+    <div class="modal modal-wide" role="dialog" aria-modal="true">
+      <button class="modal-close" aria-label="Close" onclick="closeModal('modal-illustration')">&times;</button>
+      <h3 class="modal-title">Creative Illustration</h3>
+      <div class="ill-main">
+        <img id="ill-big" src="illustration-1.jpg" alt="Illustration">
+      </div>
+      <div class="ill-thumbs">
+        <div class="ill-thumb active" onclick="illShow(0)"><img src="illustration-1.jpg" alt="Illustration 1"></div>
+        <div class="ill-thumb" onclick="illShow(1)"><img src="illustration-2.png" alt="Illustration 2"></div>
+        <div class="ill-thumb" onclick="illShow(2)"><img src="illustration-3.png" alt="Illustration 3"></div>
+        <div class="ill-thumb" onclick="illShow(3)"><img src="illustration-4.png" alt="Illustration 4"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Email Marketing -->
+  <div class="modal-overlay" id="modal-email" aria-hidden="true">
+    <div class="modal modal-wide" role="dialog" aria-modal="true">
+      <button class="modal-close" aria-label="Close" onclick="closeModal('modal-email')">&times;</button>
+      <h3 class="modal-title">Email Marketing</h3>
+      <div class="car-panel">
+        <button class="car-arrow prev" onclick="mailNav(-1)">&larr;</button>
+        <div class="car-view"><img id="mail-big" src="mail-thumbs/mail1.png" alt="Email design"></div>
+        <button class="car-arrow next" onclick="mailNav(1)">&rarr;</button>
+      </div>
+      <div class="car-counter" id="mail-counter">1 / 4</div>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('scroll', function() {
+      document.querySelector('.nav').classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    function openModal(id) {
+      document.getElementById(id).classList.add('show');
+      document.getElementById(id).setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('show');
+      document.getElementById(id).setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    document.querySelectorAll('.modal-overlay').forEach(function(ov) {
+      ov.addEventListener('click', function(e) {
+        if (e.target === ov) closeModal(ov.id);
+      });
+    });
+
+    function illShow(index) {
+      var images = ['illustration-1.jpg', 'illustration-2.png', 'illustration-3.png', 'illustration-4.png'];
+      document.getElementById('ill-big').src = images[index];
+      var thumbs = document.querySelectorAll('.ill-thumb');
+      thumbs.forEach(function(t, i) { t.classList.toggle('active', i === index); });
+    }
+    var packList = ['pack-1.png', 'pack-2.png', 'pack-3.png', 'pack-4.png', 'pack-5.png'];
+    var packIdx = 0;
+    function packNav(dir) {
+      packIdx = (packIdx + dir + packList.length) % packList.length;
+      document.getElementById('pack-big').src = packList[packIdx];
+      document.getElementById('pack-counter').textContent = (packIdx + 1) + ' / ' + packList.length;
+    }
+    var edList = ['ed-1.png', 'ed-2.png', 'ed-3.png', 'ed-4.png', 'ed-5.png'];
+    var edIdx = 0;
+    function edNav(dir) {
+      edIdx = (edIdx + dir + edList.length) % edList.length;
+      document.getElementById('ed-big').src = edList[edIdx];
+      document.getElementById('ed-counter').textContent = (edIdx + 1) + ' / ' + edList.length;
+    }
+    var mailList = ['mail-thumbs/mail1.png', 'mail-thumbs/mail2.png', 'mail-thumbs/mail3.png', 'mail-thumbs/mail4.png'];
+    var mailIdx = 0;
+    function mailNav(dir) {
+      mailIdx = (mailIdx + dir + mailList.length) % mailList.length;
+      document.getElementById('mail-big').src = mailList[mailIdx];
+      document.getElementById('mail-counter').textContent = (mailIdx + 1) + ' / ' + mailList.length;
+    }
+  </script>
+
+<script src="js/lang.js"></script>
+</body>
+</html>

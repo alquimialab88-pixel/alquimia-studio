@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Alquimia Lab Products — Notion templates, coloring books, and productivity tools.">
+  <meta name="theme-color" content="#f2f2f2">
+  <title>Products · Alquimia Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">Alquimia Lab</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <div class="nav-dd">
+        <a href="portafolio.html">Portfolio <span class="nav-dd-arrow">▾</span></a>
+        <div class="nav-dd-menu">
+          <a href="portafolio.html#projects" class="nav-dd-featured">Projects <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          <a href="portafolio.html#about">About Me</a>
+          <a href="portafolio.html#experience">Work Experience</a>
+          <a href="portafolio.html#education">Education</a>
+        </div>
+      </div>
+      <a href="productos.html" class="active">Products</a>
+      <a href="contacto.html">Contact</a>
+    </div>
+    <button id="langToggle" class="lang-toggle" type="button" aria-label="Switch language" title="ES / EN">EN</button>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="page" id="products-page">
+
+    <!-- BANNER -->
+    <section class="section">
+      <div class="products-banner anim">
+        <h2>My Products</h2>
+        <p>Tools and creativity to organize your life, find calm, and work with intention.</p>
+      </div>
+
+      <!-- YOUTUBE -->
+      <div class="youtube-banner anim d1" style="margin-top: 24px; margin-bottom: 32px;">
+        <div class="youtube-thumb">
+          <video src="lofi-video.mp4" autoplay muted loop playsinline preload="metadata" poster=""></video>
+        </div>
+        <div class="youtube-text">
+          <h3>My Lofi Music</h3>
+          <p>Lo-Fi · Alquimia Lab</p>
+          <a href="https://www.youtube.com/channel/UCWb7zKnOw5k_XDgfUcBn9eQ" target="_blank" rel="noopener" class="btn-secondary btn-sm">Subscribe on YouTube →</a>
+        </div>
+      </div>
+
+      <!-- CATEGORIES -->
+      <div class="category-grid anim d1" id="categories-grid">
+        <div class="category-card" id="cat-notion">
+          <div class="category-media"><img src="notion-featured.png" alt="Notion Templates"></div>
+          <h3>Notion Templates</h3>
+          <p>Productivity, planning, and personal &amp; professional organization systems. 7 templates available.</p>
+          <button class="btn-primary btn-sm" onclick="document.getElementById('notion-products').style.display='block';document.getElementById('impresos-products').style.display='none';">View all</button>
+        </div>
+        <div class="category-card" id="cat-impresos">
+          <div class="category-media"><img src="printed-featured.png" alt="Printed Products"></div>
+          <h3>Printed Products</h3>
+          <p>Coloring books, productivity PDFs, and more. Available on Amazon and Gumroad.</p>
+          <button class="btn-primary btn-sm" onclick="document.getElementById('impresos-products').style.display='block';document.getElementById('notion-products').style.display='none';">View all</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOTION TEMPLATES -->
+    <section class="section" id="notion-products" style="display:none; padding-top: 0;">
+      <button class="btn-secondary btn-sm" onclick="document.getElementById('notion-products').style.display='none';" style="margin-bottom:20px;">← Back</button>
+      <div class="section-title"><span>Notion Templates</span></div>
+
+      <div class="notion-grid">
+        <div class="notion-card">
+          <img class="notion-thumb" src="cover-freelancer-crm.png" alt="Freelancer CRM">
+          <div class="notion-info">
+            <h3>Freelancer CRM - Planner</h3>
+            <p>Operating system to structure your workflow from start to finish.</p>
+            <span class="notion-price">$9.99</span>
+            <a href="https://bordergaze.gumroad.com/l/FreelancerCRM?wanted=true" target="_blank" rel="noopener" class="btn-primary btn-sm" style="width:100%;justify-content:center;">Buy</a>
+          </div>
+        </div>
+
+        <div class="notion-card">
+          <img class="notion-thumb" src="cover-finance-free.png" alt="Finance Planner Free">
+          <div class="notion-info">
+            <h3>Finance Planner Free</h3>
+            <p>Organize your personal finances with a visual and intuitive system.</p>
+            <span class="notion-price" style="color:var(--text-muted);">Free</span>
+            <a href="https://www.notion.com/templates/finance-planner-785" target="_blank" rel="noopener" class="btn-secondary btn-sm" style="width:100%;justify-content:center;">Download</a>
+          </div>
+        </div>
+
+        <div class="notion-card">
+          <img class="notion-thumb" src="cover-finance-pro.png" alt="Finance Planner Pro">
+          <div class="notion-info">
+            <h3>Finance Planner Pro</h3>
+            <p>Advanced financial tracking with detailed reports and projections.</p>
+            <span class="notion-price">$9.99</span>
+            <a href="https://www.notion.com/templates/finance-planner-pro" target="_blank" rel="noopener" class="btn-primary btn-sm" style="width:100%;justify-content:center;">Buy</a>
+          </div>
+        </div>
+
+        <div class="notion-card">
+          <img class="notion-thumb" src="cover-habit.png" alt="Habit Planner">
+          <div class="notion-info">
+            <h3>Habit Planner</h3>
+            <p>Transform your habits without the visual guilt of missed days from the past. A clean-slate design to keep your mind clear and focused entirely on your growth.</p>
+            <span class="notion-price" style="color:var(--text-muted);">Free</span>
+            <a href="https://www.notion.com/templates/habit-planner" target="_blank" rel="noopener" class="btn-secondary btn-sm" style="width:100%;justify-content:center;">Download</a>
+          </div>
+        </div>
+
+        <div class="notion-card">
+          <div class="notion-thumb" style="background: linear-gradient(135deg, #6462ab 0%, #524f96 100%); display:flex; align-items:center; justify-content:center; color:#fff; font-size:32px;">🎓</div>
+          <div class="notion-info">
+            <h3>Student OS & Study Planner</h3>
+            <p>Say goodbye to scattered notes and missed deadlines with a single minimalist dashboard. Run your entire student life smoothly, from daily tasks to final exams.</p>
+            <span class="notion-price">$5.99</span>
+            <a href="https://www.notion.com/templates/student-os-study-planner" target="_blank" rel="noopener" class="btn-primary btn-sm" style="width:100%;justify-content:center;">Buy</a>
+          </div>
+        </div>
+
+        <div class="notion-card">
+          <img class="notion-thumb" src="cover-quiet-mind.png" alt="Quiet Mind Planner">
+          <div class="notion-info">
+            <h3>Quiet Mind Planner</h3>
+            <p>Free your mind from mental noise with a minimalist sanctuary designed to protect your energy and bring calm. Transform your daily routines into a gentle daily flow of intentional reflection.</p>
+            <span class="notion-price" style="color:var(--text-muted);">Free</span>
+            <a href="https://www.notion.com/templates/quiet-mind-planner" target="_blank" rel="noopener" class="btn-secondary btn-sm" style="width:100%;justify-content:center;">Download</a>
+          </div>
+        </div>
+
+        <div class="notion-card">
+          <img class="notion-thumb" src="cover-youtube.png" alt="YouTube Creator OS">
+          <div class="notion-info">
+            <h3>YouTube Creator OS – Planner & Script</h3>
+            <p>Stop losing video ideas with a comprehensive Notion workspace built for creators and producers. Bring strategic clarity to your channel, from long-form scripts to viral shorts.</p>
+            <span class="notion-price">$15</span>
+            <a href="https://www.notion.com/templates/youtube-creator-os-automated-social-media-planner-script" target="_blank" rel="noopener" class="btn-primary btn-sm" style="width:100%;justify-content:center;">Buy</a>
+          </div>
+        </div>
+
+        <div class="notion-card">
+          <img class="notion-thumb" src="cover-social-media.png" alt="Social Media Planner">
+          <div class="notion-info">
+            <h3>Social Media Planner</h3>
+            <p>Bring mental clarity and absolute control to your digital business with a minimalist ecosystem designed for creators and entrepreneurs. Manage everything seamlessly in one aesthetic place.</p>
+            <span class="notion-price">$4</span>
+            <a href="https://www.notion.com/templates/social-media-planner-256" target="_blank" rel="noopener" class="btn-primary btn-sm" style="width:100%;justify-content:center;">Buy</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRINTED PRODUCTS -->
+    <section class="section" id="impresos-products" style="display:none; padding-top: 0;">
+      <div class="section-title"><span>Printed Products</span></div>
+      <button class="btn-secondary btn-sm" onclick="document.getElementById('impresos-products').style.display='none';" style="margin-bottom:20px;">← Back</button>
+
+      <div class="product-item">
+        <img class="product-media" src="print-focus.png" alt="Focus Dock">
+        <div class="product-body">
+          <h3>Focus Dock</h3>
+          <p>Your Notion isn't broken. It's just poorly designed. 43-page protocol.</p>
+        </div>
+        <span class="product-price">$27</span>
+        <a href="http://getfocusdock.com/isabel" target="_blank" rel="noopener" class="btn-primary btn-sm">Buy</a>
+      </div>
+
+      <div class="product-item">
+        <img class="product-media" src="print-coloring.png" alt="Lofi Coloring">
+        <div class="product-body">
+          <h3>Coloring Books — Lofi Coloring</h3>
+          <p>Available in English and Spanish. Print and digital edition.</p>
+        </div>
+        <div style="display:flex;gap:8px;flex-shrink:0;">
+          <a href="https://www.amazon.com/COLORING-Adults-Isabel-Correa-Boder/dp/B0HBML5LCP/?_encoding=UTF8" target="_blank" rel="noopener" class="btn-primary btn-sm">Amazon</a>
+          <a href="https://bordergaze.gumroad.com/l/LofiColoringBookAlquimia" target="_blank" rel="noopener" class="btn-secondary btn-sm">Digital</a>
+        </div>
+      </div>
+
+      <div class="product-item" style="opacity:.7; border-style: dashed;">
+        <div class="product-icon" style="background:var(--lavender);">📅</div>
+        <div class="product-body">
+          <h3>Planner 2027</h3>
+          <p>We're working on it&hellip;</p>
+        </div>
+        <span class="badge" style="background:var(--lavender);color:var(--purple);font-size:10px;font-weight:700;padding:4px 10px;border-radius:99px;">Soon</span>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">&copy; 2026 Alquimia Lab &middot; Made with calm &amp; coffee</footer>
+
+  <!-- WHATSAPP -->
+  <a href="https://wa.me/573104108483" target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script>
+    window.addEventListener('scroll', function() {
+      document.querySelector('.nav').classList.toggle('scrolled', window.scrollY > 20);
+    });
+  </script>
+
+<script src="js/lang.js"></script>
+</body>
+</html>

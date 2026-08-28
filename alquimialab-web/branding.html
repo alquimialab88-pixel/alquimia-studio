@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Alquimia Lab Portfolio — Brand Identity Exploration.">
+  <meta name="theme-color" content="#f2f2f2">
+  <title>Brand Identity Exploration · Alquimia Lab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">Alquimia Lab</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <div class="nav-dd">
+        <a href="portafolio.html" class="active">Portfolio <span class="nav-dd-arrow">▾</span></a>
+        <div class="nav-dd-menu">
+          <a href="portafolio.html#projects" class="nav-dd-featured">Projects <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          <a href="portafolio.html#about">About Me</a>
+          <a href="portafolio.html#experience">Work Experience</a>
+          <a href="portafolio.html#education">Education</a>
+        </div>
+      </div>
+      <a href="productos.html">Products</a>
+      <a href="contacto.html">Contact</a>
+    </div>
+    <button id="langToggle" class="lang-toggle" type="button" aria-label="Switch language" title="ES / EN">EN</button>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="page">
+
+    <!-- PROJECT HEADER -->
+    <section class="section" style="padding-top:60px;">
+      <div class="project-back">
+        <a href="portafolio.html" class="btn-primary btn-sm">&larr; Back to Portfolio</a>
+      </div>
+      <div class="section-title anim"><span>BRAND IDENTITY EXPLORATION</span></div>
+      <p class="section-intro anim d1">
+        A selection of logo designs developed to capture the essence of each brand through clean, adaptable, and impactful visuals.
+      </p>
+      <p class="modal-hint anim d1" style="margin-top:12px;text-align:center;">Tap on each logo to view the complete brand board.</p>
+
+      <!-- BRAND GRID -->
+      <div class="brand-grid anim d2">
+        <div class="brand-card" onclick="openModal('modal-petsgo')">
+          <div class="brand-card-thumb"><img src="brand-petsgo.png" alt="PetsGo"></div>
+          <h3>PetsGo</h3>
+        </div>
+        <div class="brand-card" onclick="openModal('modal-vdm')">
+          <div class="brand-card-thumb"><img src="brand-VDM.jpeg" alt="Voces de Medianoche"></div>
+          <h3>Voces de Medianoche</h3>
+        </div>
+        <div class="brand-card" onclick="openModal('modal-boma')">
+          <div class="brand-card-thumb"><img src="brand-boma.jpeg" alt="BöMA"></div>
+          <h3>BöMA</h3>
+        </div>
+        <div class="brand-card" onclick="openModal('modal-donnadie')">
+          <div class="brand-card-thumb"><img src="brand-donnadie.jpeg" alt="Don Nadie"></div>
+          <h3>Don Nadie</h3>
+        </div>
+        <div class="brand-card" onclick="openModal('modal-fulltrade')">
+          <div class="brand-card-thumb"><img src="brand-fulltrade.jpeg" alt="FullTrade"></div>
+          <h3>FullTrade</h3>
+        </div>
+        <div class="brand-card" onclick="openModal('modal-yesenia')">
+          <div class="brand-card-thumb"><img src="brand-yesenia.jpeg" alt="Yesenia"></div>
+          <h3>Yesenia</h3>
+        </div>
+        <div class="brand-card" onclick="openModal('modal-bioredes')">
+          <div class="brand-card-thumb"><img src="bioredes-thumb.jpeg" alt="Bioredes"></div>
+          <h3>Bioredes</h3>
+        </div>
+        <div class="brand-card" onclick="openModal('modal-vamos')">
+          <div class="brand-card-thumb"><img src="vamos-thumb.jpeg" alt="Vamos.com"></div>
+          <h3>Vamos.com</h3>
+        </div>
+        <div class="brand-card" onclick="openModal('modal-mymary')">
+          <div class="brand-card-thumb"><img src="mymary-thumb.jpeg" alt="MyMary"></div>
+          <h3>MyMary</h3>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">&copy; 2026 Alquimia Lab &middot; Made with calm &amp; coffee</footer>
+
+  <!-- WHATSAPP -->
+  <a href="https://wa.me/573104108483" target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <!-- MODAL: PetsGo -->
+  <div class="modal-overlay" id="modal-petsgo" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" aria-label="Close" onclick="closeModal('modal-petsgo')">&times;</button>
+      <h3 class="modal-title">PetsGo</h3>
+      <div class="brand-hero"><img src="petsgo-hero.png" alt="PetsGo"></div>
+      <div class="brand-board">
+        <div class="brand-col">
+          <h4>Color Palette</h4>
+          <div class="swatches">
+            <div class="swatch"><span class="swatch-color" style="background:#52B09E;"></span><span class="swatch-hex">#52B09E</span></div>
+            <div class="swatch"><span class="swatch-color" style="background:#F5BA3A;"></span><span class="swatch-hex">#F5BA3A</span></div>
+            <div class="swatch"><span class="swatch-color" style="background:#DBF0EE;"></span><span class="swatch-hex">#DBF0EE</span></div>
+            <div class="swatch"><span class="swatch-color" style="background:#5F5E5C;"></span><span class="swatch-hex">#5F5E5C</span></div>
+          </div>
+        </div>
+        <div class="brand-col">
+          <h4>Typography</h4>
+          <div class="type-card">
+            <span class="type-name">Roboto Bold</span>
+            <span class="type-tag">Primary / Headline</span>
+          </div>
+          <div class="type-card">
+            <span class="type-name">Roboto Regular</span>
+            <span class="type-tag">Secondary / Body</span>
+          </div>
+        </div>
+      </div>
+      <div class="brand-mockup"><img src="petsgo-mockup.png" alt="PetsGo mockup"></div>
+    </div>
+  </div>
+
+  <!-- MODAL placeholder: Voces de Medianoche -->
+  <div class="modal-overlay" id="modal-vdm" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" aria-label="Close" onclick="closeModal('modal-vdm')">&times;</button>
+      <h3 class="modal-title">Voces de Medianoche</h3>
+      <div class="brand-hero"><img src="vdm-hero.png" alt="Voces de Medianoche"></div>
+      <div class="brand-board">
+        <div class="brand-col">
+          <h4>Color Palette</h4>
+          <div class="swatches">
+            <div class="swatch"><span class="swatch-color" style="background:#ff483a;"></span><span class="swatch-hex">#ff483a</span></div>
+            <div class="swatch"><span class="swatch-color" style="background:#711613;"></span><span class="swatch-hex">#711613</span></div>
+            <div class="swatch"><span class="swatch-color" style="background:#111111;"></span><span class="swatch-hex">#111111</span></div>
+            <div class="swatch"><span class="swatch-color" style="background:#f0f1f3;"></span><span class="swatch-hex">#f0f1f3</span></div>
+          </div>
+        </div>
+        <div class="brand-col">
+          <h4>Typography</h4>
+          <div class="type-card"><span class="type-name">Anton Regular</span><span class="type-tag">Primary / Headline</span></div>
+          <div class="type-card"><span class="type-name">Montserrat</span><span class="type-tag">Secondary / Body</span></div>
+        </div>
+      </div>
+      <div class="brand-mockup"><img src="vdm-mockup.png" alt="Voces de Medianoche mockup"></div>
+    </div>
+  </div>
+
+  <!-- MODAL placeholder: BöMA -->
+  <div class="modal-overlay" id="modal-boma" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" aria-label="Close" onclick="closeModal('modal-boma')">&times;</button>
+      <h3 class="modal-title">BöMA</h3>
+      <div class="brand-hero"><img src="boma-hero.jpeg" alt="BöMA"></div>
+      <div class="brand-board">
+        <div class="brand-col">
+          <h4>Color Palette</h4>
+          <div class="swatches">
+            <div class="swatch"><span class="swatch-color" style="background:#010b54;"></span><span class="swatch-hex">#010b54</span></div>
+            <div class="swatch"><span class="swatch-color" style="background:#ff00f3;"></span><span class="swatch-hex">#ff00f3</span></div>
+            <div class="swatch"><span class="swatch-color" style="background:#ffe600;"></span><span class="swatch-hex">#ffe600</span></div>
+            <div class="swatch"><span class="swatch-color" style="background:#00e1ff;"></span><span class="swatch-hex">#00e1ff</span></div>
+          </div>
+        </div>
+        <div class="brand-col">
+          <h4>Typography</h4>
+          <div class="type-card"><span class="type-name">Roboto Bold</span><span class="type-tag">Primary / Headline</span></div>
+          <div class="type-card"><span class="type-name">Roboto Regular</span><span class="type-tag">Secondary / Body</span></div>
+        </div>
+      </div>
+      <div class="brand-mockup"><img src="boma-mockup.jpeg" alt="BöMA mockup"></div>
+    </div>
+  </div>
+
+  <!-- MODAL placeholder: Don Nadie -->
+  <div class="modal-overlay" id="modal-donnadie" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" aria-label="Close" onclick="closeModal('modal-donnadie')">&times;</button>
+      <h3 class="modal-title">Don Nadie</h3>
+      <div class="brand-hero"><img src="donnadie-hero.jpeg" alt="Don Nadie"></div>
+      <div class="brand-board">
+        <div class="brand-col">
+          <h4>Color Palette</h4>
+          <div class="swatches">
+            <div class="swatch"><span class="swatch-color" style="background:#ffefcd;"></span><span class="swatch-hex">#ffefcd</span></div>
+            <div class="swatch"><span class="swatch-color" style="background:#254411;"></span><span class="swatch-hex">#254411</span></div>
+            <div class="swatch"><span class="swatch-color" style="background:#e09132;"></span><span class="swatch-hex">#e09132</span></div>
+            <div class="swatch"><span class="swatch-color" style="background:#232323;"></span><span class="swatch-hex">#232323</span></div>
+          </div>
+        </div>
+        <div class="brand-col">
+          <h4>Typography</h4>
+          <div class="type-card"><span class="type-name">BillyMoney Regular</span><span class="type-tag">Primary / Headline</span></div>
+          <div class="type-card"><span class="type-name">Candara Regular</span><span class="type-tag">Secondary / Body</span></div>
+        </div>
+      </div>
+      <div class="brand-mockup"><img src="donnadie-mockup.jpeg" alt="Don Nadie mockup"></div>
+    </div>
+  </div>
+
+  <!-- MODAL placeholder: FullTrade -->
+  <div class="modal-overlay" id="modal-fulltrade" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" aria-label="Close" onclick="closeModal('modal-fulltrade')">&times;</button>
+      <h3 class="modal-title">FullTrade</h3>
+      <div class="brand-hero"><img src="fulltrade-hero.jpeg" alt="FullTrade"></div>
+      <div class="brand-board">
+        <div class="brand-col">
+          <h4>Color Palette</h4>
+          <div class="swatches">
+            <div class="swatch"><span class="swatch-color" style="background:#f9b816;"></span><span class="swatch-hex">#f9b816</span></div>
+            <div class="swatch"><span class="swatch-color" style="background:#111e2f;"></span><span class="swatch-hex">#111e2f</span></div>
+            <div class="swatch"><span class="swatch-color" style="background:#f7f7f7;"></span><span class="swatch-hex">#f7f7f7</span></div>
+            <div class="swatch"><span class="swatch-color" style="background:#ffffff;"></span><span class="swatch-hex">—</span></div>
+          </div>
+        </div>
+        <div class="brand-col">
+          <h4>Typography</h4>
+          <div class="type-card"><span class="type-name">Roboto Bold</span><span class="type-tag">Primary / Headline</span></div>
+          <div class="type-card"><span class="type-name">Roboto Regular</span><span class="type-tag">Secondary / Body</span></div>
+        </div>
+      </div>
+      <div class="brand-mockup"><img src="fulltrade-mockup.jpeg" alt="FullTrade mockup"></div>
+    </div>
+  </div>
+
+  <!-- MODAL placeholder: Yesenia -->
+  <div class="modal-overlay" id="modal-yesenia" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" aria-label="Close" onclick="closeModal('modal-yesenia')">&times;</button>
+      <h3 class="modal-title">Yesenia</h3>
+      <div class="brand-hero"><img src="yesenia-hero.jpeg" alt="Yesenia"></div>
+      <div class="brand-board">
+        <div class="brand-col">
+          <h4>Color Palette</h4>
+          <div class="swatches">
+            <div class="swatch"><span class="swatch-color" style="background:#e9d9d9;"></span><span class="swatch-hex">#e9d9d9</span></div>
+            <div class="swatch"><span class="swatch-color" style="background:#e5a695;"></span><span class="swatch-hex">#e5a695</span></div>
+            <div class="swatch"><span class="swatch-color" style="background:#d66c5c;"></span><span class="swatch-hex">#d66c5c</span></div>
+            <div class="swatch"><span class="swatch-color" style="background:#474747;"></span><span class="swatch-hex">#474747</span></div>
+          </div>
+        </div>
+        <div class="brand-col">
+          <h4>Typography</h4>
+          <div class="type-card"><span class="type-name">FelixTitlingMT Regular</span><span class="type-tag">Primary / Headline</span></div>
+          <div class="type-card"><span class="type-name">ITC Avant Garde Gothic Std</span><span class="type-tag">Secondary / Body</span></div>
+        </div>
+      </div>
+      <div class="brand-mockup"><img src="yesenia-mockup.jpeg" alt="Yesenia mockup"></div>
+    </div>
+  </div>
+
+  <!-- MODAL: Bioredes -->
+  <div class="modal-overlay" id="modal-bioredes" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" aria-label="Close" onclick="closeModal('modal-bioredes')">&times;</button>
+      <h3 class="modal-title">Bioredes</h3>
+      <div class="brand-hero"><img src="bioredes-hero.jpeg" alt="Bioredes"></div>
+      <div class="brand-board">
+        <div class="brand-col">
+          <h4>Color Palette</h4>
+          <div class="swatches">
+            <div class="swatch"><span class="swatch-color" style="background:#1e1e1e;"></span><span class="swatch-hex">#1e1e1e</span></div>
+            <div class="swatch"><span class="swatch-color" style="background:#f4f4f4;"></span><span class="swatch-hex">#f4f4f4</span></div>
+            <div class="swatch"><span class="swatch-color" style="background:#b5c422;"></span><span class="swatch-hex">#b5c422</span></div>
+            <div class="swatch"><span class="swatch-color" style="background:#ffffff;"></span><span class="swatch-hex">—</span></div>
+          </div>
+        </div>
+        <div class="brand-col">
+          <h4>Typography</h4>
+          <div class="type-card"><span class="type-name">Dongle</span><span class="type-tag">Primary / Headline</span></div>
+          <div class="type-card"><span class="type-name">Futura Std</span><span class="type-tag">Secondary / Body</span></div>
+        </div>
+      </div>
+      <div class="brand-mockup"><img src="bioredes-mockup.jpeg" alt="Bioredes mockup"></div>
+    </div>
+  </div>
+
+  <!-- MODAL: Vamos.com -->
+  <div class="modal-overlay" id="modal-vamos" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" aria-label="Close" onclick="closeModal('modal-vamos')">&times;</button>
+      <h3 class="modal-title">Vamos.com</h3>
+      <div class="brand-hero"><img src="vamos-hero.jpeg" alt="Vamos.com"></div>
+      <div class="brand-board">
+        <div class="brand-col">
+          <h4>Color Palette</h4>
+          <div class="swatches">
+            <div class="swatch"><span class="swatch-color" style="background:#f67d48;"></span><span class="swatch-hex">#f67d48</span></div>
+            <div class="swatch"><span class="swatch-color" style="background:#ffd578;"></span><span class="swatch-hex">#ffd578</span></div>
+            <div class="swatch"><span class="swatch-color" style="background:#3096e1;"></span><span class="swatch-hex">#3096e1</span></div>
+            <div class="swatch"><span class="swatch-color" style="background:#7c7c7c;"></span><span class="swatch-hex">#7c7c7c</span></div>
+          </div>
+        </div>
+        <div class="brand-col">
+          <h4>Typography</h4>
+          <div class="type-card"><span class="type-name">Miguna</span><span class="type-tag">Primary / Headline</span></div>
+          <div class="type-card"><span class="type-name">Ultima Std</span><span class="type-tag">Secondary / Body</span></div>
+        </div>
+      </div>
+      <div class="brand-mockup"><img src="vamos-mockup.jpeg" alt="Vamos.com mockup"></div>
+    </div>
+  </div>
+
+  <!-- MODAL: MyMary -->
+  <div class="modal-overlay" id="modal-mymary" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" aria-label="Close" onclick="closeModal('modal-mymary')">&times;</button>
+      <h3 class="modal-title">MyMary</h3>
+      <div class="brand-hero"><img src="mymary-hero.jpeg" alt="MyMary"></div>
+      <div class="brand-board">
+        <div class="brand-col">
+          <h4>Color Palette</h4>
+          <div class="swatches">
+            <div class="swatch"><span class="swatch-color" style="background:#2a169a;"></span><span class="swatch-hex">#2a169a</span></div>
+            <div class="swatch"><span class="swatch-color" style="background:#ed046c;"></span><span class="swatch-hex">#ed046c</span></div>
+            <div class="swatch"><span class="swatch-color" style="background:#b60adc;"></span><span class="swatch-hex">#b60adc</span></div>
+            <div class="swatch"><span class="swatch-color" style="background:#f9dced;"></span><span class="swatch-hex">#f9dced</span></div>
+          </div>
+        </div>
+        <div class="brand-col">
+          <h4>Typography</h4>
+          <div class="type-card"><span class="type-name">Regards</span><span class="type-tag">Primary / Headline</span></div>
+          <div class="type-card"><span class="type-name">Jeko</span><span class="type-tag">Secondary / Body</span></div>
+        </div>
+      </div>
+      <div class="brand-mockup"><img src="mymary-mockup.jpeg" alt="MyMary mockup"></div>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('scroll', function() {
+      document.querySelector('.nav').classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    function openModal(id) {
+      document.getElementById(id).classList.add('show');
+      document.getElementById(id).setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('show');
+      document.getElementById(id).setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    document.querySelectorAll('.modal-overlay').forEach(function(ov) {
+      ov.addEventListener('click', function(e) {
+        if (e.target === ov) closeModal(ov.id);
+      });
+    });
+  </script>
+
+<script src="js/lang.js"></script>
+</body>
+</html>
