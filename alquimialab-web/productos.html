@@ -199,12 +199,44 @@
           <p>A minimalist planner to organize your year with calm and intention.</p>
         </div>
         <div style="display:flex;gap:8px;flex-shrink:0;align-items:center;">
+          <span class="btn-secondary btn-sm" onclick="openModal('modal-journal')" style="cursor:pointer;">View project</span>
           <a href="https://bordergaze.gumroad.com/l/bvzpd?wanted=true" target="_blank" rel="noopener" class="btn-primary btn-sm">Download</a>
           <span class="badge" style="background:var(--lavender);color:var(--purple);font-size:10px;font-weight:700;padding:4px 10px;border-radius:99px;white-space:nowrap;">Soon on Amazon</span>
         </div>
       </div>
     </section>
 
+  </div>
+
+  <!-- MODAL: Calma y Orden Journal -->
+  <div class="modal-overlay" id="modal-journal" aria-hidden="true">
+    <div class="modal modal-wide" role="dialog" aria-modal="true">
+      <button class="modal-close" aria-label="Close" onclick="closeModal('modal-journal')">&times;</button>
+      <h3 class="modal-title">Calma y Orden &mdash; Journal H&iacute;brido de Autocuidado y Productividad</h3>
+      <div class="car-panel">
+        <button class="car-arrow prev" onclick="journalNav(-1)">&larr;</button>
+        <div class="car-view"><img id="journal-big" src="journal-1.webp" alt="Calma y Orden journal" loading="lazy" decoding="async"></div>
+        <button class="car-arrow next" onclick="journalNav(1)">&rarr;</button>
+      </div>
+      <div class="car-counter" id="journal-counter">1 / 6</div>
+
+      <h4 class="pack-section-title">Lo que encontrar&aacute;s dentro</h4>
+      <ul class="journal-features">
+        <li><strong>Calendarios mensuales</strong> con espacio para fechas clave y objetivos del mes.</li>
+        <li><strong>Planificaci&oacute;n semanal</strong> que integra responsabilidades + autocuidado obligatorio.</li>
+        <li><strong>P&aacute;ginas diarias</strong> con lista de tareas y prompts de reflexi&oacute;n rotativos.</li>
+        <li><strong>Tracker de h&aacute;bitos mensual</strong> con grilla 31 d&iacute;as &times; 6 h&aacute;bitos.</li>
+        <li><strong>Control de finanzas personales</strong> (ingresos, gastos, ahorro y balance).</li>
+        <li><strong>Registro de energ&iacute;a y estr&eacute;s</strong> para identificar tus patrones.</li>
+        <li><strong>Espacios libres</strong> para notas, ideas y descarga mental.</li>
+        <li><strong>P&aacute;gina de cierre anual</strong> para reflexionar sobre tu crecimiento.</li>
+      </ul>
+
+      <div class="journal-cta">
+        <a href="https://bordergaze.gumroad.com/l/bvzpd?wanted=true" target="_blank" rel="noopener" class="btn-primary btn-sm" style="padding:10px 18px;">Download</a>
+        <span class="badge" style="background:var(--lavender);color:var(--purple);font-size:10px;font-weight:700;padding:4px 10px;border-radius:99px;">Soon on Amazon</span>
+      </div>
+    </div>
   </div>
 
   <!-- FOOTER -->
@@ -219,8 +251,30 @@
     window.addEventListener('scroll', function() {
       document.querySelector('.nav').classList.toggle('scrolled', window.scrollY > 20);
     });
+
+    function openModal(id) {
+      document.getElementById(id).classList.add('show');
+      document.getElementById(id).setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('show');
+      document.getElementById(id).setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    var journalList = ['journal-1.webp', 'journal-2.webp', 'journal-3.webp', 'journal-4.webp', 'journal-5.webp', 'journal-6.webp'];
+    var journalIdx = 0;
+    function journalNav(dir) {
+      journalIdx = (journalIdx + dir + journalList.length) % journalList.length;
+      document.getElementById('journal-big').src = journalList[journalIdx];
+      document.getElementById('journal-counter').textContent = (journalIdx + 1) + ' / ' + journalList.length;
+    }
+    document.querySelectorAll('.modal-overlay').forEach(function(ov) {
+      ov.addEventListener('click', function(e) {
+        if (e.target === ov) closeModal(ov.id);
+      });
+    });
   </script>
 
 <script src="js/lang.js"></script>
-</body>
 </html>

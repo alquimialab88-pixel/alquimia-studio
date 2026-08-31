@@ -1265,6 +1265,25 @@ img { max-width: 100%; display: block; }
 }
 .pack-section-title:first-of-type { margin-top: 0; }
 
+/* === JOURNAL MODAL === */
+.journal-features {
+  margin: 14px 0 0; padding: 0; list-style: none;
+}
+.journal-features li {
+  padding: 8px 0 8px 24px; position: relative;
+  font-size: 15px; color: var(--text, #333); line-height: 1.5;
+  border-bottom: 1px dashed var(--lavender-light, #e8e6f4);
+}
+.journal-features li::before {
+  content: ""; position: absolute; left: 4px; top: 14px;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--purple, #6462ab);
+}
+.journal-features li::marker { display: none; }
+.journal-cta {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  margin-top: 22px;
+}
+
 .car-panel {
   position: relative; margin-top: 18px;
   display: flex; align-items: center; justify-content: center; gap: 14px;
