@@ -144,6 +144,9 @@
     "Available in English and Spanish. Print and digital edition.": "Disponibles en inglés y español. Edición impresa y digital.",
     "We're working on it…": "Lo estamos trabajando…",
     "Soon": "Pronto",
+    "Soon on Amazon": "Pronto en Amazon",
+    "A minimalist planner to organize your year with calm and intention.": "Un planificador minimalista para organizar tu año con calma e intención.",
+    "Planner 2027": "Planificador 2027",
 
     /* CONTACTO */
     "Shall we work together?": "¿Trabajamos juntos?",
