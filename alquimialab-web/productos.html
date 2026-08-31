@@ -218,7 +218,7 @@
         <div class="car-view"><img id="journal-big" src="journal-1.webp" alt="Calma y Orden journal" loading="lazy" decoding="async"></div>
         <button class="car-arrow next" onclick="journalNav(1)">&rarr;</button>
       </div>
-      <div class="car-counter" id="journal-counter">1 / 6</div>
+      <div class="car-counter" id="journal-counter">1 / 5</div>
 
       <h4 class="pack-section-title">Lo que encontrar&aacute;s dentro</h4>
       <ul class="journal-features">
@@ -262,7 +262,7 @@
       document.getElementById(id).setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
     }
-    var journalList = ['journal-1.webp', 'journal-2.webp', 'journal-3.webp', 'journal-4.webp', 'journal-5.webp', 'journal-6.webp'];
+    var journalList = ['journal-1.webp', 'journal-3.webp', 'journal-4.webp', 'journal-5.webp', 'journal-6.webp'];
     var journalIdx = 0;
     function journalNav(dir) {
       journalIdx = (journalIdx + dir + journalList.length) % journalList.length;
