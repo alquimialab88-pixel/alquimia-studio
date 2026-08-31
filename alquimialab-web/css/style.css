@@ -927,7 +927,7 @@ img { max-width: 100%; display: block; }
 .whatsapp-float {
   position: fixed;
   bottom: 24px;
-  right: 24px;
+  left: 24px;
   width: 56px;
   height: 56px;
   background: #25d366;
@@ -959,7 +959,7 @@ img { max-width: 100%; display: block; }
   .featured-card { flex: 0 0 160px; }
   .featured-card { flex: 0 0 180px; }
   .youtube-banner { flex-direction: column; text-align: center; }
-  .whatsapp-float { bottom: 16px; right: 16px; }
+  .whatsapp-float { bottom: 16px; left: 16px; }
 }
 
 /* === MODAL (PROJECT) === */
