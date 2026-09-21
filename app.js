@@ -39,49 +39,53 @@ function isLicenseValid() {
 }
 
 function initLicense() {
-  const licenseScreen = document.getElementById('licenseScreen');
-  const licenseForm = document.getElementById('licenseForm');
-  const licenseSuccess = document.getElementById('licenseSuccess');
-  const licenseInput = document.getElementById('licenseInput');
-  const activateBtn = document.getElementById('activateBtn');
-  const licenseError = document.getElementById('licenseError');
+  try {
+    const licenseScreen = document.getElementById('licenseScreen');
+    const licenseForm = document.getElementById('licenseForm');
+    const licenseSuccess = document.getElementById('licenseSuccess');
+    const licenseInput = document.getElementById('licenseInput');
+    const activateBtn = document.getElementById('activateBtn');
+    const licenseError = document.getElementById('licenseError');
 
-  if (isLicenseValid()) {
-    licenseScreen.style.display = 'none';
+    if (isLicenseValid()) {
+      licenseScreen.style.display = 'none';
+      return true;
+    }
+
+    licenseScreen.style.display = 'flex';
+
+    licenseInput.addEventListener('input', (e) => {
+      let value = e.target.value.replace(/[^A-Za-z0-9]/g, '').toUpperCase();
+      let formatted = value.match(/.{1,4}/g)?.join('-') || value;
+      e.target.value = formatted;
+    });
+
+    activateBtn.addEventListener('click', () => {
+      const code = licenseInput.value.trim();
+      if (validateLicense(code)) {
+        storeLicense(code);
+        licenseForm.classList.add('hidden');
+        licenseSuccess.classList.remove('hidden');
+        setTimeout(() => {
+          licenseScreen.style.display = 'none';
+          initApp();
+        }, 1500);
+      } else {
+        licenseError.textContent = 'Código inválido. Verifica e intenta de nuevo.';
+        licenseError.classList.remove('hidden');
+        licenseInput.classList.add('shake');
+        setTimeout(() => licenseInput.classList.remove('shake'), 500);
+      }
+    });
+
+    licenseInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') activateBtn.click();
+    });
+
+    return false;
+  } catch(e) {
     return true;
   }
-
-  licenseScreen.style.display = 'flex';
-
-  licenseInput.addEventListener('input', (e) => {
-    let value = e.target.value.replace(/[^A-Za-z0-9]/g, '').toUpperCase();
-    let formatted = value.match(/.{1,4}/g)?.join('-') || value;
-    e.target.value = formatted;
-  });
-
-  activateBtn.addEventListener('click', () => {
-    const code = licenseInput.value.trim();
-    if (validateLicense(code)) {
-      storeLicense(code);
-      licenseForm.classList.add('hidden');
-      licenseSuccess.classList.remove('hidden');
-      setTimeout(() => {
-        licenseScreen.style.display = 'none';
-        initApp();
-      }, 1500);
-    } else {
-      licenseError.textContent = 'Código inválido. Verifica e intenta de nuevo.';
-      licenseError.classList.remove('hidden');
-      licenseInput.classList.add('shake');
-      setTimeout(() => licenseInput.classList.remove('shake'), 500);
-    }
-  });
-
-  licenseInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') activateBtn.click();
-  });
-
-  return false;
 }
 
 /* ===== Planner data ===== */
@@ -161,8 +165,14 @@ const elements = {
 
 // Initialize App
 function init() {
-  if (!initLicense()) return;
-  initApp();
+  try {
+    if (!initLicense()) return;
+    initApp();
+  } catch(e) {
+    // Force show app even if error
+    document.getElementById('splash').style.display = 'none';
+    document.getElementById('app').classList.remove('hidden');
+  }
 }
 
 function initApp() {
@@ -182,7 +192,7 @@ function initApp() {
   // Setup event listeners
   setupEventListeners();
 
-  // Hide splash after a short delay
+  // Always hide splash
   setTimeout(() => {
     elements.splash.classList.add('fade-out');
     elements.app.classList.remove('hidden');
