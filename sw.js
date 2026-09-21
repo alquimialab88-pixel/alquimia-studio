@@ -1,6 +1,6 @@
 /* ===== Alquimia Studio — Service Worker ===== */
 
-const CACHE_NAME = 'alquimia-studio-v1';
+const CACHE_NAME = 'alquimia-studio-v2';
 const ASSETS = [
   '/',
   '/index.html',
@@ -8,8 +8,11 @@ const ASSETS = [
   '/js/app.js',
   '/manifest.json',
   '/icons/favicon.svg',
-  '/icons/icon-192.png',
-  '/icons/icon-512.png'
+  '/planners/calma-y-orden.html',
+  '/planners/planner-anual.html',
+  '/planners/planner-tdah.html',
+  '/planners/planner-menstrual.html',
+  '/planners/planner-semanal.html'
 ];
 
 // Install event
