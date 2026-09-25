@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kore · Your calm space · Alquimia Lab</title>
+<meta name="description" content="Kore is your calm space: tasks, habits, notes, diary, lo‑fi music and an AI assistant — all in one app.">
+<meta name="theme-color" content="#f2f2f2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=3">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<script src="js/lang.js" defer></script>
+<style>
+
+:root{
+  --purple:#6462ab;
+  --purple-dark:#524f96;
+  --purple-light:#a29de0;
+  --lavender:#ccc9e6;
+  --lavender-light:#e8e6f4;
+  --bg:#f2f2f2;
+  --surface:#ffffff;
+  --text:#3b3866;
+  --muted:#8a87ad;
+  --shadow:rgba(100,98,171,.12);
+  --shadow-lg:rgba(100,98,171,.22);
+  --roc-dark:#1a1a2e;
+  --line:#e8e6f4;
+  --green:#2e9e5b;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Quicksand',system-ui,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+table{border-collapse:collapse;width:100%}
+
+.blob{position:fixed;border-radius:50%;filter:blur(90px);opacity:.4;z-index:-1;pointer-events:none}
+.blob-1{width:380px;height:380px;background:var(--lavender);top:-100px;left:-100px}
+.blob-2{width:320px;height:320px;background:var(--lavender-light);bottom:-80px;right:-80px}
+.blob-3{width:250px;height:250px;background:var(--purple-light);top:50%;right:-50px}
+
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes floatPhone{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-14px) rotate(-6deg)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.45}}
+.anim{animation:rise .6s ease both}
+.d1{animation-delay:.1s}.d2{animation-delay:.2s}.d3{animation-delay:.3s}.d4{animation-delay:.4s}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  background:var(--purple);color:#fff;border:none;border-radius:12px;
+  padding:14px 28px;font-size:15px;font-weight:700;font-family:inherit;
+  cursor:pointer;box-shadow:0 8px 24px var(--shadow-lg);
+  transition:transform .2s ease,box-shadow .2s ease,filter .2s ease;
+}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.06)}
+.btn-outline{
+  background:transparent;color:var(--purple);
+  border:1.5px solid var(--lavender);box-shadow:none;
+}
+.btn-outline:hover{background:var(--lavender-light);filter:none}
+.btn-lg{padding:16px 32px;font-size:16px}
+
+.hero{padding:120px 24px 80px;position:relative;overflow:hidden}
+.hero-inner{
+  max-width:1100px;margin:0 auto;
+  display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--lavender-light);color:var(--purple-dark);
+  border:1px solid var(--lavender);border-radius:99px;
+  padding:6px 16px;font-size:13px;font-weight:700;margin-bottom:20px;
+}
+.badge-dot{
+  width:8px;height:8px;background:var(--purple);border-radius:50%;
+  animation:pulse 1.5s infinite;
+}
+.hero h1{
+  font-size:clamp(34px,5vw,52px);line-height:1.1;letter-spacing:-1px;
+  font-weight:700;color:var(--roc-dark);margin-bottom:16px;
+}
+.hero h1 em{font-style:normal;color:var(--purple)}
+.hero-lead{
+  font-size:17px;color:var(--muted);max-width:480px;margin-bottom:28px;line-height:1.65;
+}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.hero-note{font-size:13px;color:var(--muted);font-weight:600}
+.hero-note strong{color:var(--purple)}
+
+.phone-stage{
+  position:relative;display:flex;justify-content:center;align-items:center;
+  min-height:560px;perspective:1200px;
+}
+.phone-glow{
+  position:absolute;width:280px;height:280px;border-radius:50%;
+  background:radial-gradient(circle,rgba(100,98,171,.28),transparent 70%);
+  filter:blur(20px);z-index:0;
+}
+.phone-float{
+  position:relative;z-index:1;
+  animation:floatPhone 5s ease-in-out infinite;
+  transform-origin:center center;
+  filter:drop-shadow(0 14px 20px rgba(26,26,46,.12));
+  transition:filter .4s ease;
+}
+.phone-float:hover{
+  animation-play-state:paused;
+  filter:drop-shadow(0 36px 50px rgba(100,98,171,.35));
+}
+.phone-float:hover .phone-samsung{
+  transform:perspective(900px) rotateY(-14deg) rotateX(6deg) translateY(-18px) scale(1.08);
+}
+/* Samsung Galaxy S24 Ultra — boxy, sharp corners, titanium, flat AMOLED */
+.phone-samsung{
+  width:268px;
+  transition:transform .55s cubic-bezier(.34,1.56,.64,1);
+  background:linear-gradient(165deg,#4a4a5c 0%,#1a1a24 35%,#0c0c12 70%,#1e1e2a 100%);
+  border-radius:28px;
+  padding:7px;
+  box-shadow:
+    0 18px 36px rgba(26,26,46,.18),
+    0 8px 16px rgba(100,98,171,.10),
+    inset 0 0 0 1.5px rgba(255,255,255,.14),
+    inset 0 1px 0 rgba(255,255,255,.22);
+  border:2.5px solid #0a0a10;
+  position:relative;
+}
+.phone-float:hover .phone-screen::after{
+  opacity:.35;
+  height:65%;
+}
+.phone-samsung::before{
+  content:"";
+  position:absolute;top:16px;left:50%;transform:translateX(-50%);
+  width:10px;height:10px;border-radius:50%;
+  background:#020204;
+  box-shadow:
+    inset 0 0 0 2px #101018,
+    0 0 0 1px rgba(255,255,255,.05),
+    0 0 6px rgba(0,0,0,.6);
+  z-index:4;
+}
+.phone-samsung::after{
+  content:"";
+  position:absolute;right:-3.5px;top:108px;width:3px;height:72px;
+  background:linear-gradient(180deg,#5a5a72 0%,#5a5a72 40%,#3a3a50 40%,#3a3a50 100%);
+  border-radius:0 2px 2px 0;
+}
+.phone-screen{
+  background:#000;border-radius:22px;overflow:hidden;
+  aspect-ratio:9/19.5;position:relative;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.03);
+}
+.phone-screen::before{
+  content:"";
+  position:absolute;top:0;left:-80%;width:50%;height:100%;
+  background:linear-gradient(105deg,transparent,rgba(255,255,255,.55),transparent);
+  transform:skewX(-18deg);
+  opacity:0;pointer-events:none;z-index:3;
+}
+.phone-float:hover .phone-screen::before{
+  animation:phoneShine .7s ease forwards;
+}
+@keyframes phoneShine{
+  0%{left:-80%;opacity:0}
+  20%{opacity:1}
+  100%{left:130%;opacity:0}
+}
+.phone-screen img{
+  width:100%;height:100%;object-fit:cover;object-position:top center;
+}
+.phone-screen::after{
+  content:"";
+  position:absolute;top:0;left:0;right:0;height:42%;
+  background:linear-gradient(165deg,rgba(255,255,255,.08) 0%,rgba(255,255,255,.02) 40%,transparent 70%);
+  pointer-events:none;
+  border-radius:22px 22px 0 0;
+  transition:opacity .4s ease,height .4s ease;
+}
+.phone-titanium{
+  position:absolute;inset:0;border-radius:28px;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);
+  pointer-events:none;z-index:5;
+}
+
+.stats-band{
+  max-width:900px;margin:-40px auto 0;position:relative;z-index:2;
+  background:var(--purple);color:#fff;border-radius:24px;
+  padding:36px 32px;box-shadow:0 20px 48px var(--shadow-lg);
+  overflow:hidden;
+}
+.stats-band::before{
+  content:"";position:absolute;top:-40%;left:-20%;width:55%;height:180%;
+  background:linear-gradient(105deg,transparent,rgba(255,255,255,.18),transparent);
+  animation:shineSweep 5s ease-in-out infinite;
+  pointer-events:none;
+}
+.stats-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  max-width:640px;margin:0 auto;text-align:center;
+  position:relative;z-index:1;
+}
+.stat-num{font-size:2rem;font-weight:700;line-height:1.1;display:flex;align-items:center;justify-content:center;min-height:44px}
+.stat-lbl{font-size:.85rem;opacity:.8;margin-top:4px}
+.stats-band .stats-foot{text-align:center;font-size:.9rem;opacity:.7;margin-top:20px;position:relative;z-index:1}
+
+section{padding:88px 24px}
+.container{max-width:1100px;margin:0 auto}
+.section-title{text-align:center;margin-bottom:12px}
+.section-title span{
+  display:inline-block;font-size:13px;font-weight:700;
+  letter-spacing:2.5px;text-transform:uppercase;color:var(--purple);
+  position:relative;padding:0 28px;
+}
+.section-title span::before,
+.section-title span::after{
+  content:"";position:absolute;top:50%;width:18px;height:1px;background:var(--lavender);
+}
+.section-title span::before{left:0}
+.section-title span::after{right:0}
+.section-sub{
+  text-align:center;font-size:16px;color:var(--muted);
+  max-width:560px;margin:0 auto 40px;line-height:1.65;
+}
+.page-h{
+  text-align:center;font-size:clamp(26px,3.5vw,36px);font-weight:700;
+  color:var(--roc-dark);letter-spacing:-.5px;margin-bottom:12px;
+}
+
+/* Problem */
+.problem-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.problem-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:18px;
+  padding:22px 16px;text-align:center;
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+.problem-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px var(--shadow)}
+.problem-emoji{font-size:28px;margin-bottom:10px}
+.problem-card h3{font-size:14px;font-weight:700;color:var(--roc-dark);margin-bottom:6px;line-height:1.35}
+.problem-card p{font-size:12.5px;color:var(--muted);line-height:1.5}
+
+/* Solve / modules */
+.solve{background:var(--lavender-light)}
+.solve-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.solve-card{
+  background:var(--surface);border:1px solid var(--line);border-radius:20px;
+  padding:28px 24px;transition:transform .25s ease,box-shadow .25s ease;
+}
+.solve-card:hover{transform:translateY(-4px);box-shadow:0 14px 32px var(--shadow)}
+.solve-icon{
+  width:52px;height:52px;background:var(--lavender-light);border-radius:14px;
+  display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px;
+}
+.solve-card h3{font-size:17px;font-weight:700;color:var(--roc-dark);margin-bottom:8px}
+.solve-card p{font-size:14.5px;color:var(--muted);line-height:1.6}
+.solve-note{
+  text-align:center;margin-top:32px;font-size:15px;color:var(--text);font-weight:600;
+}
+
+/* Story */
+.story{
+  background:var(--surface);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.story-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;
+}
+.story-label{
+  display:inline-block;background:var(--lavender-light);color:var(--purple-dark);
+  border-radius:99px;padding:6px 16px;font-size:13px;font-weight:700;margin-bottom:16px;
+}
+.story h2{
+  font-size:clamp(26px,3.5vw,36px);font-weight:700;color:var(--roc-dark);
+  letter-spacing:-.5px;margin-bottom:16px;line-height:1.2;
+}
+.story h2 em{font-style:normal;color:var(--purple)}
+.story p{font-size:15.5px;color:var(--muted);line-height:1.7;margin-bottom:14px}
+.story-quote{
+  background:#fff;border-left:4px solid var(--purple);
+  border-radius:0 14px 14px 0;padding:18px 20px;margin-top:8px;
+  font-size:15px;color:var(--text);font-weight:600;line-height:1.6;
+  box-shadow:0 4px 18px rgba(26,26,46,.06);
+}
+.story-side{
+  border-radius:0;overflow:visible;box-shadow:none;
+  display:flex;justify-content:center;
+}
+.story-side .panda-circle{
+  width:min(340px,80vw);aspect-ratio:1;
+  border-radius:50%;
+  background:var(--lavender-light);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+  box-shadow:0 8px 22px rgba(100,98,171,.10);
+}
+.story-side .panda-circle img{
+  width:160%;height:160%;object-fit:cover;display:block;
+  transform:translateY(8%);
+}
+
+/* Full description / modules detail — modern horizontal scroller */
+.modules-stage{position:relative}
+.modules-stage::before,
+.modules-stage::after{
+  content:"";position:absolute;top:8px;bottom:28px;width:48px;z-index:2;
+  pointer-events:none;
+}
+.modules-stage::before{
+  left:0;background:linear-gradient(90deg,var(--bg),transparent);
+}
+.modules-stage::after{
+  right:0;background:linear-gradient(270deg,var(--bg),transparent);
+}
+.modules-row{
+  display:flex;gap:18px;overflow-x:auto;padding:14px 6px 28px;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  cursor:grab;
+}
+.modules-row:active{cursor:grabbing}
+.modules-row::-webkit-scrollbar{display:none}
+.module-card{
+  background:linear-gradient(160deg,rgba(255,255,255,.95) 0%,rgba(248,247,255,.92) 100%);
+  border:1px solid rgba(100,98,171,.14);
+  border-radius:22px;
+  padding:26px 22px 24px;position:relative;overflow:hidden;
+  flex:0 0 240px;scroll-snap-align:start;
+  transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s,border-color .35s;
+  box-shadow:0 6px 22px rgba(100,98,171,.08);
+  backdrop-filter:blur(6px);
+}
+.module-card::after{
+  content:"";position:absolute;inset:0;border-radius:22px;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),rgba(100,98,171,.12),transparent 42%);
+  opacity:0;transition:opacity .35s;pointer-events:none;
+}
+.module-card:hover::after{opacity:1}
+.module-card:hover{
+  transform:translateY(-10px) rotateX(4deg) rotateY(-3deg) scale(1.06);
+  box-shadow:0 22px 48px rgba(100,98,171,.2);
+  border-color:rgba(100,98,171,.35);
+}
+.module-card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--purple),var(--purple-light),var(--lavender));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .4s ease;
+}
+.module-card:hover::before{transform:scaleX(1)}
+.module-card .m-icon{
+  width:54px;height:54px;
+  background:linear-gradient(145deg,var(--lavender-light),rgba(204,201,230,.55));
+  border:1px solid rgba(100,98,171,.15);
+  border-radius:16px;
+  display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px;
+  transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s;
+  box-shadow:0 4px 14px rgba(100,98,171,.12);
+}
+.module-card:hover .m-icon{
+  transform:translateY(-4px) scale(1.12) rotate(-8deg);
+  box-shadow:0 10px 24px rgba(100,98,171,.25);
+}
+.module-card h3{
+  font-size:17px;font-weight:700;color:var(--roc-dark);margin-bottom:8px;
+  letter-spacing:-.2px;
+}
+.module-card p{font-size:14.5px;color:var(--muted);line-height:1.6}
+.modules-nav{
+  display:flex;justify-content:center;gap:12px;margin-top:-6px;
+}
+.modules-nav button{
+  width:42px;height:42px;border-radius:50%;
+  background:var(--surface);border:1.5px solid var(--lavender);
+  color:var(--purple);font-size:1.05rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .25s;box-shadow:0 4px 14px rgba(100,98,171,.1);
+}
+.modules-nav button:hover{
+  background:var(--purple);color:#fff;border-color:var(--purple);
+  transform:scale(1.08);box-shadow:0 8px 22px rgba(100,98,171,.3);
+}
+.modules-hint{
+  text-align:center;font-size:13px;color:var(--muted);
+  margin:0 0 4px;opacity:.7;
+}
+.full-desc{
+  background:linear-gradient(135deg,var(--lavender-light) 0%,rgba(204,201,230,.45) 100%);
+  border:1px solid rgba(100,98,171,.12);
+  border-radius:24px;
+  padding:34px 30px;margin-bottom:36px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.full-desc::before{
+  content:"";position:absolute;top:-40%;left:-20%;width:60%;height:180%;
+  background:linear-gradient(105deg,transparent,rgba(255,255,255,.6),transparent);
+  animation:shineSweep 4.5s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes shineSweep{
+  0%{transform:translateX(-120%) rotate(8deg)}
+  55%{transform:translateX(280%) rotate(8deg)}
+  100%{transform:translateX(280%) rotate(8deg)}
+}
+.full-desc p{font-size:16px;color:var(--text);line-height:1.7;max-width:720px;margin:0 auto;position:relative;z-index:1}
+
+/* Pricing */
+.pricing{background:var(--bg);padding-top:24px}
+.price-table-wrap{
+  max-width:720px;margin:0 auto 36px;
+  background:var(--surface);border:1px solid var(--line);border-radius:20px;
+  overflow:hidden;box-shadow:0 8px 28px var(--shadow);
+}
+.price-table th,
+.price-table td{
+  padding:14px 18px;text-align:center;font-size:14px;
+  border-bottom:1px solid var(--line);
+}
+.price-table th{
+  background:var(--purple);color:#fff;font-weight:700;font-size:14px;
+}
+.price-table th:first-child,
+.price-table td:first-child{text-align:left;font-weight:600;color:var(--text)}
+.price-table tr:last-child td{border-bottom:none}
+.price-table tbody tr:nth-child(even){background:#faf9ff}
+.price-table .yes{color:var(--green);font-weight:700}
+.price-table .no{color:var(--muted)}
+
+.price-cards{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:16px;
+  max-width:520px;margin:0 auto;
+}
+.price-card{
+  background:var(--surface);border:2px solid var(--line);border-radius:18px;
+  padding:24px 20px;text-align:center;
+}
+.price-card.popular{
+  border-color:var(--purple);position:relative;
+  box-shadow:0 12px 32px var(--shadow);
+}
+.price-card .tag{
+  position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+  background:var(--purple);color:#fff;font-size:11px;font-weight:700;
+  padding:4px 12px;border-radius:99px;letter-spacing:.5px;text-transform:uppercase;
+}
+.price-card .period{
+  font-size:13px;color:var(--muted);font-weight:600;margin-bottom:6px;
+}
+.price-card .amount{
+  font-size:2rem;font-weight:700;color:var(--purple);line-height:1.1;
+}
+.price-card .note{font-size:12.5px;color:var(--muted);margin-top:6px}
+
+/* Notify */
+.notify-card{
+  max-width:560px;margin:0 auto;background:var(--surface);
+  border:1px solid var(--lavender);border-radius:20px;
+  padding:36px 28px;text-align:center;box-shadow:0 8px 28px var(--shadow);
+}
+.notify-card h3{font-size:22px;font-weight:700;color:var(--roc-dark);margin-bottom:8px}
+.notify-card p{font-size:15px;color:var(--muted);margin-bottom:20px}
+.notify-form{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.notify-form input{
+  flex:1;min-width:200px;padding:14px 18px;border:1.5px solid var(--lavender);
+  border-radius:12px;font-size:15px;font-family:inherit;background:var(--bg);
+  color:var(--text);outline:none;transition:border-color .2s;
+}
+.notify-form input:focus{border-color:var(--purple)}
+.notify-form .btn{flex-shrink:0}
+.notify-alt{font-size:13px;color:var(--muted);margin-top:16px;margin-bottom:0}
+
+/* FAQ */
+.faq-wrap{max-width:720px;margin:0 auto}
+.faq-item{
+  background:var(--surface);border:1px solid var(--line);border-radius:16px;
+  padding:0 22px;margin-bottom:12px;
+  transition:border-color .3s ease,box-shadow .3s ease,transform .3s ease;
+}
+.faq-item[open]{
+  border-color:rgba(100,98,171,.28);
+  box-shadow:0 8px 24px rgba(100,98,171,.10);
+  transform:translateY(-1px);
+}
+.faq-item summary{
+  font-size:15.5px;font-weight:700;cursor:pointer;list-style:none;
+  padding:18px 0;display:flex;justify-content:space-between;align-items:center;
+  color:var(--roc-dark);
+}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{
+  content:"+";font-size:22px;color:var(--purple);font-weight:400;
+  transition:transform .3s cubic-bezier(.22,1,.36,1),color .2s;
+  line-height:1;
+}
+.faq-item[open] summary::after{content:"−";transform:rotate(180deg);color:var(--purple-dark)}
+.faq-item summary:hover::after{transform:scale(1.15)}
+.faq-item[open] summary:hover::after{transform:rotate(180deg) scale(1.15)}
+.faq-item p{
+  font-size:14.5px;color:var(--muted);padding:0 0 18px;line-height:1.65;
+  animation:faqOpen .38s cubic-bezier(.22,1,.36,1);
+}
+@keyframes faqOpen{
+  from{opacity:0;transform:translateY(-8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* Showcase — floating phone with rotating screenshots */
+.showcase{
+  background:linear-gradient(180deg,transparent 0%,var(--lavender-light) 18%,var(--lavender-light) 82%,transparent 100%);
+  padding:48px 24px 56px;
+  overflow:hidden;
+}
+.showcase-inner{
+  max-width:900px;margin:0 auto;
+  display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:center;
+}
+.showcase-copy h2{
+  font-size:clamp(24px,3vw,32px);font-weight:700;color:var(--roc-dark);
+  letter-spacing:-.4px;margin-bottom:12px;line-height:1.2;
+}
+.showcase-copy h2 em{font-style:normal;color:var(--purple)}
+.showcase-copy p{
+  font-size:15.5px;color:var(--muted);line-height:1.7;margin-bottom:18px;
+}
+.showcase-tags{display:flex;flex-wrap:wrap;gap:8px}
+.showcase-tags span{
+  background:#fff;border:1px solid var(--lavender);border-radius:99px;
+  padding:6px 14px;font-size:13px;font-weight:600;color:var(--purple-dark);
+}
+.showcase-stage{
+  display:flex;justify-content:center;position:relative;
+}
+.showcase-stage::before{
+  content:"";position:absolute;width:220px;height:220px;border-radius:50%;
+  background:radial-gradient(circle,rgba(100,98,171,.22),transparent 70%);
+  filter:blur(18px);z-index:0;top:50%;left:50%;transform:translate(-50%,-50%);
+}
+.showcase-phone{
+  position:relative;z-index:1;
+  animation:floatPhone 6s ease-in-out infinite;
+  transform-origin:center center;
+  filter:drop-shadow(0 16px 24px rgba(26,26,46,.14));
+  transition:filter .4s ease;
+}
+.showcase-phone:hover{animation-play-state:paused;filter:drop-shadow(0 28px 40px rgba(100,98,171,.3))}
+.showcase-phone:hover .showcase-device{
+  transform:perspective(900px) rotateY(-12deg) rotateX(5deg) translateY(-12px) scale(1.05);
+}
+.showcase-device{
+  width:220px;
+  transition:transform .5s cubic-bezier(.34,1.56,.64,1);
+  background:linear-gradient(165deg,#4a4a5c 0%,#1a1a24 35%,#0c0c12 70%,#1e1e2a 100%);
+  border-radius:24px;
+  padding:6px;
+  box-shadow:
+    0 16px 32px rgba(26,26,46,.16),
+    0 8px 16px rgba(100,98,171,.10),
+    inset 0 0 0 1.5px rgba(255,255,255,.14);
+  border:2.5px solid #0a0a10;
+  position:relative;
+}
+.showcase-device::before{
+  content:"";
+  position:absolute;top:14px;left:50%;transform:translateX(-50%);
+  width:9px;height:9px;border-radius:50%;
+  background:#020204;
+  box-shadow:inset 0 0 0 2px #101018,0 0 6px rgba(0,0,0,.5);
+  z-index:4;
+}
+.showcase-screen{
+  background:#000;border-radius:18px;overflow:hidden;
+  aspect-ratio:9/19.5;position:relative;
+}
+.showcase-screen img{
+  position:absolute;inset:0;
+  width:100%;height:100%;object-fit:cover;object-position:top center;
+  opacity:0;transition:opacity .9s ease;
+  z-index:0;
+}
+.showcase-screen img.on{opacity:1;z-index:1}
+.showcase-screen img.leaving{opacity:1;z-index:0}
+.showcase-screen::after{
+  content:"";position:absolute;top:0;left:0;right:0;height:40%;
+  background:linear-gradient(165deg,rgba(255,255,255,.08),transparent 70%);
+  pointer-events:none;border-radius:18px 18px 0 0;z-index:2;
+}
+.showcase-dots{
+  display:flex;justify-content:center;gap:7px;margin-top:14px;
+}
+.showcase-dots button{
+  width:8px;height:8px;border-radius:50%;border:none;padding:0;
+  background:rgba(100,98,171,.3);cursor:pointer;transition:all .25s;
+}
+.showcase-dots button.on{background:var(--purple);width:20px;border-radius:99px}
+
+
+
+@media(max-width:960px){
+  .hero-inner{grid-template-columns:1fr;text-align:center}
+  .hero-lead{margin-left:auto;margin-right:auto}
+  .hero-ctas{justify-content:center}
+  .problem-grid{grid-template-columns:repeat(2,1fr)}
+  .showcase-inner{grid-template-columns:1fr;text-align:center;gap:28px}
+  .showcase-tags{justify-content:center}
+  .story-grid{grid-template-columns:1fr;gap:32px}
+  .story-side .panda-circle{width:min(280px,75vw)}
+  .price-table th,.price-table td{padding:10px 12px;font-size:13px}
+}
+@media(max-width:720px){
+  .phone-samsung{width:240px}
+  .phone-stage{min-height:480px}
+  .problem-grid{grid-template-columns:1fr}
+  .price-cards{grid-template-columns:1fr}
+  .price-table-wrap{overflow-x:auto}
+  .price-table{min-width:420px}
+  section{padding:64px 20px}
+  .hero{padding:100px 20px 64px}
+  .showcase{padding:36px 20px 44px}
+  .showcase-device{width:190px}
+}
+
+</style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">Alquimia Lab</a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <div class="nav-dd">
+        <a href="portafolio.html">Portfolio <span class="nav-dd-arrow">▾</span></a>
+        <div class="nav-dd-menu">
+          <a href="portafolio.html#projects" class="nav-dd-featured">Projects <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          <a href="portafolio.html#about">About Me</a>
+          <a href="portafolio.html#experience">Work Experience</a>
+          <a href="portafolio.html#education">Education</a>
+        </div>
+      </div>
+      <a href="productos.html">Products</a>
+      <a href="kore-landing.html" class="active">Kore</a>
+      <a href="contacto.html">Contact</a>
+    </div>
+    <button id="langToggle" class="lang-toggle" type="button" aria-label="Switch language" title="ES / EN">ES | EN</button>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
+
+<!-- 1. HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge anim"><span class="badge-dot"></span> Coming soon · by Alquimia Lab</div>
+      <h1 class="anim d1"><em>Your space of calm</em>, in an app</h1>
+      <p class="hero-lead anim d2">Kore is your calm space: tasks, habits, notes, diary, lo‑fi music and an AI assistant — all in one app.</p>
+      <div class="hero-ctas anim d3">
+        <a href="#notify" class="btn btn-lg">Notify me when it launches</a>
+        <a href="#modules" class="btn btn-outline btn-lg">View modules</a>
+      </div>
+      <p class="hero-note anim d3"><strong>Android · Coming soon</strong></p>
+    </div>
+
+    <div class="phone-stage anim d4">
+      <div class="phone-glow"></div>
+      <div class="phone-float">
+        <div class="phone-samsung">
+          <div class="phone-titanium"></div>
+          <div class="phone-screen">
+            <img src="assets/kore-screenshot.jpg" alt="Kore on Samsung Galaxy S24 Ultra" width="268" height="550">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="stats-band anim">
+    <div class="stats-grid">
+      <div>
+        <div class="stat-num">6</div>
+        <div class="stat-lbl">Spaces in 1 app</div>
+      </div>
+      <div>
+        <div class="stat-num"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 18V6l12-2v12" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="18" r="3" fill="#fff"/><circle cx="18" cy="16" r="3" fill="#fff"/></svg></div>
+        <div class="stat-lbl">Lo‑fi music</div>
+      </div>
+      <div>
+        <div class="stat-num">1</div>
+        <div class="stat-lbl">AI assistant</div>
+      </div>
+    </div>
+    <p class="stats-foot">No complicated menus. No 40 buttons. Open, breathe, organize.</p>
+  </div>
+</div>
+
+<!-- 2. EL PROBLEMA -->
+<section id="problem">
+  <div class="container">
+    <div class="section-title"><span>The problem</span></div>
+    <h2 class="page-h">Does this sound familiar?</h2>
+    <p class="section-sub">Kore was born from real chaos. If any of this resonates, it's for you.</p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-emoji">📋</div>
+        <h3>Tasks everywhere</h3>
+        <p>Notes, WhatsApp, your head… nothing in one place.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-emoji">🌱</div>
+        <h3>Habits you quit</h3>
+        <p>By week one they fall apart and you start from zero.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-emoji">📝</div>
+        <h3>Racing thoughts</h3>
+        <p>Ideas and feelings with nowhere to go.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-emoji">🎵</div>
+        <h3>Mental noise</h3>
+        <p>Your mind won't stop and focus feels impossible.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-emoji">🤖</div>
+        <h3>Feeling alone</h3>
+        <p>Doubts with no one to talk them through.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. HISTORIA -->
+<section id="story" class="story">
+  <div class="container">
+    <div class="story-grid">
+      <div>
+        <div class="story-label">The story</div>
+        <h2><em>Why Kore?</em></h2>
+        <p>Kore was born from a personal need: finding calm in the middle of chaos. Its creator wanted one app to order her day and care for her mind — since it didn't exist, she built it.</p>
+        <p>In Ancient Greek, Kore (κόρη) means “maiden”: the name of Persephone as goddess of spring — a symbol of rebirth and starting anew.</p>
+        <div class="story-quote">Kore is that: your daily rebirth, your space to come back to yourself.</div>
+      </div>
+      <div class="story-side">
+        <div class="panda-circle">
+          <img src="assets/kore-red-panda.png" alt="Red panda reading a book" width="340" height="340" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. DESCRIPCIÓN COMPLETA / MÓDULOS -->
+<section id="modules" style="padding-bottom:24px">
+  <div class="container">
+    <div class="section-title"><span>The modules</span></div>
+    <h2 class="page-h">Everything Kore brings</h2>
+
+    <div class="full-desc">
+      <p>Kore is your daily companion for order and peace. Organize your tasks, build habits that last, write how you feel in your diary, save ideas in notes, and calm your mind with lo‑fi music. And when you need to talk, Antonio, your AI assistant, is there for you. No distractions, no noise — just you and your calm.</p>
+    </div>
+
+    <p class="modules-hint">Drag or use the arrows →</p>
+    <div class="modules-stage">
+      <div class="modules-row" id="modulesRow">
+        <div class="module-card">
+          <div class="m-icon">📋</div>
+          <h3>Tasks</h3>
+          <p>Write what's pending, check it off, feel the peace of that check ✔</p>
+        </div>
+        <div class="module-card">
+          <div class="m-icon">🌱</div>
+          <h3>Habits</h3>
+          <p>Pick your habits, mark them daily, watch your streak grow 🔥</p>
+        </div>
+        <div class="module-card">
+          <div class="m-icon">📝</div>
+          <h3>Notes</h3>
+          <p>Quick ideas, lists and reminders in seconds</p>
+        </div>
+        <div class="module-card">
+          <div class="m-icon">📖</div>
+          <h3>Diary</h3>
+          <p>How do you feel today? Saved just for you 🔒</p>
+        </div>
+        <div class="module-card">
+          <div class="m-icon">🎵</div>
+          <h3>Lo‑fi music</h3>
+          <p>Hit play and calm your mind instantly</p>
+        </div>
+        <div class="module-card">
+          <div class="m-icon">🤖</div>
+          <h3>Antonio (AI)</h3>
+          <p>Ask him anything — here for you 24/7</p>
+        </div>
+      </div>
+    </div>
+    <div class="modules-nav">
+      <button type="button" id="modPrev" aria-label="Previous">&#10094;</button>
+      <button type="button" id="modNext" aria-label="Next">&#10095;</button>
+    </div>
+  </div>
+</section>
+
+<!-- 5.5 SHOWCASE — celular con screenshots -->
+<section class="showcase" id="showcase">
+  <div class="showcase-inner">
+    <div class="showcase-stage">
+      <div class="showcase-phone">
+        <div class="showcase-device">
+          <div class="showcase-screen" id="showcaseScreen">
+            <img src="assets/kore-shots/kore-1.jpg" alt="Kore screen 1" class="on">
+            <img src="assets/kore-shots/kore-2.jpg" alt="Kore screen 2">
+            <img src="assets/kore-shots/kore-3.jpg" alt="Kore screen 3">
+            <img src="assets/kore-shots/kore-4.jpg" alt="Kore screen 4">
+            <img src="assets/kore-shots/kore-5.jpg" alt="Kore screen 5">
+            <img src="assets/kore-shots/kore-6.jpg" alt="Kore screen 6">
+            <img src="assets/kore-shots/kore-7.jpg" alt="Kore screen 7">
+            <img src="assets/kore-shots/kore-8.jpg" alt="Kore screen 8">
+            <img src="assets/kore-shots/kore-9.jpg" alt="Kore screen 9">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="showcase-copy">
+      <h2><em>This is what opening Kore feels like</em></h2>
+      <p>A real look at the app: tasks, habits, diary and your daily calm. No filters, no weird promises — just the interface.</p>
+      <div class="showcase-tags">
+        <span>🌅 Rituals</span>
+        <span>📋 Tasks</span>
+        <span>🌱 Habits</span>
+        <span>📖 Diary</span>
+        <span>🤖 Antonio</span>
+      </div>
+    </div>
+  </div>
+  <div class="showcase-dots" id="showcaseDots" role="tablist" aria-label="Screenshots"></div>
+</section>
+
+<!-- 6. FREE VS PREMIUM -->
+<section id="pricing" class="pricing">
+  <div class="container">
+    <div class="section-title"><span>Pricing</span></div>
+    <h2 class="page-h">Free vs Premium</h2>
+    <p class="section-sub">Start free. Go Premium whenever you want to unlock everything.</p>
+
+    <div class="price-table-wrap">
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Free</th>
+            <th>Premium</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Tasks</td>
+            <td class="yes">✅ Unlimited tasks</td>
+            <td class="yes">✅ Unlimited tasks</td>
+          </tr>
+          <tr>
+            <td>Habits</td>
+            <td>Up to 3</td>
+            <td class="yes">♾️ Unlimited habits</td>
+          </tr>
+          <tr>
+            <td>Notes & diary</td>
+            <td>Up to 20</td>
+            <td class="yes">♾️ Unlimited + styles</td>
+          </tr>
+          <tr>
+            <td>Lo‑fi music</td>
+            <td>2 playlists</td>
+            <td class="yes">♾️ Unlimited lo‑fi</td>
+          </tr>
+          <tr>
+            <td>Chat with Antonio (AI)</td>
+            <td>5 messages</td>
+            <td class="yes">♾️ Unlimited chat</td>
+          </tr>
+          <tr>
+            <td>Languages</td>
+            <td>Spanish & English</td>
+            <td class="yes">All 9 languages</td>
+          </tr>
+          <tr>
+            <td>Free trial</td>
+            <td class="no">—</td>
+            <td class="yes">7 days free</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="price-cards">
+      <div class="price-card">
+        <div class="period">Monthly</div>
+        <div class="amount">$2.99</div>
+        <div class="note">per month</div>
+      </div>
+      <div class="price-card popular">
+        <span class="tag">Most popular</span>
+        <div class="period">Yearly</div>
+        <div class="amount">$24.99</div>
+        <div class="note">per year · save</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. FAQ -->
+<section id="faq" style="padding-top:0">
+  <div class="container faq-wrap">
+    <div class="section-title"><span>Questions</span></div>
+    <h2 class="page-h" style="margin-bottom:32px">FAQ</h2>
+    <details class="faq-item" open>
+      <summary>Is it free?</summary>
+      <p>Yes. Kore is free to start your daily system. Optional premium features come later — the base will always be free.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Do I need to use it every day?</summary>
+      <p>No guilt here. Miss a day? Come back the next. The tracker shows real progress — not a streak that stresses you out.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Does it work if I have ADHD or anxiety?</summary>
+      <p>It was designed with that brain in mind: few decisions, clear rituals, zero scolding. It doesn't replace therapy — it supports your system.</p>
+    </details>
+    <details class="faq-item">
+      <summary>When does it launch?</summary>
+      <p>Very soon. Leave your email or follow us on Instagram @alquimia.lab8 and we'll notify you on launch day.</p>
+    </details>
+    <details class="faq-item">
+      <summary>Who made Kore?</summary>
+      <p>Alquimia Lab — Isabel. Product designer with 6 years creating order systems for real people.</p>
+    </details>
+  </div>
+</section>
+
+<!-- 8. AVÍSAME / NOTIFY -->
+<section id="notify" style="padding-top:0">
+  <div class="container">
+    <div class="notify-card">
+      <h3>🔔 Notify me when it launches</h3>
+      <p>We'll email you on launch day. No spam — just the news.</p>
+      <form class="notify-form" onsubmit="event.preventDefault();alert('Done! We''ll let you know when Kore launches 💜');this.reset();">
+        <input type="email" placeholder="your@email.com" required aria-label="Email">
+        <button type="submit" class="btn">Notify me</button>
+      </form>
+      <p class="notify-alt">Or follow us on <a href="https://www.instagram.com/alquimia.lab8/" target="_blank" rel="noopener" style="color:var(--purple);font-weight:700">@alquimia.lab8</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- Datos: link sutil -->
+<section style="max-width: 600px; margin: 0 auto; padding: 0 1.5rem 1.5rem; text-align: center;">
+  <a href="delete-account.html" style="font-size: 13px; color: var(--muted, #8a87ad); text-decoration: none; opacity: .85;">Want to delete your data? <span aria-hidden="true">→</span></a>
+</section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Alquimia Lab</h4>
+        <p>Order, Calm and Autonomy for your day to day.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="productos.html">Products</a></li>
+          <li><a href="portafolio.html">Portfolio</a></li>
+          <li><a href="contacto.html">Contact</a></li>
+          <li><a href="politica-privacidad.html">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Social</h4>
+        <ul>
+          <li><a href="https://www.facebook.com/profile.php?id=61592768576548" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="https://www.instagram.com/alquimia.lab8/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.youtube.com/@LofiAlquimiaLab88" target="_blank" rel="noopener">YouTube</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Alquimia Lab · Made with calm &amp; coffee</p>
+    </div>
+  </footer>
+
+
+<script>
+window.addEventListener('scroll', function() {
+  document.querySelector('.nav').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+(function(){
+  var row = document.getElementById('modulesRow');
+  if(row){
+    var prev = document.getElementById('modPrev');
+    var next = document.getElementById('modNext');
+    var step = function(){
+      var card = row.querySelector('.module-card');
+      return card ? card.offsetWidth + 18 : 280;
+    };
+    if(prev) prev.addEventListener('click', function(){ row.scrollBy({left:-step(),behavior:'smooth'}); });
+    if(next) next.addEventListener('click', function(){ row.scrollBy({left:step(),behavior:'smooth'}); });
+
+    var isDown=false, startX=0, scrollLeft=0;
+    row.addEventListener('mousedown', function(e){
+      isDown=true; startX=e.pageX-row.offsetLeft; scrollLeft=row.scrollLeft;
+      row.style.scrollSnapType='none';
+    });
+    row.addEventListener('mouseleave', function(){ isDown=false; row.style.scrollSnapType='x mandatory'; });
+    row.addEventListener('mouseup', function(){ isDown=false; row.style.scrollSnapType='x mandatory'; });
+    row.addEventListener('mousemove', function(e){
+      if(!isDown) return; e.preventDefault();
+      var x=e.pageX-row.offsetLeft;
+      row.scrollLeft=scrollLeft-(x-startX)*1.2;
+    });
+
+    row.querySelectorAll('.module-card').forEach(function(card){
+      card.addEventListener('mousemove', function(e){
+        var r=card.getBoundingClientRect();
+        card.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
+        card.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');
+      });
+    });
+  }
+document.querySelectorAll('.faq-item').forEach(function(item){
+    item.addEventListener('toggle', function(){
+      if(item.open){
+        document.querySelectorAll('.faq-item[open]').forEach(function(other){
+          if(other !== item) other.removeAttribute('open');
+        });
+      }
+    });
+  });
+
+  var scScreen = document.getElementById('showcaseScreen');
+  var scDots = document.getElementById('showcaseDots');
+  if(scScreen && scDots){
+    var shots = scScreen.querySelectorAll('img');
+    var si = 0, sTimer, sBusy = false;
+    for(var n=0;n<shots.length;n++){
+      (function(idx){
+        var db=document.createElement('button');
+        db.type='button';
+        db.setAttribute('aria-label','Captura '+(idx+1));
+        db.addEventListener('click',function(){ scGo(idx); scReset(); });
+        scDots.appendChild(db);
+      })(n);
+    }
+    var sDots = scDots.children;
+    if(sDots[0]) sDots[0].classList.add('on');
+    function scGo(n){
+      if(sBusy) return;
+      var next=(n+shots.length)%shots.length;
+      if(next===si) return;
+      sBusy=true;
+      var prev=shots[si];
+      var cur=shots[next];
+      prev.classList.remove('on');
+      prev.classList.add('leaving');
+      cur.classList.remove('leaving');
+      cur.classList.add('on');
+      for(var k=0;k<shots.length;k++){
+        if(sDots[k]) sDots[k].classList.toggle('on',k===next);
+      }
+      setTimeout(function(){
+        prev.classList.remove('leaving');
+        sBusy=false;
+      },900);
+      si=next;
+    }
+    function scReset(){ clearInterval(sTimer); sTimer=setInterval(function(){ scGo(si+1); },4500); }
+    scReset();
+  }
+})();
+</script>
+</body>
+</html>

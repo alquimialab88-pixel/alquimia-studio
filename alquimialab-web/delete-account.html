@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eliminar mis datos · Kore · Alquimia Lab</title>
+  <meta name="description" content="Solicita la eliminación de tus datos personales en Kore.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=3">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <script src="js/lang.js" defer></script>
+</head>
+<body>
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">Alquimia Lab</a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <div class="nav-dd">
+        <a href="portafolio.html">Portfolio <span class="nav-dd-arrow">▾</span></a>
+        <div class="nav-dd-menu">
+          <a href="portafolio.html#projects" class="nav-dd-featured">Projects <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          <a href="portafolio.html#about">About Me</a>
+          <a href="portafolio.html#experience">Work Experience</a>
+          <a href="portafolio.html#education">Education</a>
+        </div>
+      </div>
+      <a href="productos.html">Products</a>
+      <a href="kore-landing.html" class="active">Kore</a>
+      <a href="contacto.html">Contact</a>
+    </div>
+    <button id="langToggle" class="lang-toggle" type="button" aria-label="Switch language" title="ES / EN">ES | EN</button>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="main-content">
+    <section class="section" style="text-align: center; max-width: 600px; margin: 0 auto; padding: 4rem 1rem;">
+
+      <!-- EMOJI -->
+      <div style="font-size: 5rem; margin-bottom: 1rem; animation: float 3s ease-in-out infinite;">🧘‍♀️</div>
+
+      <!-- TITLE -->
+      <h1 style="font-size: 2.5rem; font-weight: 700; color: var(--roc-dark); margin-bottom: 0.25rem;">Kore</h1>
+      <p style="font-size: 1.1rem; color: var(--lila-accent); font-weight: 500; margin-bottom: 2rem;">Tu espacio de calma</p>
+
+      <!-- EN DESARROLLO -->
+      <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem;">En desarrollo</p>
+
+      <!-- PROXIMAMENTE -->
+      <h2 style="font-size: 1.5rem; font-weight: 700; color: var(--roc-dark); margin-bottom: 0.75rem;">Próximamente en Google Play</h2>
+      <p style="font-size: 1rem; color: var(--text-muted); max-width: 400px; margin: 0 auto 1.5rem; line-height: 1.6;">Kore está en fase final de desarrollo. Será tu espacio personal de calma: tareas, hábitos, notas, diario, música relajante y chat con Antonio (IA).</p>
+
+      <!-- TAGS -->
+      <div style="display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 3rem;">
+        <span style="background: var(--purple-light); color: var(--purple-dark); padding: 0.5rem 1rem; border-radius: 2rem; font-size: 0.85rem;">📋 Tareas & Hábitos</span>
+        <span style="background: var(--purple-light); color: var(--purple-dark); padding: 0.5rem 1rem; border-radius: 2rem; font-size: 0.85rem;">📝 Notas & Diario</span>
+        <span style="background: var(--purple-light); color: var(--purple-dark); padding: 0.5rem 1rem; border-radius: 2rem; font-size: 0.85rem;">🎵 Música Relajante</span>
+        <span style="background: var(--purple-light); color: var(--purple-dark); padding: 0.5rem 1rem; border-radius: 2rem; font-size: 0.85rem;">🤖 Chat IA (Antonio)</span>
+      </div>
+
+      <!-- ELIMINAR DATOS -->
+      <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">¿Deseas eliminar tus datos de Kore?</p>
+      <div style="margin-bottom: 2.5rem;">
+        <a href="#formulario" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; border: 2px solid var(--purple); color: var(--purple); border-radius: 12px; font-weight: 600; text-decoration: none;">🗑️ Eliminar mis datos</a>
+      </div>
+
+      <!-- FORMULARIO -->
+      <div id="formulario" style="background: var(--bg-card); border-radius: 1.5rem; padding: 2rem; border: 1px solid var(--border-light); margin-bottom: 2.5rem; text-align: left;">
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--roc-dark); margin-bottom: 1rem; text-align: center;">¿Qué se elimina?</h2>
+        <ul style="margin: 0 0 1.5rem; padding-left: 1.5rem; font-size: 14px; color: var(--text-muted); line-height: 1.8;">
+          <li>Cuenta de autenticación (Firebase Auth)</li>
+          <li>Datos de perfil: nombre, email, foto</li>
+          <li>Tareas, hábitos, notas, diario, eventos</li>
+          <li>Preferencias: notificaciones, idioma, tema</li>
+          <li>Historial de chat con Antonio (IA)</li>
+          <li>Datos de uso y analytics (Firebase)</li>
+          <li>Suscripción/estado premium (Google Play Billing)</li>
+        </ul>
+        <p style="font-size: 13px; color: var(--lila-accent); margin-bottom: 1.5rem;"><strong>Esta acción es irreversible.</strong></p>
+
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--roc-dark); margin-bottom: 1rem; text-align: center;">Solicitar eliminación</h2>
+        <form name="delete-account" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" style="display: flex; flex-direction: column; gap: 1rem;">
+          <input type="hidden" name="form-name" value="delete-account">
+          <input type="hidden" name="bot-field" value="">
+          <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+            <label for="email" style="font-weight: 600; color: var(--text); font-size: 14px;">Email asociado a Kore *</label>
+            <input type="email" id="email" name="email" required placeholder="tu@email.com" autocomplete="email" style="padding: 0.65rem 1rem; border-radius: 0.75rem; border: 1px solid var(--lavender); background: var(--surface); color: var(--text); font-family: inherit; font-size: 14px;">
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+            <label for="uid" style="font-weight: 600; color: var(--text); font-size: 14px;">UID de Firebase (opcional)</label>
+            <input type="text" id="uid" name="uid" placeholder="abc123xyz" autocomplete="off" style="padding: 0.65rem 1rem; border-radius: 0.75rem; border: 1px solid var(--lavender); background: var(--surface); color: var(--text); font-family: inherit; font-size: 14px;">
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <input type="checkbox" id="confirm" name="confirm" required style="width: 1.1rem; height: 1.1rem;">
+            <label for="confirm" style="font-weight: 600; color: var(--text); font-size: 14px;">Confirmo que quiero eliminar mis datos permanentemente *</label>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+            <label for="message" style="font-weight: 600; color: var(--text); font-size: 14px;">Mensaje adicional (opcional)</label>
+            <textarea id="message" name="message" rows="4" placeholder="Motivo, comentarios..." style="padding: 0.65rem 1rem; border-radius: 0.75rem; border: 1px solid var(--lavender); background: var(--surface); color: var(--text); font-family: inherit; font-size: 14px; resize: vertical;"></textarea>
+          </div>
+          <button type="submit" style="width: 100%; padding: 0.85rem; font-size: 1rem; font-weight: 700; font-family: inherit; background: var(--purple); color: #fff; border: none; border-radius: 12px; cursor: pointer;">🗑️ Enviar solicitud de eliminación</button>
+          <p style="font-size: 12px; color: var(--text-muted); text-align: center;">Procesaremos tu solicitud en <strong>30 días hábiles</strong> (GDPR/LOPD).</p>
+        </form>
+      </div>
+
+      <!-- ADVERTENCIA -->
+      <div style="background: var(--bg-card); border-radius: 1rem; padding: 1.25rem; border: 1px solid var(--border-light); margin-bottom: 2.5rem; text-align: left;">
+        <h3 style="font-size: 1rem; font-weight: 700; color: var(--roc-dark); margin-bottom: 0.75rem;">⚠️ Antes de enviar, ten en cuenta:</h3>
+        <ul style="margin: 0; padding-left: 1.5rem; font-size: 13px; color: var(--text-muted); line-height: 1.8;">
+          <li>La eliminación es <strong>permanente e irreversible</strong>.</li>
+          <li>Perderás acceso a todas tus tareas, hábitos, notas, diario, chat y música.</li>
+          <li>Tu suscripción premium se cancelará sin reembolso.</li>
+          <li>Los datos de facturación de Google Play se conservan por ley fiscal.</li>
+          <li>Recibirás email de confirmación cuando se complete.</li>
+        </ul>
+      </div>
+
+      <!-- VOLVER -->
+      <div>
+        <a href="kore-landing.html" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.65rem 1.25rem; font-weight: 600; font-family: inherit; background: var(--surface); color: var(--text); border: 1px solid var(--lavender); border-radius: 12px; text-decoration: none;">← Volver a Kore</a>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Alquimia Lab</h4>
+        <p>Orden, Tranquilidad y Autonomía para tu día a día.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="politica-privacidad.html">Política de Privacidad</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Alquimia Lab · Hecho con calma y café</p>
+    </div>
+  </footer>
+
+  <!-- WHATSAPP FLOAT -->
+  <a href="https://wa.me/573104108483" target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+  </a>
+
+  <script src="js/lang.js" defer></script>
+  <style>
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+  </style>
+</body>
+</html>

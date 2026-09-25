@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Alquimia Lab Products — Notion templates, coloring books, and productivity tools.">
   <meta name="theme-color" content="#f2f2f2">
+<meta name="p:domain_verify" content="873c3dceab38058f2ad57c008b30e2ee"/>
   <title>Products · Alquimia Lab</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -31,6 +33,7 @@
         </div>
       </div>
       <a href="productos.html" class="active">Products</a>
+      <a href="kore-landing.html">Kore</a>
       <a href="contacto.html">Contact</a>
     </div>
     <button id="langToggle" class="lang-toggle" type="button" aria-label="Switch language" title="ES / EN">ES | EN</button>
@@ -66,20 +69,26 @@
           <div class="category-media"><img src="notion-featured.webp" alt="Notion Templates" loading="lazy" decoding="async"></div>
           <h3>Notion Templates</h3>
           <p>Productivity, planning, and personal &amp; professional organization systems. 7 templates available.</p>
-          <button class="btn-primary btn-sm" onclick="document.getElementById('notion-products').style.display='block';document.getElementById('impresos-products').style.display='none';">View all</button>
+          <button class="btn-primary btn-sm" onclick="showCategory('notion')">View all</button>
         </div>
         <div class="category-card" id="cat-impresos">
           <div class="category-media"><img src="printed-featured.webp" alt="Printed Products" loading="lazy" decoding="async"></div>
           <h3>Printed Products</h3>
           <p>Coloring books, productivity PDFs, and more. Available on Amazon and Gumroad.</p>
-          <button class="btn-primary btn-sm" onclick="document.getElementById('impresos-products').style.display='block';document.getElementById('notion-products').style.display='none';">View all</button>
+          <button class="btn-primary btn-sm" onclick="showCategory('impresos')">View all</button>
+        </div>
+        <div class="category-card" id="cat-digitales">
+          <div class="category-media"><img src="products/digital-tools.jpg" alt="Digital Products" loading="lazy" decoding="async"></div>
+          <h3>Digital Products</h3>
+          <p>Apps, planners, and digital tools that bring calm order to your content and daily life. Ready on desktop and mobile.</p>
+          <button class="btn-primary btn-sm" onclick="showCategory('digitales')">View all</button>
         </div>
       </div>
     </section>
 
     <!-- NOTION TEMPLATES -->
     <section class="section" id="notion-products" style="display:none; padding-top: 0;">
-      <button class="btn-secondary btn-sm" onclick="document.getElementById('notion-products').style.display='none';" style="margin-bottom:20px;">← Back</button>
+      <button class="btn-secondary btn-sm" onclick="showCategory('home')" style="margin-bottom:20px;">← Back</button>
       <div class="section-title"><span>Notion Templates</span></div>
 
       <div class="notion-grid">
@@ -162,13 +171,23 @@
             <a href="https://www.notion.com/templates/social-media-planner-256" target="_blank" rel="noopener" class="btn-primary btn-sm" style="width:100%;justify-content:center;">Buy</a>
           </div>
         </div>
+
+        <div class="notion-card">
+          <div class="notion-thumb" style="background: linear-gradient(135deg, #524f96 0%, #1a1832 100%); display:flex; align-items:center; justify-content:center; color:#fff; font-size:32px;">🐾</div>
+          <div class="notion-info">
+            <h3>Pet Control</h3>
+            <p>Vaccines, vet visits, meds, and food in one dashboard. Never miss a rabies shot again — built for Bonnie, Luna, and every fur baby.</p>
+            <span class="notion-price">$5</span>
+            <span class="btn-secondary btn-sm" style="width:100%;justify-content:center;opacity:.7;cursor:default;">Coming soon</span>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- PRINTED PRODUCTS -->
     <section class="section" id="impresos-products" style="display:none; padding-top: 0;">
       <div class="section-title"><span>Printed Products</span></div>
-      <button class="btn-secondary btn-sm" onclick="document.getElementById('impresos-products').style.display='none';" style="margin-bottom:20px;">← Back</button>
+      <button class="btn-secondary btn-sm" onclick="showCategory('home')" style="margin-bottom:20px;">← Back</button>
 
       <div class="product-item">
         <img class="product-media" src="print-focus.webp" alt="Focus Dock" loading="lazy" decoding="async">
@@ -186,8 +205,9 @@
           <h3>Coloring Books — Lofi Coloring</h3>
           <p>Available in English and Spanish. Print and digital edition.</p>
         </div>
-        <div style="display:flex;gap:8px;flex-shrink:0;">
-          <a href="https://www.amazon.com/COLORING-Adults-Isabel-Correa-Boder/dp/B0HBML5LCP/?_encoding=UTF8" target="_blank" rel="noopener" class="btn-primary btn-sm">Amazon</a>
+        <div style="display:flex;gap:8px;flex-shrink:0;flex-wrap:wrap;">
+          <a href="https://www.amazon.com/dp/B0HBML5LCP" target="_blank" rel="noopener" class="btn-primary btn-sm">Amazon EN</a>
+          <a href="https://www.amazon.com/dp/B0HJ9713N5" target="_blank" rel="noopener" class="btn-primary btn-sm">Amazon ES</a>
           <a href="https://bordergaze.gumroad.com/l/LofiColoringBookAlquimia" target="_blank" rel="noopener" class="btn-secondary btn-sm">Digital</a>
         </div>
       </div>
@@ -198,11 +218,38 @@
           <h3>Planner 2027</h3>
           <p>A minimalist planner to organize your year with calm and intention.</p>
         </div>
-        <div style="display:flex;gap:8px;flex-shrink:0;align-items:center;">
+        <div style="display:flex;gap:8px;flex-shrink:0;align-items:center;flex-wrap:wrap;">
           <span class="btn-secondary btn-sm" onclick="openModal('modal-journal')" style="cursor:pointer;">View project</span>
-          <a href="https://bordergaze.gumroad.com/l/bvzpd?wanted=true" target="_blank" rel="noopener" class="btn-primary btn-sm">Download</a>
-          <span class="badge" style="background:var(--lavender);color:var(--purple);font-size:10px;font-weight:700;padding:4px 10px;border-radius:99px;white-space:nowrap;">Soon on Amazon</span>
+          <a href="https://www.amazon.com/dp/B0HJ8J6MHG" target="_blank" rel="noopener" class="btn-primary btn-sm">Amazon</a>
+          <a href="https://bordergaze.gumroad.com/l/bvzpd?wanted=true" target="_blank" rel="noopener" class="btn-secondary btn-sm">Download</a>
+          <span class="badge" style="background:#2e9e5b;color:#fff;font-size:10px;font-weight:700;padding:4px 10px;border-radius:99px;white-space:nowrap;">On Amazon</span>
         </div>
+      </div>
+    </section>
+
+    <!-- DIGITAL PRODUCTS -->
+    <section class="section" id="digitales-products" style="display:none; padding-top: 0;">
+      <div class="section-title"><span>Digital Products</span></div>
+      <button class="btn-secondary btn-sm" onclick="showCategory('home')" style="margin-bottom:20px;">← Back</button>
+
+      <div class="product-item">
+        <img class="product-media" src="assets/featured-maestro.jpg?v=2" alt="Plan Maestro" loading="lazy" decoding="async">
+        <div class="product-body">
+          <h3>Plan Maestro Template</h3>
+          <p>Blank content plan for pillars, calendar, copy, ideas, and multiple brands. No more messy spreadsheets.</p>
+        </div>
+        <span class="product-price">$7</span>
+        <a href="https://bordergaze.gumroad.com/l/PlantillaPlanMaestro" target="_blank" rel="noopener" class="btn-primary btn-sm" style="white-space:nowrap;">Buy</a>
+      </div>
+
+      <div class="product-item">
+        <img class="product-media" src="assets/featured-alquimia.jpg?v=2" alt="Alquimia Studio" loading="lazy" decoding="async">
+        <div class="product-body">
+          <h3>Alquimia Studio</h3>
+          <p>Five interactive planners in one place: calm, annual, ADHD, menstrual, and weekly. Dark mode, favorites, and PDF export.</p>
+        </div>
+        <span class="product-price">$3</span>
+        <a href="https://bordergaze.gumroad.com/l/AlquimiaStudio_Planner" target="_blank" rel="noopener" class="btn-primary btn-sm" style="white-space:nowrap;">Buy</a>
       </div>
     </section>
 
@@ -233,14 +280,15 @@
       </ul>
 
       <div class="journal-cta">
-        <a href="https://bordergaze.gumroad.com/l/bvzpd?wanted=true" target="_blank" rel="noopener" class="btn-primary btn-sm" style="padding:10px 18px;">Download</a>
-        <span class="badge" style="background:var(--lavender);color:var(--purple);font-size:10px;font-weight:700;padding:4px 10px;border-radius:99px;">Soon on Amazon</span>
+        <a href="https://www.amazon.com/dp/B0HJ8J6MHG" target="_blank" rel="noopener" class="btn-primary btn-sm" style="padding:10px 18px;">Amazon</a>
+        <a href="https://bordergaze.gumroad.com/l/bvzpd?wanted=true" target="_blank" rel="noopener" class="btn-secondary btn-sm" style="padding:10px 18px;">Download</a>
+        <span class="badge" style="background:#2e9e5b;color:#fff;font-size:10px;font-weight:700;padding:4px 10px;border-radius:99px;">On Amazon</span>
       </div>
     </div>
   </div>
 
   <!-- FOOTER -->
-  <footer class="footer">&copy; 2026 Alquimia Lab &middot; Made with calm &amp; coffee</footer>
+  <footer class="footer">&copy; 2026 Alquimia Lab &middot; Made with calm &amp; coffee &middot; <a href="politica-privacidad.html">Privacy Policy</a></footer>
 
   <!-- WHATSAPP -->
   <a href="https://wa.me/573104108483" target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">
@@ -251,6 +299,31 @@
     window.addEventListener('scroll', function() {
       document.querySelector('.nav').classList.toggle('scrolled', window.scrollY > 20);
     });
+
+    function showCategory(id) {
+      var cats = document.getElementById('categories-grid');
+      var notion = document.getElementById('notion-products');
+      var impresos = document.getElementById('impresos-products');
+      var digitales = document.getElementById('digitales-products');
+      if (!cats || !notion || !impresos || !digitales) return;
+      if (['notion', 'impresos', 'digitales'].indexOf(id) === -1) id = 'home';
+      cats.style.display = (id === 'home') ? '' : 'none';
+      notion.style.display = (id === 'notion') ? 'block' : 'none';
+      impresos.style.display = (id === 'impresos') ? 'block' : 'none';
+      digitales.style.display = (id === 'digitales') ? 'block' : 'none';
+      if (history.replaceState) {
+        history.replaceState(null, '', location.pathname + location.search + (id === 'home' ? '' : '#' + id));
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function categoryFromHash() {
+      return (location.hash || '').replace('#', '').toLowerCase();
+    }
+    window.addEventListener('hashchange', function() { showCategory(categoryFromHash()); });
+    if (['notion', 'impresos', 'digitales'].indexOf(categoryFromHash()) !== -1) {
+      showCategory(categoryFromHash());
+    }
 
     function openModal(id) {
       document.getElementById(id).classList.add('show');
@@ -274,7 +347,8 @@
         if (e.target === ov) closeModal(ov.id);
       });
     });
-  </script>
+
+    </script>
 
 <script src="js/lang.js"></script>
 </html>
