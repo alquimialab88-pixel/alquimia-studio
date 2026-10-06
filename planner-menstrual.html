@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planner Menstrual 2027</title>
+<style>
+  :root{--ink:#3b3a52;--paper:#fff;--cream:#f2f2f2;--accent:#6463aa;--sage:#8f8dc7;--soft:#ccc9e6;--line:#ccc9e6;
+        --rose:#d4789c;--rose-light:#f5dce8;--peach:#e8b89d;--mint:#9dd4c4;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Urbanist','Segoe UI',sans-serif;color:var(--ink);background:#ececf1;padding:24px 0;}
+  #planner{display:flex;flex-direction:column;align-items:center;gap:24px;}
+  .page{width:6in;height:9in;background:var(--paper);padding:.55in .55in .45in;box-shadow:0 3px 14px rgba(60,50,35,.18);position:relative;display:flex;flex-direction:column;overflow:hidden;}
+  .page.cover{padding:0;}
+  .pgfoot{position:absolute;bottom:.24in;left:0;right:0;text-align:center;font-size:8px;letter-spacing:.14em;color:#9a98bd;text-transform:uppercase;}
+  .pagenum{position:absolute;left:50%;transform:translateX(-50%);bottom:87px;width:28px;height:28px;border-radius:50%;background:var(--rose);color:#fff;font-size:11px;font-weight:bold;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 1px var(--rose-light);}
+  @media print{body{background:#fff;padding:0;}#planner{display:block;gap:0;}.page{box-shadow:none;width:6in;height:9in;page-break-after:always;break-after:page;}.page:last-child{page-break-after:auto;}#toolbar{display:none;}}
+  @page{size:6in 9in;margin:0;}
+  #toolbar{position:fixed;top:14px;right:14px;z-index:99;display:flex;gap:8px;align-items:center;}
+  .toolbtn{background:#fff;color:var(--rose);border:1.5px solid var(--rose-light);padding:9px 16px;border-radius:22px;font-family:inherit;font-size:13px;cursor:pointer;text-decoration:none;}
+  .toolbtn:hover{background:var(--rose-light);}
+  #printBtn{background:var(--rose);color:#fff;border:none;padding:10px 18px;border-radius:22px;font-family:inherit;font-size:13px;cursor:pointer;}
+
+  .wline{display:block;width:100%;border:none;border-bottom:1px solid var(--line);height:26px;background:transparent;outline:none;font-family:inherit;font-size:12px;color:var(--ink);padding:0 2px;}
+  .wline:focus{border-bottom-color:var(--rose);}
+  .inline{flex:1;min-width:0;border:none;background:transparent;outline:none;font-family:inherit;font-size:12px;color:var(--ink);padding:0 2px;}
+  .tin{width:100%;height:100%;border:none;background:transparent;outline:none;font-family:inherit;font-size:10px;color:var(--ink);padding:0;}
+  .tick{cursor:pointer;}
+  .cb.tick.on{background:var(--rose);border-color:var(--rose);}
+  td.tick.on{background:var(--rose-light);}
+  .monthnav{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px;}
+  .monthnav a{border:1px solid var(--rose-light);border-radius:8px;padding:8px;text-align:center;font-size:12px;color:var(--rose);text-decoration:none;background:#fff;}
+  .monthnav a:hover{background:var(--rose-light);}
+  .pagenav{display:flex;justify-content:space-between;align-items:center;margin-top:18px;font-size:12px;gap:8px;}
+  .pagenav a{color:var(--rose);text-decoration:none;border:1px solid var(--rose-light);border-radius:16px;padding:5px 14px;background:#fff;}
+  .pagenav a:hover{background:var(--rose-light);}
+  .noteswrap{position:relative;flex:1;min-height:200px;}
+  .notesarea{position:absolute;inset:0;width:100%;height:100%;background:transparent;border:none;outline:none;font-family:inherit;font-size:12px;line-height:16px;color:var(--ink);resize:none;padding:0;}
+
+  .kicker{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--rose);margin-bottom:12px;}
+  .sec{font-family:'Eternalo',Georgia,serif;font-size:26px;font-weight:normal;color:var(--rose);border-bottom:2px dashed var(--rose-light);padding-bottom:7px;margin-bottom:13px;}
+  .sub{font-size:13.5px;color:var(--sage);margin:13px 0 7px;font-weight:700;}
+  .body{font-size:11.5px;line-height:1.65;margin-bottom:9px;color:#4a4870;}
+  .list{list-style:none;}
+  .list li{padding-left:16px;position:relative;font-size:11.5px;line-height:1.5;margin-bottom:7px;}
+  .list li::before{content:'—';position:absolute;left:0;color:var(--rose);}
+  .lbl{font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:#7876a0;margin-bottom:1px;font-weight:700;}
+  .box{border:1.5px solid var(--rose-light);border-radius:8px;background:#fdf6f9;padding:12px 14px;}
+  .cb{display:inline-block;width:11px;height:11px;border:1.5px solid var(--rose);border-radius:3px;margin-right:8px;flex:none;}
+  .check-line{display:flex;align-items:flex-end;border-bottom:1px solid var(--line);height:29px;padding-bottom:4px;}
+  .center-v{flex:1;display:flex;flex-direction:column;justify-content:center;}
+  .cover-frame{position:absolute;inset:0;background:linear-gradient(135deg,var(--rose) 0%,#e8a0bc 55%,var(--rose-light) 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:40px 24px;z-index:0;}
+  .cover-frame h1{font-family:'Eternalo',Georgia,serif;font-size:44px;line-height:1.12;color:#fff;font-weight:normal;margin:10px 0;}
+  .cover-frame .kicker{color:#f2f2f2;}
+  .cover-sub{font-size:12.5px;font-style:italic;color:#fff;max-width:3.6in;line-height:1.6;}
+  .year{font-family:'Eternalo',Georgia,serif;font-size:22px;letter-spacing:.45em;color:#fff;margin-top:22px;}
+  .cover-note{font-size:11px;color:#f2f2f2;margin-top:14px;}
+
+  .cal-head{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;font-size:9.5px;color:var(--rose);font-weight:700;margin-bottom:4px;}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;}
+  .cal-cell{border:1px dashed var(--rose-light);border-radius:4px;padding:3px 4px;font-size:9.5px;min-height:.56in;background:#fff;}
+  .cal-cell.empty{border-style:dotted;opacity:.5;}
+  .cal-cell.period{background:var(--rose-light);border-color:var(--rose);}
+  .cal-cell.ovulation{background:var(--mint);border-color:#6bb89e;}
+  .dnum{color:var(--rose);font-weight:bold;}
+
+  .symptom-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:10px 0;}
+  .symptom-box{border:1.5px solid var(--rose-light);border-radius:8px;padding:8px;text-align:center;cursor:pointer;transition:all .15s;}
+  .symptom-box:hover{background:var(--rose-light);}
+  .symptom-box.on{background:var(--rose);color:#fff;border-color:var(--rose);}
+  .symptom-box .icon{font-size:18px;}
+  .symptom-box .txt{font-size:8px;text-transform:uppercase;letter-spacing:.05em;margin-top:2px;}
+
+  .cycle-info{display:flex;gap:10px;margin:10px 0;}
+  .cycle-stat{flex:1;border:1.5px solid var(--rose-light);border-radius:10px;padding:10px;text-align:center;}
+  .cycle-stat .num{font-family:'Eternalo',Georgia,serif;font-size:24px;color:var(--rose);}
+  .cycle-stat .lbl{margin-top:2px;}
+
+  .tbl{width:100%;border-collapse:collapse;font-size:10px;}
+  .tbl th,.tbl td{border:1px solid var(--rose-light);padding:3px 6px;text-align:left;}
+  .tbl th{background:var(--rose-light);color:var(--rose);font-weight:bold;font-size:9px;letter-spacing:.05em;text-transform:uppercase;}
+  .tbl td.h{height:23px;}
+  .tbl.tight td.h{height:19px;}
+  .tbl.mini th{font-size:7px;padding:2px 0;text-align:center;}
+  .tbl.mini td.h{height:21px;}
+  .dots{flex:1;border-radius:6px;background-image:radial-gradient(var(--rose-light) 1px,transparent 1.4px);background-size:16px 16px;}
+
+  .phase-bar{height:8px;border-radius:4px;margin:6px 0;}
+  .phase-menstrual{background:var(--rose);}
+  .phase-follicular{background:var(--peach);}
+  .phase-ovulation{background:var(--mint);}
+  .phase-luteal{background:var(--sage);}
+</style>
+</head>
+<body>
+<div id="toolbar"><a href="#idx" class="toolbtn">Índice</a><button id="printBtn" onclick="window.print()">Imprimir / PDF</button><button class="toolbtn" onclick="if(confirm('¿Borrar todo?')){localStorage.clear();location.reload();}">Borrar datos</button></div>
+<div id="planner"></div>
+
+<script>
+const YEAR = 2027;
+const BOOK = 'Planner Menstrual';
+const MONTHS = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+const WD = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
+const WDS = ['L','M','X','J','V','S','D'];
+const SYMPTOMS = [
+  {icon:'🩸',txt:'Regla'},{icon:'💫',txt:'Cólicos'},{icon:'🤢',txt:'Náuseas'},
+  {icon:'😫',txt:'Dolor pecho'},{icon:'😤',txt:'Irritabilidad'},{icon:'😢',txt:'Tristeza'},
+  {icon:'😴',txt:'Cansancio'},{icon:'🍫',txt:'Antojos'},{icon:'🫧',txt:'Hinchazón'},
+  {icon:'💤',txt:'Insomnio'},{icon:'🧠',txt:'Niebla mental'},{icon:'💪',txt:'Dolor espalda'},
+  {icon:'😤',txt:'Acné'},{icon:'🌸',txt:'Buen ánimo'},{icon:'⚡',txt:'Energía alta'},
+  {icon:'🧘',txt:'Zen'}
+];
+const HEALTH_LABELS = ['Sueño','Ejercicio','Agua','Alimentación','Ánimo'];
+const QUOTES = [
+  'Tu cuerpo te habla. Escuchalo sin juicio.',
+  'Cada ciclo es diferente. Todas son válidas.',
+  'Descansar durante la regla no es debilidad.',
+  'Conocer tu cuerpo es un acto de amor.',
+  'Los altos y bajos son parte del camino.',
+  'Tu energía fluctúa. Planificá en consecuencia.',
+  'No pelees con tu cuerpo. Acompañalo.',
+  'Hoy es buen día para ser amable contigo.',
+  'Escuchar a tu cuerpo es sabiduría, no debilidad.',
+  'Cada fase tiene su regalo.',
+  'Permitite fluir con tu ciclo.',
+  'Tu bienestar es prioridad, siempre.'
+];
+
+let out = '';
+let numPg = 0;
+let K = 0;
+const key = () => 'mu' + (K++);
+function page(inner, foot, showNum, id, cls){
+  numPg++;
+  const badge = (showNum === false) ? '' : '<div class="pagenum">'+numPg+'</div>';
+  out += '<section class="page' + (cls ? ' '+cls : '') + '"' + (id ? ' id="'+id+'"' : '') + '>' + inner + badge +
+         '<footer class="pgfoot">' + (foot || BOOK) + '</footer></section>';
+}
+const L = n => Array(n).fill(0).map(()=>'<input class="wline" data-key="'+key()+'">').join('');
+const cl = () => '<div class="check-line"><span class="cb tick" data-key="'+key()+'"></span><input class="inline" data-key="'+key()+'"></div>';
+const checks = n => Array(n).fill(0).map(cl).join('');
+const lbl = t => '<div class="lbl">' + t + '</div>';
+const gap = h => '<div style="height:' + h + 'px"></div>';
+
+function calCells(y,m){
+  const dim = new Date(y,m+1,0).getDate();
+  const start = (new Date(y,m,1).getDay()+6)%7;
+  let cells='';
+  for(let i=0;i<start;i++) cells += '<div class="cal-cell empty"></div>';
+  for(let d=1;d<=dim;d++) cells += '<div class="cal-cell" data-day="'+d+'"><span class="dnum">'+d+'</span></div>';
+  const rows = Math.ceil((start+dim)/7);
+  for(let i=start+dim;i<rows*7;i++) cells += '<div class="cal-cell empty"></div>';
+  return cells;
+}
+function weeksOf(y,m){
+  const dim = new Date(y,m+1,0).getDate();
+  const start = (new Date(y,m,1).getDay()+6)%7;
+  const days = Array.from({length:dim},(_,i)=>i+1);
+  const weeks=[];
+  const first = days.splice(0, 7-start);
+  if(first.length) weeks.push(first);
+  while(days.length) weeks.push(days.splice(0,7));
+  return weeks;
+}
+
+function symptomGrid(m,d){
+  return '<div class="symptom-grid" data-group="sym-'+m+'-'+d+'">' +
+    SYMPTOMS.map(s => '<div class="symptom-box" data-val="'+s.txt+'"><div class="icon">'+s.icon+'</div><div class="txt">'+s.txt+'</div></div>').join('') +
+    '</div>';
+}
+
+function healthRow(m,d){
+  return '<div style="display:flex;gap:6px;margin-bottom:4px;">' +
+    '<div style="width:50px;text-align:center;color:var(--rose);font-weight:bold;font-size:10px;">'+d+'</div>' +
+    HEALTH_LABELS.map(l => '<div style="flex:1;"><input class="tin" data-key="'+key()+'" placeholder="1-5"></div>').join('') +
+    '</div>';
+}
+
+function dailyPage(m,d,foot){
+  const wd = (new Date(YEAR,m,d).getDay()+6)%7;
+  page(
+    '<div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid var(--rose-light);padding-bottom:6px;margin-bottom:10px;">' +
+      '<h2 class="sec" style="border:none;margin:0;font-size:18px;font-family:Urbanist,sans-serif;font-weight:700;">'+WD[wd]+' '+d+'</h2>' +
+      '<div class="cycle-info" style="margin:0;flex:none;">' +
+        '<div class="cycle-stat" style="padding:4px 8px;"><div class="lbl" style="font-size:7px;">Día del ciclo</div><input class="tin" data-key="'+key()+'" style="width:30px;text-align:center;font-size:14px;font-weight:bold;"></div>' +
+      '</div>' +
+    '</div>' +
+    '<h3 class="sub">¿Cómo me siento hoy?</h3>' +
+    symptomGrid(m,d) +
+    '<h3 class="sub">Salud del día</h3>' +
+    '<div style="display:flex;gap:4px;margin-bottom:6px;font-size:8px;color:var(--rose);font-weight:700;">' +
+      '<div style="width:50px;"></div>' +
+      HEALTH_LABELS.map(l => '<div style="flex:1;text-align:center;">'+l+'</div>').join('') +
+    '</div>' +
+    healthRow(m,d) +
+    '<h3 class="sub">Notas del día</h3>' +
+    lbl('Cómo me siento física y emocionalmente') + L(2) +
+    lbl('Algo que noto en mi cuerpo') + L(1),
+    foot);
+}
+
+function healthTable(m){
+  const dim = new Date(YEAR,m+1,0).getDate();
+  let head = '<tr><th style="width:.45in;">Día</th>';
+  HEALTH_LABELS.forEach(l => head += '<th>'+l+'</th>');
+  head += '<th>Nota</th></tr>';
+  let rows='';
+  for(let d=1;d<=dim;d++){
+    rows += '<tr><td style="text-align:center;color:var(--rose);font-weight:bold;">'+d+'</td>';
+    for(let i=0;i<HEALTH_LABELS.length;i++) rows += '<td class="h"><input class="tin" data-key="'+key()+'" placeholder="1-5"></td>';
+    rows += '<td class="h"><input class="tin" data-key="'+key()+'"></td></tr>';
+  }
+  return '<table class="tbl tight">'+head+rows+'</table>';
+}
+
+function symptomTable(m){
+  const dim = new Date(YEAR,m+1,0).getDate();
+  let head = '<tr><th style="width:.45in;">Día</th>';
+  SYMPTOMS.slice(0,8).forEach(s => head += '<th style="font-size:7px;">'+s.txt+'</th>');
+  head += '</tr>';
+  let rows='';
+  for(let d=1;d<=dim;d++){
+    rows += '<tr><td style="text-align:center;color:var(--rose);font-weight:bold;">'+d+'</td>';
+    for(let i=0;i<8;i++) rows += '<td class="h tick" data-key="'+key()+'"></td>';
+    rows += '</tr>';
+  }
+  return '<table class="tbl mini" style="table-layout:fixed;">'+head+rows+'</table>';
+}
+
+/* PORTADA */
+page('<div class="cover-frame">' +
+       '<div class="kicker">Planner Menstrual · '+YEAR+'</div>' +
+       '<h1 style="font-family:Eternalo,Georgia,serif;font-size:42px;color:#fff;font-weight:normal;">Calendario<br>Menstrual</h1>' +
+       '<p class="cover-sub">Conocé tu ciclo, cuidá tu cuerpo y planificá con intención en cada fase.</p>' +
+       '<div class="year">'+YEAR+'</div>' +
+       '<p class="cover-note">Edición digital interactiva · Tus datos se guardan automáticamente</p>' +
+     '</div>', '', false, null, 'cover');
+
+page('<div class="center-v">' +
+       lbl('Este planner pertenece a') + L(2) + gap(22) +
+       lbl('Empecé a registrar el') + L(1) + gap(10) +
+       lbl('Mi ciclo típico dura (días)') + L(1) + gap(10) +
+       lbl('Mi último periodo empezó el') + L(1) + gap(20) +
+       '<p class="box" style="text-align:center;"><p class="body" style="font-style:italic;margin:0;">"Conocer tu ciclo es conocerte a ti. Cada fase tiene su regalo."</p></div>', '');
+
+page('<h2 class="sec">Cómo funciona</h2><ul class="list">' +
+     '<li><strong>Fase menstrual ( días 1-5):</strong> tu cuerpo se está renovando. Descansá, hidratate, sé amable.</li>' +
+     '<li><strong>Fase folicular (días 6-13):</strong> tu energía sube. Buen momento para empezar proyectos nuevos.</li>' +
+     '<li><strong>Ovulación (día 14):</strong> tu energía está en su pico. Socializá, creá, expone.</li>' +
+     '<li><strong>Fase lútea (días 15-28):</strong> tu energía baja gradualmente. Preparate, planificá, descansá.</li>' +
+     '<li><strong>Síntomas:</strong> tocá los iconos para registrar cómo te sentís cada día.</li>' +
+     '<li><strong>Salud:</strong> registra sueño, ejercicio, agua, alimentación y ánimo del 1 al 5.</li>' +
+     '</ul>' +
+     '<h3 class="sub">Ir directo a un mes</h3>' +
+     '<div class="monthnav">'+MONTHS.map((nm,i)=>'<a href="#mes-'+i+'">'+nm+'</a>').join('')+'</div>', '', true, 'idx');
+
+/* MESES */
+for(let m=0;m<12;m++){
+  const foot = BOOK + ' · ' + MONTHS[m] + ' ' + YEAR;
+
+  page('<div class="center-v" style="text-align:center;">' +
+         '<div class="kicker">Mes de</div>' +
+         '<h1 style="font-family:Eternalo,Georgia,serif;font-size:40px;color:var(--rose);font-weight:normal;">'+MONTHS[m]+'</h1>' +
+         '<p style="font-style:italic;color:#b06080;margin:14px 0 34px;">"'+QUOTES[m]+'"</p>' +
+         lbl('Mi intención este mes para mi cuerpo') + L(1) + gap(10) +
+         lbl('Lo que quiero registrar con más atención') + L(1) +
+         '<div class="pagenav">' +
+           (m>0?'<a href="#mes-'+(m-1)+'">← '+MONTHS[m-1]+'</a>':'<span></span>') +
+           '<a href="#idx">Índice</a>' +
+           (m<11?'<a href="#mes-'+(m+1)+'">'+MONTHS[m+1]+' →</a>':'<span></span>') +
+         '</div>' +
+       '</div>', foot, true, 'mes-'+m);
+
+  page('<h2 class="sec">Calendario de '+MONTHS[m]+'</h2>' +
+       '<div class="cal-head">'+WDS.map(d=>'<span>'+d+'</span>').join('')+'</div>' +
+       '<div class="cal-grid">'+calCells(YEAR,m)+'</div>' + gap(8) +
+       '<div style="display:flex;gap:12px;font-size:9px;">' +
+         '<div><span style="display:inline-block;width:10px;height:10px;background:var(--rose-light);border:1px solid var(--rose);border-radius:2px;vertical-align:middle;margin-right:4px;"></span> Regla</div>' +
+         '<div><span style="display:inline-block;width:10px;height:10px;background:var(--mint);border:1px solid #6bb89e;border-radius:2px;vertical-align:middle;margin-right:4px;"></span> Ovulación (estimada)</div>' +
+       '</div>' + gap(8) +
+       '<div class="box"><div class="lbl">Mi periodo este mes</div>' +
+         '<div style="display:flex;gap:8px;">' +
+           '<div style="flex:1;"><div class="lbl">Empezó día</div><input class="tin" data-key="'+key()+'" style="width:100%;"></div>' +
+           '<div style="flex:1;"><div class="lbl">Terminó día</div><input class="tin" data-key="'+key()+'" style="width:100%;"></div>' +
+           '<div style="flex:1;"><div class="lbl">Duración</div><input class="tin" data-key="'+key()+'" style="width:100%;"></div>' +
+         '</div>' +
+       '</div>', foot);
+
+  page('<h2 class="sec">Objetivos del mes</h2>' +
+       '<p class="body">Máximo dos. Cuidate mientras avanzás.</p>' +
+       [1,2].map(i =>
+         '<div class="box" style="margin-bottom:12px;">' +
+           lbl('Objetivo '+i) + L(1) + gap(8) +
+           lbl('Primer paso') + L(1) +
+         '</div>').join(''), foot);
+
+  const weeks = weeksOf(YEAR,m);
+  weeks.forEach((days,wi)=>{
+    const first=days[0], last=days[days.length-1];
+
+    page('<h2 class="sec">Semana '+(wi+1)+' · del '+first+' al '+last+'</h2>' +
+         lbl('Mi enfoque de bienestar esta semana') + L(1) + gap(8) +
+         lbl('¿En qué fase del ciclo estoy?') + L(1) + gap(8) +
+         lbl('¿Qué necesita mi cuerpo esta semana?') + L(2), foot);
+
+    days.forEach(d => dailyPage(m,d,foot));
+
+    page('<h2 class="sec">Resumen semanal</h2>' +
+         '<p class="body">Semana del '+first+' al '+last+' de '+MONTHS[m]+'.</p>' +
+         ['¿Cómo fue mi energía esta semana?',
+          '¿Qué síntomas noté más?',
+          '¿Qué hice para cuidarme?',
+          '¿Qué quiero cambiar la próxima semana?',
+          'Algo bonito que quiero recordar:'
+         ].map(q => lbl(q)+L(2)+gap(8)).join(''), foot);
+  });
+
+  page('<h2 class="sec">Síntomas · '+MONTHS[m]+'</h2>' +
+       '<p class="body">Marca con un check cada síntoma que experimentaste.</p>' +
+       symptomTable(m), foot);
+
+  page('<h2 class="sec">Salud y bienestar · '+MONTHS[m]+'</h2>' +
+       '<p class="body">Registra del 1 al 5: 1=malo, 5=excelente.</p>' +
+       healthTable(m), foot);
+
+  page('<h2 class="sec">Notas libres</h2><div class="noteswrap"><div class="dots" style="position:absolute;inset:0;"></div><textarea class="notesarea" data-key="'+key()+'"></textarea></div>', foot);
+}
+
+document.getElementById('planner').innerHTML = out;
+(function(){
+  const NS = 'mu2027:';
+  document.querySelectorAll('[data-key]').forEach(el=>{
+    const k = NS + el.dataset.key;
+    try{
+      if(el.classList.contains('tick')){
+        if(localStorage.getItem(k)==='on') el.classList.add('on');
+        el.addEventListener('click', ()=>{
+          el.classList.toggle('on');
+          try{localStorage.setItem(k, el.classList.contains('on')?'on':'');}catch(e){}
+        });
+      } else {
+        const v = localStorage.getItem(k);
+        if(v!==null && v!=='') el.value = v;
+        el.addEventListener('input', ()=>{ try{localStorage.setItem(k, el.value);}catch(e){} });
+      }
+    }catch(e){}
+  });
+  /* Symptom toggles */
+  document.querySelectorAll('.symptom-grid').forEach(grid=>{
+    grid.querySelectorAll('.symptom-box').forEach(box=>{
+      const k = NS + 'sym_' + grid.dataset.group + '_' + box.dataset.val;
+      if(localStorage.getItem(k)==='on') box.classList.add('on');
+      box.addEventListener('click', ()=>{
+        box.classList.toggle('on');
+        try{localStorage.setItem(k, box.classList.contains('on')?'on':'');}catch(e){}
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>

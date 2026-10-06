@@ -1,0 +1,34 @@
+# Licencias Alquimia Studio — Generadas
+
+> ⚠️ GUARDA ESTE ARCHIVO EN UN LUGAR SEGURO
+> Estas son tus licencias para vender. Compártelas con clientes después de recibir pago.
+
+## Licencias (10 generadas el 2026-09-21)
+
+```
+LFDF-TJ7M-4828WL4W
+Q9ZJ-YLTA-DAD7LF92
+XPPV-ERWS-KHPTUWMU
+ZNF6-43L7-WJ2JPLX5
+47UT-JQKR-WZSLOIHM
+L95G-9FZ7-MTRTZ7DS
+3TAQ-VZQN-6G5BT9EM
+MQ4P-TZAA-WV6HVMU3
+Q53N-7G9C-HY5HZ2QD
+FAE3-HADZ-HJ4789XX
+```
+
+---
+
+## Generar más licencias
+
+```bash
+node generate-license.js 10    # Genera 10 más
+node generate-license.js 50    # Genera 50 más
+```
+
+## Validar una licencia
+
+```bash
+node generate-license.js --validate LFDF-TJ7M-4828WL4W
+```
