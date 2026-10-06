@@ -32,7 +32,7 @@ En la sección "Content" del producto:
    Tu código de acceso es: [CÓDIGO AQUÍ]
 
    Cómo usarlo:
-   1. Ve a https://alquimialab88-pixel.github.io/alquimia-studio/
+   1. Ve a https://alquimialab88-pixel.github.io/alquimia-studio/alquimia-studio/
    2. Ingresa tu código de acceso
    3. ¡Listo! Tu acceso queda guardado
 

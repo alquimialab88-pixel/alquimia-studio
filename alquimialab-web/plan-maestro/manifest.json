@@ -1,0 +1,20 @@
+{
+  "name": "Plan Maestro · Alquimia",
+  "short_name": "Plan Maestro",
+  "description": "Tu parrilla de contenido interactiva",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F7F5FB",
+  "theme_color": "#6462AB",
+  "icons": [
+    {
+      "src": "icons/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["productivity", "utilities"],
+  "lang": "es"
+}

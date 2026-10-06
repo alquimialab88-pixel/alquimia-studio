@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Alquimia Lab Portfolio — Brand Identity Exploration.">
   <meta name="theme-color" content="#f2f2f2">
+<meta name="color-scheme" content="light">
 <meta name="p:domain_verify" content="873c3dceab38058f2ad57c008b30e2ee"/>
   <title>Brand Identity Exploration · Alquimia Lab</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
@@ -12,6 +13,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6568715444285154" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y8Z50HWV3J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Y8Z50HWV3J');
+</script>
 </head>
 <body>
 
@@ -33,7 +42,7 @@
         </div>
       </div>
       <a href="productos.html">Products</a>
-      <a href="kore/">Kore</a>
+      <a href="kore-landing.html">Kore</a>
       <a href="contacto.html">Contact</a>
     </div>
     <button id="langToggle" class="lang-toggle" type="button" aria-label="Switch language" title="ES / EN">ES | EN</button>
@@ -92,6 +101,10 @@
         <div class="brand-card" onclick="openModal('modal-mymary')">
           <div class="brand-card-thumb"><img src="mymary-thumb.jpeg" alt="MyMary" loading="lazy" decoding="async"></div>
           <h3>MyMary</h3>
+        </div>
+        <div class="brand-card" onclick="openModal('modal-alquimia')">
+          <div class="brand-card-thumb"><img src="brand-alquimia-thumb.jpg" alt="Alquimia Lab" loading="lazy" decoding="async"></div>
+          <h3>Alquimia Lab</h3>
         </div>
       </div>
     </section>
@@ -343,6 +356,32 @@
         </div>
       </div>
       <div class="brand-mockup"><img src="mymary-mockup.jpeg" alt="MyMary mockup" loading="lazy" decoding="async"></div>
+    </div>
+  </div>
+
+  <!-- MODAL: Alquimia Lab -->
+  <div class="modal-overlay" id="modal-alquimia" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true">
+      <button class="modal-close" aria-label="Close" onclick="closeModal('modal-alquimia')">&times;</button>
+      <h3 class="modal-title">Alquimia Lab</h3>
+      <div class="brand-hero"><img src="brand-alquimia-hero.jpg" alt="Alquimia Lab" loading="lazy" decoding="async"></div>
+      <div class="brand-board">
+        <div class="brand-col">
+          <h4>Color Palette</h4>
+          <div class="swatches">
+            <div class="swatch"><span class="swatch-color" style="background:#ccc9e6;"></span><span class="swatch-hex">#ccc9e6</span></div>
+            <div class="swatch"><span class="swatch-color" style="background:#6462ab;"></span><span class="swatch-hex">#6462ab</span></div>
+            <div class="swatch"><span class="swatch-color" style="background:#292956;"></span><span class="swatch-hex">#292956</span></div>
+            <div class="swatch"><span class="swatch-color" style="background:#f2f2f2;"></span><span class="swatch-hex">#f2f2f2</span></div>
+          </div>
+        </div>
+        <div class="brand-col">
+          <h4>Typography</h4>
+          <div class="type-card"><span class="type-name">Quicksand Bold</span><span class="type-tag">Primary / Headline</span></div>
+          <div class="type-card"><span class="type-name">Quicksand Regular</span><span class="type-tag">Secondary / Body</span></div>
+        </div>
+      </div>
+      <div class="brand-mockup"><img src="brand-alquimia-mockup.jpg" alt="Alquimia Lab mockup" loading="lazy" decoding="async"></div>
     </div>
   </div>
 

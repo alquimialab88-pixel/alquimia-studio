@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#6463aa">
+  <meta name="p:domain_verify" content="873c3dceab38058f2ad57c008b30e2ee"/>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Alquimia Studio</title>
@@ -18,6 +19,8 @@
 html,body{height:100%;overflow:hidden}
 body{font-family:var(--font-body);background:var(--bg-primary);color:var(--text-primary);line-height:1.5;-webkit-font-smoothing:antialiased}
 .hidden{display:none!important}
+.studio-back{position:fixed;right:14px;bottom:14px;z-index:5000;background:#6463aa;color:#fff;font-family:'Inter',system-ui,sans-serif;font-size:12.5px;font-weight:600;padding:9px 16px;border-radius:99px;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,.22);opacity:.88;transition:opacity .2s ease,transform .2s ease}
+.studio-back:hover{opacity:1;transform:translateY(-1px);color:#fff}
 .splash{position:fixed;inset:0;background:var(--bg-primary);display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity .5s ease,visibility .5s ease}
 .splash.fade-out{opacity:0;visibility:hidden}
 .splash-content{text-align:center;animation:pulse 1.5s ease-in-out infinite}
@@ -526,5 +529,6 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 })();
   </script>
+  <a href="../index.html" class="studio-back">&larr; Alquimia Lab</a>
 </body>
 </html>

@@ -1,0 +1,1676 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan Maestro · Alquimia</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --purple:#6462AB; --lilac:#CCC9E6; --white:#FFFFFF;
+  --purple-deep:#4E4C8A; --lavender:#A8A6D4; --lilac-bg:#E4E3F1;
+  --cream:#F7F5FB; --dark:#2E2D52; --ink:#1A1A2E; --muted:#6E6C96;
+  --line:#E4E3F1; --card:rgba(255,255,255,.85);
+  --green:#3ecf8e; --amber:#f5a623; --red:#e05c5c;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',system-ui,sans-serif;background:linear-gradient(160deg,#F7F5FB 0%,#F5F5F5 45%,#E4E3F1 100%);color:var(--ink);min-height:100vh;padding-bottom:60px}
+button{font-family:inherit;cursor:pointer}
+input,textarea,select{font-family:inherit;color:inherit}
+.mono{font-family:'JetBrains Mono',monospace}
+
+.topbar{position:sticky;top:0;z-index:50;background:rgba(46,45,82,.94);backdrop-filter:blur(10px);color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.topbar h1{font-size:15.5px;font-weight:600;letter-spacing:.3px}
+.topbar h1 span{color:var(--lilac);font-weight:700}
+.topbar-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.brand-bar{
+  display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);
+  border-radius:99px;padding:6px 8px 6px 14px;
+}
+.brand-bar .lbl{
+  font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  color:var(--lilac);opacity:.9;
+}
+.brand-bar select{
+  background:rgba(46,45,82,.95);color:#fff;border:1.5px solid rgba(255,255,255,.25);
+  border-radius:99px;padding:7px 12px;font-size:13px;font-weight:700;max-width:200px;
+}
+.brand-bar select:focus{outline:none;border-color:var(--lilac)}
+.brand-bar select option{background:#2E2D52;color:#fff}
+.brand-mini{
+  border:1.5px solid rgba(255,255,255,.25);background:transparent;color:#fff;
+  border-radius:99px;width:32px;height:32px;font-size:14px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;padding:0;
+}
+.brand-mini:hover{border-color:var(--lilac);color:var(--lilac)}
+.brand-chip{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11.5px;font-weight:700;color:var(--purple);
+  background:#efe9ff;border:1px solid var(--lilac);
+  border-radius:99px;padding:4px 12px;margin-bottom:10px;
+}
+.brand-chip .dot{width:8px;height:8px;border-radius:50%;background:var(--purple)}
+.btn{border:none;border-radius:99px;padding:8px 16px;font-size:12.5px;font-weight:700;transition:transform .12s,filter .12s}
+.btn:active{transform:scale(.96)}
+.btn-p{background:var(--purple);color:#fff}
+.btn-p:hover{filter:brightness(1.08)}
+.btn-g{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.25)}
+.btn-g:hover{border-color:var(--lilac);color:var(--lilac)}
+.btn-l{background:var(--lilac);color:var(--dark)}
+.btn-l:hover{filter:brightness(1.04)}
+.btn-ghost{background:#fff;color:var(--purple);border:1.5px solid var(--line)}
+.btn-ghost:hover{border-color:var(--lavender)}
+.btn-danger{background:#ffe9e9;color:var(--red);border:1.5px solid transparent}
+.btn-danger:hover{border-color:var(--red)}
+
+.tabs{display:flex;gap:6px;padding:14px 16px 0;max-width:1100px;margin:0 auto;overflow-x:auto}
+.tab{flex:1;min-width:130px;border:1.5px solid var(--line);background:var(--card);border-radius:14px 14px 0 0;padding:12px 10px;font-size:13px;font-weight:700;color:var(--muted);text-align:center;transition:.15s}
+.tab:hover{border-color:var(--lavender);color:var(--purple)}
+.tab.on{background:var(--purple);border-color:var(--purple);color:#fff;box-shadow:0 -4px 14px rgba(100,98,171,.25)}
+.tab small{display:block;font-weight:400;font-size:10.5px;opacity:.75;margin-top:2px}
+.panel{display:none;max-width:1100px;margin:0 auto;padding:18px 16px 40px}
+.panel.on{display:block}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:14px;box-shadow:0 3px 12px rgba(46,45,82,.04)}
+.card h3{font-size:15px;color:var(--purple);margin-bottom:8px}
+.card h4{font-size:13.5px;margin:10px 0 6px;color:var(--dark)}
+.card p,.card li{font-size:13.5px;line-height:1.55;color:#3c3c55}
+.card ul{padding-left:18px;margin:6px 0}
+.badge{display:inline-block;font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:99px;letter-spacing:.3px;text-transform:uppercase}
+.b-pre{background:#efe9ff;color:var(--purple-deep)}
+.b-dur{background:#fff3df;color:#b07000}
+.b-post{background:#e2f8ee;color:#0d8a55}
+.b-mig{background:#e8f1fb;color:#2f6fa8}
+.b-prod{background:#ffe9f0;color:#c23a68}
+.b-amiga{background:#fff0e8;color:#c26a2a}
+.b-frase{background:#f4f3fa;color:var(--purple)}
+.b-kore{background:#ede9ff;color:var(--purple-deep)}
+.b-gen{background:#eef0f4;color:#555}
+
+.empty{
+  text-align:center;padding:48px 24px;border:2px dashed var(--lilac);
+  border-radius:18px;background:rgba(255,255,255,.6);margin-bottom:16px;
+}
+.empty h3{font-size:18px;color:var(--purple);margin-bottom:8px}
+.empty p{font-size:14px;color:var(--muted);max-width:420px;margin:0 auto 18px;line-height:1.55}
+
+.parr-toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.parr-stats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-size:12px;color:var(--muted);min-width:100px}
+.stat b{display:block;font-family:'JetBrains Mono',monospace;font-size:18px;color:var(--dark)}
+
+.post{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:12px;overflow:hidden;box-shadow:0 3px 10px rgba(46,45,82,.04)}
+.post.done{opacity:.62}
+.post.open{border-color:var(--lavender)}
+.post-h{display:flex;align-items:center;gap:10px;padding:14px 16px;flex-wrap:wrap;cursor:pointer}
+.post-id{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:13px;color:var(--purple);background:#efe9ff;width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.post-t{flex:1;min-width:180px}
+.post-t .tt{font-weight:700;font-size:14px}
+.post-t .sub{font-size:11.5px;color:var(--muted);margin-top:2px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.post-ctrl{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.date-in{border:1.5px solid var(--line);border-radius:8px;padding:6px 8px;font-size:12px;background:#fff}
+.date-in:focus{outline:none;border-color:var(--purple)}
+.status-btn{border:none;border-radius:99px;padding:6px 12px;font-size:11px;font-weight:700;background:#ffe9e9;color:var(--red)}
+.status-btn.on{background:#e2f8ee;color:#0d8a55}
+.post-body{display:none;padding:0 16px 16px;border-top:1px dashed var(--line)}
+.post.open .post-body{display:block;padding-top:14px}
+.post-body h5{font-size:12px;font-weight:700;color:var(--purple);text-transform:uppercase;letter-spacing:.4px;margin:10px 0 4px}
+.post-body p{font-size:13.5px;line-height:1.6;color:#3c3c55}
+.field{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;font-size:13.5px;background:#fff;margin-bottom:4px}
+.field:focus{outline:none;border-color:var(--purple)}
+.field-title{font-weight:700;font-size:14px}
+.notes-area{width:100%;min-height:64px;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;font-size:13px;background:#fffce8;resize:vertical}
+.notes-area:focus{outline:none;border-color:var(--amber)}
+.copy-edit{width:100%;min-height:110px;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;font-size:13px;line-height:1.55;background:#fff;resize:vertical}
+.copy-edit:focus{outline:none;border-color:var(--purple)}
+.field-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+.field-row .field{flex:1;min-width:140px;margin-bottom:0}
+select.field{cursor:pointer}
+
+.week-sep{display:flex;align-items:center;gap:12px;margin:22px 0 12px}
+.week-sep b{font-size:13px;color:var(--purple);background:#efe9ff;padding:5px 14px;border-radius:99px;white-space:nowrap}
+.week-sep::after{content:'';flex:1;height:1.5px;background:var(--line)}
+
+.cal{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 3px 12px rgba(46,45,82,.04)}
+.cal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.cal-head h3{font-size:16px;color:var(--purple);margin:0}
+.cal-nav{display:flex;gap:6px;align-items:center}
+.cal-nav button{width:34px;height:34px;border-radius:10px;border:1.5px solid var(--line);background:#fff;font-weight:700;color:var(--purple);font-size:16px}
+.cal-nav button:hover{background:var(--purple);color:#fff;border-color:var(--purple)}
+.cal-nav .cal-label{font-size:13px;font-weight:700;color:var(--dark);min-width:140px;text-align:center;text-transform:capitalize}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.cal-dow{text-align:center;font-size:10.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;padding:6px 0}
+.cal-cell{min-height:88px;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:6px;position:relative;transition:.12s}
+.cal-cell:hover{border-color:var(--lilac)}
+.cal-cell.out{opacity:.35;background:transparent}
+.cal-cell.today{border-color:var(--purple);box-shadow:0 0 0 2px rgba(100,98,171,.15)}
+.cal-daynum{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--dark);margin-bottom:4px}
+.cal-cell.today .cal-daynum{color:var(--purple);background:#efe9ff;border-radius:6px;display:inline-block;padding:1px 5px}
+.cal-post{font-size:10.5px;font-weight:600;line-height:1.3;padding:4px 6px;border-radius:6px;margin-bottom:3px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:#efe9ff;color:var(--purple-deep)}
+.cal-post:hover{filter:brightness(.95)}
+.cal-post.done{opacity:.55;text-decoration:line-through}
+.cal-empty{font-size:9.5px;color:var(--lavender);text-align:center;margin-top:4px;opacity:.8}
+.cal-legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;font-size:11px;color:var(--muted)}
+.cal-legend span{display:flex;align-items:center;gap:5px}
+.cal-legend i{width:12px;height:12px;border-radius:4px;display:inline-block}
+
+.ideas-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.ideas-head h3{margin:0}
+.ideas-add-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.idea-input{flex:1;min-width:200px;border:1.5px solid var(--line);border-radius:12px;padding:10px 14px;font-size:13.5px;background:#fff}
+.idea-input:focus{outline:none;border-color:var(--purple);box-shadow:0 0 0 3px rgba(100,98,171,.12)}
+.idea-select{border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;font-size:13px;font-weight:600;background:#fff;color:var(--dark)}
+.ideas-list{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.ideas-list-main{margin-top:0}
+.idea-card{background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:12px 14px;transition:.12s}
+.idea-card:hover{border-color:var(--lilac)}
+.idea-card.done{opacity:.55}
+.idea-card.done .idea-title{text-decoration:line-through}
+.idea-h{display:flex;align-items:flex-start;gap:10px;cursor:pointer}
+.idea-type{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;background:#efe9ff;color:var(--purple);padding:3px 8px;border-radius:99px;white-space:nowrap;margin-top:2px}
+.idea-title{flex:1;font-size:14px;font-weight:700;line-height:1.4;color:var(--dark)}
+.idea-actions{display:flex;gap:6px;flex-wrap:wrap}
+.idea-actions button{border:1.5px solid var(--line);background:#fff;border-radius:99px;font-size:11px;font-weight:700;padding:5px 10px;color:var(--muted)}
+.idea-actions button:hover{border-color:var(--purple);color:var(--purple)}
+.idea-actions button.danger:hover{border-color:var(--red);color:var(--red)}
+.idea-actions button.primary{background:var(--purple);border-color:var(--purple);color:#fff}
+.idea-body{display:none;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
+.idea-card.open .idea-body{display:block}
+.idea-meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:8px}
+.idea-notes{width:100%;min-height:72px;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;font-size:13px;line-height:1.5;resize:vertical;background:#faf9ff}
+.idea-notes:focus{outline:none;border-color:var(--purple)}
+
+.banco-item{background:var(--card);border:1px solid var(--line);border-radius:16px;margin-bottom:12px;overflow:hidden}
+.banco-item.date-set{border-color:var(--lilac);box-shadow:0 0 0 2px rgba(204,201,230,.25)}
+.banco-h{display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;flex-wrap:wrap}
+.banco-h:hover{background:#faf9ff}
+.banco-t{flex:1;min-width:180px}
+.banco-t .tt{font-weight:700;font-size:14px}
+.banco-t .sub{font-size:11.5px;color:var(--muted);margin-top:2px}
+.banco-body{display:none;padding:0 16px 16px;border-top:1px dashed var(--line)}
+.banco-item.open .banco-body{display:block;padding-top:14px}
+.banco-body h5{font-size:11.5px;font-weight:700;color:var(--purple);text-transform:uppercase;letter-spacing:.4px;margin:10px 0 4px}
+.banco-body p,.banco-body .ideas-box{font-size:13.5px;line-height:1.6;color:#3c3c55;white-space:pre-wrap}
+.b-badge{font-size:10px;font-weight:700;padding:3px 8px;border-radius:99px;background:#efe9ff;color:var(--purple-deep);text-transform:uppercase}
+.b-badge.reel{background:#ffe9f0;color:#c23a68}
+.ideas-box{background:linear-gradient(135deg,#F7F5FB,#E4E3F1);border:1.5px dashed var(--lilac);border-radius:10px;padding:12px 14px;font-size:13px;line-height:1.6;color:#3c3c55;white-space:pre-wrap}
+.banco-sort-hint{font-size:11px;color:var(--muted);margin-bottom:10px}
+.banco-ctrl{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.banco-ctrl .date-in{border:1.5px solid var(--line);border-radius:10px;padding:6px 8px;font-size:12px;font-weight:600;color:var(--purple);background:#fff}
+
+.strategy-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:700px){.strategy-grid{grid-template-columns:1fr}}
+.mini{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px}
+.mini .k{font-size:11px;font-weight:700;color:var(--purple);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.mini .v{font-size:13.5px;line-height:1.55;color:#3c3c55;min-height:48px}
+.mini .v:empty::before,.mini .v[data-ph]:empty::before{content:attr(data-ph);color:#A8A6D4;opacity:.85}
+[contenteditable]:hover{outline:1.5px dashed rgba(100,98,171,.35);outline-offset:2px;border-radius:4px}
+[contenteditable]:focus{outline:2px solid var(--lavender);outline-offset:2px;border-radius:4px;background:#fff}
+
+.modal-back{position:fixed;inset:0;background:rgba(26,26,46,.45);z-index:80;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-back.on{display:flex}
+.modal{background:#fff;border-radius:18px;padding:22px;width:100%;max-width:480px;max-height:90vh;overflow:auto;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+.modal h3{font-size:16px;color:var(--purple);margin-bottom:14px}
+.modal label{display:block;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--purple);margin:12px 0 4px}
+.modal input,.modal select,.modal textarea{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px;background:var(--cream)}
+.modal input:focus,.modal select:focus,.modal textarea:focus{outline:none;border-color:var(--purple)}
+.modal textarea{min-height:90px;resize:vertical;line-height:1.5}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:18px}
+
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--dark);color:#fff;padding:12px 22px;border-radius:99px;font-size:13px;font-weight:700;opacity:0;transition:.3s;z-index:99;pointer-events:none}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.footnote{font-size:11.5px;color:var(--muted);text-align:center;margin-top:24px}
+.hint-line{font-size:12px;color:var(--muted);margin-bottom:12px}
+@media(max-width:600px){
+  .post-h{gap:8px}
+  .cal-cell{min-height:70px}
+}
+/* LICENCIA */
+.pm-license{position:fixed;inset:0;z-index:9999;background:#F7F5FB;display:flex;align-items:center;justify-content:center;padding:20px}
+.pm-license-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:40px;max-width:400px;width:100%;text-align:center;box-shadow:0 8px 32px rgba(46,45,82,.12)}
+.pm-license-icon{font-size:48px;color:var(--purple);margin-bottom:16px}
+.pm-license-card h1{font-size:28px;color:var(--ink);margin-bottom:8px}
+.pm-license-sub{color:var(--muted);font-size:14px;margin-bottom:24px}
+.pm-license-info{color:var(--muted);font-size:13px;margin-bottom:16px}
+.pm-license-row{display:flex;gap:8px}
+.pm-license-row input{flex:1;padding:12px 14px;font-size:14px;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:1px;border:1.5px solid var(--line);border-radius:12px;outline:none;min-width:0}
+.pm-license-row input:focus{border-color:var(--purple)}
+.pm-license-row button{padding:12px 22px;font-size:14px;font-weight:700;color:#fff;background:var(--purple);border:none;border-radius:12px;white-space:nowrap}
+.pm-license-row button:hover{filter:brightness(1.08)}
+#pmLicenseError{display:none;color:var(--red);font-size:12px;margin-top:12px}
+.pm-license-hint{margin-top:20px;font-size:12px;color:var(--muted)}
+.pm-license-hint a{color:var(--purple);text-decoration:none;font-weight:700}
+.pm-license-ok{font-size:48px;color:var(--green);margin-bottom:12px}
+.pm-back{position:fixed;right:14px;bottom:14px;z-index:5000;background:#6462AB;color:#fff;font-size:12.5px;font-weight:700;padding:9px 16px;border-radius:99px;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,.22);opacity:.88}
+.pm-back:hover{opacity:1;color:#fff}
+/* ===== VISTA COMPACTA ===== */
+body.compact .post-body{display:none!important}
+body.compact .post-h{padding:9px 12px}
+body.compact .post-ctrl .btn,body.compact .status-btn{padding:4px 9px;font-size:10.5px}
+body.compact .post-ctrl .date-in{padding:4px 6px;font-size:11px}
+/* ===== MODAL APP (reemplaza prompt/confirm) ===== */
+#appModalBody label{display:block;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--purple);margin:12px 0 4px}
+#appModalBody label:first-child{margin-top:0}
+#appModalBody input{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;font-size:14px;background:var(--cream)}
+#appModalBody input:focus{outline:none;border-color:var(--purple)}
+#appModalBody p{font-size:13.5px;line-height:1.6;color:#3c3c55}
+/* ===== VISTA CLIENTE (solo PDF) ===== */
+#clientView{display:none}
+@media print{
+  @page{size:A4 landscape;margin:10mm}
+  body>*:not(#clientView){display:none!important}
+  #clientView{display:block!important;color:#1A1A2E;font-family:'Outfit',system-ui,sans-serif}
+  .cv-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+  .cv-brand{font-size:15px;font-weight:700;color:#6462AB}
+  .cv-title{font-size:24px;font-weight:700;color:#1A1A2E;margin-top:2px}
+  .cv-logo{font-size:13px;font-weight:700;color:#6E6C96}
+  .cv-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #E4E3F1;border-radius:12px;overflow:hidden}
+  .cv-table th{background:#6462AB;color:#fff;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:9px 10px;text-align:left}
+  .cv-table td{border-top:1px solid #E4E3F1;padding:9px 10px;font-size:11.5px;vertical-align:top;color:#1A1A2E}
+  .cv-table tr:nth-child(even) td{background:#FAF9FF}
+  .cv-td-date{white-space:nowrap;font-weight:700;color:#6462AB}
+  .cv-td-title{font-weight:700}
+  .cv-td-fmt{font-size:10px;color:#6E6C96;font-weight:400;margin-top:2px}
+  .cv-td-copy{white-space:pre-wrap;line-height:1.5;max-width:340px}
+  .cv-legend{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap}
+  .cv-sec{margin-bottom:12px;border:1px solid #E4E3F1;border-radius:12px;padding:14px 16px;background:#fff}
+  .cv-sec h3{font-size:14px;color:#6462AB;margin-bottom:8px}
+  .cv-kv{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px}
+  .cv-k{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#6E6C96}
+  .cv-v{font-size:12.5px;color:#1A1A2E;margin-top:2px}
+  .cv-empty{color:#A8A6D4}
+  .cv-foot{margin-top:12px;text-align:center;font-size:10.5px;color:#6E6C96}
+}
+</style>
+</head>
+<body>
+
+<div id="pmLicense" class="pm-license" style="display:none">
+  <div class="pm-license-card">
+    <div class="pm-license-icon">✦</div>
+    <h1>Plan Maestro</h1>
+    <p class="pm-license-sub" data-i18n="Tu parrilla de contenido interactiva">Tu parrilla de contenido interactiva</p>
+    <div id="pmLicenseForm">
+      <p class="pm-license-info" data-i18n="Ingresa tu código de acceso para activar">Ingresa tu código de acceso para activar</p>
+      <div class="pm-license-row">
+        <input type="text" id="pmLicenseInput" placeholder="XXXX-XXXX-XXXX-XXXX" maxlength="19" autocomplete="off">
+        <button type="button" id="pmActivateBtn" data-i18n="Activar">Activar</button>
+      </div>
+      <p id="pmLicenseError"></p>
+      <p class="pm-license-hint"><span data-i18n="¿No tienes código?">¿No tienes código?</span> <a href="https://alquimialab.gumroad.com/l/PlantillaPlanMaestro" data-href-es="https://alquimialab.gumroad.com/l/PlantillaPlanMaestro" data-href-en="https://alquimialab.gumroad.com/l/planmaestro-pro" target="_blank" rel="noopener" data-i18n="Consíguelo aquí">Consíguelo aquí</a></p>
+    </div>
+    <div id="pmLangStep" style="display:none">
+      <p class="pm-license-info" data-i18n="Elige tu idioma">Elige tu idioma</p>
+      <div class="pm-license-row" style="justify-content:center">
+        <button type="button" id="pmLangEs">Español</button>
+        <button type="button" id="pmLangEn">English</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-back" id="appModal">
+  <div class="modal">
+    <h3 id="appModalTitle"></h3>
+    <div id="appModalBody"></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeAppModal()" data-i18n="Cancelar">Cancelar</button>
+      <button class="btn btn-p" id="appModalOk" data-i18n="Aceptar">Aceptar</button>
+    </div>
+  </div>
+</div>
+
+<div class="topbar">
+  <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;min-width:0">
+    <h1 data-i18n="alquimia · Plan Maestro en blanco">alquimia <span>· Plan Maestro en blanco</span></h1>
+    <div class="brand-bar" data-i18n-title="Marca activa — cambia para filtrar todo el plan" title="Marca activa — cambia para filtrar todo el plan">
+      <span class="lbl" data-i18n="Marca">Marca</span>
+      <select id="brandSelect" onchange="switchBrand(this.value)" aria-label="Marca activa"></select>
+      <button class="brand-mini" onclick="addBrand()" data-i18n-title="Agregar marca" title="Agregar marca">+</button>
+      <button class="brand-mini" onclick="renameBrand()" data-i18n-title="Renombrar marca" title="Renombrar marca">✎</button>
+      <button class="brand-mini" onclick="deleteBrand()" data-i18n-title="Eliminar marca activa" title="Eliminar marca activa">✕</button>
+    </div>
+  </div>
+  <div class="topbar-actions">
+    <button class="btn btn-g" id="langBtn" onclick="cycleLang()">EN</button>
+    <button class="btn btn-g" onclick="exportPDF()" data-i18n="🖨 PDF">🖨 PDF</button>
+    <button class="btn btn-g" onclick="exportJSON()" data-i18n="⬇ Descargar copia">⬇ Descargar copia</button>
+    <button class="btn btn-g" onclick="document.getElementById('importFile').click()" data-i18n="⬆ Restaurar copia">⬆ Restaurar copia</button>
+    <button class="btn btn-l" onclick="resetAll()" data-i18n="Vaciar todo">Vaciar todo</button>
+    <input type="file" id="importFile" accept=".json,application/json" style="display:none" onchange="importJSON(event)">
+  </div>
+</div>
+
+<div class="tabs" role="tablist">
+  <button class="tab" data-tab="estr" onclick="goTab('estr')">🧩 <span data-i18n="Estrategia">Estrategia</span><small data-i18n="Tu plan editable">Tu plan editable</small></button>
+  <button class="tab on" data-tab="parr" onclick="goTab('parr')">📅 <span data-i18n="Parrilla">Parrilla</span><small data-i18n="Posts · copys · fechas">Posts · copys · fechas</small></button>
+  <button class="tab" data-tab="banco" onclick="goTab('banco')">🗄 <span data-i18n="Banco">Banco</span><small data-i18n="Piezas guardadas">Piezas guardadas</small></button>
+  <button class="tab" data-tab="ideas" onclick="goTab('ideas')">💡 <span data-i18n="Ideas">Ideas</span><small data-i18n="Notas rápidas">Notas rápidas</small></button>
+</div>
+
+<!-- ═══ ESTRATEGIA ═══ -->
+<section class="panel" id="panel-estr">
+  <div class="card" style="background:linear-gradient(135deg,#6462AB,#8b87d4);color:#fff;border:none">
+    <h3 style="color:#fff;margin-bottom:6px" data-i18n="Tu estrategia, a tu manera">Tu estrategia, a tu manera</h3>
+      <p style="color:rgba(255,255,255,.9);font-size:13.5px" data-i18n="Haz clic en cualquier bloque y escribe. Cada marca tiene su propia estrategia (cambia con el selector de arriba). Todo se guarda en tu navegador.">Haz clic en cualquier bloque y escribe. Cada marca tiene su propia estrategia (cambia con el selector de arriba). Todo se guarda en tu navegador.</p>
+  </div>
+
+  <div class="brand-chip" id="estrBrandChip"><span class="dot"></span><span id="estrBrandName">—</span></div>
+
+  <div class="card">
+    <h3 data-i18n="1 · Marca y promesa">1 · Marca y promesa</h3>
+      <div class="strategy-grid">
+        <div class="mini"><div class="k" data-i18n="Nombre / marca">Nombre / marca</div><div class="v" contenteditable="true" data-s="marca" data-ph="Ej: Mi marca…" data-i18n-ph="Ej: Mi marca…"></div></div>
+        <div class="mini"><div class="k" data-i18n="Tagline">Tagline</div><div class="v" contenteditable="true" data-s="tagline" data-ph="Una frase que te defina" data-i18n-ph="Una frase que te defina"></div></div>
+        <div class="mini"><div class="k" data-i18n="Tono de voz">Tono de voz</div><div class="v" contenteditable="true" data-s="tono" data-ph="Ej: amiguis, real, sin cringe…" data-i18n-ph="Ej: amiguis, real, sin cringe…"></div></div>
+        <div class="mini"><div class="k" data-i18n="Diferenciador">Diferenciador</div><div class="v" contenteditable="true" data-s="difer" data-ph="Por qué a ti y no a otro" data-i18n-ph="Por qué a ti y no a otro"></div></div>
+      </div>
+  </div>
+
+  <div class="card">
+    <h3 data-i18n="2 · Objetivos">2 · Objetivos</h3>
+      <div class="strategy-grid">
+        <div class="mini"><div class="k" data-i18n="Meta 90 días">Meta 90 días</div><div class="v" contenteditable="true" data-s="meta1" data-ph="Ej: +1000 seguidores" data-i18n-ph="Ej: +1000 seguidores"></div></div>
+        <div class="mini"><div class="k" data-i18n="Meta ingresos">Meta ingresos</div><div class="v" contenteditable="true" data-s="meta2" data-ph="Ej: $300 USD/mes" data-i18n-ph="Ej: $300 USD/mes"></div></div>
+        <div class="mini"><div class="k" data-i18n="Meta email / lista">Meta email / lista</div><div class="v" contenteditable="true" data-s="meta3" data-ph="Ej: 500 suscriptores" data-i18n-ph="Ej: 500 suscriptores"></div></div>
+        <div class="mini"><div class="k" data-i18n="Regla de contenido">Regla de contenido</div><div class="v" contenteditable="true" data-s="regla" data-ph="Ej: 60% valor · 25% demo · 15% venta" data-i18n-ph="Ej: 60% valor · 25% demo · 15% venta"></div></div>
+      </div>
+  </div>
+
+  <div class="card">
+    <h3 data-i18n="3 · Audiencia">3 · Audiencia</h3>
+      <div class="strategy-grid">
+        <div class="mini"><div class="k" data-i18n="Persona 1">Persona 1</div><div class="v" contenteditable="true" data-s="p1" data-ph="Quién es, qué le duele, qué compra" data-i18n-ph="Quién es, qué le duele, qué compra"></div></div>
+        <div class="mini"><div class="k" data-i18n="Persona 2">Persona 2</div><div class="v" contenteditable="true" data-s="p2" data-ph="Otra audiencia clave" data-i18n-ph="Otra audiencia clave"></div></div>
+        <div class="mini"><div class="k" data-i18n="Dónde están">Dónde están</div><div class="v" contenteditable="true" data-s="canales" data-ph="IG · TikTok · email · YouTube…" data-i18n-ph="IG · TikTok · email · YouTube…"></div></div>
+        <div class="mini"><div class="k" data-i18n="Producto / oferta">Producto / oferta</div><div class="v" contenteditable="true" data-s="oferta" data-ph="Qué vendes y a qué precio" data-i18n-ph="Qué vendes y a qué precio"></div></div>
+      </div>
+  </div>
+
+  <div class="card">
+    <h3 data-i18n="4 · Notas libres">4 · Notas libres</h3>
+      <div class="v mini" style="min-height:120px" contenteditable="true" data-s="notasLibres" data-ph="Embudo, fases, KPIs, lo que quieras…" data-i18n-ph="Embudo, fases, KPIs, lo que quieras…"></div>
+  </div>
+</section>
+
+<!-- ═══ PARRILLA ═══ -->
+<section class="panel on" id="panel-parr">
+  <div class="brand-chip" id="parrBrandChip" style="margin-bottom:14px"><span class="dot"></span><span id="parrBrandName">—</span></div>
+  <div class="card" style="background:linear-gradient(135deg,#6462AB,#8b87d4);color:#fff;border:none">
+      <h3 style="color:#fff;margin-bottom:6px" data-i18n="📅 Tu parrilla">📅 Tu parrilla</h3>
+      <p style="color:rgba(255,255,255,.9);font-size:13.5px" data-i18n="Agrega posts, escribe el copy, pon fecha y marca cuando publiques. Se reordena sola. Cada marca tiene su parrilla aparte.">Agrega posts, escribe el copy, pon fecha y marca cuando publiques. Se reordena sola. Cada marca tiene su parrilla aparte.</p>
+  </div>
+
+  <div class="parr-stats">
+      <div class="stat"><b id="stTotal">0</b><span data-i18n="Posts">Posts</span></div>
+      <div class="stat"><b id="stPub">0</b><span data-i18n="Publicados">Publicados</span></div>
+      <div class="stat"><b id="stPend">0</b><span data-i18n="Pendientes">Pendientes</span></div>
+  </div>
+
+  <div class="parr-toolbar">
+      <button class="btn btn-p" onclick="openPostModal()" data-i18n="+ Agregar post">+ Agregar post</button>
+      <button class="btn btn-ghost" onclick="expandAll(true)" data-i18n="Abrir todos">Abrir todos</button>
+      <button class="btn btn-ghost" onclick="expandAll(false)" data-i18n="Cerrar todos">Cerrar todos</button>
+      <button class="btn btn-ghost" id="compactBtn" onclick="toggleCompact()" data-i18n="☰ Compacta">☰ Compacta</button>
+      <button class="btn btn-l" id="viewToggle" onclick="toggleView()" data-i18n="🗓 Ver calendario">🗓 Ver calendario</button>
+      <button class="btn btn-l" onclick="goTab('ideas')" data-i18n="💡 Mis ideas">💡 Mis ideas</button>
+      <span style="font-size:12px;color:var(--muted)" data-i18n="Clic en un post para ver copy y notas">Clic en un post para ver copy y notas</span>
+  </div>
+
+  <div id="calendarView" style="display:none"></div>
+  <div id="parrilla"></div>
+  <div id="parrEmpty" class="empty" style="display:none">
+      <h3 data-i18n="Tu parrilla está en blanco ✨">Tu parrilla está en blanco ✨</h3>
+      <p data-i18n="Agrega tu primer post: título, fecha, copy y CTA. También puedes verlo en calendario o soltar ideas sueltas en la pestaña Ideas.">Agrega tu primer post: título, fecha, copy y CTA. También puedes verlo en calendario o soltar ideas sueltas en la pestaña Ideas.</p>
+      <button class="btn btn-p" onclick="openPostModal()" data-i18n="+ Mi primer post">+ Mi primer post</button>
+  </div>
+</section>
+
+<!-- ═══ BANCO ═══ -->
+<section class="panel" id="panel-banco">
+  <div class="brand-chip" id="bancoBrandChip" style="margin-bottom:14px"><span class="dot"></span><span id="bancoBrandName">—</span></div>
+  <div class="card" style="background:linear-gradient(135deg,#2E2D52,#6462AB);color:#fff;border:none">
+      <h3 style="color:var(--lilac);margin-bottom:6px" data-i18n="🗄 Banco de piezas">🗄 Banco de piezas</h3>
+      <p style="color:rgba(255,255,255,.88);font-size:13.5px" data-i18n="Guarda contenido que ya tengas listo (o por reusar). Pon fecha y se ordena solo ↑↓. Por marca activa.">Guarda contenido que ya tengas listo (o por reusar). Pon fecha y se ordena solo ↑↓. Por marca activa.</p>
+  </div>
+
+  <div class="parr-toolbar">
+      <button class="btn btn-p" onclick="openBancoModal()" data-i18n="+ Agregar pieza">+ Agregar pieza</button>
+      <button class="btn btn-ghost" onclick="expandBanco(true)" data-i18n="Abrir todos">Abrir todos</button>
+      <button class="btn btn-ghost" onclick="expandBanco(false)" data-i18n="Cerrar">Cerrar</button>
+      <span style="font-size:12px;color:var(--muted)" data-i18n="Pon fecha a cada pieza · se ordena sola">Pon fecha a cada pieza · se ordena sola</span>
+  </div>
+
+  <div id="banco"></div>
+  <div id="bancoEmpty" class="empty" style="display:none">
+      <h3 data-i18n="Banco vacío">Banco vacío</h3>
+      <p data-i18n="Sube aquí posts o reels que ya existan (portafolio, frases, demos) y prográmalos cuando quieras.">Sube aquí posts o reels que ya existan (portafolio, frases, demos) y prográmalos cuando quieras.</p>
+      <button class="btn btn-p" onclick="openBancoModal()" data-i18n="+ Primera pieza">+ Primera pieza</button>
+  </div>
+</section>
+
+<!-- ═══ IDEAS ═══ -->
+<section class="panel" id="panel-ideas">
+  <div class="brand-chip" id="ideasBrandChip" style="margin-bottom:14px"><span class="dot"></span><span id="ideasBrandName">—</span></div>
+  <div class="card" style="background:linear-gradient(135deg,#6462AB,#8b87c9);color:#fff;border:none">
+      <h3 style="color:#fff;margin-bottom:6px" data-i18n="💡 Ideas de publicación">💡 Ideas de publicación</h3>
+      <p style="color:rgba(255,255,255,.9);font-size:13.5px" data-i18n="Anota cuando se te ocurra algo. Ideas separadas por marca activa.">Anota cuando se te ocurra algo. Ideas separadas por marca activa.</p>
+  </div>
+
+  <div class="card">
+    <div class="ideas-add-row" style="margin-bottom:14px">
+        <input id="ideaMainInput" class="idea-input" placeholder="Nueva idea…" data-i18n-ph="Nueva idea…" onkeydown="if(event.key==='Enter')addIdea('ideaMainInput')">
+      <select id="ideaType" class="idea-select">
+        <option value="Idea">💡 Idea</option>
+        <option value="Hook">🪝 Hook</option>
+        <option value="Carrusel">🖼 Carrusel</option>
+        <option value="Reel">🎬 Reel</option>
+        <option value="Frase">✨ Frase</option>
+        <option value="Story">📱 Story</option>
+        <option value="Colab">🤝 Colab</option>
+      </select>
+        <button class="btn btn-p" onclick="addIdea('ideaMainInput')" data-i18n="+ Agregar">+ Agregar</button>
+        <button class="btn btn-ghost" onclick="expandIdeas(true)" data-i18n="Todas abiertas">Todas abiertas</button>
+        <button class="btn btn-ghost" onclick="expandIdeas(false)" data-i18n="Cerrar">Cerrar</button>
+    </div>
+    <div id="ideasList" class="ideas-list ideas-list-main"></div>
+      <p class="footnote" id="ideasEmpty" style="display:none" data-i18n="Aún no hay ideas. ¡La primera se te va a ocurrir en la ducha!">Aún no hay ideas. ¡La primera se te va a ocurrir en la ducha!</p>
+  </div>
+
+  <div class="card">
+      <h3 data-i18n="Cómo usarla">Cómo usarla</h3>
+      <ul>
+        <li><b data-i18n="Escribe y Enter">Escribe y Enter</b><span data-i18n=" — aparece en la lista."> — aparece en la lista.</span></li>
+        <li><b data-i18n="Clic en la idea">Clic en la idea</b><span data-i18n=" para abrir: fecha soñada + copy borrador."> para abrir: fecha soñada + copy borrador.</span></li>
+        <li><b data-i18n="Hecha">Hecha</b><span data-i18n=" cuando la publiques;"> cuando la publiques;</span> <b>✕</b><span data-i18n=" para borrar."> para borrar.</span></li>
+      </ul>
+  </div>
+</section>
+
+<!-- ═══ MODAL POST ═══ -->
+<div class="modal-back" id="postModal">
+  <div class="modal">
+    <h3 id="postModalTitle" data-i18n="Nuevo post">Nuevo post</h3>
+    <label data-i18n="Título">Título</label>
+    <input id="mTitle" placeholder="Ej: Carrusel presentación…" data-i18n-ph="Ej: Carrusel presentación…">
+    <label data-i18n="Fecha">Fecha</label>
+    <input type="date" id="mDate">
+    <label data-i18n="Formato">Formato</label>
+    <input id="mFormat" placeholder="Ej: Carrusel 5 slides / Reel 30s" data-i18n-ph="Ej: Carrusel 5 slides / Reel 30s">
+    <label data-i18n="Pilar">Pilar</label>
+    <select id="mPillar">
+      <option>Producto</option>
+      <option>Amiga</option>
+      <option>Frase</option>
+      <option>Venta</option>
+      <option>Educativo</option>
+      <option>Personal</option>
+      <option>Batch</option>
+    </select>
+    <label data-i18n="Fase">Fase</label>
+    <select id="mPhase">
+      <option value="—">—</option>
+      <option value="PRE">PRE</option>
+      <option value="DURANTE">DURANTE</option>
+      <option value="POST">POST</option>
+    </select>
+    <label data-i18n="Story / nota de stories">Story / nota de stories</label>
+    <textarea id="mStory" placeholder="Qué subir en stories el mismo día…" data-i18n-ph="Qué subir en stories el mismo día…"></textarea>
+    <label data-i18n="CTA">CTA</label>
+    <input id="mCta" placeholder="Ej: Link en bio / Comenta abajo…" data-i18n-ph="Ej: Link en bio / Comenta abajo…">
+    <label data-i18n="Copia el copy aquí">Copia el copy aquí</label>
+    <textarea id="mCopy" placeholder="Tu copy para el caption…" data-i18n-ph="Tu copy para el caption…"></textarea>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('postModal')" data-i18n="Cancelar">Cancelar</button>
+      <button class="btn btn-p" onclick="savePostFromModal()" data-i18n="Guardar post">Guardar post</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MODAL BANCO ═══ -->
+<div class="modal-back" id="bancoModal">
+  <div class="modal">
+    <h3 data-i18n="Nueva pieza en banco">Nueva pieza en banco</h3>
+    <label data-i18n="Título">Título</label>
+    <input id="bTitle" placeholder="Ej: Meme de venta / Portafolio X" data-i18n-ph="Ej: Meme de venta / Portafolio X">
+    <label data-i18n="Tipo">Tipo</label>
+    <select id="bTipo"><option>POST</option><option>REEL</option></select>
+    <label data-i18n="Fecha (opcional)">Fecha (opcional)</label>
+    <input type="date" id="bDate">
+    <label data-i18n="Copy">Copy</label>
+    <textarea id="bCopy" placeholder="Copy de la pieza…" data-i18n-ph="Copy de la pieza…"></textarea>
+    <label data-i18n="Notas / ideas de reuso">Notas / ideas de reuso</label>
+    <textarea id="bIdeas" placeholder="Cómo reutilizarla, tono, visual…" data-i18n-ph="Cómo reutilizarla, tono, visual…"></textarea>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal('bancoModal')" data-i18n="Cancelar">Cancelar</button>
+      <button class="btn btn-p" onclick="saveBancoFromModal()" data-i18n="Guardar pieza">Guardar pieza</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+/* ══════════ STORAGE ══════════ */
+const LS_KEY = 'alquimiaPlanMaestroBlanco_v1';
+const PILLARS = ['Producto','Amiga','Frase','Venta','Educativo','Personal','Batch'];
+const PILLAR_CLASS = {'Producto':'b-prod','Amiga':'b-amiga','Frase':'b-frase','Venta':'b-kore','Educativo':'b-mig','Personal':'b-amiga','Batch':'b-gen'};
+const PILLAR_CAL = {'Producto':'prod','Amiga':'amiga','Frase':'frase','Venta':'kore','Educativo':'mig','Personal':'amiga','Batch':''};
+
+let store = {
+  brands: [],          // [{id,name}]
+  activeBrand: null,   // brand id
+  posts: [],   // {id,brand,title,date,format,pillar,phase,story,cta,copy,notes,done,open}
+  banco: [],   // {id,brand,title,tipo,date,copy,ideas,open}
+  ideas: [],   // {id,brand,type,title,notes,date,done,open}
+  strategy: {} // brandId -> { data-s: html }
+};
+
+function defaultBrand(){
+  return {id:'b_'+Date.now().toString(36), name:'Mi marca'};
+}
+function loadStore(){
+  try{
+    const raw=localStorage.getItem(LS_KEY);
+    if(raw){
+      const p=JSON.parse(raw);
+      store=Object.assign({brands:[],activeBrand:null,posts:[],banco:[],ideas:[],strategy:{}},p);
+      if(!Array.isArray(store.posts))store.posts=[];
+      if(!Array.isArray(store.banco))store.banco=[];
+      if(!Array.isArray(store.ideas))store.ideas=[];
+      if(!store.strategy)store.strategy={};
+      if(!Array.isArray(store.brands))store.brands=[];
+      if(!store.brands.length){
+        const b=defaultBrand();
+        store.brands=[b];
+        store.activeBrand=b.id;
+      }
+      if(!store.activeBrand || !store.brands.some(b=>b.id===store.activeBrand)){
+        store.activeBrand=store.brands[0].id;
+      }
+      const fixOrphans=a=>a.forEach(x=>{if(!x.brand||!store.brands.some(b=>b.id===x.brand))x.brand=store.activeBrand;});
+      fixOrphans(store.posts);fixOrphans(store.banco);fixOrphans(store.ideas);
+    }else{
+      const b=defaultBrand();
+      store.brands=[b];
+      store.activeBrand=b.id;
+    }
+  }catch(e){
+    const b=defaultBrand();
+    store.brands=[b];
+    store.activeBrand=b.id;
+  }
+}
+function saveStore(){
+  try{localStorage.setItem(LS_KEY,JSON.stringify(store));}catch(e){console.warn(e);}
+}
+function activeBrand(){
+  return store.brands.find(b=>b.id===store.activeBrand) || store.brands[0];
+}
+function brandName(id){
+  const b=store.brands.find(x=>x.id===id);
+  return b?b.name:'—';
+}
+function brandOf(item){
+  return item.brand || store.activeBrand;
+}
+function activePosts(){return store.posts.filter(p=>brandOf(p)===store.activeBrand);}
+function activeBanco(){return store.banco.filter(b=>brandOf(b)===store.activeBrand);}
+function activeIdeas(){return store.ideas.filter(i=>brandOf(i)===store.activeBrand);}
+function activeStrategy(){
+  if(!store.strategy[store.activeBrand]) store.strategy[store.activeBrand]={};
+  return store.strategy[store.activeBrand];
+}
+
+function renderBrandUI(){
+  const sel=document.getElementById('brandSelect');
+  if(!sel)return;
+  sel.innerHTML=store.brands.map(b=>
+    `<option value="${esc(b.id)}"${b.id===store.activeBrand?' selected':''}>${esc(b.name)}</option>`
+  ).join('');
+  const name=activeBrand()?activeBrand().name:'—';
+  ['estrBrandName','parrBrandName','bancoBrandName','ideasBrandName'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el)el.textContent=name;
+  });
+  const slugEl=document.getElementById('brandSlug');
+  if(slugEl)slugEl.textContent=name;
+}
+function switchBrand(id){
+  if(!store.brands.some(b=>b.id===id))return;
+  store.activeBrand=id;
+  saveStore();
+  renderBrandUI();
+  loadStrategyUI();
+  renderAll();
+  toast(t('Marca activa: ')+brandName(id));
+}
+function addBrand(){
+  askInput(t('Nueva marca'),t('Nombre de la marca'),'', t('Crear'),function(v){
+    if(!v||!v.trim())return;
+    const b={id:'b_'+Date.now().toString(36), name:v.trim()};
+    store.brands.push(b);
+    store.activeBrand=b.id;
+    saveStore();
+    renderBrandUI();
+    loadStrategyUI();
+    renderAll();
+    toast(t('Marca «')+b.name+t('» creada ✓'));
+  });
+}
+function renameBrand(){
+  const b=activeBrand();
+  if(!b)return;
+  askInput(t('Renombrar marca'),t('Nuevo nombre'),b.name,t('Guardar'),function(v){
+    if(!v||!v.trim())return;
+    b.name=v.trim();
+    saveStore();
+    renderBrandUI();
+    toast(t('Marca renombrada ✓'));
+  });
+}
+function deleteBrand(){
+  const b=activeBrand();
+  if(!b)return;
+  if(store.brands.length<=1){
+    toast(t('Debe quedar al menos una marca'));
+    return;
+  }
+  const nPosts=activePosts().length, nIdeas=activeIdeas().length, nBanco=activeBanco().length;
+  const total=nPosts+nIdeas+nBanco;
+  askConfirm(t('Eliminar marca'),t('¿Eliminar «')+esc(b.name)+t('»?')+(total?'<br><br>'+t('Se borran también: ')+nPosts+t(' posts, ')+nBanco+t(' piezas y ')+nIdeas+t(' ideas de esta marca.'):''),t('Eliminar'),function(ok){
+    if(!ok)return;
+    store.posts=store.posts.filter(p=>brandOf(p)!==b.id);
+    store.banco=store.banco.filter(x=>brandOf(x)!==b.id);
+    store.ideas=store.ideas.filter(i=>brandOf(i)!==b.id);
+    delete store.strategy[b.id];
+    store.brands=store.brands.filter(x=>x.id!==b.id);
+    store.activeBrand=store.brands[0].id;
+    saveStore();
+    renderBrandUI();
+    loadStrategyUI();
+    renderAll();
+    toast(t('Marca eliminada'));
+  });
+}
+/* Modal propio (funciona en app y web, reemplaza prompt/confirm) */
+let appModalCb=null;
+function openAppModal(title,bodyHTML,okText,cb){
+  document.getElementById('appModalTitle').textContent=title;
+  document.getElementById('appModalBody').innerHTML=bodyHTML||'';
+  document.getElementById('appModalOk').textContent=okText||t('Aceptar');
+  appModalCb=cb||null;
+  document.getElementById('appModal').classList.add('on');
+  const inp=document.getElementById('appModalInput');
+  if(inp){ setTimeout(function(){inp.focus();inp.select();},60); inp.onkeydown=function(e){ if(e.key==='Enter')document.getElementById('appModalOk').click(); }; }
+}
+function closeAppModal(){ document.getElementById('appModal').classList.remove('on'); appModalCb=null; }
+document.getElementById('appModalOk').addEventListener('click',function(){
+  const inp=document.getElementById('appModalInput');
+  const cb=appModalCb; closeAppModal();
+  if(cb)cb(inp?inp.value:'');
+});
+function askInput(title,label,initial,okText,cb){
+  openAppModal(title,'<label>'+label+'</label><input id="appModalInput" value="'+esc(initial||'')+'" placeholder="'+esc(t('Escribe aquí…'))+'">',okText,function(v){ cb(v||''); });
+}
+function askConfirm(title,msgHTML,okText,cb){
+  openAppModal(title,'<p>'+msgHTML+'</p>',okText,function(){ cb(true); });
+}
+
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+/* ══════════ I18N ES/EN ══════════ */
+let pmLang='es';
+try{ pmLang=localStorage.getItem('pm-lang')||'es'; }catch(e){}
+if(pmLang!=='en')pmLang='es';
+const EN={
+'Estrategia':'Strategy','Tu plan editable':'Your editable plan',
+'Parrilla':'Grid','Posts · copys · fechas':'Posts · copy · dates',
+'Banco':'Vault','Piezas guardadas':'Saved pieces',
+'Ideas':'Ideas','Notas rápidas':'Quick notes',
+'Estrategia':'Strategy','Tu plan editable':'Your editable plan',
+'Posts · copys · fechas':'Posts · copy · dates',
+'Marca':'Brand','Tu estrategia, a tu manera':'Your strategy, your way',
+'Haz clic en cualquier bloque y escribe. Cada marca tiene su propia estrategia (cambia con el selector de arriba). Todo se guarda en tu navegador.':'Click any block and write. Each brand has its own strategy (switch it above). Everything saves in your browser.',
+'1 · Marca y promesa':'1 · Brand & promise','Nombre / marca':'Name / brand','Tagline':'Tagline','Tono de voz':'Tone of voice','Diferenciador':'Differentiator',
+'2 · Objetivos':'2 · Goals','Meta 90 días':'90-day goal','Meta ingresos':'Revenue goal','Meta email / lista':'Email / list goal','Regla de contenido':'Content rule',
+'3 · Audiencia':'3 · Audience','Persona 1':'Persona 1','Persona 2':'Persona 2','Dónde están':'Where they hang out','Producto / oferta':'Product / offer',
+'4 · Notas libres':'4 · Free notes',
+'📅 Tu parrilla':'📅 Your grid','Agrega posts, escribe el copy, pon fecha y marca cuando publiques. Se reordena sola. Cada marca tiene su parrilla aparte.':'Add posts, write the copy, set dates and check off when you publish. It re-sorts itself. Each brand has its own grid.',
+'Posts':'Posts','Publicados':'Published','Pendientes':'Pending',
+'+ Agregar post':'+ Add post','Abrir todos':'Expand all','Cerrar todos':'Collapse all','☰ Compacta':'☰ Compact','🗓 Ver calendario':'🗓 View calendar','🗓 Ver lista':'🗓 View list','💡 Mis ideas':'💡 My ideas',
+'Clic en un post para ver copy y notas':'Click a post to see copy & notes',
+'Tu parrilla está en blanco ✨':'Your grid is blank ✨','Agrega tu primer post: título, fecha, copy y CTA. También puedes verlo en calendario o soltar ideas sueltas en la pestaña Ideas.':'Add your first post: title, date, copy & CTA. You can also view it as a calendar or drop loose ideas in the Ideas tab.',
+'+ Mi primer post':'+ My first post',
+'🗄 Banco de piezas':'🗄 Piece vault','Guarda contenido que ya tengas listo (o por reusar). Pon fecha y se ordena solo ↑↓. Por marca activa.':'Save content you already have ready (or to reuse). Set a date and it sorts itself ↑↓. For the active brand.',
+'+ Agregar pieza':'+ Add piece','Cerrar':'Close','Pon fecha a cada pieza · se ordena sola':'Set a date per piece · it sorts itself',
+'Banco vacío':'Empty vault','Sube aquí posts o reels que ya existan (portafolio, frases, demos) y prográmalos cuando quieras.':'Upload existing posts or reels (portfolio, quotes, demos) and schedule them whenever.',
+'+ Primera pieza':'+ First piece',
+'💡 Ideas de publicación':'💡 Post ideas','Anota cuando se te ocurra algo. Ideas separadas por marca activa.':'Jot it down whenever inspiration strikes. Ideas live under the active brand.',
+'+ Agregar':'＋ Add','Todas abiertas':'Expand all','Aún no hay ideas. ¡La primera se te va a ocurrir en la ducha!':'No ideas yet. The first one will hit you in the shower!',
+'Cómo usarla':'How to use it','Escribe y Enter':'Type + Enter',' — aparece en la lista.':' — it appears in the list.','Clic en la idea':'Click an idea',' para abrir: fecha soñada + copy borrador.':' to open: dream date + draft copy.','Hecha':'Done',' cuando la publiques;':' when you publish;',
+'✕':'✕',' para borrar.':' to delete.','Nuevo post':'New post','Editar post':'Edit post','Título':'Title','Fecha':'Date','Formato':'Format','Pilar':'Pillar','Fase':'Stage','Story / nota de stories':'Story note','Copy':'Copy','CTA':'CTA','Notas':'Notes','Guardar':'Save','Cancelar':'Cancel','Eliminar':'Delete',
+'Nueva marca':'New brand','Nombre de la marca':'Brand name','Crear':'Create','Renombrar marca':'Rename brand','Nuevo nombre':'New name',
+'Debe quedar al menos una marca':'Keep at least one brand',
+'Eliminar marca':'Delete brand','Vaciar todo':'Reset everything','Todo vacío ✓':'All cleared ✓',
+'Marca «':'Brand “','» creada ✓':'” created ✓','Marca renombrada ✓':'Brand renamed ✓','Marca eliminada':'Brand deleted',
+'Borrar post':'Delete post','¿Borrar este post de la parrilla?':'Delete this post from the grid?','Post borrado':'Post deleted',
+'Borrar pieza':'Delete piece','¿Borrar esta pieza del banco?':'Delete this piece from the vault?','Pieza borrada':'Piece deleted',
+'Borrar idea':'Delete idea','¿Borrar esta idea?':'Delete this idea?','Idea borrada':'Idea deleted',
+'Ponle un título ✍️':'Give it a title ✍️','Post actualizado ✓':'Post updated ✓','Post agregado a la parrilla ✓':'Post added to the grid ✓',
+'Pieza actualizada ✓':'Piece updated ✓','Pieza en el banco ✓':'Piece saved to vault ✓',
+'Todo abierto ✓':'All expanded ✓','Todo cerrado ✓':'All collapsed ✓','Vista compacta ✓':'Compact view ✓','Vista completa ✓':'Full view ✓',
+'Fecha actualizada · parrilla reordenada ↑↓':'Date updated · grid re-sorted ↑↓',
+'Marcado como publicado ✓':'Marked as published ✓','Marcado como no publicado':'Marked as unpublished',
+'Fecha puesta · banco reordenado ↑↓':'Date set · vault re-sorted ↑↓','Fecha quitada':'Date removed',
+'Escribe tu idea primero ✍️':'Write your idea first ✍️','Idea guardada 💡':'Idea saved 💡',
+'Idea marcada como publicada ✓':'Idea marked as published ✓','Idea reabierta':'Idea reopened','Fecha de idea guardada':'Idea date saved',
+'Sin título':'Untitled','Sin fecha':'No date','+ Más':' more','· tachado = publicado · clic = abrir':'· crossed out = published · click to open',
+'🗓 Calendario de publicación':'🗓 Publishing calendar','Fecha soñada':'Dream date','Aún no hay ideas 💡':'No ideas yet 💡',
+'¿Qué exportamos en el PDF?':'What should we export to PDF?','Tip: mueve el calendario al mes que quieres mostrar en la parrilla.':'Tip: move the calendar to the month you want to show.',
+'📅 Parrilla del mes':'📅 Month grid','🧩 Estrategia de la marca':'🧩 Brand strategy',
+'Marca activa — cambia para filtrar todo el plan':'Active brand — switch to filter the whole plan','Agregar marca':'Add brand','Renombrar marca':'Rename brand','Eliminar marca activa':'Delete active brand',
+'Archivo inválido':'Invalid file','Copia descargada ⬇':'Copy downloaded ⬇','Copia restaurada ⬆':'Copy restored ⬆',
+'PDF guardado ⬇':'PDF saved ⬇','PDF cancelado':'PDF cancelled','No se pudo crear el PDF':'Could not create the PDF',
+'Fecha actualizada · parrilla reordenada':'Date updated · grid re-sorted',
+'Tu parrilla de contenido interactiva':'Your interactive content grid','Ingresa tu código de acceso para activar':'Enter your access code to activate',
+'Activar':'Activate','Código inválido. Verifica e intenta de nuevo.':'Invalid code. Check and try again.',
+'¿No tienes código?':'No code yet?','Consíguelo aquí':'Get it here','¡Activado correctamente!':'Activated!',
+'Hecho con calma · Plan Maestro · Alquimia Lab':'Made with calm · Plan Maestro · Alquimia Lab',
+'Borrar':'Delete','Notas / ideas':'Notes / ideas','Ordenado por fecha · ':'Sorted by date · ',
+'Sin fechas aún — pon fecha a cada pieza para ordenarlas':'No dates yet — set a date per piece to sort them',
+'✓ Publicada':'✓ Published',
+'Aceptar':'OK','Escribe aquí…':'Type here…','Marca activa: ':'Active brand: ',
+'¿Eliminar «':'Delete “','»?':'”?','Se borran también: ':'Also deleted: ',' posts, ':' posts, ',
+' piezas y ':' pieces and ',' ideas de esta marca.':' ideas for this brand.',
+'Se borran marcas, posts, banco, ideas y estrategia de este navegador.':'Deletes brands, posts, vault, ideas and strategy from this browser.',
+'📋 Ver lista':'📋 View list','Amiga / Personal':'Buddy / Personal',
+'alquimia · Plan Maestro en blanco':'alquimia · Blank Plan Maestro',
+'Elige tu idioma':'Choose your language','Continuar':'Continue',
+'🖨 PDF':'🖨 PDF','⬇ Descargar copia':'⬇ Download copy','⬆ Restaurar copia':'⬆ Restore copy',
+'+ Agregar post':'+ Add post','💡 Mis ideas':'💡 My ideas',
+'Clic en un post para ver copy y notas':'Click a post to see copy & notes',
+'🗓 Ver calendario':'🗓 View calendar','🗓 Ver lista':'🗓 View list',
+'+ Mi primer post':'+ My first post',
+'+ Agregar pieza':'+ Add piece','Pon fecha a cada pieza · se ordena sola':'Set a date per piece · it sorts itself',
+'+ Primera pieza':'+ First piece',
+'Escribe y Enter':'Type + Enter',' — aparece en la lista.':' — it appears in the list.',
+'Clic en la idea':'Click an idea',' para abrir: fecha soñada + copy borrador.':' to open: dream date + draft copy.',
+'Hecha':'Done',' cuando la publiques;':' when you publish;',
+' para borrar.':' to delete.',
+'Guardar post':'Save post','Guardar pieza':'Save piece',
+'Nueva pieza en banco':'New vault piece','Tipo':'Type','Fecha (opcional)':'Date (optional)',
+'Notas / ideas de reuso':'Reuse notes / ideas','Editar post':'Edit post','Nuevo post':'New post',
+'Story vinculada':'Linked story','Copy (editable)':'Copy (editable)','Notas':'Notes',
+'Qué subir en stories…':'What to post to stories…','Link en bio / comenta…':'Link in bio / comment…',
+'Escribe tu copy aquí…':'Write your copy here…','Ideas, cambios, referencias…':'Ideas, changes, references…',
+'Ej: Carrusel presentación…':'E.g.: intro carousel…','Ej: Carrusel 5 slides / Reel 30s':'E.g.: 5-slide carousel / 30s reel',
+'Qué subir en stories el mismo día…':'What to post to stories that same day…',
+'Ej: Link en bio / Comenta abajo…':'E.g.: Link in bio / Comment below…','Tu copy para el caption…':'Your caption copy…',
+'Ej: Meme de venta / Portafolio X':'E.g.: sales meme / X portfolio','Copy de la pieza…':'Piece copy…',
+'Cómo reutilizarla, tono, visual…':'How to reuse it, tone, visuals…',
+'Editar':'Edit','✓ Publicado':'✓ Published','No publicado':'Unpublished',
+'Semana del ':'Week of ',
+'Todas abiertas':'Expand all','Cerrar':'Close','Cómo usarla':'How to use it',
+'Nueva idea…':'New idea…','+ Agregar':'+ Add',
+'Aún no hay ideas. ¡La primera se te va a ocurrir en la ducha!':'No ideas yet. The first one will hit you in the shower!',
+'Fecha soñada':'Dream date','Copy borrador, formato, gancho…':'Draft copy, format, hook…','Aún no hay ideas 💡':'No ideas yet 💡',
+'Tu estrategia, a tu manera':'Your strategy, your way',
+'Haz clic en cualquier bloque y escribe. Cada marca tiene su propia estrategia (cambia con el selector de arriba). Todo se guarda en tu navegador.':'Click any block and write. Each brand has its own strategy (switch it above). Everything saves in your browser.',
+'1 · Marca y promesa':'1 · Brand & promise','Nombre / marca':'Name / brand','Tagline':'Tagline','Tono de voz':'Tone of voice','Diferenciador':'Differentiator',
+'2 · Objetivos':'2 · Goals','Meta 90 días':'90-day goal','Meta ingresos':'Revenue goal','Meta email / lista':'Email / list goal','Regla de contenido':'Content rule',
+'3 · Audiencia':'3 · Audience','Persona 1':'Persona 1','Persona 2':'Persona 2','Dónde están':'Where they hang out','Producto / oferta':'Product / offer',
+'4 · Notas libres':'4 · Free notes',
+'Ej: Mi marca…':'E.g.: My brand…','Una frase que te defina':'One line that defines you','Ej: amiguis, real, sin cringe…':'E.g.: friendly, real, no cringe…',
+'Por qué a ti y no a otro':'Why you and not someone else','Ej: +1000 seguidores':'E.g.: +1000 followers','Ej: $300 USD/mes':'E.g.: $300 USD/mo',
+'Ej: 500 suscriptores':'E.g.: 500 subscribers','Ej: 60% valor · 25% demo · 15% venta':'E.g.: 60% value · 25% demo · 15% sales',
+'Quién es, qué le duele, qué compra':'Who they are, their pain, what they buy','Otra audiencia clave':'Another key audience',
+'IG · TikTok · email · YouTube…':'IG · TikTok · email · YouTube…','Qué vendes y a qué precio':'What you sell and at what price',
+'Embudo, fases, KPIs, lo que quieras…':'Funnel, phases, KPIs, whatever…'
+};
+function t(s){ if(pmLang==='en'&&EN.hasOwnProperty(s))return EN[s]; return s; }
+const PLBL_EN={'Producto':'Product','Amiga':'Buddy','Frase':'Quote','Venta':'Sale','Educativo':'Educational','Personal':'Personal','Batch':'Batch'};
+const PHLBL_EN={'PRE':'PRE','DURANTE':'DURING','POST':'POST'};
+const ITLBL_EN={'Idea':'Idea','Hook':'Hook','Carrusel':'Carousel','Reel':'Reel','Frase':'Quote','Story':'Story','Colab':'Collab'};
+function plbl(v){ v=v||'Batch'; if(pmLang==='en'&&PLBL_EN.hasOwnProperty(v))return PLBL_EN[v]; return v; }
+function phlbl(v){ v=v||'—'; if(pmLang==='en'&&PHLBL_EN.hasOwnProperty(v))return PHLBL_EN[v]; return v; }
+function itlbl(v){ v=v||'Idea'; if(pmLang==='en'&&ITLBL_EN.hasOwnProperty(v))return ITLBL_EN[v]; return v; }
+const CAL_MONTHS_ES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+const CAL_MONTHS_EN=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const CAL_DOW_ES=['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
+const CAL_DOW_EN=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+function CM(){ return pmLang==='en'?CAL_MONTHS_EN:CAL_MONTHS_ES; }
+function CDOW(){ return pmLang==='en'?CAL_DOW_EN:CAL_DOW_ES; }
+function loc(){ return pmLang==='en'?'en-US':'es-CO'; }
+function renderPillarSelect(){
+  const sel=document.getElementById('mPillar');
+  if(!sel)return;
+  const cur=sel.value||'Producto';
+  sel.innerHTML=['Producto','Amiga','Frase','Venta','Educativo','Personal','Batch'].map(function(p){
+    return '<option value="'+p+'"'+(p===cur?' selected':'')+'>'+esc(plbl(p))+'</option>';
+  }).join('');
+}
+function renderIdeaTypes(){
+  const sel=document.getElementById('ideaType');
+  if(!sel)return;
+  const cur=sel.value||'Idea';
+  sel.innerHTML=['Idea','Hook','Carrusel','Reel','Frase','Story','Colab'].map(function(o){
+    return '<option value="'+o+'"'+(o===cur?' selected':'')+'>'+esc(itlbl(o))+'</option>';
+  }).join('');
+}
+function renderPhaseSelect(){
+  const sel=document.getElementById('mPhase');
+  if(!sel)return;
+  const cur=sel.value||'—';
+  sel.innerHTML=[['—','—'],['PRE','PRE'],['DURANTE','DURANTE'],['POST','POST']].map(function(p){
+    return '<option value="'+p[0]+'"'+(p[0]===cur?' selected':'')+'>'+esc(phlbl(p[0]))+'</option>';
+  }).join('');
+}
+function setLang(l){
+  pmLang=(l==='en')?'en':'es';
+  try{localStorage.setItem('pm-lang',pmLang);}catch(e){}
+  document.documentElement.lang=pmLang;
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    el.textContent=t(el.getAttribute('data-i18n'));
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(function(el){
+    el.setAttribute('placeholder',t(el.getAttribute('data-i18n-ph')));
+    if(el.hasAttribute('data-ph'))el.setAttribute('data-ph',t(el.getAttribute('data-i18n-ph')));
+  });
+  document.querySelectorAll('[data-i18n-title]').forEach(function(el){
+    el.setAttribute('title',t(el.getAttribute('data-i18n-title')));
+  });
+  document.querySelectorAll('[data-href-en]').forEach(function(el){
+    el.setAttribute('href',pmLang==='en'?el.getAttribute('data-href-en'):el.getAttribute('data-href-es'));
+  });
+  const lb=document.getElementById('langBtn'); if(lb)lb.textContent=(pmLang==='en')?'ES':'EN';
+  renderPillarSelect(); renderIdeaTypes(); renderPhaseSelect();
+  if(typeof renderAll==='function')renderAll();
+  if(typeof calVisible!=='undefined'&&calVisible&&typeof renderCalendar==='function')renderCalendar();
+}
+function cycleLang(){ setLang(pmLang==='en'?'es':'en'); }
+function todayISO(){
+  const d=new Date();
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+function fmtShort(ds){
+  try{    return new Date(ds+'T12:00:00').toLocaleDateString(loc(),{day:'numeric',month:'short'});}catch(e){return ds||'';}
+}
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  clearTimeout(t._t);
+  t._t=setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+/* ══════════ TABS ══════════ */
+function goTab(name){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.tab===name));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('on',p.id==='panel-'+name));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ══════════ MODALS ══════════ */
+let editingPostId = null;
+let editingBancoId = null;
+
+function openModal(id){document.getElementById(id).classList.add('on');}
+function closeModal(id){document.getElementById(id).classList.remove('on');}
+
+function openPostModal(id){
+  editingPostId = id!=null?id:null;
+  const ttl=document.getElementById('postModalTitle');
+  if(id!=null){
+    const p=store.posts.find(x=>x.id===id);
+    if(!p)return;
+    ttl.setAttribute('data-i18n','Editar post');
+    ttl.textContent=t('Editar post');
+    document.getElementById('mTitle').value=p.title||'';
+    document.getElementById('mDate').value=p.date||'';
+    document.getElementById('mFormat').value=p.format||'';
+    document.getElementById('mPillar').value=p.pillar||'Producto';
+    document.getElementById('mPhase').value=p.phase||'—';
+    document.getElementById('mStory').value=p.story||'';
+    document.getElementById('mCta').value=p.cta||'';
+    document.getElementById('mCopy').value=p.copy||'';
+  }else{
+    ttl.setAttribute('data-i18n','Nuevo post');
+    ttl.textContent=t('Nuevo post');
+    document.getElementById('mTitle').value='';
+    document.getElementById('mDate').value=todayISO();
+    document.getElementById('mFormat').value='';
+    document.getElementById('mPillar').value='Producto';
+    document.getElementById('mPhase').value='—';
+    document.getElementById('mStory').value='';
+    document.getElementById('mCta').value='';
+    document.getElementById('mCopy').value='';
+  }
+  openModal('postModal');
+  setTimeout(()=>document.getElementById('mTitle').focus(),50);
+}
+
+function savePostFromModal(){
+  const title=document.getElementById('mTitle').value.trim();
+  if(!title){toast(t('Ponle un título ✍️'));return;}
+  const data={
+    title,
+    date:document.getElementById('mDate').value||todayISO(),
+    format:document.getElementById('mFormat').value.trim()||'Post',
+    pillar:document.getElementById('mPillar').value,
+    phase:document.getElementById('mPhase').value,
+    story:document.getElementById('mStory').value,
+    cta:document.getElementById('mCta').value.trim(),
+    copy:document.getElementById('mCopy').value
+  };
+  if(editingPostId!=null){
+    const p=store.posts.find(x=>x.id===editingPostId);
+    if(p) Object.assign(p,data);
+    toast(t('Post actualizado ✓'));
+  }else{
+    store.posts.push(Object.assign({
+      id:Date.now(), brand:store.activeBrand, notes:'', done:false, open:true
+    },data));
+    toast(t('Post agregado a la parrilla ✓'));
+  }
+  saveStore();
+  closeModal('postModal');
+  renderParrilla();
+  if(calVisible) renderCalendar();
+}
+
+function openBancoModal(id){
+  editingBancoId = id!=null?id:null;
+  if(id!=null){
+    const b=store.banco.find(x=>x.id===id);
+    if(!b)return;
+    document.getElementById('bTitle').value=b.title||'';
+    document.getElementById('bTipo').value=b.tipo||'POST';
+    document.getElementById('bDate').value=b.date||'';
+    document.getElementById('bCopy').value=b.copy||'';
+    document.getElementById('bIdeas').value=b.ideas||'';
+  }else{
+    document.getElementById('bTitle').value='';
+    document.getElementById('bTipo').value='POST';
+    document.getElementById('bDate').value='';
+    document.getElementById('bCopy').value='';
+    document.getElementById('bIdeas').value='';
+  }
+  openModal('bancoModal');
+  setTimeout(()=>document.getElementById('bTitle').focus(),50);
+}
+
+function saveBancoFromModal(){
+  const title=document.getElementById('bTitle').value.trim();
+  if(!title){toast(t('Ponle un título ✍️'));return;}
+  const data={
+    title,
+    tipo:document.getElementById('bTipo').value,
+    date:document.getElementById('bDate').value||'',
+    copy:document.getElementById('bCopy').value,
+    ideas:document.getElementById('bIdeas').value
+  };
+  if(editingBancoId!=null){
+    const b=store.banco.find(x=>x.id===editingBancoId);
+    if(b) Object.assign(b,data);
+    toast(t('Pieza actualizada ✓'));
+  }else{
+    store.banco.push(Object.assign({id:Date.now(), brand:store.activeBrand, open:true},data));
+    toast(t('Pieza en el banco ✓'));
+  }
+  saveStore();
+  closeModal('bancoModal');
+  renderBanco();
+}
+
+document.querySelectorAll('.modal-back').forEach(m=>{
+  m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('on');});
+});
+
+/* ══════════ PARRILLA ══════════ */
+function sortedPosts(){
+  return activePosts().slice().sort((a,b)=>{
+    const da=a.date||'', db=b.date||'';
+    if(da!==db) return da.localeCompare(db);
+    return a.id-b.id;
+  });
+}
+
+function renderParrilla(){
+  const root=document.getElementById('parrilla');
+  const empty=document.getElementById('parrEmpty');
+  const list=sortedPosts();
+  const openIds=new Set(list.filter(p=>p.open).map(p=>p.id));
+  root.innerHTML='';
+  if(!list.length){
+    empty.style.display='block';
+    updateStats();
+    return;
+  }
+  empty.style.display='none';
+
+  let lastWeek=null;
+  list.forEach((p,idx)=>{
+    const wk=weekLabel(p.date);
+    if(wk && wk!==lastWeek){
+      lastWeek=wk;
+      const sep=document.createElement('div');
+      sep.className='week-sep';
+      sep.innerHTML='<b>'+esc(wk)+'</b>';
+      root.appendChild(sep);
+    }
+
+    const el=document.createElement('div');
+    el.className='post'+(p.done?' done':'')+(openIds.has(p.id)?' open':'');
+    el.id='post-'+p.id;
+    el.innerHTML=`
+      <div class="post-h" onclick="togglePost(${p.id})">
+        <div class="post-id">${String(idx+1).padStart(2,'0')}</div>
+        <div class="post-t">
+          <div class="tt">${esc(p.title)}</div>
+          <div class="sub">
+            <span>${esc(p.format||'')}</span>
+            <span class="badge ${PILLAR_CLASS[p.pillar]||'b-gen'}">${esc(plbl(p.pillar||''))}</span>
+            <span class="badge ${p.phase==='PRE'?'b-pre':p.phase==='DURANTE'?'b-dur':p.phase==='POST'?'b-post':'b-gen'}">${esc(phlbl(p.phase||'—'))}</span>
+          </div>
+        </div>
+        <div class="post-ctrl" onclick="event.stopPropagation()">
+          <input type="date" class="date-in" value="${esc(p.date||'')}" onchange="setPostDate(${p.id},this.value)">
+          <button class="status-btn ${p.done?'on':''}" onclick="toggleDone(${p.id})">${p.done?t('✓ Publicado'):t('No publicado')}</button>
+          <button class="btn btn-ghost" style="font-size:11px;padding:6px 10px" onclick="openPostModal(${p.id})">${t('Editar')}</button>
+          <button class="btn btn-danger" style="font-size:11px;padding:6px 10px" onclick="delPost(${p.id})">✕</button>
+        </div>
+      </div>
+      <div class="post-body">
+        <h5>${t('Story vinculada')}</h5>
+        <textarea class="field" style="min-height:50px" onchange="setField(${p.id},'story',this.value)" placeholder="${t('Qué subir en stories…')}">${esc(p.story||'')}</textarea>
+        <h5>${t('CTA')}</h5>
+        <input class="field" value="${esc(p.cta||'')}" onchange="setField(${p.id},'cta',this.value)" placeholder="${t('Link en bio / comenta…')}">
+        <h5>${t('Copy (editable)')}</h5>
+        <textarea class="copy-edit" onchange="setField(${p.id},'copy',this.value)" placeholder="${t('Escribe tu copy aquí…')}">${esc(p.copy||'')}</textarea>
+        <h5>${t('Notas')}</h5>
+        <textarea class="notes-area" onchange="setField(${p.id},'notes',this.value)" placeholder="${t('Ideas, cambios, referencias…')}">${esc(p.notes||'')}</textarea>
+      </div>`;
+    root.appendChild(el);
+  });
+  updateStats();
+}
+
+function weekLabel(dateStr){
+  if(!dateStr) return null;
+  try{
+    const d=new Date(dateStr+'T12:00:00');
+    const opts={day:'numeric',month:'short'};
+    const a=d.toLocaleDateString(loc(),opts);
+    const e=new Date(d); e.setDate(e.getDate()+6);
+    const b=e.toLocaleDateString(loc(),opts);
+    return t('Semana del ')+a+' – '+b;
+  }catch(err){return null;}
+}
+
+function togglePost(id){
+  const p=store.posts.find(x=>x.id===id);
+  if(!p)return;
+  p.open=!p.open;
+  saveStore();
+  const el=document.getElementById('post-'+id);
+  if(el) el.classList.toggle('open',p.open);
+}
+function expandAll(open){
+  activePosts().forEach(p=>p.open=open);
+  saveStore();
+  renderParrilla();
+  if(calVisible) renderCalendar();
+  toast(open?t('Todo abierto ✓'):t('Todo cerrado ✓'));
+}
+function toggleCompact(){
+  document.body.classList.toggle('compact');
+  toast(document.body.classList.contains('compact')?t('Vista compacta ✓'):t('Vista completa ✓'));
+}
+function setPostDate(id,v){
+  const p=store.posts.find(x=>x.id===id);
+  if(!p)return;
+  p.date=v;
+  saveStore();
+  renderParrilla();
+  if(calVisible) renderCalendar();
+  toast(t('Fecha actualizada · parrilla reordenada ↑↓'));
+}
+function setField(id,key,v){
+  const p=store.posts.find(x=>x.id===id);
+  if(!p)return;
+  p[key]=v;
+  saveStore();
+}
+function toggleDone(id){
+  const p=store.posts.find(x=>x.id===id);
+  if(!p)return;
+  p.done=!p.done;
+  saveStore();
+  renderParrilla();
+  if(calVisible) renderCalendar();
+  toast(p.done?t('Marcado como publicado ✓'):t('Marcado como no publicado'));
+}
+function delPost(id){
+  askConfirm(t('Borrar post'),t('¿Borrar este post de la parrilla?'), t('Borrar'),function(ok){
+    if(!ok)return;
+    store.posts=store.posts.filter(x=>x.id!==id);
+    saveStore();
+    renderParrilla();
+    if(calVisible) renderCalendar();
+    toast(t('Post borrado'));
+  });
+}
+function updateStats(){
+  const list=activePosts();
+  const total=list.length;
+  const pub=list.filter(p=>p.done).length;
+  document.getElementById('stTotal').textContent=total;
+  document.getElementById('stPub').textContent=pub;
+  document.getElementById('stPend').textContent=total-pub;
+}
+
+/* ══════════ CALENDAR ══════════ */
+let calVisible=false;
+let calYear, calMonth;
+const CAL_DOW=['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
+const CAL_MONTHS=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+
+function toggleView(){
+  calVisible=!calVisible;
+  document.getElementById('calendarView').style.display=calVisible?'block':'none';
+  document.getElementById('parrilla').style.display=calVisible?'none':'block';
+  const empty=document.getElementById('parrEmpty');
+  if(empty && !sortedPosts().length) empty.style.display=calVisible?'none':'block';
+  document.getElementById('viewToggle').textContent=calVisible?t('📋 Ver lista'):t('🗓 Ver calendario');
+  if(calVisible) renderCalendar();
+}
+function calMove(d){
+  calMonth+=d;
+  if(calMonth<0){calMonth=11;calYear--;}
+  if(calMonth>11){calMonth=0;calYear++;}
+  renderCalendar();
+}
+function renderCalendar(){
+  const root=document.getElementById('calendarView');
+  const first=new Date(calYear,calMonth,1);
+  let startDow=first.getDay();
+  startDow=startDow===0?6:startDow-1;
+  const daysInMonth=new Date(calYear,calMonth+1,0).getDate();
+  const daysPrev=new Date(calYear,calMonth,0).getDate();
+  const todayStr=todayISO();
+
+  const byDate={};
+  sortedPosts().forEach(p=>{
+    if(!p.date)return;
+    if(!byDate[p.date])byDate[p.date]=[];
+    byDate[p.date].push(p);
+  });
+
+  let cells='';
+  for(let i=startDow-1;i>=0;i--){
+    cells+=`<div class="cal-cell out"><div class="cal-daynum">${daysPrev-i}</div></div>`;
+  }
+  for(let d=1;d<=daysInMonth;d++){
+    const ds=calYear+'-'+String(calMonth+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
+    const isToday=ds===todayStr;
+    const posts=byDate[ds]||[];
+    let chips=posts.slice(0,3).map((p,pi)=>{
+      const cls=PILLAR_CAL[p.pillar]||'';
+      const label=(String(pi+1).padStart(2,'0'))+' · '+(p.title||'').slice(0,22)+((p.title||'').length>22?'…':'');
+      return `<div class="cal-post ${cls}${p.done?' done':''}" title="${esc(p.title)}" onclick="openFromCal(${p.id})">${esc(label)}</div>`;
+    }).join('');
+    if(posts.length>3) chips+=`<div class="cal-empty">+${posts.length-3}${pmLang==='en'?' more':' más'}</div>`;
+    if(posts.length===0) chips=`<div class="cal-empty">·</div>`;
+    cells+=`<div class="cal-cell${isToday?' today':''}"><div class="cal-daynum">${d}</div>${chips}</div>`;
+  }
+  const total=startDow+daysInMonth;
+  const trail=(7-(total%7))%7;
+  for(let i=1;i<=trail;i++){
+    cells+=`<div class="cal-cell out"><div class="cal-daynum">${i}</div></div>`;
+  }
+
+  root.innerHTML=`
+    <div class="cal">
+      <div class="cal-head">
+        <h3>${t('🗓 Calendario de publicación')}</h3>
+        <div class="cal-nav">
+          <button onclick="calMove(-1)">‹</button>
+          <span class="cal-label">${CM()[calMonth]} ${calYear}</span>
+          <button onclick="calMove(1)">›</button>
+        </div>
+      </div>
+      <div class="cal-grid">${CDOW().map(d=>`<div class="cal-dow">${d}</div>`).join('')}${cells}</div>
+      <div class="cal-legend">
+        <span><i style="background:#e8f1fb"></i> ${plbl('Educativo')}</span>
+        <span><i style="background:#ede9ff"></i> ${plbl('Venta')}</span>
+        <span><i style="background:#ffe9f0"></i> ${plbl('Producto')}</span>
+        <span><i style="background:#fff0e8"></i> ${t('Amiga / Personal')}</span>
+        <span><i style="background:#f4f3fa"></i> ${plbl('Frase')}</span>
+        <span>${t('· tachado = publicado · clic = abrir')}</span>
+      </div>
+    </div>`;
+}
+function openFromCal(id){
+  if(calVisible) toggleView();
+  const p=store.posts.find(x=>x.id===id);
+  if(p){p.open=true;saveStore();}
+  goTab('parr');
+  setTimeout(()=>{
+    const el=document.getElementById('post-'+id);
+    if(el){el.classList.add('open');el.scrollIntoView({behavior:'smooth',block:'center'});}
+  },80);
+}
+
+/* ══════════ BANCO ══════════ */
+function sortedBanco(){
+  return activeBanco().slice().sort((a,b)=>{
+    const da=a.date||'', db=b.date||'';
+    if(da && db) return da.localeCompare(db);
+    if(da) return -1;
+    if(db) return 1;
+    return a.id-b.id;
+  });
+}
+function renderBanco(){
+  const root=document.getElementById('banco');
+  const empty=document.getElementById('bancoEmpty');
+  const list=sortedBanco();
+  const openIds=new Set(list.filter(b=>b.open).map(b=>b.id));
+  root.innerHTML='';
+  if(!list.length){
+    empty.style.display='block';
+    return;
+  }
+  empty.style.display='none';
+  const withDate=list.filter(b=>b.date).length;
+  const hint=document.createElement('div');
+  hint.className='banco-sort-hint';
+  hint.textContent=withDate?(t('Ordenado por fecha · ')+withDate+'/'+list.length+(pmLang==='en'?' scheduled':' programadas')):t('Sin fechas aún — pon fecha a cada pieza para ordenarlas');
+  root.appendChild(hint);
+
+  list.forEach(b=>{
+    const el=document.createElement('div');
+    el.className='banco-item'+(b.date?' date-set':'')+(openIds.has(b.id)?' open':'');
+    el.id='banco-'+b.id;
+    el.innerHTML=`
+      <div class="banco-h" onclick="toggleBanco(${b.id})">
+        <span class="b-badge ${b.tipo==='REEL'?'reel':''}">${esc(b.tipo||'POST')}</span>
+        <div class="banco-t">
+          <div class="tt">${esc(b.title)}</div>
+          <div class="sub">${b.date?esc(fmtShort(b.date)):t('Sin fecha')}</div>
+        </div>
+        <div class="banco-ctrl" onclick="event.stopPropagation()">
+          <input type="date" class="date-in" value="${esc(b.date||'')}" onchange="setBancoDate(${b.id},this.value)">
+          <button class="btn btn-ghost" style="font-size:11px;padding:6px 10px" onclick="openBancoModal(${b.id})">${t('Editar')}</button>
+          <button class="btn btn-danger" style="font-size:11px;padding:6px 10px" onclick="delBanco(${b.id})">✕</button>
+        </div>
+      </div>
+      <div class="banco-body">
+        <h5>${t('Copy')}</h5>
+        <p>${esc(b.copy||'—')}</p>
+        <h5>${t('Notas / ideas')}</h5>
+        <div class="ideas-box">${esc(b.ideas||'—')}</div>
+      </div>`;
+    root.appendChild(el);
+  });
+}
+function toggleBanco(id){
+  const b=store.banco.find(x=>x.id===id);
+  if(!b)return;
+  b.open=!b.open;
+  saveStore();
+  renderBanco();
+}
+function expandBanco(open){
+  activeBanco().forEach(b=>b.open=open);
+  saveStore();
+  renderBanco();
+  toast(open?t('Todo abierto ✓'):t('Todo cerrado ✓'));
+}
+function setBancoDate(id,v){
+  const b=store.banco.find(x=>x.id===id);
+  if(!b)return;
+  b.date=v;
+  saveStore();
+  renderBanco();
+  toast(v?t('Fecha puesta · banco reordenado ↑↓'):t('Fecha quitada'));
+}
+function delBanco(id){
+  askConfirm(t('Borrar pieza'),t('¿Borrar esta pieza del banco?'),t('Borrar'),function(ok){
+    if(!ok)return;
+    store.banco=store.banco.filter(x=>x.id!==id);
+    saveStore();
+    renderBanco();
+    toast(t('Pieza borrada'));
+  });
+}
+
+/* ══════════ IDEAS ══════════ */
+function addIdea(inputId){
+  const inp=document.getElementById(inputId);
+  if(!inp)return;
+  const text=inp.value.trim();
+  if(!text){toast(t('Escribe tu idea primero ✍️'));return;}
+  let type='Idea';
+  if(inputId==='ideaMainInput'){
+    const sel=document.getElementById('ideaType');
+    if(sel)type=sel.value;
+  }
+  store.ideas.unshift({
+    id:Date.now(), brand:store.activeBrand, type, title:text, notes:'', date:'', done:false, open:false
+  });
+  inp.value='';
+  saveStore();
+  renderIdeas();
+  toast(t('Idea guardada 💡'));
+}
+function toggleIdea(id){
+  const it=store.ideas.find(i=>i.id===id); if(!it)return;
+  it.open=!it.open; saveStore(); renderIdeas();
+}
+function toggleIdeaDone(id){
+  const it=store.ideas.find(i=>i.id===id); if(!it)return;
+  it.done=!it.done; saveStore(); renderIdeas();
+  toast(it.done?t('Idea marcada como publicada ✓'):t('Idea reabierta'));
+}
+function setIdeaNotes(id,val){
+  const it=store.ideas.find(i=>i.id===id); if(!it)return;
+  it.notes=val; saveStore();
+}
+function setIdeaDate(id,val){
+  const it=store.ideas.find(i=>i.id===id); if(!it)return;
+  it.date=val; saveStore(); renderIdeas();
+  toast(val?t('Fecha de idea guardada'):t('Fecha quitada'));
+}
+function delIdea(id){
+  askConfirm(t('Borrar idea'),t('¿Borrar esta idea?'),t('Borrar'),function(ok){
+    if(!ok)return;
+    store.ideas=store.ideas.filter(i=>i.id!==id);
+    saveStore(); renderIdeas();
+    toast(t('Idea borrada'));
+  });
+}
+function expandIdeas(open){
+  activeIdeas().forEach(i=>i.open=open);
+  saveStore(); renderIdeas();
+}
+function renderIdeas(){
+  const ideas=activeIdeas().slice().sort((a,b)=>{
+    if(a.done!==b.done) return a.done?1:-1;
+    if(a.date&&b.date) return a.date.localeCompare(b.date);
+    if(a.date) return -1;
+    if(b.date) return 1;
+    return b.id-a.id;
+  });
+  const main=document.getElementById('ideasList');
+  const empty=document.getElementById('ideasEmpty');
+  if(!main)return;
+  main.innerHTML=ideas.map(it=>{
+    const cls='idea-card'+(it.open?' open':'')+(it.done?' done':'');
+    return `<div class="${cls}" id="idea-${it.id}">
+      <div class="idea-h" onclick="toggleIdea(${it.id})">
+        <span class="idea-type">${esc(itlbl(it.type))}</span>
+        <div class="idea-title">${esc(it.title)}</div>
+        <div class="idea-actions" onclick="event.stopPropagation()">
+          <button class="${it.done?'':'primary'}" onclick="toggleIdeaDone(${it.id})">${it.done?t('✓ Publicada'):t('Hecha')}</button>
+          <button class="danger" onclick="delIdea(${it.id})">✕</button>
+        </div>
+      </div>
+      <div class="idea-body">
+        <div class="idea-meta">
+          <label style="font-size:12px;font-weight:700;color:var(--muted)">${t('Fecha soñada')}</label>
+          <input type="date" class="date-in" value="${esc(it.date||'')}" onchange="setIdeaDate(${it.id},this.value)">
+        </div>
+        <textarea class="idea-notes" placeholder="${t('Copy borrador, formato, gancho…')}" onchange="setIdeaNotes(${it.id},this.value)" onclick="event.stopPropagation()">${esc(it.notes||'')}</textarea>
+      </div>
+    </div>`;
+  }).join('') || '<p class="footnote">'+t('Aún no hay ideas 💡')+'</p>';
+  if(empty) empty.style.display=ideas.length?'none':'block';
+}
+
+/* ══════════ STRATEGY ══════════ */
+function initStrategy(){
+  document.querySelectorAll('[data-s]').forEach(el=>{
+    if(el._stratBound)return;
+    el._stratBound=true;
+    el.addEventListener('input',()=>{
+      const k=el.getAttribute('data-s');
+      activeStrategy()[k]=el.innerHTML;
+      saveStore();
+    });
+  });
+}
+function loadStrategyUI(){
+  const s=activeStrategy();
+  document.querySelectorAll('[data-s]').forEach(el=>{
+    const k=el.getAttribute('data-s');
+    el.innerHTML=s[k]||'';
+  });
+}
+
+/* ══════════ EXPORT PDF VISTA CLIENTE ══════════ */
+function openPdfChoice(){ document.getElementById('pdfChoice').classList.add('on'); }
+function closePdfChoice(){ document.getElementById('pdfChoice').classList.remove('on'); }
+function exportPDF(){ openPdfChoice(); }
+function cvSlug(s){ return (s||'marca').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')||'marca'; }
+function cvText(h){ var d=document.createElement('div'); d.innerHTML=h||''; return (d.textContent||'').trim(); }
+function cvBrandName(){ var b=activeBrand(); return (b&&(b.name||'').trim())||'Mi marca'; }
+function cvHead(sub){ return '<div class="cv-head"><div><div class="cv-brand">✦ Plan Maestro</div><div class="cv-title">'+esc(sub)+'</div></div><div class="cv-logo">Alquimia Lab</div></div>'; }
+function cvFoot(){ return '<div class="cv-foot">Hecho con calma · Plan Maestro · Alquimia Lab</div>'; }
+function cvParrilla(){
+  var list=activePosts().filter(function(p){ return p.date && p.date.slice(0,7)===calYear+'-'+String(calMonth+1).padStart(2,'0'); });
+  list.sort(function(a,b){ return (a.date||'').localeCompare(b.date||''); });
+  var used={};
+  var rows=list.map(function(p){
+    var cls=PILLAR_CLASS[p.pillar]||'b-gen';
+    if(p.pillar)used[p.pillar]=1;
+    return '<tr><td class="cv-td-date">'+esc(fmtShort(p.date))+'</td>'
+      +'<td><span class="badge '+cls+'">'+esc(p.pillar||'—')+'</span></td>'
+      +'<td class="cv-td-title">'+esc(p.title||'Sin título')+(p.format?'<div class="cv-td-fmt">'+esc(p.format)+'</div>':'')+'</td>'
+      +'<td class="cv-td-copy">'+esc(cvText(p.copy)||'—')+'</td>'
+      +'<td>'+(p.done?'<span class="badge b-post">Listo</span>':'<span class="badge b-gen">Pendiente</span>')+'</td></tr>';
+  }).join('');
+  var legend=Object.keys(used).map(function(k){ return '<span class="badge '+(PILLAR_CLASS[k]||'b-gen')+'">'+esc(k)+'</span>'; }).join(' ');
+  return cvHead(cvBrandName()+' · Parrilla '+(CAL_MONTHS[calMonth]+' '+calYear))
+    +'<table class="cv-table"><thead><tr><th>Fecha</th><th>Pilar</th><th>Post</th><th>Copy</th><th>Estado</th></tr></thead>'
+    +'<tbody>'+(rows||'<tr><td colspan="5" style="text-align:center;color:#6E6C96">Sin posts con fecha este mes. Agrega fechas en la app y vuelve a exportar.</td></tr>')+'</tbody></table>'
+    +(legend?'<div class="cv-legend">'+legend+'</div>':'')
+    +cvFoot();
+}
+function cvEstrategia(){
+  var s=activeStrategy()||{};
+  var secs=[
+    ['Marca y promesa',[['Nombre / marca','marca'],['Tagline','tagline'],['Tono de voz','tono'],['Diferenciador','difer']]],
+    ['Objetivos',[['Meta 90 días','meta1'],['Meta ingresos','meta2'],['Meta email / lista','meta3'],['Regla de contenido','regla']]],
+    ['Audiencia',[['Persona 1','p1'],['Persona 2','p2'],['Dónde están','canales'],['Producto / oferta','oferta']]],
+    ['Notas libres',[['Notas','notasLibres']]]
+  ];
+  var h=cvHead(cvBrandName()+' · Estrategia');
+  secs.forEach(function(sec){
+    h+='<div class="cv-sec"><h3>'+sec[0]+'</h3><div class="cv-kv">';
+    sec[1].forEach(function(pair){
+      var v=cvText(s[pair[1]]);
+      h+='<div class="cv-item"><div class="cv-k">'+pair[0]+'</div><div class="cv-v">'+(v?esc(v):'<span class="cv-empty">—</span>')+'</div></div>';
+    });
+    h+='</div></div>';
+  });
+  return h+cvFoot();
+}
+function exportPDFDoc(kind){
+  closePdfChoice();
+  document.getElementById('clientView').innerHTML = kind==='estrategia' ? cvEstrategia() : cvParrilla();
+  var fname = (kind==='estrategia' ? 'estrategia-' : 'parrilla-') + cvSlug(cvBrandName()) + '.pdf';
+  setTimeout(function(){
+    if(window.pmAPI && window.pmAPI.exportPDF){
+      window.pmAPI.exportPDF(fname).then(function(r){ toast(r&&r.ok?t('PDF guardado ⬇'):t('PDF cancelado')); }).catch(function(){ toast(t('No se pudo crear el PDF')); });
+    }else{ window.print(); }
+  },150);
+}
+/* ══════════ EXPORT / IMPORT / RESET ══════════ */
+function exportJSON(){
+  const data={app:'alquimia-plan-maestro-blanco',v:2,exported:new Date().toISOString(),store:store};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='plan-maestro-blanco-'+new Date().toISOString().slice(0,10)+'.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast(t('Copia descargada ⬇'));
+}
+function importJSON(e){
+  const f=e.target.files[0];
+  if(!f)return;
+  const r=new FileReader();
+  r.onload=()=>{
+    try{
+      const data=JSON.parse(r.result);
+      const inc=(data&&typeof data.store==='object'&&data.store)?data.store:{};
+      const mergeById=(cur,arr)=>{
+        const out=Array.isArray(cur)?cur.slice():[];
+        const idx=new Map();
+        out.forEach((x,i)=>{if(x&&x.id!=null)idx.set(x.id,i);});
+        (Array.isArray(arr)?arr:[]).forEach(x=>{
+          if(!x||typeof x!=='object')return;
+          if(x.id!=null&&idx.has(x.id)){const i=idx.get(x.id);out[i]=Object.assign({},out[i],x);}
+          else{out.push(x);if(x.id!=null)idx.set(x.id,out.length-1);}
+        });
+        return out;
+      };
+      store.brands=mergeById(store.brands,inc.brands);
+      store.posts=mergeById(store.posts,inc.posts);
+      store.banco=mergeById(store.banco,inc.banco);
+      store.ideas=mergeById(store.ideas,inc.ideas);
+      if(inc.strategy&&typeof inc.strategy==='object'){
+        store.strategy=store.strategy||{};
+        Object.keys(inc.strategy).forEach(k=>{
+          store.strategy[k]=Object.assign({},store.strategy[k]||{},inc.strategy[k]);
+        });
+      }
+      if(inc.kpi&&typeof inc.kpi==='object')store.kpi=Object.assign({},store.kpi||{},inc.kpi);
+      if(!Array.isArray(store.posts))store.posts=[];
+      if(!Array.isArray(store.banco))store.banco=[];
+      if(!Array.isArray(store.ideas))store.ideas=[];
+      if(!store.strategy)store.strategy={};
+      if(!Array.isArray(store.brands))store.brands=[];
+      if(!store.brands.length){
+        const b=defaultBrand();
+        store.brands=[b];
+        store.activeBrand=b.id;
+      }
+      if(inc.activeBrand&&store.brands.some(b=>b.id===inc.activeBrand))store.activeBrand=inc.activeBrand;
+      if(!store.activeBrand||!store.brands.some(b=>b.id===store.activeBrand)){
+        store.activeBrand=store.brands[0].id;
+      }
+      const migrate=arr=>arr.forEach(x=>{if(!x.brand||!store.brands.some(b=>b.id===x.brand))x.brand=store.activeBrand;});
+      migrate(store.posts); migrate(store.banco); migrate(store.ideas);
+      saveStore();
+      renderBrandUI();
+      loadStrategyUI();
+      renderAll();
+      toast(t('Copia restaurada ⬆'));
+    }catch(err){toast(t('Archivo inválido'));}
+  };
+  r.readAsText(f);
+  e.target.value='';
+}
+function resetAll(){
+  askConfirm(t('Vaciar todo'),t('Se borran marcas, posts, banco, ideas y estrategia de este navegador.'),t('Vaciar todo'),function(ok){
+    if(!ok)return;
+    const b=defaultBrand();
+    store={brands:[b],activeBrand:b.id,posts:[],banco:[],ideas:[],strategy:{}};
+    saveStore();
+    renderBrandUI();
+    loadStrategyUI();
+    renderAll();
+    toast(t('Todo vacío ✓'));
+  });
+}
+
+function renderAll(){
+  renderBrandUI();
+  renderParrilla();
+  renderBanco();
+  renderIdeas();
+  loadStrategyUI();
+  if(calVisible) renderCalendar();
+}
+
+/* ══════════ INIT ══════════ */
+/* ===== LICENCIA PLAN MAESTRO ===== */
+const PM_SECRET='MAESTRO2026';
+const PM_KEY='plan-maestro-license';
+function pmHash(code){
+  var hash=0;
+  var str=code.replace(/-/g,'')+PM_SECRET;
+  for(var i=0;i<str.length;i++){
+    hash=((hash<<5)-hash)+str.charCodeAt(i);
+    hash=hash&hash;
+  }
+  return Math.abs(hash).toString(36).toUpperCase().slice(0,8);
+}
+function pmValid(code){
+  var clean=(code||'').replace(/-/g,'').toUpperCase();
+  if(clean.length!==16)return false;
+  var base=clean.slice(0,12);
+  var input=base.slice(0,4)+'-'+base.slice(4,8)+'-'+base.slice(8,12);
+  return clean.endsWith(pmHash(input).slice(-4));
+}
+function pmStored(){
+  try{return pmValid(localStorage.getItem(PM_KEY)||'');}catch(e){return false;}
+}
+function bootApp(){
+  loadStore();
+  const now=new Date();
+  calYear=now.getFullYear();
+  calMonth=now.getMonth();
+  initStrategy();
+  setLang(pmLang);
+}
+(function initLicenseGate(){
+  var scr=document.getElementById('pmLicense');
+  if(pmStored()){ scr.style.display='none'; bootApp(); return; }
+  scr.style.display='flex';
+  var input=document.getElementById('pmLicenseInput');
+  var btn=document.getElementById('pmActivateBtn');
+  var err=document.getElementById('pmLicenseError');
+  input.addEventListener('input',function(){
+    var v=input.value.replace(/[^A-Za-z0-9]/g,'').toUpperCase();
+    var f=v.match(/.{1,4}/g);
+    input.value=f?f.join('-'):v;
+  });
+  btn.addEventListener('click',function(){
+    if(pmValid(input.value.trim())){
+      try{localStorage.setItem(PM_KEY,input.value.trim());}catch(e){}
+      document.getElementById('pmLicenseForm').style.display='none';
+      document.getElementById('pmLangStep').style.display='block';
+      document.getElementById('pmLangEs').onclick=function(){ setLang('es'); scr.style.display='none'; bootApp(); };
+      document.getElementById('pmLangEn').onclick=function(){ setLang('en'); scr.style.display='none'; bootApp(); };
+    }else{
+      err.textContent=t('Código inválido. Verifica e intenta de nuevo.');
+      err.style.display='block';
+    }
+  });
+  input.addEventListener('keypress',function(e){ if(e.key==='Enter') btn.click(); });
+})();
+</script>
+  <a href="https://alquimialab.app/" target="_blank" rel="noopener" class="pm-back" onclick="if(window.pmAPI&&window.pmAPI.openAlquimia){event.preventDefault();window.pmAPI.openAlquimia();}">&larr; Alquimia Lab</a>
+
+  <div class="modal-back" id="pdfChoice">
+    <div class="modal">
+      <h3 data-i18n="¿Qué exportamos en el PDF?">¿Qué exportamos en el PDF?</h3>
+      <p class="hint-line" data-i18n="Tip: mueve el calendario al mes que quieres mostrar en la parrilla.">Tip: mueve el calendario al mes que quieres mostrar en la parrilla.</p>
+      <div class="modal-actions" style="flex-direction:column;align-items:stretch">
+        <button class="btn btn-p" onclick="exportPDFDoc('parrilla')" data-i18n="📅 Parrilla del mes">📅 Parrilla del mes</button>
+        <button class="btn btn-p" onclick="exportPDFDoc('estrategia')" data-i18n="🧩 Estrategia de la marca">🧩 Estrategia de la marca</button>
+        <button class="btn btn-ghost" onclick="closePdfChoice()" data-i18n="Cancelar">Cancelar</button>
+      </div>
+    </div>
+  </div>
+  <div id="clientView"></div>
+</body>
+</html>

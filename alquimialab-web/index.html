@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Alquimia Lab — Notion templates, planners, coloring books, Lofi mixes and Kore, your calm app. Design tools for a calmer day.">
   <meta name="theme-color" content="#f2f2f2">
+<meta name="color-scheme" content="light">
 <meta name="p:domain_verify" content="873c3dceab38058f2ad57c008b30e2ee"/>
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Alquimia Lab">
@@ -24,6 +25,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=19">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6568715444285154" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y8Z50HWV3J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Y8Z50HWV3J');
+</script>
 </head>
 <body class="page-v2">
 
@@ -64,22 +72,39 @@
         <div class="hero-copy">
           <span class="hero-badge anim"><span class="badge-dot" aria-hidden="true"></span> Alquimia Lab · design with calm</span>
           <img src="assets/logo-3x.png" alt="Alquimia Lab Logo" class="hero-logo anim" loading="lazy" decoding="async">
-          <h1 class="anim d1">Welcome to <em>Alquimia Lab</em></h1>
+          <h1 class="anim d1">Hi, I'm <em>Isabel</em></h1>
           <p class="anim d2">I create digital tools and designs that bring clarity and calm to your daily routine. Notion templates, coloring books, productivity tools, and visual design solutions.</p>
           <div class="hero-btns anim d3">
-            <a href="portafolio.html" class="btn-primary">View Portfolio</a>
-            <a href="productos.html" class="btn-white">View Products</a>
+            <a href="planner-2027.html" class="btn-primary">Planner 2027</a>
+            <a href="portafolio.html" class="btn-white">View Portfolio</a>
           </div>
         </div>
         <div class="hero-stage anim d2">
           <div class="hero-glow" aria-hidden="true"></div>
-          <div class="hero-antonio-pop">
+          <div class="hero-antonio-pop" id="antonioPop" role="button" tabindex="0" aria-label="Saluda a Antonio">
+            <div class="antonio-bubble" id="antonioBubble" aria-live="polite"></div>
             <div class="hero-antonio-float">
-              <img src="assets/antonio.png" alt="Antonio, the red panda of Alquimia Lab" class="hero-antonio" loading="eager" decoding="async">
+              <img src="assets/kore-red-panda-v2.png" alt="Antonio, the red panda of Alquimia Lab" class="hero-antonio" loading="eager" decoding="async">
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- 1b · NEWSLETTER -->
+  <section class="section section-band-lilac" style="padding-top:56px;padding-bottom:56px;">
+    <div class="newsletter anim">
+      <h2>Get calm in your inbox</h2>
+      <p>Launches, news, and early access to Kore. No spam, only the good stuff.</p>
+      <form name="newsletter" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" class="newsletter-form">
+        <input type="hidden" name="form-name" value="newsletter">
+        <p style="display:none;"><input name="bot-field" tabindex="-1" autocomplete="off"></p>
+        <input type="text" name="name" placeholder="Your name" required aria-label="Name">
+        <input type="email" name="email" placeholder="Your email" required aria-label="Email">
+        <button type="submit" class="btn-primary">Join</button>
+      </form>
+      <p class="newsletter-ok" hidden>You're in! Check your inbox 💜</p>
     </div>
   </section>
 
@@ -88,7 +113,7 @@
     <div class="section-title anim"><span>Meet Isabel</span></div>
     <div class="about-home anim d1">
       <div class="about-home-photo">
-        <img src="assets/isabel-photo.png" alt="Isabel Correa Boder · Alquimia Lab" loading="lazy" decoding="async">
+        <img src="assets/isabel-foto5.png" alt="Isabel Correa Boder · Alquimia Lab" loading="lazy" decoding="async">
       </div>
       <div class="about-home-text">
         <h2>Hi, I'm <em>Isabel</em> 👋</h2>
@@ -268,15 +293,15 @@
     <div class="feat-wrap">
     <div class="featured-scroll">
       <div class="featured-track" id="featuredTrack">
-        <a href="https://bordergaze.gumroad.com/l/AlquimiaStudio_Planner" class="featured-card" target="_blank" rel="noopener">
+        <a href="https://alquimialab.gumroad.com/l/AlquimiaStudio_Planner" class="featured-card" target="_blank" rel="noopener">
           <img src="assets/featured-alquimia.jpg?v=2" alt="Alquimia Studio Planner" class="featured-thumb" loading="lazy" decoding="async">
           <div class="featured-info">
             <h3>Alquimia Studio Planner</h3>
             <p>The planner for designers and freelancers — order for your creative projects.</p>
-            <span class="btn-primary btn-sm">View</span>
+            <span class="btn-primary btn-sm">Buy</span>
           </div>
         </a>
-        <a href="https://bordergaze.gumroad.com/l/PlantillaPlanMaestro" class="featured-card" target="_blank" rel="noopener">
+        <a href="https://alquimialab.gumroad.com/l/PlantillaPlanMaestro" class="featured-card" target="_blank" rel="noopener">
           <img src="assets/featured-maestro.jpg?v=2" alt="Plan Maestro" class="featured-thumb" loading="lazy" decoding="async">
           <div class="featured-info">
             <h3>Plan Maestro</h3>
@@ -327,8 +352,9 @@
       <div class="testimonial-home-quotes">
         <div class="testimonial-home-quote">
           <span class="testimonial-home-mark" aria-hidden="true">&ldquo;</span>
-          <p>I wanted to thank you for the help with my personal branding — I got great reception on the posts. I've shared your work and sent you as a reference in a group of developers. Someone mentioned they'd write to you.</p>
-          <div class="testimonial-home-author">
+          <p>I wanted to thank you for the help with my personal branding — I got great reception on the posts...</p>
+          <button type="button" class="testimonial-readmore" onclick="openTestimonial('jm')">Read full review &rarr;</button>
+          <div class="testimonial-home-author" style="margin-top:16px;">
             <div class="testimonial-home-avatar">JM</div>
             <div>
               <strong>Jean Marco Marte</strong>
@@ -338,8 +364,9 @@
         </div>
         <div class="testimonial-home-quote">
           <span class="testimonial-home-mark" aria-hidden="true">&ldquo;</span>
-          <p>I'd be interested in working on other projects with you — for example, videos or posts with animations.</p>
-          <div class="testimonial-home-author">
+          <p>¡Qué bueno que te elegí! Me encantó y me liberó de mi mayor problema al publicar.</p>
+          <button type="button" class="testimonial-readmore" onclick="openTestimonial('gr')">Read full review &rarr;</button>
+          <div class="testimonial-home-author" style="margin-top:16px;">
             <div class="testimonial-home-avatar">GR</div>
             <div>
               <strong>Grolow Studio</strong>
@@ -456,6 +483,108 @@
         })(d);
       }
     })();
+
+    /* Testimonials Modal */
+    var testimonialsData = {
+      'jm': {
+        quote: "I wanted to thank you for the help with my personal branding — I got great reception on the posts. I've shared your work and sent you as a reference in a group of developers. Someone mentioned they'd write to you.",
+        name: "Jean Marco Marte",
+        role: "Software Development & Systems",
+        avatar: "JM"
+      },
+      'gr': {
+        quote: "¡Qué bueno que te elegí! Me encantó el resultado y me liberó de mi mayor problema al publicar.",
+        name: "Grolow Studio",
+        role: "grolow.studio &middot; Web for Business",
+        avatar: "GR"
+      }
+    };
+    function openTestimonial(id) {
+      var d = testimonialsData[id];
+      if(!d) return;
+      var html = '<div style="font-size:36px;color:#ccc9e6;font-family:Georgia,serif;line-height:1;margin-bottom:10px;">&ldquo;</div>' +
+                 '<p style="font-size:16px;line-height:1.75;color:#3c3c55;font-style:italic;margin-bottom:24px;">' + d.quote + '</p>' +
+                 '<div style="display:flex;align-items:center;gap:12px;">' +
+                   '<div style="width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#6462ab,#a29de0);color:#fff;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">' + d.avatar + '</div>' +
+                   '<div><strong style="display:block;font-size:14.5px;color:#1a1a2e;">' + d.name + '</strong><span style="display:block;font-size:12.5px;color:#6b6b85;">' + d.role + '</span></div>' +
+                 '</div>';
+      document.getElementById('modalTestimonialContent').innerHTML = html;
+      var modal = document.getElementById('testimonialModal');
+      modal.classList.add('show');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeTestimonial() {
+      var modal = document.getElementById('testimonialModal');
+      modal.classList.remove('show');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('click', function(e) {
+      var ov = document.getElementById('testimonialModal');
+      if (e.target === ov) closeTestimonial();
+    });
+
+    /* Newsletter: envío sin recargar */
+    (function(){
+      var f = document.querySelector('form[name="newsletter"]');
+      if(!f) return;
+      f.addEventListener('submit', function handler(e){
+        e.preventDefault();
+        var data = new FormData(f);
+        fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(data).toString()
+        }).then(function(){
+          f.hidden = true;
+          document.querySelector('.newsletter-ok').hidden = false;
+        }).catch(function(){
+          f.removeEventListener('submit', handler);
+          f.submit();
+        });
+      });
+    })();
+
+    /* Antonio easter egg: saludo al pasar la flecha */
+    (function(){
+      var pop = document.getElementById('antonioPop');
+      var bub = document.getElementById('antonioBubble');
+      if(!pop || !bub) return;
+      var timer = null;
+      function showBubble(){
+        var es = (document.documentElement.getAttribute('lang') || 'es') === 'es';
+        bub.textContent = es ? '¡Hola! Somos el equipo Alquimia \uD83D\uDC9C ¿En qué te ayudamos?' : 'Hi! We are the Alquimia team \uD83D\uDC9C How can we help?';
+        bub.classList.add('show');
+      }
+      function hideBubble(){ bub.classList.remove('show'); }
+      pop.addEventListener('mouseenter', function(){
+        if(timer) clearTimeout(timer);
+        showBubble();
+      });
+      pop.addEventListener('mouseleave', hideBubble);
+      pop.addEventListener('click', function(){
+        showBubble();
+        if(timer) clearTimeout(timer);
+        timer = setTimeout(hideBubble, 4500);
+      });
+      pop.addEventListener('keydown', function(e){
+        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); showBubble(); if(timer) clearTimeout(timer); timer = setTimeout(hideBubble, 4500); }
+      });
+    })();
   </script>
+
+  <!-- TESTIMONIAL MODAL -->
+  <div class="modal-overlay" id="testimonialModal" aria-hidden="true">
+    <div class="modal-box" style="max-width:500px; text-align:left; padding:36px;">
+      <button type="button" class="modal-close" onclick="closeTestimonial()" aria-label="Close">&times;</button>
+      <div id="modalTestimonialContent"></div>
+    </div>
+  </div>
+
+  <!-- WHATSAPP -->
+  <a href="https://wa.me/573104108483" target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
 </body>
 </html>
