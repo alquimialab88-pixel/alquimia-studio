@@ -167,6 +167,46 @@
     "I relax by coloring": "Me relajo coloreando",
     "I want a paper planner": "Quiero un planner en papel",
 
+    /* TIENDA / NUEVA PÁGINA DE PRODUCTOS */
+    "The whole shop 🛍️": "La tienda completa 🛍️",
+    "All products": "Todos los productos",
+    "Templates, planners, books, and digital tools — all in one place, made with calm.": "Plantillas, planners, libros y herramientas digitales — todo en un solo lugar, hecho con calma.",
+    "See products ↓": "Ver productos ↓",
+    "All ✨": "Todo ✨",
+    "Try online": "Probar online",
+    "NEW": "NUEVO",
+    "Tap a category to filter — or keep it on All and browse everything 😊": "Toca una categoría para filtrar — o déjalo en Todo y mira todo 😊",
+    "The real story of my leap into the freelance life — with 15 prompts to copy and paste, exercises with space to write, and a launch checklist. Coming very soon.": "La historia real de mi salto a la vida freelance — con 15 prompts para copiar y pegar, ejercicios con espacio para escribir y un checklist de lanzamiento. Muy pronto.",
+    "Vaccines, vet visits, meds, and food in one dashboard. For Bonnie, Luna and every fur baby.": "Vacunas, veterinario, medicinas y comida en un solo dashboard. Para Bonnie, Luna y todos los peluditos.",
+    "Notify me when it launches 🔔": "Avísame cuando salga 🔔",
+    "Browse categories ↓": "Ver categorías ↓",
+    "The leap into freelance life, told without filters.": "El salto a la vida freelance, contado sin filtro.",
+    "The real story of my leap into the freelance life — with 15 prompts to copy and paste, exercises with space to write, and a launch checklist.": "La historia real de mi salto a la vida freelance — con 15 prompts para copiar y pegar, ejercicios con espacio para escribir y un checklist de lanzamiento.",
+    "Planner 2027 — Calma y Orden": "Planificador 2027 — Calma y Orden",
+    "© 2026 Alquimia Lab · Made with calm & coffee ·": "© 2026 Alquimia Lab · Hecho con calma y café ·",
+    "Your image here ✨": "Tu imagen aquí ✨",
+    "Digital tools for calm days": "Herramientas digitales para días con calma",
+    "Planners and dashboards that bring order to your content and your day.": "Planners y dashboards que ordenan tu contenido y tu día.",
+    "Shop digital →": "Ver digitales →",
+    "Your life, organized in one place": "Tu vida, organizada en un solo lugar",
+    "CRM, finance, habits, student and creator systems — ready in seconds.": "Sistemas de CRM, finanzas, hábitos, estudiante y creadoras — listos en segundos.",
+    "Shop templates →": "Ver plantillas →",
+    "Color, plan, unwind on paper": "Colorea, planea y descansa en papel",
+    "Coloring books and the 2027 planner — print or digital edition.": "Libros para colorear y el planner 2027 — edición impresa o digital.",
+    "Shop printed →": "Ver impresos →",
+    "From $3": "Desde $3",
+    "7 templates": "7 plantillas",
+    "From $12.99": "Desde $12.99",
+
+    /* PRODUCTOS · MODAL JOURNAL + INDEX */
+    "Calma y Orden — Hybrid Journal for Self-Care & Productivity": "Calma y Orden — Journal Híbrido de Autocuidado y Productividad",
+    "What you'll find inside": "Lo que encontrarás dentro",
+    "Vaccines, vet visits, meds, and food in one dashboard. Never miss a rabies shot again — built for Bonnie, Luna, and every fur baby.": "Vacunas, citas, medicamentos y alimento en un solo dashboard. Nunca olvides una antirrábica — para Bonnie, Luna y todos los peluditos.",
+    "Join me 💜": "Unirme 💜",
+    "Loading...": "Cargando...",
+    "Thank you! 💜": "¡Gracias! 💜",
+    "Done! Check your inbox to confirm": "¡Listo! Revisa tu correo para confirmar",
+
     /* SALES · PLANNER 2027 */
     "Print edition · 2027": "Edición impresa · 2027",
     "Calma y Orden —": "Calma y Orden —",
@@ -371,7 +411,35 @@
     "Plan your content, strategy and metrics in one calm Notion workspace.": "Planifica tu contenido, tu estrategia y tus métricas en un solo espacio Notion con calma.",
     "I'd be interested in working on other projects with you — for example, videos or posts with animations.": "Me interesaría hacer otros proyectos con usted — por ejemplo, videos o posts con animaciones.",
     "I wanted to thank you for the help with my personal branding — I got great reception on the posts...": "Quería agradecerte la ayuda con mi branding personal — tuvo muy buena acogida en las publicaciones...",
-    "Read full review →": "Leer completo →"
+    "Read full review →": "Leer completo →",
+
+    /* BLOG · artículo único (sinopsis + compra) */
+    "Blog": "Blog",
+    "The book ·": "El libro ·",
+    "Synopsis": "Sinopsis",
+    "I quit, I trembled…": "Renuncié, tembló…",
+    "and Alquimia was born.": "y nació Alquimia.",
+    "The story of El diario imperfecto de una creadora — what happens inside its pages, and why you'll want to read it to the last exercise.": "La historia de El diario imperfecto de una creadora — lo que pasa dentro de sus páginas y por qué vas a querer leerla hasta el último ejercicio.",
+    "This is not an expert's book. It's my imperfect diary.": "Esto no es un libro de experta. Es mi diario imperfecto.",
+    "One night I had had enough: $8 posts, gifted nights, and a heart that was done. So I quit — and then I trembled in front of the empty calendar.": "Una noche ya no di más: posts de $8, noches regaladas y un corazón que ya no daba. Renuncié — y después temblé frente al calendario vacío.",
+    "From that rubble Alquimia was born: a one-woman studio built from an anime, a feeling and a lot of guerrilla resourcefulness.": "De esos escombros nació Alquimia: un estudio de una sola mujer construido con un anime, una sensación y muchos recursos de guerrilla.",
+    "And then the real battle began: learning to work with AI instead of fighting it — from sworn enemy to trusted assistant, and why a pretty logo made by AI doesn't make a brand.": "Y entonces empezó la batalla real: aprender a trabajar con IA en vez de pelear con ella — de enemiga jurada a asistente de confianza, y por qué un lindo logo hecho por IA no hace una marca.",
+    "Inside you'll find real chapters, unfinished endings, 15 prompts to copy and paste, exercises with space to write, and a launch checklist — the map I wish I'd had.": "Adentro vas a encontrar capítulos reales, finales abiertos, 15 prompts para copiar y pegar, ejercicios con espacio para escribir y un checklist de lanzamiento — el mapa que yo hubiera querido tener.",
+    "No smoke here. Just the real thing.": "Aquí no hay humo. Hay lo real.",
+    "The diary's guardian · original illustration": "La guardiana del diario · ilustración original",
+    "What's inside the diary": "Lo que hay dentro del diario",
+    "Where it all begins.": "Por dónde empieza todo.",
+    "The night I decided: no more.": "La noche en que decidí: no más.",
+    "How Alquimia was born.": "Cómo nació Alquimia.",
+    "From sworn enemy to trusted assistant.": "De enemiga jurada a asistente de confianza.",
+    "A pretty icon doesn't make a brand.": "Un ícono bonito no hace una marca.",
+    "Organizing the chaos with guerrilla resources.": "Organizar el caos con recursos de guerrilla.",
+    "The opening of a new world.": "La apertura de un nuevo mundo.",
+    "Prompts, tools and launch checklist.": "Prompts, herramientas y checklist de lanzamiento.",
+    "Get the book": "Consigue el libro",
+    "Read synopsis": "Leer sinopsis",
+    "Chapters, prompts, exercises with space to write, and a launch checklist — all in one imperfect diary.": "Capítulos, prompts, ejercicios con espacio para escribir y un checklist de lanzamiento — todo en un diario imperfecto.",
+    "Buy the book 💜": "Comprar el libro 💜"
   };
 
   var placeholders = {
@@ -413,7 +481,8 @@
     "Made with calm & coffee by": "Hecho con calma y café por",
     "Privacy": "Privacidad",
     "Delete account": "Eliminar cuenta",
-    "Terms": "Términos"
+    "Terms": "Términos",
+    "Blog · Alquimia Lab": "Blog · Alquimia Lab"
   };
 
   var descriptions = {
@@ -435,7 +504,9 @@
     "Your calm space: tasks, habits, notes, diary, lo‑fi music and an AI assistant — all in one app.": "Tu espacio de calma: tareas, hábitos, notas, diario, música lo‑fi y un asistente con IA — todo en una sola app.",
     "Android · Coming soon on Google Play": "Android · Próximamente en Google Play",
     "View Kore →": "Ver Kore →",
-    "Kore App": "App Kore"
+    "Kore App": "App Kore",
+    "The story of El diario imperfecto de una creadora — what happens inside its pages, and why you'll want to read it to the last exercise.": "La historia de El diario imperfecto de una creadora — lo que pasa dentro de sus páginas y por qué vas a querer leerla hasta el último ejercicio.",
+    "Alquimia Lab — Notion templates, planners, coloring books, Lofi mixes and Kore, your calm app. Design tools for a calmer day.": "Alquimia Lab — Plantillas de Notion, planners, libros para colorear, mixes Lofi y Kore, tu app de calma. Herramientas de diseño para un día con más calma."
   };
 
   var nodes = [], phNodes = [], titleSnap, descSnap;

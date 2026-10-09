@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mockup · Portada El diario imperfecto</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Quicksand',sans-serif; background:linear-gradient(160deg,#f4f2ff 0%,#fdf5f0 100%); min-height:100vh; padding:48px 24px 72px; color:#1a1832; }
+  header { text-align:center; max-width:760px; margin:0 auto 44px; }
+  header .pill { display:inline-block; background:#efedfb; color:#4a4790; border-radius:99px; padding:6px 16px; font-size:13px; font-weight:700; margin-bottom:14px; }
+  header h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(28px,4vw,40px); font-weight:600; letter-spacing:-.5px; margin-bottom:8px; }
+  header p { font-size:15px; color:#6b6890; line-height:1.6; }
+  .row { display:flex; flex-wrap:wrap; gap:44px; justify-content:center; align-items:flex-start; max-width:1200px; margin:0 auto; }
+  .variant { display:flex; flex-direction:column; align-items:center; gap:16px; }
+  .variant .label { font-size:13px; font-weight:700; color:#4a4790; background:#fff; padding:7px 18px; border-radius:99px; box-shadow:0 4px 14px rgba(46,45,82,.10); }
+  .variant .hint { font-size:12.5px; color:#6b6890; max-width:300px; text-align:center; line-height:1.5; }
+
+  /* ===== LIBRO BASE ===== */
+  .book { position:relative; width:300px; aspect-ratio:372/534; border-radius:8px 16px 16px 8px; overflow:hidden; background:#cdc9ef;
+          box-shadow: inset 9px 0 18px rgba(0,0,0,.25), 0 26px 50px rgba(46,45,82,.30); }
+  .book img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .book .spine { position:absolute; inset:0; border-radius:inherit; box-shadow:inset 9px 0 18px rgba(0,0,0,.25); pointer-events:none; z-index:5; }
+
+  /* ===== A · TAROT ===== */
+  .band-a { position:absolute; left:0; right:0; bottom:0; padding:16px 22px 18px; text-align:center;
+            background:linear-gradient(to top, rgba(214,211,241,.97) 78%, rgba(214,211,241,0)); z-index:3; }
+  .band-a .t { font-family:'Cormorant Garamond',serif; font-size:19px; font-weight:600; line-height:1.15; color:#3f3c7e; }
+  .band-a .a { margin-top:7px; font-size:8.5px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:#6d69ad; }
+
+  /* ===== B · EDITORIAL ===== */
+  .band-b { position:absolute; left:0; right:0; bottom:0; padding:20px 22px 18px; text-align:left;
+            background:rgba(253,252,248,.97); border-top:1px solid rgba(100,98,171,.16); z-index:3; }
+  .band-b .k { font-size:8px; font-weight:700; letter-spacing:.26em; text-transform:uppercase; color:#a09dc9; margin-bottom:6px; }
+  .band-b .t { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:22px; font-weight:600; line-height:1.08; color:#2e2d52; }
+  .band-b .a { margin-top:9px; font-size:8px; font-weight:700; letter-spacing:.24em; text-transform:uppercase; color:#6b6890; }
+
+  /* ===== C · ESFERITA ÁMBAR ===== */
+  .orb { position:absolute; left:50%; top:70.5%; width:44px; height:44px; transform:translate(-50%,-50%); z-index:4;
+         background:radial-gradient(circle, rgba(255,214,140,.95) 0%, rgba(255,178,86,.55) 38%, rgba(255,178,86,0) 72%);
+         border-radius:50%; animation:orb 3s ease-in-out infinite; pointer-events:none; }
+  @keyframes orb { 0%,100% { transform:translate(-50%,-50%) scale(1); opacity:.9; } 50% { transform:translate(-50%,-50%) scale(1.18); opacity:1; } }
+  .band-c { position:absolute; left:0; right:0; bottom:0; padding:15px 22px 17px; text-align:center;
+            background:linear-gradient(to top, rgba(214,211,241,.97) 78%, rgba(214,211,241,0)); z-index:3; }
+  .band-c .t { font-family:'Cormorant Garamond',serif; font-size:19px; font-weight:600; line-height:1.15; color:#3f3c7e; }
+  .band-c .k { margin-top:6px; font-size:8px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:#b08a4e; }
+
+  footer { margin-top:52px; text-align:center; font-size:13px; color:#6b6890; }
+  @media (max-width:700px) { .book { width:260px; } }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="pill">Mockup · 3 versiones</span>
+  <h1>El diario imperfecto de una creadora — portada</h1>
+  <p>Tres formas de usar tu ilustración. Las bandas de abajo representan el ~20% libre que hay que dejar en la ilustración para el título. La C lleva la esferita ámbar entre las manos (la idea de la alquimia).</p>
+</header>
+
+<div class="row">
+
+  <!-- A · TAROT -->
+  <div class="variant">
+    <div class="book">
+      <img src="assets/portada-ilustracion.png" alt="">
+      <div class="band-a">
+        <div class="t">El diario imperfecto de una creadora</div>
+        <div class="a">Isabel · Alquimia Lab</div>
+      </div>
+      <div class="spine"></div>
+    </div>
+    <span class="label">A · Carta del tarot</span>
+    <span class="hint">Banda lavanda translúcida: la ilustración respira y se lee como carta. Ideal si harás serie.</span>
+  </div>
+
+  <!-- B · EDITORIAL -->
+  <div class="variant">
+    <div class="book">
+      <img src="assets/portada-ilustracion.png" alt="">
+      <div class="band-b">
+        <div class="k">Alquimia Lab presenta</div>
+        <div class="t">El diario imperfecto<br>de una creadora</div>
+        <div class="a">Isabel</div>
+      </div>
+      <div class="spine"></div>
+    </div>
+    <span class="label">B · Editorial minimal</span>
+    <span class="hint">Franja color papel con título en itálica: look libro independiente, muy legible en miniatura.</span>
+  </div>
+
+  <!-- C · ESFERITA -->
+  <div class="variant">
+    <div class="book">
+      <img src="assets/portada-ilustracion.png" alt="">
+      <div class="orb"></div>
+      <div class="band-c">
+        <div class="t">El diario imperfecto de una creadora</div>
+        <div class="k">La alquimia de empezar de nuevo</div>
+      </div>
+      <div class="spine"></div>
+    </div>
+    <span class="label">C · Esferita ámbar ✨</span>
+    <span class="hint">La A + luz ámbar pulsando entre las manos: el detalle que se recuerda. (La posición se afina en tu archivo final.)</span>
+  </div>
+
+</div>
+
+<footer>Diseño provisional · Cuando elijas, pulimos juntas la versión final ✍️</footer>
+
+</body>
+</html>
