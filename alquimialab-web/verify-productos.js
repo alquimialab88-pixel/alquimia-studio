@@ -45,17 +45,19 @@ function nodesOf(html) {
   return out;
 }
 
-// permitidos: chrome, nombres de producto/marca, precios, símbolos, contadores
+// permitidos: mismo set que verify-tienda (nombres de producto/marca, precios, símbolos)
 const ALLOW = new Set([
-  'Alquimia Lab', 'ES | EN', '▾', 'Kore', 'ⓘ',
-  'Lo-Fi · Alquimia Lab', 'Alquimia Studio', 'El diario imperfecto de una creadora',
-  'Freelancer CRM', 'Freelancer CRM - Planner', 'Quiet Mind', 'Quiet Mind Planner',
-  'Habit Planner', 'Student OS & Study Planner', 'YouTube Creator OS – Planner & Script',
-  'Social Media Planner', 'Finance Planner Free', 'Finance Planner Pro', 'Pet Control',
-  'Focus Dock', 'Amazon', 'Amazon EN', 'Amazon ES', 'Digital',
-  '$3', '$4', '$5', '$7', '$15', '$27', '$5.99', '$9.99',
-  '🧾', '🌱', '🎨', '📓', '🎓', '🐾',
-  '×', '←', '→', '❮', '❯', '1 / 5', '1 / 1',
+  'Alquimia Lab', 'ES | EN', '▾', 'Products', 'Kore',
+  'Amazon', 'Amazon EN', 'Amazon ES', 'Digital',
+  'Plan Maestro', 'Alquimia Studio', 'Focus Dock',
+  'Freelancer CRM — Planner', 'YouTube Creator OS — Planner & Script',
+  'Student OS & Study Planner', 'Social Media Planner',
+  'Finance Planner Pro', 'Finance Planner Free',
+  'Quiet Mind Planner', 'Habit Planner', 'Pet Control',
+  'El diario imperfecto de una creadora', 'Isabel · Alquimia Lab',
+  'Lo-Fi · Alquimia Lab', 'Freelancer CRM', 'Quiet Mind', 'Coloring Books', 'Planner 2027',
+  '$7', '$3', '$14.99', '$12.99', '$27', '$9.99', '$15', '$5.99', '$4', '$5', 'FREE',
+  '📖', '🧾', '🌱', '🎨', '📓', '🎓', '🐾', '🐼',
 ]);
 
 const missing = [];
@@ -90,10 +92,11 @@ check('nav Blog antes que Contact', (() => {
   const iC = prod.indexOf('href="contacto.html"');
   return iB > -1 && (iC === -1 || iB < iC);
 })());
-check('modal journal en inglés', /What you'll find inside/.test(prod) && /Hybrid Journal for Self-Care/.test(prod));
-check('modal sin español crudo', !/Lo que encontrar|Calendarios mensuales|autocuidado obligatorio/.test(prod));
-check('claves del modal en dict', keys.has("What you'll find inside") && keys.has('Monthly calendars') && keys.has('Year-end closing page'));
-check('descripción Pet Control traducida', keys.has('Vaccines, vet visits, meds, and food in one dashboard. Never miss a rabies shot again — built for Bonnie, Luna, and every fur baby.'));
+check('canonical productos', /rel="canonical" href="https:\/\/alquimialab\.app\/productos\.html"/.test(prod));
+check('banner carrusel (diseño tienda)', /id="shopBanner"/.test(prod) && /banner-track/.test(prod) && /banner-slide s3/.test(prod));
+check('guía "¿cuál es para ti?"', /match-wrap/.test(prod) && /goProduct\('p-crm'\)/.test(prod));
+check('productos ocultos hasta elegir', /id="shop-products" style="display:none/.test(prod));
+check('ebook historia estilo Kore', /class="ebook-story/.test(prod) && /assets\/ebook-portada\.png/.test(prod));
 check('card libro → blog', /assets\/ebook-portada\.png/.test(prod) && /href="blog\.html"[^>]*>Read synopsis/.test(prod));
 check('divs balanceados', (prod.match(/<div/g) || []).length === (prod.match(/<\/div>/g) || []).length);
 

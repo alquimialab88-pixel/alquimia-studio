@@ -6,8 +6,8 @@
   <meta name="description" content="Alquimia Lab Products — Notion templates, coloring books, and productivity tools.">
   <meta name="theme-color" content="#f2f2f2">
   <link rel="canonical" href="https://alquimialab.app/productos.html">
-<meta name="color-scheme" content="light">
-<meta name="p:domain_verify" content="873c3dceab38058f2ad57c008b30e2ee"/>
+  <meta name="color-scheme" content="light">
+  <meta name="p:domain_verify" content="873c3dceab38058f2ad57c008b30e2ee"/>
   <title>Products · Alquimia Lab</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,12 +16,88 @@
   <link rel="stylesheet" href="css/style.css">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6568715444285154" crossorigin="anonymous"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y8Z50HWV3J"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-Y8Z50HWV3J');
-</script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y8Z50HWV3J');
+  </script>
+  <style>
+    .shop-hero { text-align:center; padding: 42px 24px 36px; border-radius: 24px; background: linear-gradient(135deg, #6462ab 0%, #524f96 100%); border:none; color:#fff; position:relative; overflow:hidden; margin-top:-48px; box-shadow:0 20px 48px rgba(74,74,133,.35); }
+    .shop-hero::before { content:""; position:absolute; top:-40%; left:-20%; width:55%; height:180%; background:linear-gradient(105deg, transparent, rgba(255,255,255,.18), transparent); animation:shineSweep 5s ease-in-out infinite; pointer-events:none; }
+    @keyframes shineSweep { 0% { transform:translateX(-120%) rotate(8deg); } 55% { transform:translateX(280%) rotate(8deg); } 100% { transform:translateX(280%) rotate(8deg); } }
+    .shop-hero h2 { font-size: 34px; font-weight:700; margin-bottom: 10px; color:#fff; position:relative; z-index:1; }
+    .shop-hero p { font-size: 16px; color: rgba(255,255,255,.9); max-width: 560px; margin: 0 auto 8px; position:relative; z-index:1; }
+    .shop-hero .trust-note { font-size: 13px; opacity:.85; margin-top: 12px; }
+    .shop-banner { position:relative; width:100%; overflow:hidden; min-height:100vh; min-height:100svh; background:#f4f2ff; border:none; border-radius:0; }
+    .banner-track { display:grid; }
+    .banner-slide { position:relative; grid-area:1/1; min-height:100vh; min-height:100svh; display:flex; align-items:center; justify-content:space-between; gap:clamp(24px,4vw,56px); padding:110px clamp(72px,7vw,120px) 84px clamp(130px,15vw,270px); opacity:0; visibility:hidden; transform:scale(1.05); filter:blur(8px); transition:opacity .7s ease, transform .95s cubic-bezier(.22,.61,.36,1), filter .7s ease, visibility 0s linear .7s; }
+    .banner-slide.active { opacity:1; visibility:visible; transform:scale(1); filter:blur(0); transition:opacity .7s ease, transform .95s cubic-bezier(.22,.61,.36,1), filter .7s ease, visibility 0s; }
+    .banner-slide.s1 { background:linear-gradient(120deg,#f4f2ff 0%,#fdf5f0 55%,#ffe9dc 100%); }
+    .banner-slide.s2 { background:linear-gradient(120deg,#eef6f1 0%,#f4f2ff 65%,#fdf5f0 100%); }
+    .banner-slide.s3 { background:linear-gradient(120deg,#fdf5f0 0%,#f4f2ff 60%,#e9f2ff 100%); }
+    .bs-text { position:relative; z-index:2; max-width:470px; }
+    .bs-eyebrow { display:flex; align-items:center; gap:8px; font-size:12.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#6462ab; margin-bottom:14px; }
+    .bs-eyebrow::before { content:""; width:8px; height:8px; border-radius:50%; background:#e5533d; flex:0 0 auto; }
+    .bs-title { font-size:clamp(34px,4.4vw,52px); line-height:1.1; font-weight:700; color:#1a1832; margin-bottom:12px; letter-spacing:-.5px; }
+    .bs-desc { font-size:clamp(15px,1.4vw,17px); line-height:1.6; color:#5c598a; margin-bottom:24px; }
+    .bs-media { position:relative; z-index:2; flex:0 1 60%; max-width:840px; }
+    .bs-media-img { position:relative; aspect-ratio:7/6; max-height:76vh; border-radius:20px; overflow:hidden; }
+    .bs-fallback { position:absolute; inset:0; display:flex; flex-direction:column; gap:6px; align-items:center; justify-content:center; color:#5c598a; font-weight:600; font-size:14px; }
+    .bs-fallback .bf-emoji { font-size:52px; }
+    .bs-media-img img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; }
+    .bs-bubble { position:absolute; top:-16px; left:6px; background:#fff; color:#1a1832; font-weight:800; font-size:15px; padding:13px 18px; border-radius:99px; box-shadow:0 12px 26px rgba(46,45,82,.25); z-index:3; animation:bob 3.2s ease-in-out infinite; white-space:nowrap; }
+    @keyframes bob { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-8px); } }
+    .banner-arrow { position:absolute; top:50%; transform:translateY(-50%); width:50px; height:50px; border-radius:50%; border:none; background:rgba(255,255,255,.85); color:#2e2d52; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:3; box-shadow:0 6px 16px rgba(26,24,50,.25); transition:all .2s; padding:0; }
+    .banner-arrow:hover { background:#fff; transform:translateY(-50%) scale(1.08); }
+    .banner-arrow svg { width:24px; height:24px; }
+    .banner-arrow.left { left:clamp(8px,2vw,30px); }
+    .banner-arrow.right { right:clamp(4px,1vw,14px); }
+    .banner-dots { position:absolute; left:0; right:0; bottom:26px; display:flex; justify-content:center; gap:8px; z-index:3; }
+    .banner-dot { width:9px; height:9px; border-radius:50%; border:none; background:rgba(100,98,171,.35); cursor:pointer; padding:0; transition:all .25s; }
+    .banner-dot.active { background:#6462ab; width:24px; border-radius:99px; }
+    /* EBOOK · estilo Kore: texto suelto + tablet morada flotando (portada pendiente) */
+    .ebook-story { display:grid; grid-template-columns:1fr 1fr; gap:clamp(32px,5vw,64px); align-items:center; margin-top:64px; }
+    .story-label { display:inline-block; background:#efedfb; color:#4a4790; border-radius:99px; padding:6px 16px; font-size:13px; font-weight:700; margin-bottom:16px; }
+    .ebook-story h3 { font-size:clamp(26px,3.5vw,36px); font-weight:700; color:#1a1832; letter-spacing:-.5px; margin-bottom:16px; line-height:1.2; }
+    .ebook-story p { font-size:15.5px; color:#6b6890; line-height:1.7; margin-bottom:14px; max-width:560px; }
+    .es-quote { background:#fff; border-left:4px solid #6462ab; border-radius:0 14px 14px 0; padding:18px 20px; margin-top:8px; font-size:15px; color:#3b3866; font-weight:600; line-height:1.6; box-shadow:0 4px 18px rgba(26,26,46,.06); max-width:560px; }
+    .es-side { display:flex; justify-content:center; }
+    .es-book { animation:floatBook 5s ease-in-out infinite; }
+    .es-book:hover { animation-play-state:paused; }
+    @keyframes floatBook { 0%,100% { transform:translateY(0) rotate(-3deg); } 50% { transform:translateY(-14px) rotate(-1deg); } }
+    /* Tablet estilo Kore — diferencial: morado del banner */
+    .tablet-stage { position:relative; display:flex; justify-content:center; align-items:center; perspective:1200px; }
+    .tablet-glow { position:absolute; width:340px; height:340px; border-radius:50%; background:radial-gradient(circle,rgba(100,98,171,.30),transparent 70%); filter:blur(22px); z-index:0; }
+    .tablet-frame { position:relative; z-index:1; width:300px; padding:12px; border-radius:22px; background:linear-gradient(160deg,#807ec9 0%,#524f96 48%,#2e2d52 100%); border:2.5px solid #23214a; box-shadow:0 22px 44px rgba(46,45,82,.35), inset 0 0 0 1.5px rgba(255,255,255,.20), inset 0 1px 0 rgba(255,255,255,.35); transition:transform .55s cubic-bezier(.34,1.56,.64,1); }
+    .tablet-frame::before { content:""; position:absolute; top:3px; left:calc(50% - 3px); width:6px; height:6px; border-radius:50%; background:#0b0a1a; box-shadow:inset 0 0 0 1.5px #14122e, 0 0 5px rgba(0,0,0,.55); z-index:4; }
+    .es-book:hover .tablet-frame { transform:perspective(900px) rotateY(-14deg) rotateX(6deg) translateY(-14px) scale(1.06); }
+    .tablet-screen { position:relative; aspect-ratio:7/10; border-radius:12px; overflow:hidden; background:#1a1832; box-shadow:inset 0 0 0 1px rgba(0,0,0,.5); }
+    .tablet-screen img { width:100%; height:100%; object-fit:cover; display:block; }
+    .tablet-screen::before { content:""; position:absolute; top:0; left:-80%; width:50%; height:100%; background:linear-gradient(105deg,transparent,rgba(255,255,255,.5),transparent); transform:skewX(-18deg); opacity:0; pointer-events:none; z-index:3; }
+    .es-book:hover .tablet-screen::before { animation:tabletShine .7s ease forwards; }
+    @keyframes tabletShine { 0% { left:-80%; opacity:0; } 20% { opacity:1; } 100% { left:130%; opacity:0; } }
+    .tablet-screen::after { content:""; position:absolute; top:0; left:0; right:0; height:40%; background:linear-gradient(165deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,.03) 40%,transparent 70%); pointer-events:none; z-index:2; }
+    .shop-hero .btn-hero { background:#fff; color:#524f96; border:none; margin-top:16px; position:relative; z-index:1; box-shadow:0 8px 20px rgba(26,24,50,.2); }
+    .shop-hero .btn-hero:hover { transform:translateY(-2px); }
+    .shop-card.hidden { display:none; }
+    .buy-stack { display:flex; gap:8px; flex-wrap:wrap; margin-top: 4px; }
+    .buy-stack .btn-primary, .buy-stack .btn-secondary { flex: 1 1 auto; justify-content:center; min-width: 90px; }
+    .soon { opacity:.7; cursor:default !important; }
+    @keyframes cardFlash { 0%,100% { box-shadow: 0 0 0 0 rgba(100,98,171,0); } 25%,75% { box-shadow: 0 0 0 5px rgba(100,98,171,.45); } }
+    .flash { animation: cardFlash 1.6s ease; }
+    @media (max-width: 640px) {
+      .shop-hero h2 { font-size: 26px; }
+      .banner-slide { flex-direction:column; align-items:flex-start; justify-content:center; padding:100px 26px 130px; gap:26px; }
+      .bs-title { font-size:30px; }
+      .bs-media { flex:1 1 auto; width:100%; max-width:none; }
+      .banner-arrow { width:40px; height:40px; top:auto; bottom:76px; transform:none; }
+      .banner-arrow:hover { transform:scale(1.08); }
+      .ebook-story { grid-template-columns:1fr; gap:34px; margin-top:48px; }
+      .tablet-frame { width:230px; }
+      .tablet-glow { width:260px; height:260px; }
+    }
+  </style>
 </head>
 <body>
 
@@ -53,18 +129,83 @@
     </button>
   </nav>
 
-  <div class="page" id="products-page">
+  <!-- BANNER CARRUSEL — hero a pantalla completa -->
+  <div class="shop-banner anim" id="shopBanner">
+        <div class="banner-track" id="bannerTrack">
+          <div class="banner-slide s1 active">
+            <div class="bs-text">
+              <div class="bs-eyebrow">Digital Products</div>
+              <h2 class="bs-title">Digital tools for calm days</h2>
+              <p class="bs-desc">Planners and dashboards that bring order to your content and your day.</p>
+              <a class="btn-primary" href="#shop" onclick="openShop('digitales');return false;">Shop digital →</a>
+            </div>
+            <div class="bs-media">
+              <div class="bs-media-img">
+                <div class="bs-fallback"><span class="bf-emoji">🐼</span><span>Your image here ✨</span></div>
+                <img src="assets/banner-digital.png" alt="Digital products" loading="lazy" onerror="this.remove()">
+              </div>
+              <span class="bs-bubble">From $3</span>
+            </div>
+          </div>
+          <div class="banner-slide s2">
+            <div class="bs-text">
+              <div class="bs-eyebrow">Notion Templates</div>
+              <h2 class="bs-title">Your life, organized in one place</h2>
+              <p class="bs-desc">CRM, finance, habits, student and creator systems — ready in seconds.</p>
+              <a class="btn-primary" href="#shop" onclick="openShop('notion');return false;">Shop templates →</a>
+            </div>
+            <div class="bs-media">
+              <div class="bs-media-img">
+                <div class="bs-fallback"><span class="bf-emoji">🐼</span><span>Your image here ✨</span></div>
+                <img src="assets/banner-notion.png" alt="Notion templates" loading="lazy" onerror="this.remove()">
+              </div>
+              <span class="bs-bubble">7 templates</span>
+            </div>
+          </div>
+          <div class="banner-slide s3">
+            <div class="bs-text">
+              <div class="bs-eyebrow">Printed Products</div>
+              <h2 class="bs-title">Color, plan, unwind on paper</h2>
+              <p class="bs-desc">Coloring books and the 2027 planner — print or digital edition.</p>
+              <a class="btn-primary" href="#shop" onclick="openShop('impresos');return false;">Shop printed →</a>
+            </div>
+            <div class="bs-media">
+              <div class="bs-media-img">
+                <div class="bs-fallback"><span class="bf-emoji">🐼</span><span>Your image here ✨</span></div>
+                <img src="assets/banner-impresos.png" alt="Printed products" loading="lazy" onerror="this.remove()">
+              </div>
+              <span class="bs-bubble">From $12.99</span>
+            </div>
+          </div>
+        </div>
+        <button class="banner-arrow left" type="button" aria-label="Previous slide">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <button class="banner-arrow right" type="button" aria-label="Next slide">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+        <div class="banner-dots">
+          <button class="banner-dot active" type="button" aria-label="Go to slide 1"></button>
+          <button class="banner-dot" type="button" aria-label="Go to slide 2"></button>
+          <button class="banner-dot" type="button" aria-label="Go to slide 3"></button>
+        </div>
+      </div>
 
-    <!-- BANNER -->
+  <div class="page">
+
+    <!-- HERO -->
     <section class="section">
-      <div class="products-banner anim">
-        <h2>My Products</h2>
-        <p>Tools and creativity to organize your life, find calm, and work with intention.</p>
-        <p class="trust-note">🔒 Secure checkout on Amazon &amp; Gumroad <span class="tip" data-tip-es="Gumroad es una plataforma segura para productos digitales: pagas con tarjeta y recibes tu descarga al instante." data-tip-en="Gumroad is a secure platform for digital products: pay by card and get your download instantly.">ⓘ</span></p>
+
+      <!-- AVISO · LA TIENDA COMPLETA -->
+      <div class="shop-hero anim d1">
+        <h2>The whole shop 🛍️</h2>
+        <p>Templates, planners, books, and digital tools — all in one place, made with calm.</p>
+        <p class="trust-note">🔒 Secure checkout on Amazon &amp; Gumroad</p>
+        <button class="btn-primary btn-hero" onclick="document.getElementById('categories-grid').scrollIntoView({behavior:'smooth'})">Browse categories ↓</button>
       </div>
 
       <!-- YOUTUBE -->
-      <div class="youtube-banner anim d1" style="margin-top: 24px; margin-bottom: 32px;">
+      <div class="youtube-banner anim d1" style="margin-top: 34px;">
         <div class="youtube-thumb">
           <video src="lofi-video.mp4" autoplay muted loop playsinline preload="metadata" poster="lofi-poster.png"></video>
         </div>
@@ -75,25 +216,25 @@
         </div>
       </div>
 
-      <!-- CATEGORIES -->
-      <div class="category-grid anim d1" id="categories-grid">
+      <!-- CATEGORÍAS -->
+      <div class="category-grid anim d1" id="categories-grid" style="margin-top: 34px;">
         <div class="category-card" id="cat-notion">
           <div class="category-media"><img src="notion-featured.webp" alt="Notion Templates" loading="lazy" decoding="async"></div>
           <h3>Notion Templates</h3>
           <p>Productivity, planning, and personal &amp; professional organization systems. 7 templates available.</p>
-          <button class="btn-primary btn-sm" onclick="showCategory('notion')">View all</button>
+          <button class="btn-primary btn-sm" onclick="openShop('notion')">View all</button>
         </div>
         <div class="category-card" id="cat-impresos">
           <div class="category-media"><img src="printed-featured.webp" alt="Printed Products" loading="lazy" decoding="async"></div>
           <h3>Printed Products</h3>
           <p>Coloring books, productivity PDFs, and more. Available on Amazon and Gumroad.</p>
-          <button class="btn-primary btn-sm" onclick="showCategory('impresos')">View all</button>
+          <button class="btn-primary btn-sm" onclick="openShop('impresos')">View all</button>
         </div>
         <div class="category-card" id="cat-digitales">
           <div class="category-media"><img src="products/digital-tools.jpg" alt="Digital Products" loading="lazy" decoding="async"></div>
           <h3>Digital Products</h3>
           <p>Apps, planners, and digital tools that bring calm order to your content and daily life. Ready on desktop and mobile.</p>
-          <button class="btn-primary btn-sm" onclick="showCategory('digitales')">View all</button>
+          <button class="btn-primary btn-sm" onclick="openShop('digitales')">View all</button>
         </div>
       </div>
 
@@ -105,257 +246,258 @@
           <div class="match-card">
             <div class="match-emoji">🧾</div>
             <p>My admin life is chaos</p>
-            <button class="btn-primary btn-sm" onclick="showCategory('notion')">Freelancer CRM</button>
+            <button class="btn-primary btn-sm" onclick="goProduct('p-crm')">Freelancer CRM</button>
           </div>
           <div class="match-card">
             <div class="match-emoji">🌱</div>
             <p>I want calm and order</p>
-            <button class="btn-primary btn-sm" onclick="showCategory('notion')">Quiet Mind</button>
+            <button class="btn-primary btn-sm" onclick="goProduct('p-quiet')">Quiet Mind</button>
           </div>
           <div class="match-card">
             <div class="match-emoji">🎨</div>
             <p>I relax by coloring</p>
-            <button class="btn-primary btn-sm" onclick="showCategory('impresos')">Coloring Books</button>
+            <button class="btn-primary btn-sm" onclick="goProduct('p-coloring')">Coloring Books</button>
           </div>
           <div class="match-card">
             <div class="match-emoji">📓</div>
             <p>I want a paper planner</p>
-            <button class="btn-primary btn-sm" onclick="showCategory('impresos')">Planner 2027</button>
+            <button class="btn-primary btn-sm" onclick="goProduct('p-planner')">Planner 2027</button>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- NOTION TEMPLATES -->
-    <section class="section" id="notion-products" style="display:none; padding-top: 0;">
-      <button class="btn-secondary btn-sm" onclick="showCategory('home')" style="margin-bottom:20px;">← Back</button>
-      <div class="section-title"><span>Notion Templates</span></div>
+      <!-- PRODUCTOS · OCULTOS HASTA ABRIR UNA CATEGORÍA -->
+      <div class="shop-products" id="shop-products" style="display:none; margin-top:34px;">
+        <button class="btn-secondary btn-sm" onclick="openShop()" style="margin-bottom:18px;">← Back</button>
+        <div class="section-title"><span>All products</span></div>
+        <div class="notion-grid" id="shop">
 
-      <div class="notion-grid">
-        <div class="notion-card">
+        <!-- EL DIARIO IMPERFECTO · lleva al artículo del blog (sinopsis + compra) -->
+        <div class="notion-card shop-card anim" data-cat="digital">
+          <img class="notion-thumb" src="assets/ebook-portada.png" alt="El diario imperfecto de una creadora" loading="lazy" decoding="async" style="height:220px;object-fit:contain;background:#e8e6f4;padding:14px;">
+          <div class="notion-info">
+            <h3>El diario imperfecto de una creadora</h3>
+            <p>The real story of my leap into the freelance life — with 15 prompts to copy and paste, exercises with space to write, and a launch checklist.</p>
+            <div class="buy-stack">
+              <a href="blog.html" class="btn-primary btn-sm">Read synopsis</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- PLAN MAESTRO (destacado) -->
+        <div class="notion-card shop-card anim" data-cat="digital">
+          <img class="notion-thumb" src="assets/featured-maestro.jpg?v=2" alt="Plan Maestro" loading="lazy" decoding="async">
+          <div class="notion-info">
+            <span class="badge" style="background:#e5533d;color:#fff;font-size:10px;font-weight:700;padding:4px 10px;border-radius:99px;align-self:flex-start;">NEW</span>
+            <h3>Plan Maestro</h3>
+            <p>Blank content plan for pillars, calendar, copy, ideas, and multiple brands. No more messy spreadsheets.</p>
+            <span class="notion-price">$7</span>
+            <div class="buy-stack">
+              <a href="https://alquimialab.gumroad.com/l/PlantillaPlanMaestro" target="_blank" rel="noopener" class="btn-primary btn-sm">Buy</a>
+              <a href="plan-maestro/index.html" target="_blank" rel="noopener" class="btn-secondary btn-sm">Try online</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ALQUIMIA STUDIO -->
+        <div class="notion-card shop-card anim" data-cat="digital">
+          <img class="notion-thumb" src="assets/featured-alquimia.jpg?v=2" alt="Alquimia Studio" loading="lazy" decoding="async">
+          <div class="notion-info">
+            <h3>Alquimia Studio</h3>
+            <p>Five interactive planners in one place: calm, annual, ADHD, menstrual, and weekly. Dark mode, favorites, and PDF export.</p>
+            <span class="notion-price">$3</span>
+            <div class="buy-stack">
+              <a href="https://alquimialab.gumroad.com/l/AlquimiaStudio_Planner" target="_blank" rel="noopener" class="btn-primary btn-sm">Buy</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- PLANNER 2027 -->
+        <div class="notion-card shop-card anim" data-cat="print" id="p-planner">
+          <img class="notion-thumb" src="journal-cover.webp" alt="Planner 2027" loading="lazy" decoding="async">
+          <div class="notion-info">
+            <h3>Planner 2027 — Calma y Orden</h3>
+            <p>A minimalist planner to organize your year with calm and intention.</p>
+            <span class="notion-price">$14.99</span>
+            <div class="buy-stack">
+              <a href="https://www.amazon.com/dp/B0HJ8J6MHG" target="_blank" rel="noopener" class="btn-primary btn-sm">Amazon</a>
+              <a href="https://alquimialab.gumroad.com/l/bvzpd?wanted=true" target="_blank" rel="noopener" class="btn-secondary btn-sm">Digital</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLORING BOOKS -->
+        <div class="notion-card shop-card anim" data-cat="print" id="p-coloring">
+          <img class="notion-thumb" src="print-coloring.webp" alt="Coloring Books" loading="lazy" decoding="async">
+          <div class="notion-info">
+            <h3>Coloring Books — Lofi Coloring</h3>
+            <p>Same book in English and Spanish. Print and digital edition.</p>
+            <span class="notion-price">$12.99</span>
+            <div class="buy-stack">
+              <a href="https://www.amazon.com/dp/B0HBML5LCP" target="_blank" rel="noopener" class="btn-primary btn-sm">Amazon EN</a>
+              <a href="https://www.amazon.com/dp/B0HJ9713N5" target="_blank" rel="noopener" class="btn-primary btn-sm">Amazon ES</a>
+              <a href="https://alquimialab.gumroad.com/l/LofiColoringBookAlquimia" target="_blank" rel="noopener" class="btn-secondary btn-sm">Digital</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- FOCUS DOCK -->
+        <div class="notion-card shop-card anim" data-cat="print">
+          <img class="notion-thumb" src="print-focus.webp" alt="Focus Dock" loading="lazy" decoding="async">
+          <div class="notion-info">
+            <h3>Focus Dock</h3>
+            <p>Your Notion isn't broken. It's just poorly designed. 43-page protocol.</p>
+            <span class="notion-price">$27</span>
+            <div class="buy-stack">
+              <a href="http://getfocusdock.com/isabel" target="_blank" rel="noopener" class="btn-primary btn-sm">Buy</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- FREELANCER CRM -->
+        <div class="notion-card shop-card anim" data-cat="notion" id="p-crm">
           <img class="notion-thumb" src="cover-freelancer-crm.webp" alt="Freelancer CRM" loading="lazy" decoding="async">
           <div class="notion-info">
-            <h3>Freelancer CRM - Planner</h3>
+            <h3>Freelancer CRM — Planner</h3>
             <p>Operating system to structure your workflow from start to finish.</p>
             <span class="notion-price">$9.99</span>
-            <a href="https://alquimialab.gumroad.com/l/FreelancerCRM?wanted=true" target="_blank" rel="noopener" class="btn-primary btn-sm" style="width:100%;justify-content:center;">Buy</a>
+            <div class="buy-stack">
+              <a href="https://alquimialab.gumroad.com/l/FreelancerCRM?wanted=true" target="_blank" rel="noopener" class="btn-primary btn-sm">Buy</a>
+            </div>
           </div>
         </div>
 
-        <div class="notion-card">
-          <img class="notion-thumb" src="cover-finance-free.webp" alt="Finance Planner Free" loading="lazy" decoding="async">
-          <div class="notion-info">
-            <h3>Finance Planner Free</h3>
-            <p>Organize your personal finances with a visual and intuitive system.</p>
-            <span class="notion-price" style="color:var(--text-muted);">Free</span>
-            <a href="https://www.notion.com/templates/finance-planner-785" target="_blank" rel="noopener" class="btn-secondary btn-sm" style="width:100%;justify-content:center;">Download</a>
-          </div>
-        </div>
-
-        <div class="notion-card">
-          <img class="notion-thumb" src="cover-finance-pro.webp" alt="Finance Planner Pro" loading="lazy" decoding="async">
-          <div class="notion-info">
-            <h3>Finance Planner Pro</h3>
-            <p>Advanced financial tracking with detailed reports and projections.</p>
-            <span class="notion-price">$9.99</span>
-            <a href="https://www.notion.com/templates/finance-planner-pro" target="_blank" rel="noopener" class="btn-primary btn-sm" style="width:100%;justify-content:center;">Buy</a>
-          </div>
-        </div>
-
-        <div class="notion-card">
-          <img class="notion-thumb" src="cover-habit.webp" alt="Habit Planner" loading="lazy" decoding="async">
-          <div class="notion-info">
-            <h3>Habit Planner</h3>
-            <p>Transform your habits without the visual guilt of missed days from the past. A clean-slate design to keep your mind clear and focused entirely on your growth.</p>
-            <span class="notion-price" style="color:var(--text-muted);">Free</span>
-            <a href="https://www.notion.com/templates/habit-planner" target="_blank" rel="noopener" class="btn-secondary btn-sm" style="width:100%;justify-content:center;">Download</a>
-          </div>
-        </div>
-
-        <div class="notion-card">
-          <div class="notion-thumb" style="background: linear-gradient(135deg, #6462ab 0%, #524f96 100%); display:flex; align-items:center; justify-content:center; color:#fff; font-size:32px;">🎓</div>
-          <div class="notion-info">
-            <h3>Student OS & Study Planner</h3>
-            <p>Say goodbye to scattered notes and missed deadlines with a single minimalist dashboard. Run your entire student life smoothly, from daily tasks to final exams.</p>
-            <span class="notion-price">$5.99</span>
-            <a href="https://www.notion.com/templates/student-os-study-planner" target="_blank" rel="noopener" class="btn-primary btn-sm" style="width:100%;justify-content:center;">Buy</a>
-          </div>
-        </div>
-
-        <div class="notion-card">
-          <img class="notion-thumb" src="cover-quiet-mind.webp" alt="Quiet Mind Planner" loading="lazy" decoding="async">
-          <div class="notion-info">
-            <h3>Quiet Mind Planner</h3>
-            <p>Free your mind from mental noise with a minimalist sanctuary designed to protect your energy and bring calm. Transform your daily routines into a gentle daily flow of intentional reflection.</p>
-            <span class="notion-price" style="color:var(--text-muted);">Free</span>
-            <a href="https://www.notion.com/templates/quiet-mind-planner" target="_blank" rel="noopener" class="btn-secondary btn-sm" style="width:100%;justify-content:center;">Download</a>
-          </div>
-        </div>
-
-        <div class="notion-card">
+        <!-- YOUTUBE CREATOR OS -->
+        <div class="notion-card shop-card anim" data-cat="notion">
           <img class="notion-thumb" src="cover-youtube.webp" alt="YouTube Creator OS" loading="lazy" decoding="async">
           <div class="notion-info">
-            <h3>YouTube Creator OS – Planner & Script</h3>
+            <h3>YouTube Creator OS — Planner &amp; Script</h3>
             <p>Stop losing video ideas with a comprehensive Notion workspace built for creators and producers. Bring strategic clarity to your channel, from long-form scripts to viral shorts.</p>
             <span class="notion-price">$15</span>
-            <a href="https://www.notion.com/templates/youtube-creator-os-automated-social-media-planner-script" target="_blank" rel="noopener" class="btn-primary btn-sm" style="width:100%;justify-content:center;">Buy</a>
+            <div class="buy-stack">
+              <a href="https://www.notion.com/templates/youtube-creator-os-automated-social-media-planner-script" target="_blank" rel="noopener" class="btn-primary btn-sm">Buy</a>
+            </div>
           </div>
         </div>
 
-        <div class="notion-card">
+        <!-- STUDENT OS -->
+        <div class="notion-card shop-card anim" data-cat="notion">
+          <div class="notion-thumb" style="background: linear-gradient(135deg, #6462ab 0%, #524f96 100%); display:flex; align-items:center; justify-content:center; color:#fff; font-size:32px;">🎓</div>
+          <div class="notion-info">
+            <h3>Student OS &amp; Study Planner</h3>
+            <p>Say goodbye to scattered notes and missed deadlines with a single minimalist dashboard. Run your entire student life smoothly, from daily tasks to final exams.</p>
+            <span class="notion-price">$5.99</span>
+            <div class="buy-stack">
+              <a href="https://www.notion.com/templates/student-os-study-planner" target="_blank" rel="noopener" class="btn-primary btn-sm">Buy</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- SOCIAL MEDIA PLANNER -->
+        <div class="notion-card shop-card anim" data-cat="notion">
           <img class="notion-thumb" src="cover-social-media.webp" alt="Social Media Planner" loading="lazy" decoding="async">
           <div class="notion-info">
             <h3>Social Media Planner</h3>
             <p>Bring mental clarity and absolute control to your digital business with a minimalist ecosystem designed for creators and entrepreneurs. Manage everything seamlessly in one aesthetic place.</p>
             <span class="notion-price">$4</span>
-            <a href="https://www.notion.com/templates/social-media-planner-256" target="_blank" rel="noopener" class="btn-primary btn-sm" style="width:100%;justify-content:center;">Buy</a>
+            <div class="buy-stack">
+              <a href="https://www.notion.com/templates/social-media-planner-256" target="_blank" rel="noopener" class="btn-primary btn-sm">Buy</a>
+            </div>
           </div>
         </div>
 
-        <div class="notion-card">
+        <!-- FINANCE PRO -->
+        <div class="notion-card shop-card anim" data-cat="notion">
+          <img class="notion-thumb" src="cover-finance-pro.webp" alt="Finance Planner Pro" loading="lazy" decoding="async">
+          <div class="notion-info">
+            <h3>Finance Planner Pro</h3>
+            <p>Advanced financial tracking with detailed reports and projections.</p>
+            <span class="notion-price">$9.99</span>
+            <div class="buy-stack">
+              <a href="https://www.notion.com/templates/finance-planner-pro" target="_blank" rel="noopener" class="btn-primary btn-sm">Buy</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- QUIET MIND (free) -->
+        <div class="notion-card shop-card anim" data-cat="notion" id="p-quiet">
+          <img class="notion-thumb" src="cover-quiet-mind.webp" alt="Quiet Mind Planner" loading="lazy" decoding="async">
+          <div class="notion-info">
+            <h3>Quiet Mind Planner</h3>
+            <p>Free your mind from mental noise with a minimalist sanctuary designed to protect your energy and bring calm. Transform your daily routines into a gentle daily flow of intentional reflection.</p>
+            <span class="notion-price" style="color:var(--text-muted);">Free</span>
+            <div class="buy-stack">
+              <a href="https://www.notion.com/templates/quiet-mind-planner" target="_blank" rel="noopener" class="btn-secondary btn-sm">Download</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- HABIT (free) -->
+        <div class="notion-card shop-card anim" data-cat="notion">
+          <img class="notion-thumb" src="cover-habit.webp" alt="Habit Planner" loading="lazy" decoding="async">
+          <div class="notion-info">
+            <h3>Habit Planner</h3>
+            <p>Transform your habits without the visual guilt of missed days from the past. A clean-slate design to keep your mind clear and focused entirely on your growth.</p>
+            <span class="notion-price" style="color:var(--text-muted);">Free</span>
+            <div class="buy-stack">
+              <a href="https://www.notion.com/templates/habit-planner" target="_blank" rel="noopener" class="btn-secondary btn-sm">Download</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- FINANCE FREE -->
+        <div class="notion-card shop-card anim" data-cat="notion">
+          <img class="notion-thumb" src="cover-finance-free.webp" alt="Finance Planner Free" loading="lazy" decoding="async">
+          <div class="notion-info">
+            <h3>Finance Planner Free</h3>
+            <p>Organize your personal finances with a visual and intuitive system.</p>
+            <span class="notion-price" style="color:var(--text-muted);">Free</span>
+            <div class="buy-stack">
+              <a href="https://www.notion.com/templates/finance-planner-785" target="_blank" rel="noopener" class="btn-secondary btn-sm">Download</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- PET CONTROL (coming soon) -->
+        <div class="notion-card shop-card anim" data-cat="notion">
           <div class="notion-thumb" style="background: linear-gradient(135deg, #524f96 0%, #1a1832 100%); display:flex; align-items:center; justify-content:center; color:#fff; font-size:32px;">🐾</div>
           <div class="notion-info">
             <h3>Pet Control</h3>
-            <p>Vaccines, vet visits, meds, and food in one dashboard. Never miss a rabies shot again — built for Bonnie, Luna, and every fur baby.</p>
+            <p>Vaccines, vet visits, meds, and food in one dashboard. For Bonnie, Luna and every fur baby.</p>
             <span class="notion-price">$5</span>
-            <span class="btn-secondary btn-sm" style="width:100%;justify-content:center;opacity:.7;cursor:default;">Coming soon</span>
+            <span class="btn-secondary btn-sm soon" style="width:100%;justify-content:center;">Coming soon</span>
+          </div>
+        </div>
+
+      </div>
+
+      </div>
+
+      <!-- EBOOK · HISTORIA (estilo Kore, sin cajas) -->
+      <div class="ebook-story anim d2">
+        <div>
+          <span class="story-label">Coming soon</span>
+          <h3>El diario imperfecto de una creadora</h3>
+          <p>The real story of my leap into the freelance life — with 15 prompts to copy and paste, exercises with space to write, and a launch checklist.</p>
+          <div class="es-quote">The leap into freelance life, told without filters.</div>
+          <a class="btn-primary" href="https://wa.me/573104108483?text=Hola%20Isabel%20%F0%9F%91%8B%20av%C3%ADsame%20cuando%20salga%20El%20diario%20imperfecto%20de%20una%20creadora" target="_blank" rel="noopener" style="margin-top:18px;">Notify me when it launches 🔔</a>
+        </div>
+        <div class="es-side">
+          <div class="es-book" aria-hidden="true">
+            <div class="tablet-stage">
+              <div class="tablet-glow"></div>
+              <div class="tablet-frame">
+                <div class="tablet-screen">
+                  <img src="assets/ebook-portada.png" alt="" loading="lazy" decoding="async">
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
     </section>
 
-    <!-- PRINTED PRODUCTS -->
-    <section class="section" id="impresos-products" style="display:none; padding-top: 0;">
-      <div class="section-title"><span>Printed Products</span></div>
-      <button class="btn-secondary btn-sm" onclick="showCategory('home')" style="margin-bottom:20px;">← Back</button>
-
-      <div class="product-item">
-        <img class="product-media" src="print-focus.webp" alt="Focus Dock" loading="lazy" decoding="async">
-        <div class="product-body">
-          <h3>Focus Dock</h3>
-          <p>Your Notion isn't broken. It's just poorly designed. 43-page protocol.</p>
-        </div>
-        <span class="product-price">$27</span>
-        <a href="http://getfocusdock.com/isabel" target="_blank" rel="noopener" class="btn-primary btn-sm">Buy</a>
-      </div>
-
-      <div class="product-item">
-        <img class="product-media" src="print-coloring.webp" alt="Lofi Coloring" loading="lazy" decoding="async">
-        <div class="product-body">
-          <h3>Coloring Books — Lofi Coloring</h3>
-          <p>Same book in English and Spanish. Print and digital edition.</p>
-        </div>
-        <div style="display:flex;gap:8px;flex-shrink:0;flex-wrap:wrap;">
-          <a href="https://www.amazon.com/dp/B0HBML5LCP" target="_blank" rel="noopener" class="btn-primary btn-sm">Amazon EN</a>
-          <a href="https://www.amazon.com/dp/B0HJ9713N5" target="_blank" rel="noopener" class="btn-primary btn-sm">Amazon ES</a>
-          <a href="https://alquimialab.gumroad.com/l/LofiColoringBookAlquimia" target="_blank" rel="noopener" class="btn-secondary btn-sm">Digital</a>
-        </div>
-      </div>
-
-      <div class="product-item">
-        <img class="product-media" src="journal-cover.webp" alt="Planner 2027" loading="lazy" decoding="async">
-        <div class="product-body">
-          <h3>Planner 2027</h3>
-          <p>A minimalist planner to organize your year with calm and intention.</p>
-        </div>
-        <div style="display:flex;gap:8px;flex-shrink:0;align-items:center;flex-wrap:wrap;">
-          <span class="btn-secondary btn-sm" onclick="openModal('modal-journal')" style="cursor:pointer;">View project</span>
-          <a href="https://www.amazon.com/dp/B0HJ8J6MHG" target="_blank" rel="noopener" class="btn-primary btn-sm">Amazon</a>
-          <a href="https://alquimialab.gumroad.com/l/bvzpd?wanted=true" target="_blank" rel="noopener" class="btn-secondary btn-sm">Download</a>
-          <span class="badge" style="background:#2e9e5b;color:#fff;font-size:10px;font-weight:700;padding:4px 10px;border-radius:99px;white-space:nowrap;">On Amazon</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- DIGITAL PRODUCTS -->
-    <section class="section" id="digitales-products" style="display:none; padding-top: 0;">
-      <div class="section-title"><span>Digital Products</span></div>
-      <button class="btn-secondary btn-sm" onclick="showCategory('home')" style="margin-bottom:20px;">← Back</button>
-
-      <div class="product-item">
-        <img class="product-media" src="assets/featured-maestro.jpg?v=2" alt="Plan Maestro" loading="lazy" decoding="async">
-        <div class="product-body">
-          <h3>Plan Maestro Template</h3>
-          <p>Blank content plan for pillars, calendar, copy, ideas, and multiple brands. No more messy spreadsheets.</p>
-        </div>
-        <span class="product-price">$7</span>
-        <a href="https://alquimialab.gumroad.com/l/PlantillaPlanMaestro" target="_blank" rel="noopener" class="btn-primary btn-sm" style="white-space:nowrap;">Buy</a>
-      </div>
-
-      <div class="product-item">
-        <img class="product-media" src="assets/featured-alquimia.jpg?v=2" alt="Alquimia Studio" loading="lazy" decoding="async">
-        <div class="product-body">
-          <h3>Alquimia Studio</h3>
-          <p>Five interactive planners in one place: calm, annual, ADHD, menstrual, and weekly. Dark mode, favorites, and PDF export.</p>
-        </div>
-        <span class="product-price">$3</span>
-        <a href="https://alquimialab.gumroad.com/l/AlquimiaStudio_Planner" target="_blank" rel="noopener" class="btn-primary btn-sm" style="white-space:nowrap;">Buy</a>
-      </div>
-
-      <div class="product-item">
-        <img class="product-media" src="assets/ebook-portada.png" alt="El diario imperfecto de una creadora" loading="lazy" decoding="async" style="width:70px;height:100px;object-fit:cover;background:#e8e6f4;">
-        <div class="product-body">
-          <h3>El diario imperfecto de una creadora</h3>
-          <p>The real story of my leap into the freelance life — with 15 prompts to copy and paste, exercises with space to write, and a launch checklist.</p>
-        </div>
-        <a href="blog.html" class="btn-primary btn-sm" style="white-space:nowrap;">Read synopsis</a>
-      </div>
-    </section>
-
-  </div>
-
-  <!-- MODAL: Calma y Orden Journal -->
-  <div class="modal-overlay" id="modal-journal" aria-hidden="true">
-    <div class="modal modal-wide" role="dialog" aria-modal="true">
-      <button class="modal-close" aria-label="Close" onclick="closeModal('modal-journal')">&times;</button>
-      <h3 class="modal-title">Calma y Orden &mdash; Hybrid Journal for Self-Care &amp; Productivity</h3>
-      <div class="car-panel">
-        <button class="car-arrow prev" onclick="journalNav(-1)">&larr;</button>
-        <div class="car-view"><img id="journal-big" src="journal-1.webp" alt="Calma y Orden journal" loading="lazy" decoding="async"></div>
-        <button class="car-arrow next" onclick="journalNav(1)">&rarr;</button>
-      </div>
-      <div class="car-counter" id="journal-counter">1 / 5</div>
-
-      <h4 class="pack-section-title">What you'll find inside</h4>
-      <ul class="journal-features">
-        <li><strong>Monthly calendars</strong> with space for key dates and monthly goals.</li>
-        <li><strong>Weekly planning</strong> combining responsibilities + mandatory self-care.</li>
-        <li><strong>Daily pages</strong> with to-do lists and rotating reflection prompts.</li>
-        <li><strong>Monthly habit tracker</strong> &mdash; 31-day &times; 6-habit grid.</li>
-        <li><strong>Personal finance control</strong> (income, expenses, savings, balance).</li>
-        <li><strong>Energy &amp; stress log</strong> to spot your patterns.</li>
-        <li><strong>Free spaces</strong> for notes, ideas, and mental downloads.</li>
-        <li><strong>Year-end closing page</strong> to reflect on your growth.</li>
-      </ul>
-
-      <div class="journal-cta">
-        <a href="https://www.amazon.com/dp/B0HJ8J6MHG" target="_blank" rel="noopener" class="btn-primary btn-sm" style="padding:10px 18px;">Amazon</a>
-        <a href="https://alquimialab.gumroad.com/l/bvzpd?wanted=true" target="_blank" rel="noopener" class="btn-secondary btn-sm" style="padding:10px 18px;">Download</a>
-        <span class="badge" style="background:#2e9e5b;color:#fff;font-size:10px;font-weight:700;padding:4px 10px;border-radius:99px;">On Amazon</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL: Producto (se llena al hacer clic en cada tarjeta) -->
-  <div class="modal-overlay" id="modal-product" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true" style="max-width:480px;text-align:center;position:relative;">
-      <button class="modal-close" aria-label="Close" onclick="closeModal('modal-product')">&times;</button>
-      <div class="pm-media">
-        <button class="pm-arrow prev" id="pm-prev" aria-label="Anterior">&#10094;</button>
-        <img id="pm-img" src="" alt="Producto">
-        <button class="pm-arrow next" id="pm-next" aria-label="Siguiente">&#10095;</button>
-        <span class="pm-count" id="pm-count">1 / 1</span>
-      </div>
-      <h3 class="modal-title" id="pm-title" style="margin-top:18px;font-size:22px;"></h3>
-      <p class="modal-desc" id="pm-desc"></p>
-      <div id="pm-price" class="pm-price" style="display:none;"></div>
-      <div id="pm-actions" class="pm-actions"></div>
-    </div>
-  </div>
-
-  <!-- LIGHTBOX: imagen ampliada del producto -->
-  <div class="modal-overlay" id="pm-lightbox" aria-hidden="true" style="z-index:2000;">
-    <img id="pm-lightbox-img" src="" alt="Vista ampliada" style="max-width:92vw;max-height:88vh;border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,.4);">
   </div>
 
   <!-- FOOTER -->
@@ -371,138 +513,81 @@
       document.querySelector('.nav').classList.toggle('scrolled', window.scrollY > 20);
     });
 
-    function showCategory(id) {
+    /* Banner carrusel */
+    (function() {
+      var banner = document.getElementById('shopBanner');
+      if (!banner) return;
+      var slides = banner.querySelectorAll('.banner-slide');
+      var dots = banner.querySelectorAll('.banner-dot');
+      var i = 0, timer = null;
+
+      function go(n) {
+        i = (n + slides.length) % slides.length;
+        slides.forEach(function(s, k) { s.classList.toggle('active', k === i); });
+        dots.forEach(function(d, k) { d.classList.toggle('active', k === i); });
+      }
+      function stop() { if (timer) { clearInterval(timer); timer = null; } }
+      function play() { stop(); timer = setInterval(function() { go(i + 1); }, 5000); }
+
+      banner.querySelector('.banner-arrow.left').addEventListener('click', function() { go(i - 1); play(); });
+      banner.querySelector('.banner-arrow.right').addEventListener('click', function() { go(i + 1); play(); });
+      dots.forEach(function(d, k) { d.addEventListener('click', function() { go(k); play(); }); });
+      banner.addEventListener('mouseenter', stop);
+      banner.addEventListener('mouseleave', play);
+      document.addEventListener('visibilitychange', function() { document.hidden ? stop() : play(); });
+
+      go(0);
+      play();
+    })();
+
+    /* Filtros */
+    var chips = document.querySelectorAll('.chip');
+    var cards = document.querySelectorAll('.shop-card');
+    var CAT_FILTER = { notion: 'notion', impresos: 'print', digitales: 'digital' };
+
+    function applyFilter(f) {
+      chips.forEach(function(c) { c.classList.toggle('active', c.getAttribute('data-filter') === f); });
+      cards.forEach(function(card) {
+        card.classList.toggle('hidden', !(f === 'all' || card.getAttribute('data-cat') === f));
+      });
+    }
+
+    /* Abrir/cerrar productos por categoría (a primera vista: solo las 3 tarjetas) */
+    function openShop(cat, noScroll) {
       var cats = document.getElementById('categories-grid');
-      var notion = document.getElementById('notion-products');
-      var impresos = document.getElementById('impresos-products');
-      var digitales = document.getElementById('digitales-products');
-      if (!cats || !notion || !impresos || !digitales) return;
-      if (['notion', 'impresos', 'digitales'].indexOf(id) === -1) id = 'home';
-      cats.style.display = (id === 'home') ? '' : 'none';
-      notion.style.display = (id === 'notion') ? 'block' : 'none';
-      impresos.style.display = (id === 'impresos') ? 'block' : 'none';
-      digitales.style.display = (id === 'digitales') ? 'block' : 'none';
-      if (history.replaceState) {
-        history.replaceState(null, '', location.pathname + location.search + (id === 'home' ? '' : '#' + id));
-      }
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function categoryFromHash() {
-      return (location.hash || '').replace('#', '').toLowerCase();
-    }
-    window.addEventListener('hashchange', function() { showCategory(categoryFromHash()); });
-    if (['notion', 'impresos', 'digitales'].indexOf(categoryFromHash()) !== -1) {
-      showCategory(categoryFromHash());
-    }
-
-    function openModal(id) {
-      document.getElementById(id).classList.add('show');
-      document.getElementById(id).setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeModal(id) {
-      document.getElementById(id).classList.remove('show');
-      document.getElementById(id).setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    }
-    var journalList = ['journal-1.webp', 'journal-3.webp', 'journal-4.webp', 'journal-5.webp', 'journal-6.webp'];
-    var journalIdx = 0;
-    function journalNav(dir) {
-      journalIdx = (journalIdx + dir + journalList.length) % journalList.length;
-      document.getElementById('journal-big').src = journalList[journalIdx];
-      document.getElementById('journal-counter').textContent = (journalIdx + 1) + ' / ' + journalList.length;
-    }
-    document.querySelectorAll('.modal-overlay').forEach(function(ov) {
-      ov.addEventListener('click', function(e) {
-        if (e.target === ov) closeModal(ov.id);
-      });
-    });
-
-    /* Modal de producto: clic en la tarjeta abre ficha con imagen grande, info, precio y compra */
-    var PRODUCT_GALLERIES = {
-      'plan maestro template': ['assets/pm-maestro-1.png', 'assets/pm-maestro-2.png', 'assets/pm-maestro-3.png'],
-      'plantilla plan maestro': ['assets/pm-maestro-1.png', 'assets/pm-maestro-2.png', 'assets/pm-maestro-3.png'],
-      'alquimia studio': ['assets/pm-studio-1.jpeg', 'assets/pm-studio-2.jpeg', 'assets/pm-studio-3.jpeg', 'assets/pm-studio-4.jpeg']
-    };
-    var pmSlides = [], pmIdx = 0;
-    function pmShow(n) {
-      if (!pmSlides.length) return;
-      pmIdx = (n + pmSlides.length) % pmSlides.length;
-      var pmImg = document.getElementById('pm-img');
-      pmImg.src = pmSlides[pmIdx];
-      var multi = pmSlides.length > 1;
-      document.getElementById('pm-prev').style.display = multi ? '' : 'none';
-      document.getElementById('pm-next').style.display = multi ? '' : 'none';
-      var c = document.getElementById('pm-count');
-      c.style.display = multi ? '' : 'none';
-      c.textContent = (pmIdx + 1) + ' / ' + pmSlides.length;
-    }
-    function openProductModal(card) {
-      var img = card.querySelector('img');
-      var title = card.querySelector('h3');
-      var desc = card.querySelector('.notion-info p, .product-body p');
-      var price = card.querySelector('.notion-price, .product-price');
-      if (img) {
-        var pmImg = document.getElementById('pm-img');
-        var titleText = title ? title.textContent.trim().toLowerCase() : '';
-        pmSlides = PRODUCT_GALLERIES[titleText] || [img.src];
-        pmImg.alt = img.alt || titleText || 'Producto';
-        pmShow(0);
-      }
-      document.getElementById('pm-title').textContent = title ? title.textContent : '';
-      document.getElementById('pm-desc').textContent = desc ? desc.textContent : '';
-      var pmPrice = document.getElementById('pm-price');
-      if (price && price.textContent.trim()) {
-        pmPrice.textContent = price.textContent.trim();
-        pmPrice.style.display = '';
+      var shop = document.getElementById('shop-products');
+      if (!cats || !shop) return;
+      var valid = !!CAT_FILTER[cat];
+      cats.style.display = valid ? 'none' : '';
+      shop.style.display = valid ? 'block' : 'none';
+      if (valid) {
+        applyFilter(CAT_FILTER[cat]);
+        if (history.replaceState) history.replaceState(null, '', location.pathname + location.search + '#' + cat);
+        if (!noScroll) shop.scrollIntoView({ behavior: 'smooth', block: 'start' });
       } else {
-        pmPrice.style.display = 'none';
+        applyFilter('all');
+        if (history.replaceState) history.replaceState(null, '', location.pathname + location.search);
       }
-      var pmActions = document.getElementById('pm-actions');
-      pmActions.innerHTML = '';
-      card.querySelectorAll('a[class*="btn"]').forEach(function(a) {
-        pmActions.appendChild(a.cloneNode(true));
-      });
-      var viewProject = card.querySelector('span[onclick*="modal-journal"]');
-      if (viewProject) {
-        var b = document.createElement('button');
-        b.type = 'button';
-        b.className = 'btn-secondary btn-sm';
-        b.style.padding = '10px 18px';
-        b.textContent = viewProject.textContent.trim();
-        b.addEventListener('click', function() {
-          closeModal('modal-product');
-          openModal('modal-journal');
-        });
-        pmActions.appendChild(b);
-      }
-      openModal('modal-product');
     }
-    /* Tooltip bilingüe de Gumroad (se sincroniza con el idioma de la página) */
-    function setGumTips() {
-      var es = (document.documentElement.getAttribute('lang') || 'es') !== 'en';
-      document.querySelectorAll('[data-tip-es]').forEach(function (el) {
-        el.setAttribute('data-tip', es ? el.getAttribute('data-tip-es') : el.getAttribute('data-tip-en'));
-      });
-    }
-    setGumTips();
-    if (window.MutationObserver) {
-      new MutationObserver(setGumTips).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
-    }
-    document.getElementById('pm-prev').addEventListener('click', function(e) { e.stopPropagation(); pmShow(pmIdx - 1); });    document.getElementById('pm-next').addEventListener('click', function(e) { e.stopPropagation(); pmShow(pmIdx + 1); });
-    document.getElementById('pm-img').addEventListener('click', function() {
-      document.getElementById('pm-lightbox-img').src = pmSlides[pmIdx] || this.src;
-      openModal('pm-lightbox');
-    });
-    document.querySelectorAll('.notion-card, .product-item').forEach(function(card) {
-      card.addEventListener('click', function(e) {
-        if (e.target.closest('a, button')) return;
-        openProductModal(card);
-      });
-    });
+    function catFromHash() { return (location.hash || '').replace('#', '').toLowerCase(); }
+    window.addEventListener('hashchange', function() { openShop(catFromHash()); });
+    if (CAT_FILTER[catFromHash()]) openShop(catFromHash(), true);
 
-    </script>
+    /* Guía "¿cuál es para ti?": abre la tienda, filtra y resalta la tarjeta */
+    function goProduct(id) {
+      var card = document.getElementById(id);
+      if (!card) return;
+      var cat = card.getAttribute('data-cat');
+      var map = { notion: 'notion', print: 'impresos', digital: 'digitales' };
+      openShop(map[cat] || '', true);
+      applyFilter(cat);
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      card.classList.remove('flash');
+      void card.offsetWidth;
+      card.classList.add('flash');
+    }
+  </script>
 
-<script src="js/lang.js"></script>
+  <script src="js/lang.js"></script>
+</body>
 </html>
