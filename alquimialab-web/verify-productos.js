@@ -85,7 +85,7 @@ const mTitle = (prod.match(/<title>([^<]+)<\/title>/) || [])[1] || '';
 const mDesc = (prod.match(/<meta name="description" content="([^"]+)"/) || [])[1] || '';
 check('título traducido', !!titles[mTitle]);
 check('meta descripción traducida', !!descriptions[mDesc]);
-check('lang.js incluido', /src="js\/lang\.js"/.test(prod));
+check('lang.js incluido', /src="js\/lang\.js(\?v=\d+)?"/.test(prod));
 check('selector ES | EN', /id="langToggle"/.test(prod));
 check('nav Blog antes que Contact', (() => {
   const iB = prod.indexOf('<a href="blog.html"');

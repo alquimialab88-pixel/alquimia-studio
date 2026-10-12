@@ -73,7 +73,7 @@ check('meta descripción traducida', !!descriptions[mDesc]);
 
 check('nav Blog activo', /href="blog\.html" class="active"/.test(blog));
 check('Blog antes que Contact en nav', blog.indexOf('href="blog.html" class="active"') < blog.indexOf('href="contacto.html"'));
-check('lang.js incluido', /src="js\/lang\.js"/.test(blog));
+check('lang.js incluido', /src="js\/lang\.js(\?v=\d+)?"/.test(blog));
 check('CTA WhatsApp compra', /wa\.me\/573104108483\?text=[^"]*comprar/.test(blog) && />Buy the book/.test(blog));
 check('estilo editorial (hoja)', /class="ed-sheet/.test(blog));
 check('paleta Kore (sin crema/coral)', !/faf5ec|#e5533d|#ffd9a8|#cdc9ef/.test(blog));

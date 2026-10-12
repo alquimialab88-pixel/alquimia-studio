@@ -88,7 +88,7 @@ for (const [f, allow] of files) {
 
   check(f + ' lang="en"', /<html lang="en">/.test(html));
   check(f + ' canonical', new RegExp('rel="canonical" href="https://alquimialab.app/' + f + '"').test(html));
-  check(f + ' lang.js', /src="js\/lang\.js"/.test(html));
+  check(f + ' lang.js', /src="js\/lang\.js(\?v=\d+)?"/.test(html));
   check(f + ' divs balanceados', (html.match(/<div/g) || []).length === (html.match(/<\/div>/g) || []).length);
   check(f + ' copyright EN', html.indexOf('Made with calm &amp; coffee') > -1 || html.indexOf('Made with calm & coffee') > -1);
 }
