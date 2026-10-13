@@ -2,6 +2,9 @@
   var STORE_KEY = "alquimia-lang";
 
   var dict = {
+    "Order, calm & design for your everyday": "Orden, calma y diseño para tu día a día",
+    "Get my free 14-Day Kit": "Descarga gratis mi Kit 14 Días",
+    "5-minute rituals, anxiety protocol + printable tracker. Free forever.": "Rituales de 5 minutos, protocolo de pánico y tracker imprimible. Gratis, para siempre.",
     "AI": "IA",
     "My rules for working with AI": "Mis reglas para trabajar con IA",
     "The calm version is smaller than you think. You don't need every area of life in one place - you need one entry point that tells you where to look, and three areas you actually check every day.": "La versión tranquila es más pequeña de lo que crees. No necesitas cada área de la vida en un lugar: necesitas un punto de entrada que te diga dónde mirar, y tres áreas que realmente revisas cada día.",
