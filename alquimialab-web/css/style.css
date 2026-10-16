@@ -2808,3 +2808,52 @@ a.featured-card {
   flex-wrap: wrap; margin-top: 20px;
 }
 .pm-actions .btn-primary, .pm-actions .btn-secondary { justify-content: center; }
+
+/* ═══ HOME · KEEPEXPLORING (invita a leer más) ═══ */
+.home-explore {
+  max-width: 1080px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+}
+.home-explore .ex-card {
+  display: block; text-decoration: none;
+  background: #fff; border: 1px solid #e8e6f4; border-radius: 16px;
+  padding: 22px 24px; box-shadow: 0 10px 26px rgba(100, 98, 171, .10);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.home-explore .ex-card:hover { transform: translateY(-3px); box-shadow: 0 16px 34px rgba(100, 98, 171, .16); }
+.home-explore .ex-k { font-size: 11.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #a29de0; }
+.home-explore .ex-t { font-size: 17px; font-weight: 700; color: #1a1a2e; line-height: 1.35; margin-top: 8px; }
+.home-explore .ex-go { font-size: 13px; color: #6462ab; font-weight: 700; margin-top: 12px; display: inline-block; }
+@media (max-width: 860px) { .home-explore { grid-template-columns: 1fr; } }
+
+/* ═══ HOME · CTA FINAL (invita a comprar) ═══ */
+.home-cta {
+  position: relative; overflow: hidden;
+  background: linear-gradient(135deg, #6462ab 0%, #2e2d52 100%);
+  border-radius: 24px; max-width: 1080px; margin: 0 auto;
+  padding: 58px 32px; text-align: center; color: #fff;
+  box-shadow: 0 18px 50px rgba(100, 98, 171, .35);
+}
+.home-cta::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(circle at 18% 22%, rgba(255,255,255,.15), transparent 46%),
+              radial-gradient(circle at 82% 78%, rgba(255,255,255,.10), transparent 46%);
+  pointer-events: none;
+}
+.home-cta h2 { position: relative; font-size: clamp(26px, 4vw, 38px); font-weight: 800; color: #fff; margin-bottom: 12px; }
+.home-cta p { position: relative; font-size: 16px; opacity: .92; max-width: 580px; margin: 0 auto 30px; line-height: 1.6; }
+.home-cta-btns { position: relative; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.home-cta .btn-white { padding: 15px 34px; font-size: 15.5px; }
+.home-cta .btn-outline-w {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 14px 30px; border-radius: 99px;
+  border: 1.5px solid rgba(255, 255, 255, .55); color: #fff;
+  background: rgba(255, 255, 255, .08);
+  font-weight: 700; font-size: 15px; text-decoration: none;
+  transition: background .2s ease, transform .2s ease;
+}
+.home-cta .btn-outline-w:hover { background: rgba(255, 255, 255, .2); transform: translateY(-2px); }
+@media (max-width: 560px) {
+  .home-cta { padding: 44px 20px; }
+  .home-cta-btns a { width: 100%; justify-content: center; }
+}

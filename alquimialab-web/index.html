@@ -78,6 +78,7 @@
           <p class="anim d2" data-i18n="Order, calm &amp; design for your everyday">Order, calm &amp; design for your everyday</p>
           <div class="hero-btns anim d3">
             <a href="planner-2027.html" class="btn-primary">Planner 2027</a>
+            <a href="kore-landing.html" class="btn-white" data-i18n="🦊 Meet Kore" onclick="window.gtag&&gtag('event','click_hero_kore')">🦊 Meet Kore</a>
             <a href="portafolio.html" class="btn-white">View Portfolio</a>
           </div>
         </div>
@@ -109,7 +110,7 @@
         #mlb2-46817049 .ml-form-fieldRow { flex:1 1 150px; margin:0 !important; min-width:0; }
         #mlb2-46817049 .ml-form-fieldRow input { width:100% !important; box-sizing:border-box !important; padding:13px 18px !important; border-radius:12px !important; border:1.5px solid #ccc9e6 !important; background:#fff !important; color:#3b3866 !important; font-family:'Quicksand',sans-serif !important; font-size:14.5px !important; margin:0 !important; }
         #mlb2-46817049 .ml-form-fieldRow input:focus { outline:none !important; border-color:#6462ab !important; }
-        #mlb2-46817049 .ml-form-embedSubmit { margin:0 !important; }
+        #mlb2-46817049 .ml-form-embedSubmit { margin:22px 0 0 !important; text-align:center !important; }
         #mlb2-46817049 .ml-form-embedSubmit button.primary { background:#6462ab !important; color:#fff !important; border:none !important; border-radius:12px !important; padding:13px 28px !important; font-family:'Quicksand',sans-serif !important; font-weight:700 !important; font-size:14.5px !important; cursor:pointer; transition:background .2s ease, transform .2s ease; width:auto !important; }
         #mlb2-46817049 .ml-form-embedSubmit button.primary:hover { background:#524F96 !important; transform:translateY(-2px); }
         #mlb2-46817049 .ml-form-successContent h4 { color:#1a1a2e !important; font-family:'Quicksand',sans-serif !important; text-align:center !important; font-size:22px !important; margin:0 0 8px !important; }
@@ -140,7 +141,7 @@
                 </div>
                 <input type="hidden" name="ml-submit" value="1">
                 <div class="ml-form-embedSubmit">
-                  <button type="submit" class="primary">Join me 💜</button>
+                  <button type="submit" class="primary" onclick="window.gtag&&gtag('event','newsletter_submit')">Join me 💜</button>
                   <button disabled="disabled" style="display: none;" type="button" class="loading">
                     <div class="ml-form-embedSubmitLoad"></div>
                     <span class="sr-only">Loading...</span>
@@ -409,6 +410,28 @@
     </div>
   </section>
 
+  <!-- 5b · MORE FROM THE BLOG · invita a explorar más -->
+  <section class="section">
+    <div class="section-title anim"><span>More from the blog</span></div>
+    <div class="home-explore anim d1">
+      <a class="ex-card" href="blog-notion-mistakes.html" onclick="window.gtag&&gtag('event','click_home_article')">
+        <div class="ex-k">Notion</div>
+        <div class="ex-t">5 Notion mistakes that make you abandon your system</div>
+        <div class="ex-go">Read the fixes →</div>
+      </a>
+      <a class="ex-card" href="blog-todo-list.html" onclick="window.gtag&&gtag('event','click_home_article')">
+        <div class="ex-k">Productivity</div>
+        <div class="ex-t">Why your to-do list never works</div>
+        <div class="ex-go">Read the method →</div>
+      </a>
+      <a class="ex-card" href="blog-ai-criteria.html" onclick="window.gtag&&gtag('event','click_home_article')">
+        <div class="ex-k">AI</div>
+        <div class="ex-t">AI with criteria</div>
+        <div class="ex-go">Read the rules →</div>
+      </a>
+    </div>
+  </section>
+
   <!-- 6 · PRUEBA SOCIAL (Opción C) -->
   <section class="section section-band-lilac">
     <div class="section-title anim"><span>What they say</span></div>
@@ -446,6 +469,19 @@
           <span class="testimonial-home-brand-dot">·</span>
           <span class="testimonial-home-brand">Jean Marco Marte</span>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · CTA FINAL · invita a comprar -->
+  <section class="section section-band-white">
+    <div class="home-cta anim">
+      <h2>Ready to bring calm to your week?</h2>
+      <p>Planners, Notion templates and apps made with calm — pick your first step.</p>
+      <div class="home-cta-btns">
+        <a href="tienda.html" class="btn-white" onclick="window.gtag&&gtag('event','click_cta_shop')">🛍 Shop the collection</a>
+        <a href="planner-2027.html" class="btn-outline-w" onclick="window.gtag&&gtag('event','click_cta_planner')">Planner 2027</a>
+        <a href="kore-landing.html" class="btn-outline-w" onclick="window.gtag&&gtag('event','click_cta_kore')">🦊 Meet Kore</a>
       </div>
     </div>
   </section>
@@ -626,6 +662,21 @@
       <button type="button" class="modal-close" onclick="closeTestimonial()" aria-label="Close">&times;</button>
       <div id="modalTestimonialContent"></div>
     </div>
+  </div>
+
+  <!-- STICKY KORE CTA -->
+  <style>
+    .kore-sticky { position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 1200; display: flex; align-items: center; gap: 10px; background: #4a3b8c; color: #fff; border-radius: 16px; padding: 12px 12px 12px 18px; box-shadow: 0 12px 30px rgba(40,25,90,.4); font-family: 'Quicksand', sans-serif; font-size: 14.5px; font-weight: 600; }
+    .kore-sticky span { flex: 1; }
+    .kore-sticky-btn { background: #ffd97a; color: #4a3b8c; font-weight: 700; border-radius: 999px; padding: 10px 22px; text-decoration: none; white-space: nowrap; }
+    .kore-sticky-x { background: transparent; border: none; color: #fff; font-size: 20px; cursor: pointer; opacity: .8; padding: 4px 8px; }
+    .whatsapp-float { bottom: 84px !important; }
+    @media (min-width: 720px) { .kore-sticky { left: auto; right: 24px; bottom: 24px; max-width: 420px; } }
+  </style>
+  <div id="koreSticky" class="kore-sticky" role="region" aria-label="Kore app">
+    <span data-i18n="🦊 Kore app is coming soon">🦊 Kore app is coming soon</span>
+    <a href="kore-landing.html#notify" class="kore-sticky-btn" data-i18n="Notify me" onclick="window.gtag&&gtag('event','click_sticky_kore')">Notify me</a>
+    <button type="button" class="kore-sticky-x" aria-label="Close" onclick="document.getElementById('koreSticky').remove()">×</button>
   </div>
 
   <!-- WHATSAPP -->
