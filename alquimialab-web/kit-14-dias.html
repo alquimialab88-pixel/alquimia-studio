@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kit 14 Días · Orden y Tranquilidad · Alquimia Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Alquimia Lab · premium minimal · Outfit · #6462AB / #CCC9E6 */
+:root{
+  --purple:#6462AB;
+  --purple-deep:#4E4C8A;
+  --purple-dark:#3F3E70;
+  --lavender:#A8A6D4;
+  --lavender-soft:#CCC9E6;
+  --lilac-bg:#E4E3F1;
+  --cream:#F7F5FB;
+  --cream-dark:#ECEAF5;
+  --ink:#2E2D52;
+  --muted:#6E6C96;
+  --white:#FFFFFF;
+  --line:#E4E3F1;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',system-ui,sans-serif;background:#E4E3F1;color:var(--ink);padding:24px 12px 80px}
+.toolbar{position:sticky;top:0;z-index:50;max-width:820px;margin:0 auto 20px;background:var(--purple);color:#fff;border-radius:14px;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.toolbar h1{font-size:14px;font-weight:700}
+.toolbar h1 span{color:var(--lavender-soft);font-weight:400}
+.toolbar p{font-size:11px;opacity:.7;margin-top:2px}
+.btn{border:none;border-radius:8px;padding:9px 18px;font-size:12.5px;font-weight:700;font-family:inherit;cursor:pointer;background:var(--lavender-soft);color:var(--purple-dark)}
+.btn:hover{filter:brightness(1.05)}
+.btn-g{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff}
+.book{max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+.page{
+  background:var(--white);width:100%;aspect-ratio:210/297;max-height:1120px;
+  padding:56px 60px;position:relative;overflow:hidden;
+  box-shadow:0 2px 12px rgba(46,45,82,.06);
+  border-radius:4px;display:flex;flex-direction:column;
+  border:1px solid var(--line);
+}
+.page-foot{position:absolute;bottom:24px;left:60px;right:60px;display:flex;justify-content:space-between;align-items:center;font-size:10px;color:var(--muted);letter-spacing:.5px}
+.brand-eyebrow{
+  font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);
+  font-weight:600;margin-bottom:16px;
+}
+h2{font-size:32px;line-height:1.15;margin-bottom:12px;font-weight:700;color:var(--ink)}
+.day-num{
+  font-size:11px;font-weight:600;color:var(--muted);
+  letter-spacing:2.5px;margin-bottom:12px;text-transform:uppercase;
+}
+.day-title{font-size:28px;line-height:1.2;margin-bottom:12px;color:var(--ink);font-weight:700}
+.day-intro{font-size:15px;line-height:1.6;color:var(--muted);margin-bottom:24px;max-width:540px;font-weight:400}
+.ritual{
+  background:var(--cream);border-radius:12px;padding:18px 20px;margin-bottom:10px;
+  display:grid;grid-template-columns:100px 1fr;gap:16px;align-items:start;
+}
+.ritual .when{
+  font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;
+  padding:8px;border-radius:6px;text-align:center;background:var(--lilac-bg);color:var(--purple-deep);
+}
+.when-t{background:var(--cream-dark);color:var(--purple)}
+.when-n{background:var(--purple);color:#fff}
+.ritual h4{font-size:14.5px;margin-bottom:5px;color:var(--ink);font-weight:700}
+.ritual p{font-size:13.5px;line-height:1.55;color:var(--muted)}
+.ritual .time{font-size:10.5px;color:var(--lavender);margin-top:6px;letter-spacing:.5px;font-weight:600;text-transform:uppercase}
+/* reflexión diaria */
+.reflect{
+  background:var(--white);border:1.5px dashed var(--lavender-soft);
+  border-radius:10px;padding:14px 18px;margin-top:4px;
+}
+.reflect .r-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--purple);margin-bottom:8px}
+.reflect .r-line{
+  border-bottom:1.5px solid var(--line);height:32px;margin-bottom:6px;
+}
+.reflect .r-mood{display:flex;gap:14px;align-items:center;margin-top:8px;font-size:14px;color:var(--muted);flex-wrap:wrap}
+.reflect .r-mood span{display:flex;align-items:center;gap:4px;font-size:13px}
+.reflect .r-mood input{accent-color:var(--purple);width:14px;height:14px;cursor:pointer}
+.quote{
+  background:var(--lilac-bg);border-radius:10px;padding:16px 20px;
+  font-size:15px;font-weight:500;color:var(--ink);
+  margin-top:auto;line-height:1.5;
+}
+.quote b{color:var(--purple);font-weight:700}
+/* portada */
+.cover{background:var(--purple);color:#fff;justify-content:center;align-items:flex-start;padding:64px 60px}
+.cover::before{display:none}
+.cover .tag{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--lavender-soft);font-weight:600;margin-bottom:24px}
+.cover h1{font-size:52px;line-height:1.08;margin-bottom:16px;letter-spacing:-1px;font-weight:700}
+.cover .tagline-hand{font-size:15px;font-weight:700;color:var(--lavender-soft);margin-bottom:18px;letter-spacing:.5px}
+.cover .sub{font-size:16px;line-height:1.6;opacity:.85;max-width:460px;margin-bottom:36px;font-weight:400}
+.cover .meta{display:flex;gap:8px;flex-wrap:wrap}
+.chip{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:8px 14px;font-size:12.5px;font-weight:500}
+.cover .sig{position:absolute;bottom:56px;left:60px;font-size:14px;color:rgba(255,255,255,.6);font-weight:500;letter-spacing:.5px}
+.cover .foot{position:absolute;bottom:24px;left:60px;right:60px;display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.4);letter-spacing:1px}
+/* pasos */
+.steps{list-style:none;counter-reset:s;margin:10px 0 24px}
+.steps li{counter-increment:s;position:relative;padding:12px 0 12px 44px;font-size:14.5px;line-height:1.55;border-bottom:1px solid var(--line)}
+.steps li::before{content:counter(s);position:absolute;left:0;top:10px;width:26px;height:26px;background:var(--lilac-bg);color:var(--purple-deep);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+.steps li b{color:var(--ink);font-weight:700}
+/* pánico */
+.panic-box{
+  background:var(--purple);color:#fff;border-radius:14px;padding:24px 26px;margin-bottom:16px;
+}
+.panic-box h3{font-size:20px;font-weight:700;margin-bottom:10px}
+.panic-box p{font-size:14px;line-height:1.6;opacity:.9;margin-bottom:8px}
+.ground-steps{counter-reset:g;margin:8px 0 0}
+.ground-steps li{
+  counter-increment:g;position:relative;padding:10px 0 10px 48px;
+  font-size:15px;line-height:1.5;border-bottom:1px solid rgba(255,255,255,.12);list-style:none;
+}
+.ground-steps li:last-child{border-bottom:none}
+.ground-steps li::before{
+  content:counter(g);position:absolute;left:0;top:8px;
+  width:30px;height:30px;background:rgba(255,255,255,.15);color:#fff;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:14px;
+}
+/* tracker */
+.tracker-table{width:100%;border-collapse:separate;border-spacing:0;font-size:12.5px;margin-top:8px;flex:1;border-radius:8px;overflow:hidden;border:1px solid var(--line)}
+.tracker-table th{background:var(--purple);color:#fff;padding:11px 6px;font-size:11px;text-align:center;font-weight:700}
+.tracker-table th:first-child{text-align:left;padding-left:14px;width:42%}
+.tracker-table td{border-bottom:1px solid var(--line);border-right:1px solid var(--line);padding:0;text-align:center;height:34px;background:var(--white)}
+.tracker-table td:first-child{text-align:left;padding:8px 14px;font-size:12.5px;font-weight:500}
+.tracker-table td:last-child{border-right:none}
+.tracker-table tr:last-child td{border-bottom:none}
+.tracker-table tr:nth-child(even) td{background:var(--cream)}
+/* frases */
+.phrase-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}
+.phrase-card{
+  background:var(--cream);border:1.5px solid var(--lavender-soft);
+  border-radius:12px;padding:20px 16px;text-align:center;
+  min-height:100px;display:flex;align-items:center;justify-content:center;
+  font-size:15px;font-weight:600;color:var(--purple-deep);line-height:1.4;
+  position:relative;
+}
+.phrase-card::after{content:'✂';position:absolute;top:6px;right:10px;font-size:11px;color:var(--lavender)}
+/* checklist semanal 2 */
+.checklist{margin-top:10px;background:var(--cream);border-radius:8px;padding:8px 18px}
+.checklist label{display:flex;align-items:center;gap:12px;font-size:14px;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.checklist label:last-child{border-bottom:none}
+.checklist input{width:16px;height:16px;accent-color:var(--purple);cursor:pointer}
+/* embudo */
+.funnel{background:var(--purple);color:#fff;border-radius:14px;padding:26px 28px;margin-top:auto}
+.funnel h3{font-size:20px;font-weight:700;margin-bottom:10px}
+.funnel p{font-size:14px;line-height:1.6;opacity:.9;margin-bottom:14px}
+.funnel-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px}
+.funnel-card{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:10px;padding:14px 12px;text-align:center}
+.funnel-card .fc-title{font-size:13px;font-weight:700;margin-bottom:4px}
+.funnel-card .fc-price{font-size:16px;font-weight:700;color:var(--lavender-soft)}
+.funnel-card .fc-desc{font-size:11px;opacity:.75;margin-top:4px}
+.funnel .handle{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;color:var(--lavender-soft);display:block;text-align:center}
+/* semana 2 row */
+.week2-header{background:var(--lilac-bg);border-radius:10px;padding:16px 20px;margin-bottom:16px}
+.week2-header h3{font-size:18px;font-weight:700;color:var(--purple-deep);margin-bottom:4px}
+.week2-header p{font-size:13.5px;color:var(--muted)}
+@media print{
+  body{background:#fff;padding:0}
+  .toolbar{display:none!important}
+  .book{gap:0;max-width:none}
+  .page{box-shadow:none;margin:0;page-break-after:always;break-after:page;max-height:none;height:100vh;min-height:100vh;border:none;border-radius:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .page:last-child{page-break-after:auto}
+  @page{size:A4;margin:0}
+}
+@media(max-width:700px){
+  .page{padding:32px 26px;aspect-ratio:auto;max-height:none}
+  .ritual{grid-template-columns:1fr}
+  .cover h1{font-size:34px}
+  h2,.day-title{font-size:24px}
+  .funnel-grid{grid-template-columns:1fr}
+  .phrase-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div>
+    <h1>Kit 14 Días <span>· Premium · Orden y Tranquilidad</span></h1>
+    <p>15 páginas A4 · reflexiones + pánico + semana 2 + frases · Ctrl+P → PDF</p>
+  </div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <button class="btn btn-g" onclick="location.href='kit-14-days.html'">Read in English</button>
+    <button class="btn btn-g" onclick="window.print()">Imprimir / PDF</button>
+  </div>
+</div>
+
+<div class="book">
+
+  <!-- PORTADA -->
+  <section class="page cover">
+    <div class="tag">Alquimia Lab · Kit premium</div>
+    <h1>14 días de<br>Orden y Tranquilidad</h1>
+    <div class="tagline-hand">Orden, Tranquilidad y Autonomía para tu día a día</div>
+    <p class="sub">Dos semanas reales: rituales de 5 minutos, espacio para sentir y aprender cada día, protocolo para cuando la ansiedad llegue, y una semana 2 que consolida el hábito. Sin culpa, sin perfección — solo sistema.</p>
+    <div class="meta">
+      <span class="chip">Rituales mañana / tarde / noche</span>
+      <span class="chip">Reflexión diaria</span>
+      <span class="chip">Protocolo de pánico</span>
+      <span class="chip">Semana 2</span>
+      <span class="chip">Frases printeables</span>
+      <span class="chip">Tracker</span>
+    </div>
+    <div class="sig">con calma</div>
+    <div class="foot"><span>@alquimia.lab8</span><span>Kit Premium · v2.0</span></div>
+  </section>
+
+  <!-- CÓMO USAR -->
+  <section class="page">
+    <div class="brand-eyebrow">Antes de empezar</div>
+    <h2>Cómo usar este kit</h2>
+    <p class="day-intro">No es una semana perfecta — son 14 días con anclas. Imprime todo, elige horas reales y respeta los 5 minutos. El caos se va con sistema, no con fuerza de voluntad.</p>
+    <ol class="steps">
+      <li><b>Imprime</b> las páginas y guárdalas en un carpetero o pliego. Ideal el domingo anterior.</li>
+      <li><b>Elige tu ancla:</b> una hora fija por ritual. Nada de horarios de fantasía.</li>
+      <li><b>Cada noche</b> marca el tracker Y llena tu reflexión: ¿qué aprendí? ¿cómo me sentí?</li>
+      <li><b>Si llega el caos fuerte</b> → ve a Protocolo de pánico (pág. 11). No improvises.</li>
+      <li><b>Semana 2</b> es mantenimiento: mismos anclas, menos carga. Ahí se instala el hábito real.</li>
+      <li><b>Día 14:</b> diseña tu semana tipo para siempre. Lo que funcionó se queda.</li>
+    </ol>
+    <div class="quote">No necesitas dominar tu vida entera. Solo <b>estos 5 minutos</b>, 14 días seguidos.</div>
+    <div class="page-foot"><span>Orden · Tranquilidad · Autonomía</span><span>02</span></div>
+  </section>
+
+  <!-- DÍA 1 -->
+  <section class="page">
+    <div class="day-num">Día 01 · Lunes</div>
+    <h3 class="day-title">El ancla de la mañana</h3>
+    <p class="day-intro">Hoy solo instalas un punto de apoyo al despertar. Antes de las redes, antes del caos — tú eliges cómo arranca el día.</p>
+    <div class="ritual"><div class="when">Mañana</div><div><h4>5 min · Ancla</h4><p>3 respiraciones + 1 vaso de agua. «¿Qué es LO ÚNICO que hoy no puede fallar?» — una línea.</p><div class="time">5 min</div></div></div>
+    <div class="ritual"><div class="when when-t">Tarde</div><div><h4>5 min · Pausa</h4><p>Camina 20 pasos. Mira algo verde. Inhala 4, exhala 6. No resuelvas — solo llegas.</p><div class="time">5 min · sin pantalla</div></div></div>
+    <div class="ritual"><div class="when when-n">Noche</div><div><h4>5 min · Cierre</h4><p>1 que salió bien · 1 que sueltas · 1 agradecimiento tonto. Cierras y descansas.</p><div class="time">5 min</div></div></div>
+    <div class="reflect">
+      <div class="r-label">Reflexión del día</div>
+      <div class="r-label" style="font-weight:600;color:var(--muted);letter-spacing:1px">Hoy aprendí:</div>
+      <div class="r-line"></div><div class="r-line"></div>
+      <div class="r-mood">
+        <span><input type="radio" name="m1"> 😣 mal</span>
+        <span><input type="radio" name="m1"> 😐 regular</span>
+        <span><input type="radio" name="m1"> 🙂 bien</span>
+        <span><input type="radio" name="m1"> 😌 en calma</span>
+      </div>
+    </div>
+    <div class="page-foot"><span>Día 01</span><span>03</span></div>
+  </section>
+
+  <!-- DÍA 2 -->
+  <section class="page">
+    <div class="day-num">Día 02 · Martes</div>
+    <h3 class="day-title">Descarga mental</h3>
+    <p class="day-intro">Tu cabeza no está rota — está saturada. Hoy la vaciamos en papel para que deje de gritarte en la ducha.</p>
+    <div class="ritual"><div class="when">Mañana</div><div><h4>5 min · Vuelco total</h4><p>Escribe TODO lo que ronda: tareas, miedos, ideas. Divide en 3: hoy / esta semana / suelto.</p><div class="time">5 min</div></div></div>
+    <div class="ritual"><div class="when when-t">Tarde</div><div><h4>5 min · El «no hoy»</h4><p>De «suelto», elige 1 y márcala no hoy de verdad. Decir no a eso es decir sí a tu paz.</p><div class="time">5 min</div></div></div>
+    <div class="ritual"><div class="when when-n">Noche</div><div><h4>5 min · Desconexión</h4><p>Cel fuera del alcance de la cama. Lee 2 páginas o mira el techo respirando.</p><div class="time">5 min</div></div></div>
+    <div class="reflect">
+      <div class="r-label">Reflexión del día</div>
+      <div class="r-label" style="font-weight:600;color:var(--muted);letter-spacing:1px">Hoy aprendí:</div>
+      <div class="r-line"></div><div class="r-line"></div>
+      <div class="r-mood">
+        <span><input type="radio" name="m2"> 😣 mal</span>
+        <span><input type="radio" name="m2"> 😐 regular</span>
+        <span><input type="radio" name="m2"> 🙂 bien</span>
+        <span><input type="radio" name="m2"> 😌 en calma</span>
+      </div>
+    </div>
+    <div class="page-foot"><span>Día 02</span><span>04</span></div>
+  </section>
+
+  <!-- DÍA 3 -->
+  <section class="page">
+    <div class="day-num">Día 03 · Miércoles</div>
+    <h3 class="day-title">Solo 3 prioridades</h3>
+    <p class="day-intro">La lista de 40 tareas no es productividad — es pánico disfrazado. Hoy: 3 cosas que mueven la aguja.</p>
+    <div class="ritual"><div class="when">Mañana</div><div><h4>5 min · Las 3 del día</h4><p>Elige SOLO 3 prioridades de verdad. Las demás esperan — no compiten hoy.</p><div class="time">5 min</div></div></div>
+    <div class="ritual"><div class="when when-t">Tarde</div><div><h4>20 min · Bloque de foco</h4><p>Prioridad #1. Temporizador 20 min. Sin IG. Cuando suene, para — aunque no termines.</p><div class="time">20 min</div></div></div>
+    <div class="ritual"><div class="when when-n">Noche</div><div><h4>5 min · Review</h4><p>¿Qué % de tus 3 se hizo? Celebra sin redondear hacia la culpa.</p><div class="time">5 min</div></div></div>
+    <div class="reflect">
+      <div class="r-label">Reflexión del día</div>
+      <div class="r-label" style="font-weight:600;color:var(--muted);letter-spacing:1px">Hoy aprendí:</div>
+      <div class="r-line"></div><div class="r-line"></div>
+      <div class="r-mood">
+        <span><input type="radio" name="m3"> 😣 mal</span>
+        <span><input type="radio" name="m3"> 😐 regular</span>
+        <span><input type="radio" name="m3"> 🙂 bien</span>
+        <span><input type="radio" name="m3"> 😌 en calma</span>
+      </div>
+    </div>
+    <div class="page-foot"><span>Día 03</span><span>05</span></div>
+  </section>
+
+  <!-- DÍA 4 -->
+  <section class="page">
+    <div class="day-num">Día 04 · Jueves</div>
+    <h3 class="day-title">Espacios en blanco</h3>
+    <p class="day-intro">No se trata de hacer más — de dejar huecos. La agenda llena al 100% es caos con calendario bonito.</p>
+    <div class="ritual"><div class="when">Mañana</div><div><h4>5 min · Marca el vacío</h4><p>Bloquea 30 min como cita sagrada: «NO TOCAR». Protege ese hueco.</p><div class="time">5 min</div></div></div>
+    <div class="ritual"><div class="when when-t">Tarde</div><div><h4>5 min · Respiración 4-6</h4><p>Inhala 4 · exhala 6 · 6 veces. Hombros bajan. Este es tu reset portátil.</p><div class="time">5 min</div></div></div>
+    <div class="ritual"><div class="when when-n">Noche</div><div><h4>15 min · Sin info</h4><p>No noticias, no scroll. Solo tú y algo tranquilo antes de dormir.</p><div class="time">15 min</div></div></div>
+    <div class="reflect">
+      <div class="r-label">Reflexión del día</div>
+      <div class="r-label" style="font-weight:600;color:var(--muted);letter-spacing:1px">Hoy aprendí:</div>
+      <div class="r-line"></div><div class="r-line"></div>
+      <div class="r-mood">
+        <span><input type="radio" name="m4"> 😣 mal</span>
+        <span><input type="radio" name="m4"> 😐 regular</span>
+        <span><input type="radio" name="m4"> 🙂 bien</span>
+        <span><input type="radio" name="m4"> 😌 en calma</span>
+      </div>
+    </div>
+    <div class="page-foot"><span>Día 04</span><span>06</span></div>
+  </section>
+
+  <!-- DÍA 5 -->
+  <section class="page">
+    <div class="day-num">Día 05 · Viernes</div>
+    <h3 class="day-title">Cierra lo abierto</h3>
+    <p class="day-intro">Las tareas a medias pesan más que las terminadas. Limpieza de pestañas — en la mente y en el cel.</p>
+    <div class="ritual"><div class="when">Mañana</div><div><h4>15 min · Cierre exprés</h4><p>1 cosa empezada y sin terminar. Temporizador 15 min. Tiene que quedar FUERA de tu cabeza.</p><div class="time">15 min</div></div></div>
+    <div class="ritual"><div class="when when-t">Tarde</div><div><h4>5 min · Limpieza digital</h4><p>Cierra pestañas. Archiva 10 correos. Borra apps que roban tiempo.</p><div class="time">5 min</div></div></div>
+    <div class="ritual"><div class="when when-n">Noche</div><div><h4>5 min · Gratitud concreta</h4><p>3 cosas específicas de HOY — no genéricas. La mente guarda lo que le enseñas a notar.</p><div class="time">5 min</div></div></div>
+    <div class="reflect">
+      <div class="r-label">Reflexión del día</div>
+      <div class="r-label" style="font-weight:600;color:var(--muted);letter-spacing:1px">Hoy aprendí:</div>
+      <div class="r-line"></div><div class="r-line"></div>
+      <div class="r-mood">
+        <span><input type="radio" name="m5"> 😣 mal</span>
+        <span><input type="radio" name="m5"> 😐 regular</span>
+        <span><input type="radio" name="m5"> 🙂 bien</span>
+        <span><input type="radio" name="m5"> 😌 en calma</span>
+      </div>
+    </div>
+    <div class="page-foot"><span>Día 05</span><span>07</span></div>
+  </section>
+
+  <!-- DÍA 6 -->
+  <section class="page">
+    <div class="day-num">Día 06 · Sábado</div>
+    <h3 class="day-title">Tu ritual de cuidado</h3>
+    <p class="day-intro">La autonomía empieza por no depender de nadie para estar bien. Hoy diseñas tu momento sagrado.</p>
+    <div class="ritual"><div class="when">Mañana</div><div><h4>5 min · Sin prisa</h4><p>Algo sentada, sin cel ni noticias. Mira por la ventana. Este tiempo es tuyo.</p><div class="time">5 min</div></div></div>
+    <div class="ritual"><div class="when when-t">Tarde</div><div><h4>10 min · Cuerpo</h4><p>Camina, estira o baila 1 canción. El caos mental también se saca por el cuerpo.</p><div class="time">10 min</div></div></div>
+    <div class="ritual"><div class="when when-n">Noche</div><div><h4>5 min · Plan del placer</h4><p>Agenda algo que te guste la próxima semana. Si no se agenda, no pasa.</p><div class="time">5 min</div></div></div>
+    <div class="reflect">
+      <div class="r-label">Reflexión del día</div>
+      <div class="r-label" style="font-weight:600;color:var(--muted);letter-spacing:1px">Hoy aprendí:</div>
+      <div class="r-line"></div><div class="r-line"></div>
+      <div class="r-mood">
+        <span><input type="radio" name="m6"> 😣 mal</span>
+        <span><input type="radio" name="m6"> 😐 regular</span>
+        <span><input type="radio" name="m6"> 🙂 bien</span>
+        <span><input type="radio" name="m6"> 😌 en calma</span>
+      </div>
+    </div>
+    <div class="page-foot"><span>Día 06</span><span>08</span></div>
+  </section>
+
+  <!-- DÍA 7 -->
+  <section class="page">
+    <div class="day-num">Día 07 · Domingo</div>
+    <h3 class="day-title">Cierre de semana 1</h3>
+    <p class="day-intro">No inventes más rituales — consolida los que sí funcionaron. Mañana empieza el mantenimiento.</p>
+    <div class="ritual"><div class="when">Mañana</div><div><h4>5 min · Revisa el tracker</h4><p>¿Qué ritual marcaste casi siempre? Ese es tu ANCLA #1 — se queda.</p><div class="time">5 min</div></div></div>
+    <div class="ritual"><div class="when when-t">Tarde</div><div><h4>5 min · Diseña semana 2</h4><p>Mismas anclas, menos carga. 4 reglas. Eso es todo tu sistema.</p><div class="time">5 min</div></div></div>
+    <div class="ritual"><div class="when when-n">Noche</div><div><h4>5 min · Compromiso</h4><p>Firma y fecha este kit. Lee tu sistema en voz alta una vez.</p><div class="time">5 min</div></div></div>
+    <div class="reflect">
+      <div class="r-label">Reflexión · fin de semana 1</div>
+      <div class="r-label" style="font-weight:600;color:var(--muted);letter-spacing:1px">Lo que cambió en mí:</div>
+      <div class="r-line"></div><div class="r-line"></div>
+      <div class="r-mood">
+        <span><input type="radio" name="m7"> 😣 mal</span>
+        <span><input type="radio" name="m7"> 😐 regular</span>
+        <span><input type="radio" name="m7"> 🙂 bien</span>
+        <span><input type="radio" name="m7"> 😌 en calma</span>
+      </div>
+    </div>
+    <div class="page-foot"><span>Día 07</span><span>09</span></div>
+  </section>
+
+  <!-- TRACKER -->
+  <section class="page">
+    <div class="brand-eyebrow">Marca con ✏️ cada noche</div>
+    <h2>Tracker · Semana 1</h2>
+    <p class="day-intro">1 círculo = 1 victoria. Meta realista: 5 de 7. El perfeccionismo 7 de 7 no existe y está bien.</p>
+    <table class="tracker-table">
+      <thead><tr><th>Mi ritual</th><th>L</th><th>M</th><th>M</th><th>J</th><th>V</th><th>S</th><th>D</th></tr></thead>
+      <tbody>
+        <tr><td>Ancla mañana</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Pausa de tarde</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Cierre nocturno</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Cel fuera 30 min</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>3 prioridades</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td>Escribí mi reflexión</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:24px">
+      <div style="font-size:16px;font-weight:700;margin-bottom:10px">Mi semana tipo (para siempre)</div>
+      <div class="checklist">
+        <label><input type="checkbox"> Ancla de mañana fija a las ______ h</label>
+        <label><input type="checkbox"> Bloque de foco de 20 min: ______</label>
+        <label><input type="checkbox"> Pausa protegida: ______</label>
+        <label><input type="checkbox"> Cierre nocturno a las ______ h</label>
+        <label><input type="checkbox"> Mi ritual de cuidado semanal: ______</label>
+      </div>
+    </div>
+    <div class="page-foot"><span>Tracker · Sem 1</span><span>10</span></div>
+  </section>
+
+  <!-- PROTOCOLO DE PÁNICO -->
+  <section class="page">
+    <div class="brand-eyebrow">Guárdalo · úsalo cuando lo necesites</div>
+    <h2>Protocolo de pánico</h2>
+    <p class="day-intro">Cuando la ansiedad llega sin avisar a las 2am o en mitad de una reunión — NO pienses, solo sigue estos pasos en orden.</p>
+    <div class="panic-box">
+      <h3>Grounding 5 · 4 · 3 · 2 · 1</h3>
+      <p>Anclate a lo que está aquí, ahora. Tu mente no puede hacer las dos cosas al tiempo (entrar en pánico Y contar).</p>
+      <ol class="ground-steps">
+        <li><b>5 cosas</b> que puedas VER — nómbralas en voz alta o mentalmente</li>
+        <li><b>4 cosas</b> que puedas TOCAR — mesa, ropa, el suelo</li>
+        <li><b>3 cosas</b> que puedas OÍR — tráfico, ventilador, tu respiración</li>
+        <li><b>2 cosas</b> que puedas OLER — tu ropa, el aire</li>
+        <li><b>1 cosa</b> que puedas SABOREAR — el sabor de tu boca, un sorbo de agua</li>
+      </ol>
+    </div>
+    <div class="quote" style="margin-top:16px">Esto <b>no es debilidad</b> — es tu sistema de emergencia. Úsalo sin culpa. Después, vuelve al kit cuando estés lista.</div>
+    <div style="margin-top:20px;background:var(--cream);border-radius:10px;padding:18px 20px">
+      <div style="font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--purple);margin-bottom:8px">Si no baja en 10 min</div>
+      <p style="font-size:14px;line-height:1.6;color:var(--muted)">Agua fría en la cara o muñecas · cambia de espacio físico · habla con alguien de confianza · si es recurrente, buscar ayuda profesional no es fallar — es parte del sistema. 💜</p>
+    </div>
+    <div class="page-foot"><span>Protocolo de pánico</span><span>11</span></div>
+  </section>
+
+  <!-- SEMANA 2 · DÍA 8-10 -->
+  <section class="page">
+    <div class="week2-header">
+      <h3>Semana 2 · Modo mantenimiento</h3>
+      <p>Mismas anclas, menos carga. Aquí el hábito se vuelve automático. Si fallaste un día de la S1 — sin culpa, empieza aquí igual.</p>
+    </div>
+    <div class="day-num">Días 08–10 · Lunes a Miércoles</div>
+    <h3 class="day-title">Sostener sin forzar</h3>
+    <div class="ritual" style="margin-top:12px"><div class="when">Cada mañana</div><div><h4>5 min · Ancla + 1 prioridad</h4><p>Tu ancla de siempre + escribe SOLO 1 cosa que hoy no puede fallar.</p><div class="time">5 min</div></div></div>
+    <div class="ritual"><div class="when when-t">Cada tarde</div><div><h4>5 min · Pausa o bloque de foco</h4><p>Alterna: lunes pausa · martes foco 20 min · miércoles pausa. Escucha tu energía.</p><div class="time">5–20 min</div></div></div>
+    <div class="ritual"><div class="when when-n">Cada noche</div><div><h4>5 min · Cierre + reflexión</h4><p>1 que salió · 1 que sueltas · y completa tu mini reflexión diaria.</p><div class="time">5 min</div></div></div>
+    <div class="reflect">
+      <div class="r-label">Días 8–10 · lo que noté</div>
+      <div class="r-line"></div><div class="r-line"></div><div class="r-line"></div>
+      <div class="r-mood">
+        <span><input type="radio" name="w2a"> 😣</span>
+        <span><input type="radio" name="w2a"> 😐</span>
+        <span><input type="radio" name="w2a"> 🙂</span>
+        <span><input type="radio" name="w2a"> 😌</span>
+        <span style="font-weight:600;color:var(--purple)">promedio de 3 días</span>
+      </div>
+    </div>
+    <div class="page-foot"><span>Semana 2 · 8–10</span><span>12</span></div>
+  </section>
+
+  <!-- SEMANA 2 · DÍA 11-14 -->
+  <section class="page">
+    <div class="day-num">Días 11–14 · Jueves a Domingo</div>
+    <h3 class="day-title">Instalar para siempre</h3>
+    <p class="day-intro">Últimos 4 días. Ya no es «probar» — es vivir con tu sistema. Reduce, no agregues.</p>
+    <div class="ritual"><div class="when">Jueves</div><div><h4>Día 11 · Limpieza express</h4><p>Cierra 1 tarea abierta + 1 pestaña digital. 15 min máximo.</p></div></div>
+    <div class="ritual"><div class="when when-t">Viernes</div><div><h4>Día 12 · Cuidado sin excusas</h4><p>Tu ritual de cuidado completo. No es opcional — es cita contigo.</p></div></div>
+    <div class="ritual"><div class="when when-n">Sábado</div><div><h4>Día 13 · Revisión honesta</h4><p>Lee tus reflexiones de 14 días. ¿Qué patrón ves? Esa es tu verdad.</p></div></div>
+    <div class="ritual" style="background:var(--lilac-bg)"><div class="when">Domingo</div><div><h4>Día 14 · Tu sistema final</h4><p>Escribe en 4 líneas tu semana tipo permanente. Firma y fecha. Estás lista.</p></div></div>
+    <div class="reflect" style="margin-top:14px">
+      <div class="r-label">Reflexión final · día 14</div>
+      <div class="r-label" style="font-weight:600;color:var(--muted);letter-spacing:1px">En 14 días aprendí que:</div>
+      <div class="r-line"></div><div class="r-line"></div><div class="r-line"></div>
+      <div class="r-mood">
+        <span><input type="radio" name="m14"> 😣</span>
+        <span><input type="radio" name="m14"> 😐</span>
+        <span><input type="radio" name="m14"> 🙂</span>
+        <span><input type="radio" name="m14"> 😌 en calma</span>
+      </div>
+    </div>
+    <div class="page-foot"><span>Semana 2 · 11–14</span><span>13</span></div>
+  </section>
+
+  <!-- FRASES PRINTABLES -->
+  <section class="page">
+    <div class="brand-eyebrow">Recorta · pega en espejo · cel · agenda</div>
+    <h2>Frases para recordar</h2>
+    <p class="day-intro">10 recordatorios para cuando el viejo patrón intente volver. Recorta los que resuenen.</p>
+    <div class="phrase-grid">
+      <div class="phrase-card">No necesitas dominar tu vida entera — solo estos 5 minutos.</div>
+      <div class="phrase-card">Tres cosas bien hechas le ganan a treinta a medias.</div>
+      <div class="phrase-card">El espacio en blanco también es productividad.</div>
+      <div class="phrase-card">Cerrar una tarea le ahorra ansiedad a tu cerebro.</div>
+      <div class="phrase-card">Cuidarte no es premio — es parte del sistema.</div>
+      <div class="phrase-card">Hoy no tiene que ser perfecto — solo presente.</div>
+      <div class="phrase-card">Si no lo escribiste, existe en tu ansiedad.</div>
+      <div class="phrase-card">Decir «no hoy» es decir «sí» a tu paz.</div>
+      <div class="phrase-card">La calma también se practica.</div>
+      <div class="phrase-card">Volver al sistema no es empezar de cero.</div>
+    </div>
+    <div class="page-foot"><span>Frases Alquimia</span><span>14</span></div>
+  </section>
+
+  <!-- EMBUDO FINAL -->
+  <section class="page">
+    <div class="brand-eyebrow">Esto no termina aquí</div>
+    <h2>Tu siguiente paso</h2>
+    <p class="day-intro">Si 14 días te hicieron bien — hay más sistema esperándote. Elige por dónde seguir:</p>
+    <div class="funnel" style="position:static;margin-top:0">
+      <h3>Sigue con Alquimia Lab</h3>
+      <p>Estos son los productos que ya están listos. Mismo sistema, cero caos.</p>
+      <div class="funnel-grid">
+        <div class="funnel-card">
+          <div class="fc-title">Alquimia Studio</div>
+          <div class="fc-price">$19</div>
+          <div class="fc-desc">5 planners interactivos en tu navegador</div>
+        </div>
+        <div class="funnel-card">
+          <div class="fc-title">Planner TDAH</div>
+          <div class="fc-price">Gratis</div>
+          <div class="fc-desc">Notion para cerebros con 40 pestañas</div>
+        </div>
+        <div class="funnel-card">
+          <div class="fc-title">Kore App</div>
+          <div class="fc-price">Pronto</div>
+          <div class="fc-desc">Tu sistema de orden en una app Android</div>
+        </div>
+      </div>
+      <span class="handle">@alquimia.lab8 · Orden, Tranquilidad y Autonomía</span>
+    </div>
+    <div style="margin-top:24px;background:var(--cream);border-radius:10px;padding:22px 24px">
+      <div style="font-size:15px;font-weight:700;margin-bottom:8px;color:var(--ink)">¿Te sirvió este kit?</div>
+      <p style="font-size:14px;line-height:1.6;color:var(--muted);margin-bottom:10px">Una reseña de 2 líneas ayuda a que otra persona en caos lo encuentre. Escríbela donde lo compraste — de verdad, importa.</p>
+      <div class="r-line" style="height:40px;border-bottom:1.5px solid var(--lavender-soft)"></div>
+    </div>
+    <div class="page-foot"><span>con calma</span><span>15</span></div>
+  </section>
+
+</div>
+
+<script>
+document.querySelectorAll('.checklist input').forEach((inp,i)=>{
+  const k='kit7_chk_'+i;
+  try{if(localStorage.getItem(k))inp.checked=true;}catch(e){}
+  inp.addEventListener('change',()=>{try{localStorage.setItem(k,inp.checked?'1':'');}catch(e){}});
+});
+</script>
+</body>
+</html>
