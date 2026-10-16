@@ -120,7 +120,11 @@
         }
         #sib-container .input:focus { outline: none !important; border-color: #6462ab !important; box-shadow: none !important; }
         #sib-container input::placeholder { font-family: 'Quicksand', sans-serif !important; color: #b0adcf !important; }
-        #sib-container form > div { padding: 12px 0 !important; }
+        #sib-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; align-items: end; margin-top: 24px; }
+        #sib-form > div { padding: 0 !important; }
+        #sib-form > input { display: none !important; }
+        #sib-form > div:nth-child(3) { grid-column: 1 / -1; }
+        @media (max-width: 640px) { #sib-form { grid-template-columns: 1fr; } }
         #sib-container .sib-form-block { text-align: center !important; }
         #sib-container .sib-form-block__button,
         #sib-container .sib-form-block__button:hover {
