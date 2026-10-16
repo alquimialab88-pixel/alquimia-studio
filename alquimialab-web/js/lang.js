@@ -831,7 +831,8 @@
     "Your email": "Tu correo",
     "Subject": "Asunto",
     "Tell me about your project...": "Cuéntame sobre tu proyecto...",
-    "your@email.com": "tu@email.com"
+    "your@email.com": "tu@email.com",
+    "e.g., Camila": "Ej.: Camila"
   };
 
   var titles = {
@@ -903,7 +904,12 @@
     "View Kore →": "Ver Kore →",
     "Kore App": "App Kore",
     "The story of El diario imperfecto de una creadora — what happens inside its pages, and why you'll want to read it to the last exercise.": "La historia de El diario imperfecto de una creadora — lo que pasa dentro de sus páginas y por qué vas a querer leerla hasta el último ejercicio.",
-    "Alquimia Lab — Notion templates, planners, coloring books, Lofi mixes and Kore, your calm app. Design tools for a calmer day.": "Alquimia Lab — Plantillas de Notion, planners, libros para colorear, mixes Lofi y Kore, tu app de calma. Herramientas de diseño para un día con más calma."
+    "Alquimia Lab — Notion templates, planners, coloring books, Lofi mixes and Kore, your calm app. Design tools for a calmer day.": "Alquimia Lab — Plantillas de Notion, planners, libros para colorear, mixes Lofi y Kore, tu app de calma. Herramientas de diseño para un día con más calma.",
+    "What's your name?": "¿Cómo te llamas?",
+    "Your email": "Tu email",
+    "Send me my kit 💜": "Quiero mi kit 💜",
+    "Done! Check your inbox, your 14-day kit is on its way 💜": "¡Listo! Revisa tu correo, tu kit de 14 días va en camino 💜",
+    "We couldn't validate your subscription.": "No hemos podido validar tu suscripción."
   };
 
   var nodes = [], phNodes = [], titleSnap, descSnap;
