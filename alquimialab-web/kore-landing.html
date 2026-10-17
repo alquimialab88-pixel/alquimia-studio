@@ -988,34 +988,34 @@ section{padding:88px 24px}
   </div>
 </section>
 
-<!-- 9. OPINIÓN / FEEDBACK -->
+<!-- 9. OPINION / FEEDBACK -->
 <section id="opinion" style="padding-top:0">
   <div class="container">
     <div class="notify-card" id="opinionCard">
-      <h3>⭐ Califica Kore</h3>
-      <p>Tu opinión me ayuda a mejorar. Son menos de 2 minutos 💜</p>
+      <h3>⭐ Rate Kore</h3>
+      <p>Your opinion helps me improve. It takes less than 2 minutes 💜</p>
 
       <div id="opinionFormArea">
-        <div class="opinion-stars" id="opinionStars" role="radiogroup" aria-label="Calificación">
-          <button type="button" class="opinion-star" data-val="5" aria-label="5 estrellas">★</button>
-          <button type="button" class="opinion-star" data-val="4" aria-label="4 estrellas">★</button>
-          <button type="button" class="opinion-star" data-val="3" aria-label="3 estrellas">★</button>
-          <button type="button" class="opinion-star" data-val="2" aria-label="2 estrellas">★</button>
-          <button type="button" class="opinion-star" data-val="1" aria-label="1 estrella">★</button>
+        <div class="opinion-stars" id="opinionStars" role="radiogroup" aria-label="Rating">
+          <button type="button" class="opinion-star" data-val="5" aria-label="5 stars">★</button>
+          <button type="button" class="opinion-star" data-val="4" aria-label="4 stars">★</button>
+          <button type="button" class="opinion-star" data-val="3" aria-label="3 stars">★</button>
+          <button type="button" class="opinion-star" data-val="2" aria-label="2 stars">★</button>
+          <button type="button" class="opinion-star" data-val="1" aria-label="1 star">★</button>
         </div>
-        <p style="font-size:13px;color:var(--muted);margin-bottom:16px" id="opinionStarsLabel">Toca las estrellas para calificar</p>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:16px" id="opinionStarsLabel">Tap the stars to rate</p>
 
-        <textarea id="opinionText" placeholder="¿Qué te gusta o qué mejorarías? Escribe aquí... 💜" style="width:100%;min-height:110px;border:1.5px solid var(--lavender);border-radius:12px;padding:14px 16px;font-family:'Quicksand',system-ui,sans-serif;font-size:15px;color:var(--text);background:var(--surface);resize:vertical;outline:none;margin-bottom:16px"></textarea>
+        <textarea id="opinionText" placeholder="What do you like or what would you improve? Write here... 💜" style="width:100%;min-height:110px;border:1.5px solid var(--lavender);border-radius:12px;padding:14px 16px;font-family:'Quicksand',system-ui,sans-serif;font-size:15px;color:var(--text);background:var(--surface);resize:vertical;outline:none;margin-bottom:16px"></textarea>
 
-        <input type="text" id="opinionName" placeholder="Tu nombre (opcional)" style="width:100%;border:1.5px solid var(--lavender);border-radius:12px;padding:12px 16px;font-family:'Quicksand',system-ui,sans-serif;font-size:15px;color:var(--text);background:var(--surface);outline:none;margin-bottom:20px">
+        <input type="text" id="opinionName" placeholder="Your name (optional)" style="width:100%;border:1.5px solid var(--lavender);border-radius:12px;padding:12px 16px;font-family:'Quicksand',system-ui,sans-serif;font-size:15px;color:var(--text);background:var(--surface);outline:none;margin-bottom:20px">
 
-        <button type="button" class="btn" id="opinionSend" style="width:100%">Enviar mi opinión 💜</button>
+        <button type="button" class="btn" id="opinionSend" style="width:100%">Send my opinion 💜</button>
       </div>
 
       <div id="opinionThanks" style="display:none;text-align:center;padding:16px 0">
         <div style="font-size:44px;margin-bottom:12px">💜</div>
-        <h3 style="margin-bottom:8px">¡Gracias!</h3>
-        <p>Leí tu mensaje y significa mucho para mí.</p>
+        <h3 style="margin-bottom:8px">Thank you!</h3>
+        <p>I read your message and it means a lot to me.</p>
       </div>
     </div>
   </div>
@@ -1157,7 +1157,14 @@ document.querySelectorAll('.faq-item').forEach(function(item){
 (function(){
   var stars = document.querySelectorAll('.opinion-star');
   var label = document.getElementById('opinionStarsLabel');
-  var labels = {1:'Malo 😕',2:'Regular 🙂',3:'Bien 😊',4:'Muy bien 😍',5:'¡Me encanta! 🤩'};
+  var isEs = false;
+  try { isEs = localStorage.getItem('alquimia-lang') === 'es'; } catch(e) {}
+  var labels = isEs
+    ? {1:'Malo 😕',2:'Regular 🙂',3:'Bien 😊',4:'Muy bien 😍',5:'¡Me encanta! 🤩'}
+    : {1:'Not great 😕',2:'Okay 🙂',3:'Good 😊',4:'Great 😍',5:'I love it! 🤩'};
+  var tapFirst = isEs ? 'Primero toca las estrellitas ⭐' : 'Tap the stars first ⭐';
+  var sendingTxt = isEs ? 'Enviando...' : 'Sending...';
+  var errorTxt = isEs ? 'Error — intenta de nuevo 💜' : 'Error — try again 💜';
   var picked = 0;
   stars.forEach(function(btn){
     btn.addEventListener('click', function(){
@@ -1172,10 +1179,9 @@ document.querySelectorAll('.faq-item').forEach(function(item){
   if(send) send.addEventListener('click', function(){
     var text = (document.getElementById('opinionText')||{}).value || '';
     var name = (document.getElementById('opinionName')||{}).value || '';
-    if(!picked){ if(label) label.textContent='Primero toca las estrellitas ⭐'; return; }
+    if(!picked){ if(label) label.textContent = tapFirst; return; }
     if(!text.trim()){ document.getElementById('opinionText').focus(); return; }
-    send.textContent='Enviando...';
-    var body = 'Calificación: ' + picked + ' estrellas (' + (labels[picked]||'') + ')\nOpinión: ' + text + (name ? '\nNombre: ' + name : '');
+    send.textContent = sendingTxt;
     fetch('https://formsubmit.co/alquimialab88@gmail.com', {
       method:'POST',
       headers:{'Content-Type':'application/json','Accept':'application/json'},
@@ -1190,7 +1196,7 @@ document.querySelectorAll('.faq-item').forEach(function(item){
       document.getElementById('opinionFormArea').style.display='none';
       document.getElementById('opinionThanks').style.display='block';
     }).catch(function(){
-      send.textContent='Error — intenta de nuevo 💜';
+      send.textContent = errorTxt;
     });
   });
 })();

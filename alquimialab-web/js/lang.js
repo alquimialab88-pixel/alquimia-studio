@@ -837,7 +837,9 @@
     "Subject": "Asunto",
     "Tell me about your project...": "Cuéntame sobre tu proyecto...",
     "your@email.com": "tu@email.com",
-    "e.g., Camila": "Ej.: Camila"
+    "e.g., Camila": "Ej.: Camila",
+    "What do you like or what would you improve? Write here... 💜": "¿Qué te gusta o qué mejorarías? Escribe aquí... 💜",
+    "Your name (optional)": "Tu nombre (opcional)"
   };
 
   var titles = {
@@ -878,7 +880,15 @@
     "Privacy": "Privacidad",
     "Delete account": "Eliminar cuenta",
     "Terms": "Términos",
-    "Blog · Alquimia Lab": "Blog · Alquimia Lab"
+    "Blog · Alquimia Lab": "Blog · Alquimia Lab",
+    "⭐ Rate Kore": "⭐ Califica Kore",
+    "Your opinion helps me improve. It takes less than 2 minutes 💜": "Tu opinión me ayuda a mejorar. Son menos de 2 minutos 💜",
+    "Tap the stars to rate": "Toca las estrellas para calificar",
+    "Send my opinion 💜": "Enviar mi opinión 💜",
+    "Thank you!": "¡Gracias!",
+    "I read your message and it means a lot to me.": "Leí tu mensaje y significa mucho para mí.",
+    "What do you like or what would you improve? Write here... 💜": "¿Qué te gusta o qué mejorarías? Escribe aquí... 💜",
+    "Your name (optional)": "Tu nombre (opcional)"
   };
 
   var descriptions = {
