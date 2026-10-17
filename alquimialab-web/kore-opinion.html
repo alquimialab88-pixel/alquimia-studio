@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Califica Kore · Alquimia Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<style>
+:root{
+  --purple:#6462AB;
+  --purple-deep:#4E4C8A;
+  --purple-dark:#3F3E70;
+  --lavender:#A8A6D4;
+  --lavender-soft:#CCC9E6;
+  --lilac-bg:#E4E3F1;
+  --cream:#F7F5FB;
+  --ink:#2E2D52;
+  --muted:#6E6C96;
+  --white:#FFFFFF;
+  --line:#E4E3F1;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',system-ui,sans-serif;background:var(--lilac-bg);color:var(--ink);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:24px 16px 60px}
+.card{background:var(--white);max-width:520px;width:100%;border-radius:20px;box-shadow:0 8px 32px rgba(46,45,82,.1);overflow:hidden;margin-top:24px}
+.banner{background:var(--purple);padding:28px 32px;text-align:center}
+.banner img{height:36px;display:block;margin:0 auto 10px}
+.banner p{color:var(--lavender-soft);font-size:13px;margin:0}
+.body{padding:36px 36px 40px}
+h1{font-size:22px;font-weight:700;margin-bottom:8px;color:var(--ink)}
+.sub{font-size:14px;color:var(--muted);line-height:1.6;margin-bottom:28px}
+label{display:block;font-size:14px;font-weight:600;color:var(--ink);margin-bottom:10px}
+.stars{display:flex;gap:6px;justify-content:center;margin-bottom:32px}
+.stars input{display:none}
+.stars label{font-size:38px;cursor:pointer;color:var(--lavender-soft);transition:color .15s;line-height:1;margin:0}
+.stars label:hover,.stars label:hover ~ label,
+.stars input:checked ~ label{color:#F5B940}
+.stars{flex-direction:row-reverse;justify-content:center}
+.stars input:checked ~ label{color:#F5B940}
+textarea{width:100%;min-height:120px;border:2px solid var(--line);border-radius:12px;padding:14px 16px;font-family:'Outfit',system-ui,sans-serif;font-size:15px;color:var(--ink);background:var(--cream);resize:vertical;outline:none;transition:border-color .2s;margin-bottom:28px}
+textarea:focus{border-color:var(--lavender)}
+textarea::placeholder{color:var(--lavender)}
+input[type=text]{width:100%;border:2px solid var(--line);border-radius:12px;padding:12px 16px;font-family:'Outfit',system-ui,sans-serif;font-size:15px;color:var(--ink);background:var(--cream);outline:none;transition:border-color .2s;margin-bottom:28px}
+input[type=text]:focus{border-color:var(--lavender)}
+input[type=text]::placeholder{color:var(--lavender)}
+.submit{width:100%;background:var(--purple);color:#fff;border:none;border-radius:12px;padding:15px;font-family:'Outfit',system-ui,sans-serif;font-size:16px;font-weight:700;cursor:pointer;transition:background .2s}
+.submit:hover{background:var(--purple-deep)}
+.thanks{display:none;text-align:center;padding:20px 0}
+.thanks .emoji{font-size:48px;margin-bottom:16px}
+.thanks h2{font-size:22px;margin-bottom:10px}
+.thanks p{color:var(--muted);font-size:15px;line-height:1.6}
+.footer{text-align:center;margin-top:24px;font-size:12px;color:var(--muted)}
+.footer a{color:var(--purple);text-decoration:none}
+.hidden{display:none}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="banner">
+    <img src="assets/email-logo-alquimia.png" alt="Alquimia Lab">
+    <p>Un momentito 💜</p>
+  </div>
+  <div class="body">
+    <div id="formArea">
+      <h1>¿Qué tal te va con Kore?</h1>
+      <p class="sub">Tu opinión me ayuda a mejorar la app. Son menos de 2 minutos 💜</p>
+
+      <form action="https://formsubmit.co/alquimialab88@gmail.com" method="POST" id="feedbackForm">
+        <input type="hidden" name="_subject" value="Nueva opinión de Kore ⭐">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+
+        <label>¿Cómo calificarías Kore?</label>
+        <div class="stars">
+          <input type="radio" name="calificacion" value="5 estrellas ⭐⭐⭐⭐⭐" id="s5"><label for="s5">★</label>
+          <input type="radio" name="calificacion" value="4 estrellas ⭐⭐⭐⭐" id="s4"><label for="s4">★</label>
+          <input type="radio" name="calificacion" value="3 estrellas ⭐⭐⭐" id="s3"><label for="s3">★</label>
+          <input type="radio" name="calificacion" value="2 estrellas ⭐⭐" id="s2"><label for="s2">★</label>
+          <input type="radio" name="calificacion" value="1 estrella ⭐" id="s1"><label for="s1">★</label>
+        </div>
+
+        <label for="opinion">Cuéntame más — ¿qué te gusta o qué mejorarías?</label>
+        <textarea name="opinion" id="opinion" placeholder="Escribe aquí lo que quieras... 💜" required></textarea>
+
+        <label for="nombre">Tu nombre (opcional)</label>
+        <input type="text" name="nombre" id="nombre" placeholder="Ej.: María">
+
+        <button type="submit" class="submit">Enviar mi opinión 💜</button>
+      </form>
+    </div>
+
+    <div class="thanks" id="thanksArea">
+      <div class="emoji">💜</div>
+      <h2>¡Gracias!</h2>
+      <p>Leí tu mensaje y significa mucho para mí.<br>Me encanta que estés en Kore 🌿</p>
+    </div>
+  </div>
+</div>
+
+<p class="footer">Hecho con calma · <a href="https://alquimialab.app">Alquimia Lab</a></p>
+
+<script>
+document.getElementById('feedbackForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const form = this;
+  fetch(form.action, {
+    method: 'POST',
+    body: new FormData(form),
+    headers: { 'Accept': 'application/json' }
+  }).then(function(){
+    document.getElementById('formArea').style.display = 'none';
+    document.getElementById('thanksArea').style.display = 'block';
+  }).catch(function(){
+    form.submit();
+  });
+});
+</script>
+
+</body>
+</html>
