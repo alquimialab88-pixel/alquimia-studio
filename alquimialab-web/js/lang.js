@@ -996,6 +996,12 @@
 
   var lang = null;
   try { lang = localStorage.getItem(STORE_KEY); } catch (e) { /* ignore */ }
+  var qsLang = null;
+  try {
+    var qs = new URLSearchParams(window.location.search).get("lang");
+    if (qs === "es" || qs === "en") qsLang = qs;
+  } catch (e) { /* ignore */ }
+  if (qsLang) lang = qsLang;
   if (lang !== "es" && lang !== "en") lang = detectLang();
   applyLang(lang);
 

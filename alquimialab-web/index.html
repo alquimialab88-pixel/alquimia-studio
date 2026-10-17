@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Alquimia Lab — Notion templates, planners, coloring books, Lofi mixes and Kore, your calm app. Design tools for a calmer day.">
   <meta name="theme-color" content="#f2f2f2">
+  <meta name="google" content="notranslate">
+  <link rel="alternate" hreflang="es" href="https://alquimialab.app/?lang=es">
+  <link rel="alternate" hreflang="en" href="https://alquimialab.app/?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://alquimialab.app/">
   <link rel="canonical" href="https://alquimialab.app/">
 <meta name="color-scheme" content="light">
 <meta name="p:domain_verify" content="873c3dceab38058f2ad57c008b30e2ee"/>
@@ -177,7 +181,7 @@
           </div>
           <div></div>
           <div id="sib-container" class="sib-container--large sib-container--horizontal" style="max-width:540px; text-align:center; background-color:transparent; border-width:0px; border-style:dotted; border-color:#ccc9e6; border-radius:13px; direction:ltr">
-            <form id="sib-form" method="POST" action="https://01d525fe.sibforms.com/serve/MUIFAFNRaiIKKilp-ZeAKnjdtwY6pYZWmB_2pG9emsUP2fcXPdbDlNC9t4BsGntiw2GenU8pMSz5Smn8-EdFoRMMtaDHlez2W5aogeUaLBMoaAgzs-c78_EYCCjyjpLVrDcbuvf19Colqy5IFbQJPTBdMNqpBKRBpB7PPQ1EN6BaeZYBe2GZVL5UO4Y0hYR4c8061YUXZkPT1UNWzQ==" data-type="subscription">
+            <form id="sib-form" method="POST" action="https://01d525fe.sibforms.com/serve/MUIFAFNRaiIKKilp-ZeAKnjdtwY6pYZWmB_2pG9emsUP2fcXPdbDlNC9t4BsGntiw2GenU8pMSz5Smn8-EdFoRMMtaDHlez2W5aogeUaLBMoaAgzs-c78_EYCCjyjpLVrDcbuvf19Colqy5IFbQJPTBdMNqpBKRBpB7PPQ1EN6BaeZYBe2GZVL5UO4Y0hYR4c8061YUXZkPT1UNWzQ==" data-action-es="https://01d525fe.sibforms.com/serve/MUIFAFNRaiIKKilp-ZeAKnjdtwY6pYZWmB_2pG9emsUP2fcXPdbDlNC9t4BsGntiw2GenU8pMSz5Smn8-EdFoRMMtaDHlez2W5aogeUaLBMoaAgzs-c78_EYCCjyjpLVrDcbuvf19Colqy5IFbQJPTBdMNqpBKRBpB7PPQ1EN6BaeZYBe2GZVL5UO4Y0hYR4c8061YUXZkPT1UNWzQ==" data-action-en="https://01d525fe.sibforms.com/serve/MUIFACtTRj8owcmC_6JxBmlpg3Zyd7IqxJE2HS-4Wx_w3YMfVbBcu1RY2tnfMTnhSRVVpfpyHVUyyOaQOlRT5VQ57NGt7sVPVb3g7RWPiItBeCffXkdozMiL51tmRWfPuVGkL4JSumsXpTsnnTOk3k58h9qXLl-R0riZ_uAKDwiyZLGcbUsJH5TfzvOnm_XjeUx5cp6ExqojEGdjLQ==" data-type="subscription">
               <div style="padding: 8px 0;">
                 <div class="sib-input sib-form-block">
                   <div class="form__entry entry_block">
@@ -237,6 +241,11 @@
               : { common: { selectedList: '{quantity} list selected', selectedLists: '{quantity} lists selected', selectedOption: '{quantity} selected', selectedOptions: '{quantity} selected' } };
             var loc = document.querySelector('#sib-form input[name="locale"]');
             if (loc) loc.value = es ? 'es' : 'en';
+            var frm = document.getElementById('sib-form');
+            if (frm) {
+              var target = es ? frm.getAttribute('data-action-es') : frm.getAttribute('data-action-en');
+              if (target) frm.setAttribute('action', target);
+            }
           }
           setBrevoLang();
           if (window.MutationObserver) {
