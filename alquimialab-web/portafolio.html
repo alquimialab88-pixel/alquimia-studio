@@ -463,7 +463,7 @@
       <h3 class="modal-title">Email Marketing</h3>
       <div class="car-panel">
         <button class="car-arrow prev" onclick="mailNav(-1)">&larr;</button>
-        <div class="car-view"><img id="mail-big" src="mail-thumbs/mail1.png" alt="Email design" loading="lazy" decoding="async"></div>
+        <div class="car-view"><img id="mail-big" src="mail-thumbs/mail1.jpg" alt="Email design" loading="lazy" decoding="async"></div>
         <button class="car-arrow next" onclick="mailNav(1)">&rarr;</button>
       </div>
       <div class="car-counter" id="mail-counter">1 / 4</div>
@@ -511,7 +511,7 @@
       document.getElementById('ed-big').src = edList[edIdx];
       document.getElementById('ed-counter').textContent = (edIdx + 1) + ' / ' + edList.length;
     }
-    var mailList = ['mail-thumbs/mail1.png', 'mail-thumbs/mail2.png', 'mail-thumbs/mail3.png', 'mail-thumbs/mail4.png'];
+    var mailList = ['mail-thumbs/mail1.jpg', 'mail-thumbs/mail2.jpg', 'mail-thumbs/mail3.jpg', 'mail-thumbs/mail4.jpg'];
     var mailIdx = 0;
     function mailNav(dir) {
       mailIdx = (mailIdx + dir + mailList.length) % mailList.length;

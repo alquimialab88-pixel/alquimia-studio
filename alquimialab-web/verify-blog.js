@@ -110,7 +110,7 @@ const tie = fs.readFileSync(path.join(ROOT, 'tienda.html'), 'utf8');
 check('tienda.html → card libro', /assets\/ebook-portada\.png/.test(tie) && /href="blog\.html" class="btn-primary btn-sm">Read synopsis/.test(tie));
 
 /* Portada del ebook presente para la tablet */
-check('portada en assets', fs.existsSync(path.join(ROOT, 'assets/ebook-portada.png')));
+  check('portada en assets', fs.existsSync(path.join(ROOT, 'assets/ebook-portada.jpg')));
 
 console.log(fail === 0 ? '--- TODO OK ---' : '--- FALLOS: ' + fail + ' ---');
 process.exit(fail === 0 ? 0 : 1);
