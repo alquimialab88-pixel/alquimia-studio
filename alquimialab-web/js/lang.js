@@ -827,7 +827,22 @@
     "Your email": "Tu email",
     "Send me my kit 💜": "Quiero mi kit 💜",
     "Done! Check your inbox, your 14-day kit is on its way 💜": "¡Listo! Revisa tu correo, tu kit de 14 días va en camino 💜",
-    "We couldn't validate your subscription.": "No hemos podido validar tu suscripción."
+    "We couldn't validate your subscription.": "No hemos podido validar tu suscripción.",
+    "Pay here 💜": "Pagar aquí 💜",
+    "Pay here": "Pagar aquí",
+    "Send your payment 💜": "Envía tu pago 💜",
+    "Pick the method you prefer. Scan the QR with your phone camera or tap a button to pay.": "Elige el método que prefieras. Escanea el QR con la cámara de tu celular o toca un botón para pagar.",
+    "International · cards welcome": "Internacional · tarjetas bienvenidas",
+    "Scan with your phone camera": "Escanea con la cámara de tu celular",
+    "Pay with PayPal →": "Pagar con PayPal →",
+    "Transfers": "Transferencias",
+    "Ahorros": "Ahorros",
+    "App": "App",
+    "Copy": "Copiar",
+    "✓ Copied": "✓ Copiado",
+    "After paying, send your receipt to": "Después de pagar, envía tu comprobante a",
+    "WhatsApp": "WhatsApp",
+    "and I'll confirm it right away ✅": "y te confirmo de una vez ✅"
   };
 
   var placeholders = {
@@ -888,10 +903,12 @@
     "Thank you!": "¡Gracias!",
     "I read your message and it means a lot to me.": "Leí tu mensaje y significa mucho para mí.",
     "What do you like or what would you improve? Write here... 💜": "¿Qué te gusta o qué mejorarías? Escribe aquí... 💜",
-    "Your name (optional)": "Tu nombre (opcional)"
+    "Your name (optional)": "Tu nombre (opcional)",
+    "Pay · Alquimia Lab": "Pagar · Alquimia Lab"
   };
 
   var descriptions = {
+    "Alquimia Lab Pay — PayPal, Bancolombia, Nequi and Nu. Send your payment here.": "Alquimia Lab Pagar — PayPal, Bancolombia, Nequi y Nu. Envía tu pago aquí.",
     "Your Notion isn't broken — it's just badly designed. The 5 mistakes that make people abandon their workspace in two weeks, and the small fixes that make it stick.": "Tu Notion no está roto: simplemente está mal diseñado. Los 5 errores que hacen que la gente abandone su espacio de trabajo en dos semanas, y los pequeños arreglos que lo hacen funcionar.",
     "Your to-do list isn't lazy — it's designed wrong. Why long lists of tasks fail, and the simple 3-priority method that actually gets things done.": "Tu lista de tareas no es perezosa: está mal diseñada. Por qué fallan las listas largas de tareas y el simple método de 3 prioridades que sí hace las cosas.",
     "AI is not your enemy and not your savior — it's a tool that amplifies your criteria. How to use AI in your business without losing your style, your voice or your standards.": "La IA no es tu enemiga ni tu salvadora: es una herramienta que amplifica tus criterios. Cómo usarla en tu negocio sin perder tu estilo, tu voz ni tus estándares.",

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Alquimia Lab Pay — PayPal, Bancolombia, Nequi and Nu. Send your payment here.">
+  <meta name="theme-color" content="#f2f2f2">
+  <link rel="canonical" href="https://alquimialab.app/pagar.html">
+  <meta name="color-scheme" content="light">
+  <title>Pay · Alquimia Lab</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6568715444285154" crossorigin="anonymous"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y8Z50HWV3J"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-Y8Z50HWV3J');
+</script>
+</head>
+<body>
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">Alquimia Lab</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <div class="nav-dd">
+        <a href="portafolio.html">Portfolio <span class="nav-dd-arrow">▾</span></a>
+        <div class="nav-dd-menu">
+          <a href="portafolio.html#projects" class="nav-dd-featured">Projects <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          <a href="portafolio.html#about">About Me</a>
+          <a href="portafolio.html#experience">Work Experience</a>
+          <a href="portafolio.html#education">Education</a>
+          <a href="pagar.html" class="active">Pay here 💜</a>
+        </div>
+      </div>
+      <a href="productos.html">Products</a>
+      <a href="kore-landing.html">Kore</a>
+      <a href="blog.html">Blog</a>
+      <a href="contacto.html">Contact</a>
+    </div>
+    <button id="langToggle" class="lang-toggle" type="button" aria-label="Switch language" title="ES / EN">ES | EN</button>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="page">
+
+    <!-- PAY -->
+    <section class="section">
+      <div class="section-title anim"><span>Pay here</span></div>
+
+      <div class="contact-box anim d1" style="max-width:560px;margin:0 auto;">
+        <h2>Send your payment 💜</h2>
+        <p style="color: var(--text-muted); max-width: 440px; margin: 0 auto 6px;">Pick the method you prefer. Scan the QR with your phone camera or tap a button to pay.</p>
+
+        <!-- PAYPAL -->
+        <div class="pay-card">
+          <div class="pay-card-head">
+            <span class="pay-badge pay-badge-pp">PayPal</span>
+            <span class="pay-note">International · cards welcome</span>
+          </div>
+          <img class="pay-qr" src="assets/qr-paypal.png" alt="QR code to pay via PayPal" width="200" height="200">
+          <p class="pay-qr-hint">Scan with your phone camera</p>
+          <a class="btn-primary pay-btn" href="https://paypal.me/Iscobod" target="_blank" rel="noopener">Pay with PayPal →</a>
+        </div>
+
+        <!-- COLOMBIA -->
+        <div class="pay-card">
+          <div class="pay-card-head">
+            <span class="pay-badge">Colombia 🇨🇴</span>
+            <span class="pay-note">Transfers</span>
+          </div>
+
+          <div class="pay-row">
+            <div class="pay-row-info">
+              <span class="pay-bank">Bancolombia</span>
+              <span class="pay-type">Ahorros</span>
+            </div>
+            <div class="pay-row-actions">
+              <code class="pay-num" id="numBancolombia">91205261813</code>
+              <button class="pay-copy" type="button" data-copy="91205261813">Copy</button>
+            </div>
+          </div>
+
+          <div class="pay-row">
+            <div class="pay-row-info">
+              <span class="pay-bank">Nequi</span>
+              <span class="pay-type">App</span>
+            </div>
+            <div class="pay-row-actions">
+              <code class="pay-num" id="numNequi">3128387343</code>
+              <button class="pay-copy" type="button" data-copy="3128387343">Copy</button>
+            </div>
+          </div>
+        </div>
+
+        <p class="pay-foot">After paying, send your receipt to <a href="https://wa.me/573104108483" target="_blank" rel="noopener">WhatsApp</a> and I'll confirm it right away ✅</p>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">&copy; 2026 Alquimia Lab &middot; Made with calm &amp; coffee &middot; <a href="politica-privacidad.html">Privacy Policy</a></footer>
+
+  <!-- WHATSAPP -->
+  <a href="https://wa.me/573104108483" target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <style>
+    .pay-card{background:#fff;border:1px solid #e8e6f4;border-radius:18px;padding:22px 20px;margin-top:20px;text-align:center}
+    .pay-card-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+    .pay-badge{display:inline-block;background:#6462ab;color:#fff;font-size:12.5px;font-weight:700;padding:5px 12px;border-radius:999px}
+    .pay-badge-pp{background:#003087}
+    .pay-note{font-size:12px;color:#a29de0}
+    .pay-qr{width:200px;height:200px;border-radius:14px;border:1px solid #eceaf7}
+    .pay-qr-hint{font-size:12.5px;color:#a29de0;margin:8px 0 14px}
+    .pay-btn{width:100%;justify-content:center;box-sizing:border-box}
+    .pay-row{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#f7f5fb;border:1px solid #eceaf7;border-radius:14px;padding:12px 14px;margin-top:10px;flex-wrap:wrap}
+    .pay-row-info{display:flex;flex-direction:column;gap:2px}
+    .pay-bank{font-weight:700;color:#2e2d52;font-size:14.5px}
+    .pay-type{font-size:11.5px;color:#a29de0;text-transform:uppercase;letter-spacing:.08em}
+    .pay-row-actions{display:flex;align-items:center;gap:8px}
+    .pay-num{font-family:inherit;font-size:14.5px;font-weight:600;color:#3b3866;background:#fff;border:1px dashed #d9d6ef;border-radius:8px;padding:6px 10px;user-select:all}
+    .pay-copy{background:#6462ab;color:#fff;border:0;border-radius:8px;padding:7px 14px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;transition:opacity .2s}
+    .pay-copy:hover{opacity:.85}
+    .pay-copy.copied{background:#2fae6a}
+    .pay-foot{font-size:13.5px;color:#8a87ad;margin-top:18px;line-height:1.6}
+    .pay-foot a{color:#6462ab;font-weight:700}
+    @media (max-width:520px){.pay-row{flex-direction:column;align-items:flex-start}}
+  </style>
+
+  <script>
+    document.querySelectorAll('.pay-copy').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var txt = btn.getAttribute('data-copy');
+        var done = function(){
+          var old = btn.textContent;
+          btn.textContent = '✓ Copied';
+          btn.classList.add('copied');
+          setTimeout(function(){ btn.textContent = old; btn.classList.remove('copied'); }, 1800);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(txt).then(done).catch(done);
+        } else {
+          var ta = document.createElement('textarea');
+          ta.value = txt; document.body.appendChild(ta); ta.select();
+          try { document.execCommand('copy'); } catch(e){}
+          document.body.removeChild(ta); done();
+        }
+      });
+    });
+  </script>
+
+  <script>
+    window.addEventListener('scroll', function() {
+      document.querySelector('.nav').classList.toggle('scrolled', window.scrollY > 20);
+    });
+  </script>
+
+<script src="js/lang.js?v=2"></script>
+</body>
+</html>
