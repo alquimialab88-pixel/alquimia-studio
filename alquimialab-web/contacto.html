@@ -83,13 +83,45 @@
         </div>
 
         <!-- FORM -->
-        <form class="form" onsubmit="event.preventDefault(); window.location.href='mailto:alquimialab88@gmail.com?subject=' + encodeURIComponent(this.subject.value) + '&body=' + encodeURIComponent('Hello Isabel,\n\n' + this.message.value + '\n\n' + this.name.value + '\n' + this.email.value);">
+        <form class="form" id="contactForm" method="POST" action="https://api.web3forms.com/submit">
+          <input type="hidden" name="access_key" id="w3fKey" value="3c47c63f-906b-44d0-b8ff-3190ca808f57">
+          <input type="hidden" name="subject" value="Nuevo mensaje desde alquimialab.app">
+          <input type="hidden" name="from_name" value="Alquimia Lab Web">
+          <input type="checkbox" name="botcheck" style="display:none;">
           <input type="text" name="name" placeholder="Your name" required>
           <input type="email" name="email" placeholder="Your email" required>
-          <input type="text" name="subject" placeholder="Subject">
           <textarea name="message" placeholder="Tell me about your project..." required></textarea>
           <button type="submit" class="btn-primary" style="width:100%;justify-content:center;">Send message →</button>
+          <p id="formOk" style="display:none; margin-top:14px; padding:12px 16px; background:#e8f5e9; border-radius:12px; color:#2e7d32; font-weight:600;">✅ Message sent! I'll reply soon 💜</p>
+          <p id="formErr" style="display:none; margin-top:14px; padding:12px 16px; background:#fdecea; border-radius:12px; color:#c62828; font-weight:600;">Something went wrong 😔 Try WhatsApp instead 💬</p>
         </form>
+        <script>
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+          e.preventDefault();
+          var form = this;
+          var btn = form.querySelector('button[type=submit]');
+          var ok = document.getElementById('formOk');
+          var err = document.getElementById('formErr');
+          btn.disabled = true; btn.textContent = 'Sending…';
+          try {
+            var res = await fetch('https://api.web3forms.com/submit', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+              body: JSON.stringify(Object.fromEntries(new FormData(form)))
+            });
+            var data = await res.json();
+            if (data.success) {
+              ok.style.display = 'block'; err.style.display = 'none';
+              form.reset(); btn.textContent = 'Sent ✓';
+            } else {
+              throw new Error(data.message || 'Error');
+            }
+          } catch (ex) {
+            err.style.display = 'block'; ok.style.display = 'none';
+            btn.disabled = false; btn.textContent = 'Send message →';
+          }
+        });
+        </script>
       </div>
     </section>
 
