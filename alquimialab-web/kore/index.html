@@ -996,10 +996,41 @@ section{padding:88px 24px}
     <div class="notify-card">
       <h3>🔔 Notify me when it launches</h3>
       <p>We'll email you on launch day. No spam — just the news.</p>
-      <form class="notify-form" onsubmit="event.preventDefault();alert('Done! We''ll let you know when Kore launches 💜');this.reset();">
-        <input type="email" placeholder="your@email.com" required aria-label="Email">
+      <form class="notify-form" id="notifyForm">
+        <input type="hidden" name="access_key" value="3c47c63f-906b-44d0-b8ff-3190ca808f57">
+        <input type="hidden" name="subject" value="Nuevo aviso - Kore launch list">
+        <input type="hidden" name="from_name" value="Kore Landing">
+        <input type="checkbox" name="botcheck" style="display:none;">
+        <input type="email" name="email" placeholder="your@email.com" required aria-label="Email">
         <button type="submit" class="btn">Notify me</button>
       </form>
+      <p id="notifyOk" style="display:none;margin-top:16px;padding:12px 16px;background:#e8f5e9;border-radius:12px;color:#2e7d32;font-weight:700;">✅ ¡Listo! Te avisamos el día del lanzamiento 💜</p>
+      <script>
+      (function(){
+        var f = document.getElementById('notifyForm');
+        if(!f) return;
+        f.addEventListener('submit', async function(e){
+          e.preventDefault();
+          var btn = f.querySelector('button[type=submit]');
+          btn.disabled = true;
+          try {
+            var res = await fetch('https://api.web3forms.com/submit', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+              body: JSON.stringify(Object.fromEntries(new FormData(f)))
+            });
+            var data = await res.json();
+            if (data.success) {
+              f.style.display = 'none';
+              document.getElementById('notifyOk').style.display = 'block';
+            } else { throw new Error(); }
+          } catch (ex) {
+            btn.disabled = false;
+            alert('Something went wrong 😔 Please try again or follow us on Instagram @alquimia.lab8');
+          }
+        });
+      })();
+      </script>
       <p class="notify-alt">Or follow us on <a href="https://www.instagram.com/alquimia.lab8/" target="_blank" rel="noopener" style="color:var(--purple);font-weight:700">@alquimia.lab8</a></p>
     </div>
   </div>

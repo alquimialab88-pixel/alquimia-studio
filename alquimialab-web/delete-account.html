@@ -101,9 +101,11 @@
         <p style="font-size: 13px; color: var(--lila-accent); margin-bottom: 1.5rem;"><strong>This action is irreversible.</strong></p>
 
         <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--roc-dark); margin-bottom: 1rem; text-align: center;">Request deletion</h2>
-        <form name="delete-account" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" style="display: flex; flex-direction: column; gap: 1rem;">
-          <input type="hidden" name="form-name" value="delete-account">
-          <input type="hidden" name="bot-field" value="">
+        <form id="deleteForm" method="POST" style="display: flex; flex-direction: column; gap: 1rem;">
+          <input type="hidden" name="access_key" value="3c47c63f-906b-44d0-b8ff-3190ca808f57">
+          <input type="hidden" name="subject" value="Solicitud de eliminación de datos - Kore">
+          <input type="hidden" name="from_name" value="Kore Delete Account">
+          <input type="checkbox" name="botcheck" style="display:none;">
           <div style="display: flex; flex-direction: column; gap: 0.4rem;">
             <label for="email" style="font-weight: 600; color: var(--text); font-size: 14px;">Email associated with Kore *</label>
             <input type="email" id="email" name="email" required placeholder="your@email.com" autocomplete="email" style="padding: 0.65rem 1rem; border-radius: 0.75rem; border: 1px solid var(--lavender); background: var(--surface); color: var(--text); font-family: inherit; font-size: 14px;">
@@ -170,6 +172,32 @@
   </a>
 
   <script src="js/lang.js?v=2" defer></script>
+  <script>
+  (function(){
+    var f = document.getElementById('deleteForm');
+    if(!f) return;
+    f.addEventListener('submit', async function(e){
+      e.preventDefault();
+      var btn = f.querySelector('button[type=submit]');
+      var original = btn.textContent;
+      btn.disabled = true; btn.textContent = 'Sending…';
+      try {
+        var res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(Object.fromEntries(new FormData(f)))
+        });
+        var data = await res.json();
+        if (data.success) {
+          f.innerHTML = '<div style="text-align:center;padding:24px 16px;background:#e8f5e9;border-radius:12px;"><div style="font-size:40px;margin-bottom:10px">\u2705</div><p style="font-weight:700;color:#2e7d32;margin:0;">Request received!</p><p style="font-size:14px;color:#2e7d32;margin:8px 0 0;">We\'ll email you when your data is deleted.</p></div>';
+        } else { throw new Error(); }
+      } catch (ex) {
+        btn.disabled = false; btn.textContent = original;
+        alert('Something went wrong. Please try again or contact us via WhatsApp.');
+      }
+    });
+  })();
+  </script>
   <style>
     @keyframes float {
       0%, 100% { transform: translateY(0); }
