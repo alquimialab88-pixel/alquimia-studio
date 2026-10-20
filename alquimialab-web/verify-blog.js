@@ -87,7 +87,7 @@ check('divs balanceados', (blog.match(/<div/g) || []).length === (blog.match(/<\
 
 /* El resto de la web debe enlazar el blog */
 const pages = ['index.html', 'tienda.html', 'productos.html', 'portafolio.html', 'contacto.html',
-  'kore-landing.html', 'planner-2027.html', 'branding.html', 'social.html', 'ux.html',
+  'kore/', 'planner-2027.html', 'branding.html', 'social.html', 'ux.html',
   'ai-characters.html', 'politica-privacidad.html', 'delete-account.html'];
 for (const p of pages) {
   const html = fs.readFileSync(path.join(ROOT, p), 'utf8');
@@ -95,7 +95,7 @@ for (const p of pages) {
   const iContact = html.indexOf('href="contacto.html"');
   check(p + ' → Blog en nav', iBlog > -1 && (iContact === -1 || iBlog < iContact));
 }
-for (const p of ['index.html', 'kore-landing.html', 'politica-privacidad.html']) {
+for (const p of ['index.html', 'kore/', 'politica-privacidad.html']) {
   const html = fs.readFileSync(path.join(ROOT, p), 'utf8');
   check(p + ' → Blog en footer', /<li><a href="blog\.html">Blog<\/a><\/li>/.test(html));
 }
