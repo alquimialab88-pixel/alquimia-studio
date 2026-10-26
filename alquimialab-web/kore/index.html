@@ -699,14 +699,14 @@ section{padding:88px 24px}
 <header class="hero">
   <div class="hero-inner">
     <div class="hero-copy">
-      <div class="hero-badge anim"><span class="badge-dot"></span> Coming soon · by Alquimia Lab</div>
+      <div class="hero-badge anim"><span class="badge-dot"></span> Available now · by Alquimia Lab</div>
       <h1 class="anim d1"><em>Your space of calm</em>, in an app</h1>
       <p class="hero-lead anim d2">Kore is your calm space: tasks, habits, notes, diary, lo‑fi music and an AI assistant — all in one app.</p>
       <div class="hero-ctas anim d3">
-        <a href="#notify" class="btn btn-lg">Notify me when it launches</a>
+        <a href="https://play.google.com/store/apps/details?id=com.alquimialab.kore" target="_blank" rel="noopener" class="btn btn-lg" onclick="window.gtag&&gtag('event','click_play_store')">Get it on Google Play</a>
         <a href="#modules" class="btn btn-outline btn-lg">View modules</a>
       </div>
-      <p class="hero-note anim d3"><strong>Android · Coming soon</strong></p>
+      <p class="hero-note anim d3"><strong>Android · Available now</strong></p>
     </div>
 
     <div class="phone-stage anim d4">
@@ -980,8 +980,8 @@ section{padding:88px 24px}
       <p>It was designed with that brain in mind: few decisions, clear rituals, zero scolding. It doesn't replace therapy — it supports your system.</p>
     </details>
     <details class="faq-item">
-      <summary>When does it launch?</summary>
-      <p>Very soon. Leave your email or follow us on Instagram @alquimia.lab8 and we'll notify you on launch day.</p>
+      <summary>Where can I download Kore?</summary>
+      <p>Right now on Google Play — search "Kore" by Alquimia Lab or tap any download button on this page. Free on Android.</p>
     </details>
     <details class="faq-item">
       <summary>Who made Kore?</summary>
@@ -990,47 +990,15 @@ section{padding:88px 24px}
   </div>
 </section>
 
-<!-- 8. AVÍSAME / NOTIFY -->
+<!-- 8. GET KORE ON GOOGLE PLAY -->
 <section id="notify" style="padding-top:0">
   <div class="container">
     <div class="notify-card">
-      <h3>🔔 Notify me when it launches</h3>
-      <p>We'll email you on launch day. No spam — just the news.</p>
-      <form class="notify-form" id="notifyForm">
-        <input type="hidden" name="access_key" value="3c47c63f-906b-44d0-b8ff-3190ca808f57">
-        <input type="hidden" name="subject" value="Nuevo aviso - Kore launch list">
-        <input type="hidden" name="from_name" value="Kore Landing">
-        <input type="checkbox" name="botcheck" style="display:none;">
-        <input type="email" name="email" placeholder="your@email.com" required aria-label="Email">
-        <button type="submit" class="btn">Notify me</button>
-      </form>
-      <p id="notifyOk" style="display:none;margin-top:16px;padding:12px 16px;background:#e8f5e9;border-radius:12px;color:#2e7d32;font-weight:700;">✅ ¡Listo! Te avisamos el día del lanzamiento 💜</p>
-      <script>
-      (function(){
-        var f = document.getElementById('notifyForm');
-        if(!f) return;
-        f.addEventListener('submit', async function(e){
-          e.preventDefault();
-          var btn = f.querySelector('button[type=submit]');
-          btn.disabled = true;
-          try {
-            var res = await fetch('https://api.web3forms.com/submit', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-              body: JSON.stringify(Object.fromEntries(new FormData(f)))
-            });
-            var data = await res.json();
-            if (data.success) {
-              f.style.display = 'none';
-              document.getElementById('notifyOk').style.display = 'block';
-            } else { throw new Error(); }
-          } catch (ex) {
-            btn.disabled = false;
-            alert('Something went wrong 😔 Please try again or follow us on Instagram @alquimia.lab8');
-          }
-        });
-      })();
-      </script>
+      <h3>📲 Get Kore on Google Play</h3>
+      <p>Free on Android · your calm space is one tap away.</p>
+      <div class="notify-form" style="justify-content:center">
+        <a href="https://play.google.com/store/apps/details?id=com.alquimialab.kore" target="_blank" rel="noopener" class="btn btn-lg" onclick="window.gtag&&gtag('event','click_play_store')">Get it on Google Play</a>
+      </div>
       <p class="notify-alt">Or follow us on <a href="https://www.instagram.com/alquimia.lab8/" target="_blank" rel="noopener" style="color:var(--purple);font-weight:700">@alquimia.lab8</a></p>
     </div>
   </div>
@@ -1090,6 +1058,7 @@ section{padding:88px 24px}
           <li><a href="../portafolio.html">Portfolio</a></li>
           <li><a href="../contacto.html">Contact</a></li>
           <li><a href="../politica-privacidad.html">Privacy Policy</a></li>
+          <li><a href="../terminos.html">Terms of Service</a></li>
         </ul>
       </div>
       <div class="footer-col">

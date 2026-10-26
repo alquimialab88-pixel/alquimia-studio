@@ -56,7 +56,7 @@ const ALLOW = new Set([
   'Quiet Mind Planner', 'Habit Planner', 'Pet Control',
   'El diario imperfecto de una creadora', 'Isabel · Alquimia Lab',
   'Lo-Fi · Alquimia Lab', 'Freelancer CRM', 'Quiet Mind', 'Coloring Books', 'Planner 2027',
-  '$7', '$3', '$14.99', '$12.99', '$27', '$9.99', '$15', '$5.99', '$4', '$5', 'FREE',
+  '$7', '$3', '$14.99', '$12.99', '$27', '$9.99', '$15', '$5.99', '$4', '$5', '$19', 'FREE',
   '📖', '🧾', '🌱', '🎨', '📓', '🎓', '🐾', '🐼',
 ]);
 
@@ -96,8 +96,8 @@ check('canonical productos', /rel="canonical" href="https:\/\/alquimialab\.app\/
 check('banner carrusel (diseño tienda)', /id="shopBanner"/.test(prod) && /banner-track/.test(prod) && /banner-slide s3/.test(prod));
 check('guía "¿cuál es para ti?"', /match-wrap/.test(prod) && /goProduct\('p-crm'\)/.test(prod));
 check('productos ocultos hasta elegir', /id="shop-products" style="display:none/.test(prod));
-check('ebook historia estilo Kore', /class="ebook-story/.test(prod) && /assets\/ebook-portada\.png/.test(prod));
-check('card libro → blog', /assets\/ebook-portada\.png/.test(prod) && /href="blog\.html"[^>]*>Read synopsis/.test(prod));
+check('ebook historia estilo Kore', /class="ebook-story/.test(prod) && /assets\/ebook-portada\.jpg/.test(prod));
+check('card libro → wa ebook', /assets\/ebook-portada\.jpg/.test(prod) && /href="https:\/\/wa\.me\/573104108483\?text=[^"]*"[^>]*>Notify me when it launches/.test(prod));
 check('divs balanceados', (prod.match(/<div/g) || []).length === (prod.match(/<\/div>/g) || []).length);
 
 console.log(fail === 0 ? '--- TODO OK ---' : '--- FALLOS: ' + fail + ' ---');
