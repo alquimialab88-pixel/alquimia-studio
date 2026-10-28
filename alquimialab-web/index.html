@@ -1,18 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>(function(){try{var p=location.pathname,n=p;if(/\/index\.html$/i.test(n))n=n.replace(/index\.html$/i,'');else if(/\.html$/i.test(n))n=n.replace(/\.html$/i,'');if(n!==p)history.replaceState(null,'',n+location.search+location.hash);}catch(e){}})();</script>
   <meta charset="UTF-8">
-  <script>
-    /* Limpia "/index.html" de la barra de direcciones sin recargar */
-    (function () {
-      try {
-        var p = location.pathname;
-        if (p.slice(-11) === '/index.html') {
-          history.replaceState(null, '', p.slice(0, -10) + location.search + location.hash);
-        }
-      } catch (e) {}
-    })();
-  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Alquimia Lab — Notion templates, planners, coloring books, Lofi mixes and Kore, your calm app. Design tools for a calmer day.">
   <meta name="theme-color" content="#f2f2f2">
@@ -62,7 +52,7 @@
   "contactPoint": {
     "@type": "ContactPoint",
     "contactType": "customer service",
-    "url": "https://alquimialab.app/contacto.html"
+    "url": "https://alquimialab.app/contacto"
   }
 }
 </script>
@@ -74,7 +64,7 @@
   "url": "https://alquimialab.app/",
   "potentialAction": {
     "@type": "SearchAction",
-    "target": "https://alquimialab.app/blog.html?q={search_term_string}",
+    "target": "https://alquimialab.app/blog?q={search_term_string}",
     "query-input": "required name=search_term_string"
   }
 }
@@ -91,19 +81,19 @@
     <div class="nav-links">
       <a href="./" class="active">Home</a>
       <div class="nav-dd">
-        <a href="portafolio.html">Portfolio <span class="nav-dd-arrow">▾</span></a>
+        <a href="portafolio">Portfolio <span class="nav-dd-arrow">▾</span></a>
         <div class="nav-dd-menu">
-          <a href="portafolio.html#projects" class="nav-dd-featured">Projects <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
-          <a href="portafolio.html#about">About Me</a>
-          <a href="portafolio.html#experience">Work Experience</a>
-          <a href="portafolio.html#education">Education</a>
-          <a href="pagar.html">Pay here 💜</a>
+          <a href="portafolio#projects" class="nav-dd-featured">Projects <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          <a href="portafolio#about">About Me</a>
+          <a href="portafolio#experience">Work Experience</a>
+          <a href="portafolio#education">Education</a>
+          <a href="pagar">Pay here 💜</a>
         </div>
       </div>
-      <a href="productos.html">Products</a>
+      <a href="productos">Products</a>
       <a href="kore/">Kore</a>
-      <a href="blog.html">Blog</a>
-      <a href="contacto.html">Contact</a>
+      <a href="blog">Blog</a>
+      <a href="contacto">Contact</a>
     </div>
     <button id="langToggle" class="lang-toggle" type="button" aria-label="Switch language" title="ES / EN">ES | EN</button>
     <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
@@ -124,9 +114,9 @@
           <h1 class="anim d1">Hi, I'm <em>Isabel</em></h1>
           <p class="anim d2" data-i18n="Order, calm &amp; design for your everyday">Order, calm &amp; design for your everyday</p>
           <div class="hero-btns anim d3">
-            <a href="planner-2027.html" class="btn-primary">Planner 2027</a>
+            <a href="planner-2027" class="btn-primary">Planner 2027</a>
             <a href="kore/" class="btn-white" data-i18n="🦊 Meet Kore" onclick="window.gtag&&gtag('event','click_hero_kore')">🦊 Meet Kore</a>
-            <a href="portafolio.html" class="btn-white">View Portfolio</a>
+            <a href="portafolio" class="btn-white">View Portfolio</a>
           </div>
         </div>
         <div class="hero-stage anim d2">
@@ -317,8 +307,8 @@
         <p>I'm a graphic designer and creator of Alquimia Lab — where thoughtful design meets a conscious life. I create digital sanctuaries and creative tools that help you quiet the mental noise, organize your workflow, and live at a calmer pace.</p>
         <p>Notion templates, coloring books, planners, and <strong>Kore</strong> — my app of calm. Everything I make comes from my own need for order without rigidity.</p>
         <div class="about-home-links">
-          <a href="portafolio.html#about" class="btn-primary btn-sm">About me</a>
-          <a href="contacto.html" class="btn-secondary btn-sm">Let's talk</a>
+          <a href="portafolio#about" class="btn-primary btn-sm">About me</a>
+          <a href="contacto" class="btn-secondary btn-sm">Let's talk</a>
         </div>
       </div>
     </div>
@@ -329,7 +319,7 @@
     <div class="section-title anim"><span>Selected Work</span></div>
     <div class="work-carousel anim d1">
       <div class="work-track" id="workTrack">
-        <a href="branding.html" class="work-card">
+        <a href="branding" class="work-card">
           <div class="work-card-media">
             <img src="proj-branding.webp" alt="Brand Identity Exploration" loading="lazy" decoding="async">
             <span class="work-card-tag">Branding</span>
@@ -339,7 +329,7 @@
             <span class="work-card-arrow" aria-hidden="true">→</span>
           </div>
         </a>
-        <a href="ux.html" class="work-card">
+        <a href="ux" class="work-card">
           <div class="work-card-media">
             <img src="proj-landing.webp" alt="User Experience Design" loading="lazy" decoding="async">
             <span class="work-card-tag">UI/UX Design</span>
@@ -349,7 +339,7 @@
             <span class="work-card-arrow" aria-hidden="true">→</span>
           </div>
         </a>
-        <a href="social.html" class="work-card">
+        <a href="social" class="work-card">
           <div class="work-card-media">
             <img src="proj-social.webp" alt="Social Media Campaign" loading="lazy" decoding="async">
             <span class="work-card-tag">Social Media</span>
@@ -359,7 +349,7 @@
             <span class="work-card-arrow" aria-hidden="true">→</span>
           </div>
         </a>
-        <a href="portafolio.html#projects" class="work-card">
+        <a href="portafolio#projects" class="work-card">
           <div class="work-card-media">
             <img src="proj-illustration.webp" alt="Creative Illustration" loading="lazy" decoding="async">
             <span class="work-card-tag">Illustration</span>
@@ -369,7 +359,7 @@
             <span class="work-card-arrow" aria-hidden="true">→</span>
           </div>
         </a>
-        <a href="portafolio.html#projects" class="work-card">
+        <a href="portafolio#projects" class="work-card">
           <div class="work-card-media">
             <img src="proj-packaging.webp" alt="Packaging &amp; Editorial" loading="lazy" decoding="async">
             <span class="work-card-tag">Print &amp; Packaging</span>
@@ -379,7 +369,7 @@
             <span class="work-card-arrow" aria-hidden="true">→</span>
           </div>
         </a>
-        <a href="ai-characters.html" class="work-card">
+        <a href="ai-characters" class="work-card">
           <div class="work-card-media">
             <img src="ai-character.jpeg" alt="AI Characters" loading="lazy" decoding="async">
             <span class="work-card-tag">Character</span>
@@ -389,7 +379,7 @@
             <span class="work-card-arrow" aria-hidden="true">→</span>
           </div>
         </a>
-        <a href="portafolio.html#projects" class="work-card">
+        <a href="portafolio#projects" class="work-card">
           <div class="work-card-media">
             <img src="proj-email.png" alt="Email Marketing" loading="lazy" decoding="async">
             <span class="work-card-tag">Email Marketing</span>
@@ -404,7 +394,7 @@
       <button type="button" class="work-nav work-next" id="workNext" aria-label="Next projects">→</button>
     </div>
     <div style="text-align:center;margin-top:24px;">
-      <a href="portafolio.html" class="btn-primary">View full portfolio →</a>
+      <a href="portafolio" class="btn-primary">View full portfolio →</a>
     </div>
   </section>
 
@@ -413,25 +403,25 @@
     <div class="section-title anim"><span>Products</span></div>
     <div class="products-stage anim d1">
       <div class="products-row" id="productsRow">
-        <a href="productos.html#digitales" class="product-h-card">
+        <a href="productos#digitales" class="product-h-card">
           <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg></div>
           <h3>Digital Products</h3>
           <p>Apps, planners and digital tools that bring calm order to your day.</p>
           <span class="ph-go" aria-hidden="true">&rarr;</span>
         </a>
-        <a href="productos.html#impresos" class="product-h-card">
+        <a href="productos#impresos" class="product-h-card">
           <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg></div>
           <h3>Printed Products</h3>
           <p>Coloring books with a lofi aesthetic and designs that invite you to unwind.</p>
           <span class="ph-go" aria-hidden="true">&rarr;</span>
         </a>
-        <a href="productos.html#notion" class="product-h-card">
+        <a href="productos#notion" class="product-h-card">
           <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M8 11h8"/><path d="M8 15h5"/></svg></div>
           <h3>Notion Templates</h3>
           <p>Organization systems for freelancers, planning, and personal productivity.</p>
           <span class="ph-go" aria-hidden="true">&rarr;</span>
         </a>
-        <a href="portafolio.html" class="product-h-card">
+        <a href="portafolio" class="product-h-card">
           <div class="ph-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.93 0 1.65-.75 1.65-1.69 0-.44-.18-.83-.44-1.12-.29-.29-.44-.65-.44-1.13a1.64 1.64 0 0 1 1.67-1.67h2c3.05 0 5.56-2.5 5.56-5.55C21.97 6.01 17.46 2 12 2z"/><circle cx="13.5" cy="6.5" r=".6"/><circle cx="17.5" cy="10.5" r=".6"/><circle cx="8.5" cy="7.5" r=".6"/><circle cx="6.5" cy="12.5" r=".6"/></svg></div>
           <h3>Portfolio</h3>
           <p>Branding, UI/UX, illustration and visual design for conscious brands.</p>
@@ -506,7 +496,7 @@
             <span class="btn-primary btn-sm">View</span>
           </div>
         </a>
-        <a href="productos.html#notion" class="featured-card">
+        <a href="productos#notion" class="featured-card">
           <img src="featured-quietmind.webp" alt="Quiet Mind Planner" class="featured-thumb" loading="lazy" decoding="async">
           <div class="featured-info">
             <h3>Quiet Mind Planner</h3>
@@ -514,7 +504,7 @@
             <span class="btn-primary btn-sm">View</span>
           </div>
         </a>
-        <a href="productos.html#notion" class="featured-card">
+        <a href="productos#notion" class="featured-card">
           <img src="featured-youtube.webp" alt="YouTube Creator OS" class="featured-thumb" loading="lazy" decoding="async">
           <div class="featured-info">
             <h3>YouTube Creator OS</h3>
@@ -522,7 +512,7 @@
             <span class="btn-primary btn-sm">View</span>
           </div>
         </a>
-        <a href="productos.html#impresos" class="featured-card">
+        <a href="productos#impresos" class="featured-card">
           <img src="featured-coloring.webp" alt="Lofi Coloring Books" class="featured-thumb" loading="lazy" decoding="async">
           <div class="featured-info">
             <h3>Lofi Coloring Books</h3>
@@ -530,7 +520,7 @@
             <span class="btn-primary btn-sm">View</span>
           </div>
         </a>
-        <a href="productos.html#notion" class="featured-card">
+        <a href="productos#notion" class="featured-card">
           <img src="featured-social.webp" alt="Social Media Planner" class="featured-thumb" loading="lazy" decoding="async">
           <div class="featured-info">
             <h3>Social Media Planner</h3>
@@ -546,17 +536,17 @@
   <section class="section">
     <div class="section-title anim"><span>More from the blog</span></div>
     <div class="home-explore anim d1">
-      <a class="ex-card" href="blog-notion-mistakes.html" onclick="window.gtag&&gtag('event','click_home_article')">
+      <a class="ex-card" href="blog-notion-mistakes" onclick="window.gtag&&gtag('event','click_home_article')">
         <div class="ex-k">Notion</div>
         <div class="ex-t">5 Notion mistakes that make you abandon your system</div>
         <div class="ex-go">Read the fixes →</div>
       </a>
-      <a class="ex-card" href="blog-todo-list.html" onclick="window.gtag&&gtag('event','click_home_article')">
+      <a class="ex-card" href="blog-todo-list" onclick="window.gtag&&gtag('event','click_home_article')">
         <div class="ex-k">Productivity</div>
         <div class="ex-t">Why your to-do list never works</div>
         <div class="ex-go">Read the method →</div>
       </a>
-      <a class="ex-card" href="blog-ai-criteria.html" onclick="window.gtag&&gtag('event','click_home_article')">
+      <a class="ex-card" href="blog-ai-criteria" onclick="window.gtag&&gtag('event','click_home_article')">
         <div class="ex-k">AI</div>
         <div class="ex-t">AI with criteria</div>
         <div class="ex-go">Read the rules →</div>
@@ -611,8 +601,8 @@
       <h2>Ready to bring calm to your week?</h2>
       <p>Planners, Notion templates and apps made with calm — pick your first step.</p>
       <div class="home-cta-btns">
-        <a href="productos.html" class="btn-white" onclick="window.gtag&&gtag('event','click_cta_shop')">🛍 Shop the collection</a>
-        <a href="planner-2027.html" class="btn-outline-w" onclick="window.gtag&&gtag('event','click_cta_planner')">Planner 2027</a>
+        <a href="productos" class="btn-white" onclick="window.gtag&&gtag('event','click_cta_shop')">🛍 Shop the collection</a>
+        <a href="planner-2027" class="btn-outline-w" onclick="window.gtag&&gtag('event','click_cta_planner')">Planner 2027</a>
         <a href="kore/" class="btn-outline-w" onclick="window.gtag&&gtag('event','click_cta_kore')">🦊 Meet Kore</a>
       </div>
     </div>
@@ -629,12 +619,12 @@
         <h4>Links</h4>
         <ul>
           <li><a href="./">Home</a></li>
-          <li><a href="productos.html">Products</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="portafolio.html">Portfolio</a></li>
-          <li><a href="contacto.html">Contact</a></li>
-          <li><a href="politica-privacidad.html">Privacy Policy</a></li>
-          <li><a href="terminos.html">Terms of Service</a></li>
+          <li><a href="productos">Products</a></li>
+          <li><a href="blog">Blog</a></li>
+          <li><a href="portafolio">Portfolio</a></li>
+          <li><a href="contacto">Contact</a></li>
+          <li><a href="politica-privacidad">Privacy Policy</a></li>
+          <li><a href="terminos">Terms of Service</a></li>
         </ul>
       </div>
       <div class="footer-col">
