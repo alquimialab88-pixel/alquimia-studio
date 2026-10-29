@@ -306,7 +306,7 @@
     </section>
 
     <!-- SERVICES -->
-    <section class="section" style="padding-top: 0;">
+    <section class="section" id="services" style="padding-top: 0;">
       <div class="section-title anim"><span>Services</span></div>
 
       <div class="services-grid anim d1">
@@ -316,6 +316,7 @@
           </div>
           <h3>Branding</h3>
           <p>Creation of unique brand identities, including logos, visual systems, and brand guidelines.</p>
+          <a class="btn-primary btn-sm service-contact" data-wa-en="branding" data-wa-es="branding" href="https://wa.me/573104108483?text=Hola%20Isabel%2C%20quisiera%20consultar%20sobre%20branding%20para%20mi%20negocio." target="_blank" rel="noopener" onclick="window.gtag&&gtag('event','click_consult_branding')">Ask about Branding →</a>
         </div>
 
         <div class="service-card">
@@ -324,6 +325,7 @@
           </div>
           <h3>UI/UX Design</h3>
           <p>Design of intuitive and user-centered digital experiences, including user research, wireframing, interface design, and interactive prototyping.</p>
+          <a class="btn-primary btn-sm service-contact" data-wa-en="UI/UX design" data-wa-es="diseño UI/UX" href="https://wa.me/573104108483?text=Hola%20Isabel%2C%20quisiera%20consultar%20sobre%20dise%C3%B1o%20UI%2FUX%20para%20mi%20negocio." target="_blank" rel="noopener" onclick="window.gtag&&gtag('event','click_consult_uiux')">Ask about UI/UX →</a>
         </div>
 
         <div class="service-card">
@@ -332,6 +334,7 @@
           </div>
           <h3>Social Media Design</h3>
           <p>Creation of engaging social media visuals, campaign graphics, post templates, and story designs that help brands connect with their audience online.</p>
+          <a class="btn-primary btn-sm service-contact" data-wa-en="social media design" data-wa-es="diseño para redes sociales" href="https://wa.me/573104108483?text=Hola%20Isabel%2C%20quisiera%20consultar%20sobre%20dise%C3%B1o%20para%20redes%20sociales%20para%20mi%20negocio." target="_blank" rel="noopener" onclick="window.gtag&&gtag('event','click_consult_social_design')">Ask about social design →</a>
         </div>
 
         <div class="service-card">
@@ -340,6 +343,7 @@
           </div>
           <h3>Visual Design</h3>
           <p>Development of creative visual assets including editorial design, packaging, illustrations, and motion graphics for digital and print media.</p>
+          <a class="btn-primary btn-sm service-contact" data-wa-en="visual design" data-wa-es="diseño visual" href="https://wa.me/573104108483?text=Hola%20Isabel%2C%20quisiera%20consultar%20sobre%20dise%C3%B1o%20visual%20para%20mi%20negocio." target="_blank" rel="noopener" onclick="window.gtag&&gtag('event','click_consult_visual_design')">Ask about visual design →</a>
         </div>
       </div>
     </section>
@@ -522,5 +526,26 @@
   </script>
 
 <script src="js/lang.js?v=2"></script>
+  <script>
+    (function() {
+      var links = document.querySelectorAll('[data-wa-en][data-wa-es]');
+      function updateServiceLinks() {
+        var isEnglish = document.documentElement.lang !== 'es';
+        links.forEach(function(link) {
+          var service = link.getAttribute(isEnglish ? 'data-wa-en' : 'data-wa-es');
+          var message = isEnglish
+            ? "Hi Isabel, I'd like to ask about " + service + " for my business."
+            : "Hola Isabel, quisiera consultar sobre " + service + " para mi negocio.";
+          link.href = 'https://wa.me/573104108483?text=' + encodeURIComponent(message);
+        });
+      }
+      updateServiceLinks();
+      new MutationObserver(updateServiceLinks).observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['lang']
+      });
+    })();
+  </script>
+
 </body>
 </html>

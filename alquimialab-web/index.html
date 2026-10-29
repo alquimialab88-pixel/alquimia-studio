@@ -111,12 +111,11 @@
         <div class="hero-copy">
           <span class="hero-badge anim"><span class="badge-dot" aria-hidden="true"></span> Alquimia Lab · design with calm</span>
           <img src="assets/logo-3x.png" alt="Alquimia Lab Logo" class="hero-logo anim" loading="lazy" decoding="async">
-          <h1 class="anim d1">Hi, I'm <em>Isabel</em></h1>
-          <p class="anim d2" data-i18n="Order, calm &amp; design for your everyday">Order, calm &amp; design for your everyday</p>
+          <h1 class="anim d1" data-i18n="Tools and design for a calmer business">Tools and design for a calmer business</h1>
+          <p class="anim d2" data-i18n="Digital planners, Notion templates and thoughtful design for women building a business at their own pace.">Digital planners, Notion templates and thoughtful design for women building a business at their own pace.</p>
           <div class="hero-btns anim d3">
-            <a href="planner-2027" class="btn-primary">Planner 2027</a>
-            <a href="kore/" class="btn-white" data-i18n="🦊 Meet Kore" onclick="window.gtag&&gtag('event','click_hero_kore')">🦊 Meet Kore</a>
-            <a href="portafolio" class="btn-white">View Portfolio</a>
+            <a href="productos" class="btn-primary" data-i18n="Explore digital tools" onclick="window.gtag&&gtag('event','click_hero_products')">Explore digital tools</a>
+            <a href="portafolio#services" class="btn-white" data-i18n="Explore design services" onclick="window.gtag&&gtag('event','click_hero_services')">Explore design services</a>
           </div>
         </div>
         <div class="hero-stage anim d2">
@@ -135,8 +134,8 @@
   <!-- 1b · NEWSLETTER -->
   <section id="kit-band" class="section section-band-lilac" style="padding-top:56px;padding-bottom:56px;">
     <div class="newsletter anim">
-      <h2 data-i18n="Get my free 14-Day Kit">Get my free 14-Day Kit</h2>
-      <p data-i18n="5-minute rituals, anxiety protocol + printable tracker. Free forever.">5-minute rituals, anxiety protocol + printable tracker. Free forever.</p>
+      <h2 data-i18n="Start with a little more calm">Start with a little more calm</h2>
+      <p data-i18n="Get the free 14-Day Kit: simple five-minute rituals and a printable tracker to make a little more space in your week.">Get the free 14-Day Kit: simple five-minute rituals and a printable tracker to make a little more space in your week.</p>
       <!-- Begin Brevo Form -->
       <style>
         /* Banda del kit: morada de lado a lado */
@@ -170,7 +169,12 @@
         #sib-form { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; align-items: end; margin-top: 0; }
         #sib-form > div { padding: 0 !important; }
         #sib-form > input { display: none !important; }
-        #sib-form > div:nth-child(3) { grid-column: 1 / -1; }
+        #sib-form > div:nth-child(3),
+        #sib-form > div:nth-child(4) { grid-column: 1 / -1; }
+        #sib-form .marketing-consent { display: flex; align-items: flex-start; gap: 10px; color: #ffffff; font-family: 'Quicksand', sans-serif; font-size: 13px; line-height: 1.5; text-align: left; cursor: pointer; }
+        #sib-form .marketing-consent input { flex: 0 0 auto; width: 16px; height: 16px; margin: 2px 0 0; accent-color: #ccc9e6; }
+        #sib-form .marketing-consent a { color: #ffffff; text-decoration: underline; }
+        #sib-form .marketing-consent small { display: block; margin-top: 4px; color: #e2def7; font-size: 12px; }
         @media (max-width: 640px) { #sib-form { grid-template-columns: 1fr; } }
         #sib-container .sib-form-block { text-align: center !important; }
         #sib-container .sib-form-block__button,
@@ -239,6 +243,18 @@
                     </div>
                     <label class="entry__error entry__error--primary" style="font-family:Helvetica, sans-serif; font-size:16px; text-align:left; color:#661d1d; background-color:#ffeded; border-color:#ff4949; border-radius:3px;"></label>
                   </div>
+                </div>
+              </div>
+              <div style="padding: 8px 0;">
+                <div class="sib-input sib-form-block">
+                  <label class="marketing-consent" for="OPT_IN">
+                    <input type="checkbox" id="OPT_IN" name="OPT_IN" value="1">
+                    <span>
+                      <span data-i18n="Yes, email me occasional ideas, free resources, product news, and offers from Alquimia Lab. I can unsubscribe at any time.">Yes, email me occasional ideas, free resources, product news, and offers from Alquimia Lab. I can unsubscribe at any time.</span>
+                      <a href="politica-privacidad" data-i18n="Privacy Policy">Privacy Policy</a>
+                      <small data-i18n="You will still receive the kit if you leave this box unchecked.">You will still receive the kit if you leave this box unchecked.</small>
+                    </span>
+                  </label>
                 </div>
               </div>
               <div style="padding: 8px 0;">
@@ -453,11 +469,11 @@
       </div>
       <div class="promo-slide">
         <div class="promo-text">
-          <span class="promo-badge">Available now · by Alquimia Lab</span>
+          <span class="promo-badge" data-i18n="Coming soon · by Alquimia Lab">Coming soon · by Alquimia Lab</span>
           <h3><em>Your space of calm</em>, in an app</h3>
           <p>Your calm space: tasks, habits, notes, diary, lo‑fi music and an AI assistant — all in one app.</p>
-          <p class="promo-sub">Android · Available on Google Play</p>
-          <a href="https://play.google.com/store/apps/details?id=com.alquimialab.kore" class="promo-btn" onclick="window.gtag&&gtag('event','click_play_store')" target="_blank" rel="noopener">Get it on Google Play →</a>
+          <p class="promo-sub" data-i18n="Android · Coming soon">Android · Coming soon</p>
+          <a href="https://wa.me/573104108483" data-kore-notify class="promo-btn" data-i18n="Get launch updates →" onclick="window.gtag&&gtag('event','click_kore_launch_updates')" target="_blank" rel="noopener">Get launch updates →</a>
         </div>
         <div class="promo-media">
           <div class="promo-glow"></div>
@@ -797,8 +813,8 @@
     @media (min-width: 720px) { .kore-sticky { left: 24px; right: auto; bottom: 24px; max-width: 420px; } }
   </style>
   <div id="koreSticky" class="kore-sticky" role="region" aria-label="Kore app">
-    <span data-i18n="🦊 Kore is on Google Play">🦊 Kore is on Google Play</span>
-    <a href="https://play.google.com/store/apps/details?id=com.alquimialab.kore" target="_blank" rel="noopener" class="kore-sticky-btn" data-i18n="Get it" onclick="window.gtag&&gtag('event','click_sticky_kore')">Get it</a>
+    <span data-i18n="🦊 Kore is coming soon">🦊 Kore is coming soon</span>
+    <a href="https://wa.me/573104108483" data-kore-notify target="_blank" rel="noopener" class="kore-sticky-btn" data-i18n="Get launch updates" onclick="window.gtag&&gtag('event','click_sticky_kore_launch_updates')">Get launch updates</a>
     <button type="button" class="kore-sticky-x" aria-label="Close" onclick="document.getElementById('koreSticky').remove()">×</button>
   </div>
 
@@ -806,5 +822,24 @@
   <a href="https://wa.me/573104108483" target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">
     <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   </a>
+  <script>
+    (function() {
+      var links = document.querySelectorAll('[data-kore-notify]');
+      function updateKoreLinks() {
+        var isSpanish = document.documentElement.lang === 'es';
+        var message = isSpanish
+          ? 'Hola Isabel, quiero que me avises cuando Kore esté disponible.'
+          : "Hi Isabel, please let me know when Kore is available.";
+        links.forEach(function(link) {
+          link.href = 'https://wa.me/573104108483?text=' + encodeURIComponent(message);
+        });
+      }
+      updateKoreLinks();
+      new MutationObserver(updateKoreLinks).observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['lang']
+      });
+    })();
+  </script>
 </body>
 </html>
