@@ -2864,3 +2864,12 @@ a.featured-card {
   .home-cta { padding: 44px 20px; }
   .home-cta-btns a { width: 100%; justify-content: center; }
 }
+
+a[class*="btn"],
+button:not(.nav-toggle),
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+[role="button"] {
+  border-radius: 12px !important;
+}
