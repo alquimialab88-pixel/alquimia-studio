@@ -934,7 +934,19 @@
     "14. How to Contact Us": "14. Cómo Contactarnos",
     "If you have questions or concerns about these Terms, you can contact us:": "Si tienes preguntas o inquietudes sobre estos Términos, puedes contactarnos:",
     "October 21, 2026": "21 de Octubre de 2026",
-    "By using our Services after the publication of any change, you accept the revised version of these Terms of Service.": "Al usar nuestros Servicios después de la publicación de cualquier cambio, aceptas la versión revisada de estos Términos de Servicio."
+    "By using our Services after the publication of any change, you accept the revised version of these Terms of Service.": "Al usar nuestros Servicios después de la publicación de cualquier cambio, aceptas la versión revisada de estos Términos de Servicio.",
+    "Coming soon · by Alquimia Lab": "Próximamente · por Alquimia Lab",
+    "Coming soon": "Próximamente",
+    "Kore is coming soon": "Kore llega pronto",
+    "Kore is being prepared for launch. If you already have a test account, you can still request deletion below.": "Kore se está preparando para su lanzamiento. Si ya tienes una cuenta de prueba, puedes solicitar su eliminación más abajo.",
+    "🦊 Kore is coming soon": "🦊 Kore llega pronto",
+    "Android · Coming soon": "Android · Próximamente",
+    "Get launch updates": "Recibir novedades de lanzamiento",
+    "Get launch updates →": "Recibir novedades de lanzamiento →",
+    "When can I download Kore?": "¿Cuándo podré descargar Kore?",
+    "Kore is being prepared for launch and isn't ready to download yet. Message us on WhatsApp and we'll let you know when it's ready.": "Kore se está preparando para su lanzamiento y todavía no está lista para descargar. Escríbenos por WhatsApp y te avisaremos cuando esté disponible.",
+    "📲 Kore is coming soon": "📲 Kore llega pronto",
+    "Kore is being prepared for Android. Get a WhatsApp message when it's ready.": "Kore se está preparando para Android. Recibe un mensaje por WhatsApp cuando esté lista."
   };
 
   var placeholders = {
@@ -1030,19 +1042,7 @@
     "Get it on Google Play →": "Recibir novedades de lanzamiento →",
     "Kore App": "App Kore",
     "The story of El diario imperfecto de una creadora — what happens inside its pages, and why you'll want to read it to the last exercise.": "La historia de El diario imperfecto de una creadora — lo que pasa dentro de sus páginas y por qué vas a querer leerla hasta el último ejercicio.",
-    "Alquimia Lab — Notion templates, planners, coloring books, Lofi mixes and Kore, your calm app. Design tools for a calmer day.": "Alquimia Lab — Plantillas de Notion, planners, libros para colorear, mixes Lofi y Kore, tu app de calma. Herramientas de diseño para un día con más calma.",
-    "Coming soon · by Alquimia Lab": "Próximamente · por Alquimia Lab",
-    "Kore is coming soon": "Kore llega pronto",
-    "Coming soon": "Próximamente",
-    "Kore is being prepared for launch. If you already have a test account, you can still request deletion below.": "Kore se está preparando para su lanzamiento. Si ya tienes una cuenta de prueba, puedes solicitar su eliminación más abajo.",
-    "🦊 Kore is coming soon": "🦊 Kore llega pronto",
-    "Android · Coming soon": "Android · Próximamente",
-    "Get launch updates": "Recibir novedades de lanzamiento",
-    "Get launch updates →": "Recibir novedades de lanzamiento →",
-    "When can I download Kore?": "¿Cuándo podré descargar Kore?",
-    "Kore is being prepared for launch and isn't ready to download yet. Message us on WhatsApp and we'll let you know when it's ready.": "Kore se está preparando para su lanzamiento y todavía no está lista para descargar. Escríbenos por WhatsApp y te avisaremos cuando esté disponible.",
-    "📲 Kore is coming soon": "📲 Kore llega pronto",
-    "Kore is being prepared for Android. Get a WhatsApp message when it's ready.": "Kore se está preparando para Android. Recibe un mensaje por WhatsApp cuando esté lista."
+    "Alquimia Lab — Notion templates, planners, coloring books, Lofi mixes and Kore, your calm app. Design tools for a calmer day.": "Alquimia Lab — Plantillas de Notion, planners, libros para colorear, mixes Lofi y Kore, tu app de calma. Herramientas de diseño para un día con más calma."
   };
 
   var nodes = [], phNodes = [], titleSnap, descSnap;
