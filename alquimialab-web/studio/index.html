@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <script>(function(){try{var p=location.pathname,n=p;if(/\/index\.html$/i.test(n))n=n.replace(/index\.html$/i,'');else if(/\.html$/i.test(n))n=n.replace(/\.html$/i,'');if(n!==p)history.replaceState(null,'',n+location.search+location.hash);}catch(e){}})();</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#6463aa">
-  <meta name="p:domain_verify" content="873c3dceab38058f2ad57c008b30e2ee"/>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Alquimia Studio</title>
@@ -20,8 +18,6 @@
 html,body{height:100%;overflow:hidden}
 body{font-family:var(--font-body);background:var(--bg-primary);color:var(--text-primary);line-height:1.5;-webkit-font-smoothing:antialiased}
 .hidden{display:none!important}
-.studio-back{position:fixed;right:14px;bottom:14px;z-index:5000;background:#6463aa;color:#fff;font-family:'Inter',system-ui,sans-serif;font-size:12.5px;font-weight:600;padding:9px 16px;border-radius:99px;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,.22);opacity:.88;transition:opacity .2s ease,transform .2s ease}
-.studio-back:hover{opacity:1;transform:translateY(-1px);color:#fff}
 .splash{position:fixed;inset:0;background:var(--bg-primary);display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity .5s ease,visibility .5s ease}
 .splash.fade-out{opacity:0;visibility:hidden}
 .splash-content{text-align:center;animation:pulse 1.5s ease-in-out infinite}
@@ -52,7 +48,7 @@ body{font-family:var(--font-body);background:var(--bg-primary);color:var(--text-
 .nav-item.active{background:var(--bg-active);border-left-color:var(--accent)}
 .nav-item-icon{font-size:18px;width:24px;text-align:center}
 .nav-item-text{flex:1;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.nav-item-fav{opacity:0;color:var(--text-muted);transition:opacity var(--transition)}
+.nav-item-fav{opacity:0;color:var(--text-muted);transition:opacity var(--transition);background:none;border:0;cursor:pointer;font:inherit;padding:4px}
 .nav-item:hover .nav-item-fav{opacity:1}
 .nav-item-fav.active{opacity:1;color:var(--accent)}
 .sidebar-bottom{padding:12px 16px;border-top:1px solid var(--border)}
@@ -70,6 +66,7 @@ body{font-family:var(--font-body);background:var(--bg-primary);color:var(--text-
 .breadcrumb-current{color:var(--text-primary);font-weight:500}
 .toolbar-actions{display:flex;align-items:center;gap:4px}
 .toolbar-btn{display:flex;align-items:center;justify-content:center;width:32px;height:32px;background:none;border:none;border-radius:var(--radius);cursor:pointer;color:var(--text-secondary);transition:all var(--transition)}
+.toolbar-btn[hidden]{display:none}
 .toolbar-btn:hover{background:var(--bg-hover);color:var(--text-primary)}
 .toolbar-btn.active{background:var(--accent);color:#fff}
 .content-area{flex:1;overflow:hidden;position:relative}
@@ -123,28 +120,38 @@ body{font-family:var(--font-body);background:var(--bg-primary);color:var(--text-
 @keyframes scaleIn{from{transform:scale(0)}to{transform:scale(1)}}
 .license-success p{color:var(--text-primary);font-size:16px;font-weight:500;margin-bottom:4px}
 .license-valid{color:var(--text-secondary)!important;font-weight:400!important;font-size:13px!important}
+.sidebar-bottom{background:var(--bg-sidebar)}
+.sidebar-btn{min-height:38px}
+.sidebar-btn:focus-visible,.toolbar-btn:focus-visible,.nav-item:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.library-head{padding-bottom:20px;border-bottom:1px solid var(--border)}
+.library-sub{max-width:560px;line-height:1.6}
+.library-storage-note{display:inline-flex;align-items:center;gap:7px;margin-top:12px;padding:7px 10px;border:1px solid var(--border);border-radius:999px;background:var(--bg-secondary);color:var(--text-secondary);font-size:11.5px}
+.library-storage-note svg{color:var(--accent);flex-shrink:0}
+.sidebar-group-label{padding:10px 12px 4px;color:var(--text-muted);font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
 @media print{.sidebar,.toolbar,.mobile-sidebar-toggle{display:none!important}.main-content{position:static}.viewer-frame{position:fixed;inset:0;width:100%;height:100%}}
   </style>
+  <link rel="stylesheet" href="css/library.css">
+  <link rel="stylesheet" href="css/premium.css">
 </head>
 <body>
   <div id="licenseScreen" class="license-screen">
     <div class="license-card">
       <div class="license-icon">&#10022;</div>
       <h1>Alquimia Studio</h1>
-      <p class="license-subtitle">Tu espacio creativo para planners interactivos</p>
+      <p class="license-subtitle">Tus planners, libros y momentos de calma en un solo lugar</p>
       <div id="licenseForm" class="license-form">
-        <p class="license-info">Ingresa tu codigo de acceso para activar</p>
+        <p class="license-info">Ingresa tu código de acceso para activar</p>
         <div class="license-input-group">
           <input type="text" id="licenseInput" class="license-input" placeholder="XXXX-XXXX-XXXX-XXXX" maxlength="19" autocomplete="off">
           <button id="activateBtn" class="license-btn">Activar</button>
         </div>
         <p id="licenseError" class="license-error hidden"></p>
-        <p class="license-hint">No tienes codigo? <a href="https://alquimialab.gumroad.com/l/AlquimiaStudio_Planner" target="_blank">Crealo ahi</a></p>
+        <p class="license-hint">¿Aún no tienes acceso? <a href="https://alquimialab.gumroad.com/l/AlquimiaStudio_Planner" target="_blank" rel="noopener noreferrer">Descubre Alquimia Studio</a></p>
       </div>
       <div id="licenseSuccess" class="license-success hidden">
         <div class="license-check">&#10003;</div>
-        <p>Activado correctamente!</p>
-        <p class="license-valid">Tu acceso es valido</p>
+        <p>¡Activado correctamente!</p>
+        <p class="license-valid">Tu acceso es válido</p>
       </div>
     </div>
   </div>
@@ -170,12 +177,17 @@ body{font-family:var(--font-body);background:var(--bg-primary);color:var(--text-
       </div>
       <div class="sidebar-search">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-        <input type="text" id="searchInput" placeholder="Buscar planner...">
+        <input type="text" id="searchInput" placeholder="Buscar planner…">
       </div>
       <nav class="sidebar-nav">
         <div class="nav-section">
           <div class="nav-section-title">Mis Planners</div>
           <ul id="plannerList" class="nav-list"></ul>
+        </div>
+        <div class="nav-section">
+          <div class="nav-section-title"><span>&#128218; Mi Biblioteca</span><span id="pdfCount" class="fav-count">0</span></div>
+          <ul id="recentPdfList" class="nav-list recent-pdf-list"></ul>
+          <button type="button" class="library-see-all" id="navLibrary">Ver todos los PDFs</button>
         </div>
         <div class="nav-section">
           <div class="nav-section-title"><span>&#11088; Favoritos</span><span id="favCount" class="fav-count">0</span></div>
@@ -187,19 +199,20 @@ body{font-family:var(--font-body);background:var(--bg-primary);color:var(--text-
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
           <span>Abrir archivo</span>
         </button>
-        <button id="exportBackupBtn" class="sidebar-btn" title="Exportar respaldo">
+        <div class="sidebar-group-label">Tu espacio</div>
+        <button id="exportBackupBtn" class="sidebar-btn" title="Guardar una copia de tus PDFs y datos">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          <span>Exportar respaldo</span>
+          <span>Guardar una copia</span>
         </button>
-        <button id="importBackupBtn" class="sidebar-btn" title="Importar respaldo">
+        <button id="importBackupBtn" class="sidebar-btn" title="Recuperar tus PDFs y datos desde una copia">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 10 12 15 7 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          <span>Importar respaldo</span>
+          <span>Restaurar una copia</span>
         </button>
-        <button id="themeToggle" class="sidebar-btn">
+        <button id="themeToggle" class="sidebar-btn" title="Cambiar apariencia">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
           <span>Modo oscuro</span>
         </button>
-        <div class="sidebar-version">v1.0</div>
+        <div class="sidebar-version">v1.1</div>
       </div>
     </aside>
     <button id="mobileSidebarToggle" class="mobile-sidebar-toggle">
@@ -210,24 +223,48 @@ body{font-family:var(--font-body);background:var(--bg-primary);color:var(--text-
         <div class="breadcrumbs" id="breadcrumbs"><span class="breadcrumb-item">Alquimia Studio</span></div>
         <div class="toolbar-actions">
           <button id="searchToggle" class="toolbar-btn" title="Buscar en planner"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
-          <button id="favoriteBtn" class="toolbar-btn" title="Agregar a favoritos"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></button>
+          <button id="favoriteBtn" class="toolbar-btn" title="Agregar este planner a favoritos" hidden><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></button>
           <button id="exportPdf" class="toolbar-btn" title="Exportar PDF"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></button>
           <button id="fullscreenBtn" class="toolbar-btn" title="Pantalla completa"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg></button>
         </div>
       </header>
       <div class="content-area" id="contentArea">
         <div id="welcomeScreen" class="welcome-screen">
+          <div class="welcome-eyebrow">TU ESPACIO CREATIVO</div>
           <div class="welcome-icon">&#10022;</div>
-          <h1>Bienvenida a Alquimia Studio</h1>
-          <p>Tu espacio creativo para planners interactivos</p>
+          <h1>Un espacio para volver a ti</h1>
+          <p>Organiza tus ideas, acompaña tus días y disfruta tus lecturas a tu propio ritmo.</p>
           <div class="welcome-cards" id="welcomeCards"></div>
+        </div>
+        <div id="libraryView" class="library-view hidden">
+          <div class="library-head">
+            <div>
+              <h1 class="library-title">Mi Biblioteca</h1>
+              <p class="library-sub">Un lugar tranquilo para reunir tus lecturas y volver a ellas cuando quieras.</p>
+              <div class="library-storage-note"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 1 1 8 0v3"/></svg><span>Tus PDFs se guardan en este navegador. Usa <strong>Guardar una copia</strong> para recuperarlos si borras sus datos o cambias de equipo.</span></div>
+            </div>
+            <div class="library-actions">
+              <button id="libUploadBtn" class="lib-btn primary">＋ Subir PDFs</button>
+            </div>
+          </div>
+          <div class="library-tools">
+            <div class="library-search">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+              <input type="text" id="libSearch" placeholder="Buscar por título…">
+            </div>
+            <button class="lib-chip active" data-libfilter="all">Todos</button>
+            <button class="lib-chip" data-libfilter="fav">Favoritos</button>
+            <button class="lib-chip" data-libfilter="recent">Recientes</button>
+          </div>
+          <div id="pdfGrid" class="library-grid"></div>
+          <div id="libEmpty" class="library-empty hidden"></div>
         </div>
         <div id="viewer" class="viewer hidden">
           <iframe id="viewerFrame" class="viewer-frame" sandbox="allow-same-origin allow-scripts allow-forms allow-popups"></iframe>
         </div>
         <div id="searchPanel" class="search-panel hidden">
           <div class="search-panel-header">
-            <input type="text" id="searchPanelInput" placeholder="Buscar en este planner...">
+            <input type="text" id="searchPanelInput" placeholder="Buscar en este planner…">
             <button id="searchClose" class="search-close">&#10005;</button>
           </div>
           <div id="searchResults" class="search-results"></div>
@@ -235,8 +272,42 @@ body{font-family:var(--font-body);background:var(--bg-primary);color:var(--text-
       </div>
     </main>
   </div>
+
+  <div id="pdfReader" class="reader hidden">
+    <div class="reader-bar">
+      <button id="readerClose" class="reader-icon" title="Cerrar">&#10005;</button>
+      <div class="r-title" id="readerTitle"></div>
+      <button id="readerFav" class="reader-icon" title="Favorito">&#9734;</button>
+      <button id="readerNight" class="reader-icon" title="Modo noche">&#9680;</button>
+      <button id="readerFs" class="reader-icon" title="Pantalla completa">&#9974;</button>
+    </div>
+    <div id="readerWrap" class="reader-canvas-wrap">
+      <canvas id="readerCanvas" class="reader-canvas"></canvas>
+      <div id="readerLoading" class="reader-loading hidden"><span class="spin"></span> Cargando…</div>
+    </div>
+    <div class="reader-bottom">
+      <button id="readerPrev" class="reader-icon" title="Anterior">&#8249;</button>
+      <div class="reader-page"><input id="readerPage" type="number" min="1" value="1"><span>/ <b id="readerTotal">0</b></span></div>
+      <button id="readerNext" class="reader-icon" title="Siguiente">&#8250;</button>
+      <button id="readerZoomOut" class="reader-icon" title="Alejar">&#8722;</button>
+      <span class="reader-zoom" id="readerZoom">100%</span>
+      <button id="readerZoomIn" class="reader-icon" title="Acercar">＋</button>
+      <button id="readerFit" class="reader-icon" title="Ajustar al ancho">&#8596;</button>
+    </div>
+  </div>
+
+  <input type="file" id="libFileInput" accept="application/pdf,.pdf" multiple style="display:none">
+  <div id="libUploading" class="lib-uploading hidden">
+    <div class="lib-upload-card">
+      <div class="spin"></div>
+      <p id="libUploadText">Preparando…</p>
+    </div>
+  </div>
+  <div id="libToast" class="lib-toast"></div>
   <input type="file" id="fileInput" accept=".html,.htm" style="display:none" multiple>
   <input type="file" id="backupInput" accept=".json" style="display:none">
+  <script src="js/pdf.min.js"></script>
+  <script src="js/library.js"></script>
   <script>
 (function(){
 var LICENSE_SECRET='ALQUIMIA2027';
@@ -268,10 +339,10 @@ function isLicenseValid(){
 }
 
 var PLANNERS=[
-  {id:'calma-y-orden',name:'Calma y Orden',icon:'&#128210;',description:'Journal anual de autocuidado + organizacion',file:'planners/calma-y-orden.html',color:'#6463aa'},
-  {id:'planner-anual',name:'Planner Anual',icon:'&#128197;',description:'Planifica tu ano con intencion',file:'planners/planner-anual.html',color:'#6463aa'},
+  {id:'calma-y-orden',name:'Calma y Orden',icon:'&#128210;',description:'Journal anual de autocuidado + organización',file:'planners/calma-y-orden.html',color:'#6463aa'},
+  {id:'planner-anual',name:'Planner Anual',icon:'&#128197;',description:'Planifica tu año con intención',file:'planners/planner-anual.html',color:'#6463aa'},
   {id:'planner-tdah',name:'Planner TDAH',icon:'&#129504;',description:'Prioridades visuales para cerebros diferentes',file:'planners/planner-tdah.html',color:'#8f8dc7'},
-  {id:'planner-menstrual',name:'Calendario Menstrual',icon:'&#127800;',description:'Ciclo, sintomas y bienestar',file:'planners/planner-menstrual.html',color:'#d4789c'}
+  {id:'planner-menstrual',name:'Calendario Menstrual',icon:'&#127800;',description:'Ciclo, síntomas y bienestar',file:'planners/planner-menstrual.html',color:'#d4789c'}
 ];
 
 var state={
@@ -281,15 +352,24 @@ var state={
   sidebarOpen:localStorage.getItem('alquimia-sidebar')!=='false',
   customFiles:JSON.parse(localStorage.getItem('alquimia-custom-files')||'[]')
 };
+var libraryFavorites=[];
 
 function $(id){return document.getElementById(id);}
 
 function applyTheme(theme){document.documentElement.setAttribute('data-theme',theme);}
+function updateThemeButton(){
+  var label=$('themeToggle').querySelector('span');
+  var next=state.theme==='dark'?'Modo claro':'Modo oscuro';
+  if(label)label.textContent=next;
+  $('themeToggle').title='Cambiar a '+next.toLowerCase();
+  $('themeToggle').setAttribute('aria-label','Cambiar a '+next.toLowerCase());
+}
 
 function renderPlannerList(){
   var all=PLANNERS.concat(state.customFiles);
   $('plannerList').innerHTML=all.map(function(p){
-    return '<li class="nav-item'+(state.currentPlanner===p.id?' active':'')+'" data-id="'+p.id+'"><span class="nav-item-icon">'+p.icon+'</span><span class="nav-item-text">'+p.name+'</span><span class="nav-item-fav'+(state.favorites.indexOf(p.id)!==-1?' active':'')+'" data-fav="'+p.id+'">&#11088;</span></li>';
+    var favorite=state.favorites.indexOf(p.id)!==-1;
+    return '<li class="nav-item'+(state.currentPlanner===p.id?' active':'')+'" data-id="'+escapeHtml(p.id)+'"><span class="nav-item-icon">'+p.icon+'</span><span class="nav-item-text">'+escapeHtml(p.name)+'</span><button type="button" class="nav-item-fav'+(favorite?' active':'')+'" data-fav="'+escapeHtml(p.id)+'" title="'+(favorite?'Quitar de favoritos':'Agregar a favoritos')+'" aria-label="'+(favorite?'Quitar':'Agregar')+' '+escapeHtml(p.name)+' '+(favorite?'de':'a')+' favoritos">&#11088;</button></li>';
   }).join('');
   $('plannerList').querySelectorAll('.nav-item').forEach(function(item){
     item.addEventListener('click',function(e){
@@ -301,27 +381,57 @@ function renderPlannerList(){
 
 function renderFavorites(){
   var all=PLANNERS.concat(state.customFiles);
-  var favs=all.filter(function(p){return state.favorites.indexOf(p.id)!==-1;});
-  $('favCount').textContent=favs.length;
-  if(favs.length===0){
-    $('favoritesList').innerHTML='<li class="nav-item" style="opacity:0.5;cursor:default"><span class="nav-item-text">Sin favoritos aun</span></li>';
+  var plannerFavs=all.filter(function(p){return state.favorites.indexOf(p.id)!==-1;});
+  var favs=plannerFavs.length+libraryFavorites.length;
+  $('favCount').textContent=favs;
+  if(favs===0){
+    $('favoritesList').innerHTML='<li class="nav-item" style="opacity:0.5;cursor:default"><span class="nav-item-text">Sin favoritos aún</span></li>';
     return;
   }
-  $('favoritesList').innerHTML=favs.map(function(p){
+  $('favoritesList').innerHTML=plannerFavs.map(function(p){
     return '<li class="nav-item" data-id="'+p.id+'"><span class="nav-item-icon">'+p.icon+'</span><span class="nav-item-text">'+p.name+'</span></li>';
+  }).join('')+libraryFavorites.map(function(pdf){
+    return '<li class="nav-item" data-pdf-id="'+pdf.id+'"><span class="nav-item-icon">&#128196;</span><span class="nav-item-text">'+escapeHtml(pdf.title||pdf.name)+'</span></li>';
   }).join('');
   $('favoritesList').querySelectorAll('.nav-item').forEach(function(item){
-    item.addEventListener('click',function(){openPlanner(item.dataset.id);});
+    item.addEventListener('click',function(){
+      if(item.dataset.pdfId){
+        if(window.AlquimiaLibrary)window.AlquimiaLibrary.openFavorite(item.dataset.pdfId);
+        return;
+      }
+      openPlanner(item.dataset.id);
+    });
   });
+}
+
+function renderRecentPdfs(result){
+  var recent=result && Array.isArray(result.recent)?result.recent:[];
+  $('pdfCount').textContent=result && Number.isFinite(result.count)?result.count:recent.length;
+  $('recentPdfList').innerHTML=recent.length?recent.map(function(pdf){
+    return '<li class="nav-item recent-pdf-item" data-pdf-id="'+escapeHtml(pdf.id)+'"><span class="nav-item-icon">&#128196;</span><span class="nav-item-text" title="'+escapeHtml(pdf.title||pdf.name)+'">'+escapeHtml(pdf.title||pdf.name)+'</span></li>';
+  }).join(''):'<li class="recent-pdf-empty">Tus lecturas recientes aparecerán aquí.</li>';
+  $('recentPdfList').querySelectorAll('[data-pdf-id]').forEach(function(item){
+    item.addEventListener('click',function(){
+      if(window.AlquimiaLibrary)window.AlquimiaLibrary.openFavorite(item.dataset.pdfId);
+    });
+  });
+}
+
+function escapeHtml(value){
+  return String(value==null?'':value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 function renderWelcomeCards(){
   var all=PLANNERS.concat(state.customFiles);
-  $('welcomeCards').innerHTML=all.map(function(p){
+  var libCard='<div class="welcome-card" data-id="__library"><div class="welcome-card-icon">&#128218;</div><div class="welcome-card-title">Mi Biblioteca PDF</div><div class="welcome-card-desc">Sube tus PDFs y léelos como un ebook</div></div>';
+  $('welcomeCards').innerHTML=libCard+all.map(function(p){
     return '<div class="welcome-card" data-id="'+p.id+'"><div class="welcome-card-icon">'+p.icon+'</div><div class="welcome-card-title">'+p.name+'</div><div class="welcome-card-desc">'+p.description+'</div></div>';
   }).join('');
   $('welcomeCards').querySelectorAll('.welcome-card').forEach(function(card){
-    card.addEventListener('click',function(){openPlanner(card.dataset.id);});
+    card.addEventListener('click',function(){
+      if(card.dataset.id==='__library'){if(window.AlquimiaLibrary)window.AlquimiaLibrary.show();return;}
+      openPlanner(card.dataset.id);
+    });
   });
 }
 
@@ -329,10 +439,14 @@ function openPlanner(id){
   var all=PLANNERS.concat(state.customFiles);
   var planner=all.find(function(p){return p.id===id;});
   if(!planner)return;
+  if(window.AlquimiaLibrary)window.AlquimiaLibrary.hide();
   state.currentPlanner=id;
   renderPlannerList();
   $('breadcrumbs').innerHTML='<span class="breadcrumb-item" onclick="window._showWelcome()">Alquimia Studio</span><span class="breadcrumb-separator">/</span><span class="breadcrumb-current">'+planner.name+'</span>';
   $('favoriteBtn').classList.toggle('active',state.favorites.indexOf(id)!==-1);
+  $('favoriteBtn').title=(state.favorites.indexOf(id)!==-1?'Quitar ':'Agregar ')+planner.name+' '+(state.favorites.indexOf(id)!==-1?'de':'a')+' favoritos';
+  $('favoriteBtn').setAttribute('aria-pressed',state.favorites.indexOf(id)!==-1?'true':'false');
+  $('favoriteBtn').hidden=false;
   $('welcomeScreen').classList.add('hidden');
   $('viewer').classList.remove('hidden');
   $('viewerFrame').src=planner.file;
@@ -344,11 +458,19 @@ function toggleFavorite(id){
   if(idx===-1){state.favorites.push(id);}else{state.favorites.splice(idx,1);}
   localStorage.setItem('alquimia-favorites',JSON.stringify(state.favorites));
   renderPlannerList();renderFavorites();
-  $('favoriteBtn').classList.toggle('active',state.currentPlanner&&state.favorites.indexOf(state.currentPlanner)!==-1);
+  var active=!!(state.currentPlanner&&state.favorites.indexOf(state.currentPlanner)!==-1);
+  $('favoriteBtn').classList.toggle('active',active);
+  $('favoriteBtn').setAttribute('aria-pressed',active?'true':'false');
+  if(state.currentPlanner){
+    var planner=PLANNERS.concat(state.customFiles).find(function(item){return item.id===state.currentPlanner;});
+    if(planner)$('favoriteBtn').title=(active?'Quitar ':'Agregar ')+planner.name+' '+(active?'de':'a')+' favoritos';
+  }
 }
 
 window._showWelcome=function(){
+  if(window.AlquimiaLibrary)window.AlquimiaLibrary.hide();
   state.currentPlanner=null;
+  $('favoriteBtn').hidden=true;
   $('welcomeScreen').classList.remove('hidden');
   $('viewer').classList.add('hidden');
   $('viewerFrame').src='';
@@ -382,6 +504,7 @@ function setupEvents(){
     state.theme=state.theme==='light'?'dark':'light';
     applyTheme(state.theme);
     localStorage.setItem('alquimia-theme',state.theme);
+    updateThemeButton();
   });
   $('fileInput').addEventListener('change',function(e){
     Array.from(e.target.files).forEach(function(file){
@@ -408,24 +531,48 @@ function setupEvents(){
   });
 }
 
+function isBackupDataKey(key){
+  return ['alquimia-favorites','alquimia-theme','alquimia-sidebar','alquimia-custom-files','alquimia-reader-night'].indexOf(key)!==-1
+    || /^(cyo2027:|ps2027:|mu2027:|sw2027:|td2027:)/.test(key);
+}
+
 function exportBackup(){
-  var backup={
-    version:1,
-    timestamp:Date.now(),
-    data:{}
-  };
-  var keys=['alquimia-favorites','alquimia-theme','alquimia-sidebar','alquimia-custom-files','alquimia-license'];
-  keys.forEach(function(k){
-    var v=localStorage.getItem(k);
-    if(v!==null) backup.data[k]=v;
+  if(!confirm('La copia incluirá tus PDFs y datos personales de los planners. Puede ocupar bastante espacio; guárdala en un lugar privado. ¿Guardar una copia ahora?'))return;
+  var button=$('exportBackupBtn');
+  if(button)button.disabled=true;
+  var data={};
+  for(var i=0;i<localStorage.length;i++){
+    var key=localStorage.key(i);
+    if(key&&isBackupDataKey(key)){
+      var value=localStorage.getItem(key);
+      if(value!==null)data[key]=value;
+    }
+  }
+  if(!window.AlquimiaLibrary){
+    if(button)button.disabled=false;
+    alert('No se pudo acceder a la biblioteca PDF. Recarga la página e inténtalo de nuevo.');
+    return;
+  }
+  window.AlquimiaLibrary.exportBackup().then(function(pdfs){
+    var backup={
+      format:'alquimia-studio-backup',
+      version:2,
+      timestamp:Date.now(),
+      data:data,
+      pdfs:pdfs
+    };
+    var blob=new Blob([JSON.stringify(backup)],{type:'application/json'});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a');
+    a.href=url;
+    a.download='alquimia-studio-backup-'+new Date().toISOString().slice(0,10)+'.json';
+    a.click();
+    setTimeout(function(){URL.revokeObjectURL(url);},1000);
+    if(button)button.disabled=false;
+  }).catch(function(err){
+    if(button)button.disabled=false;
+    alert('No se pudo guardar la copia: '+(err.message||'error desconocido'));
   });
-  var blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json'});
-  var url=URL.createObjectURL(blob);
-  var a=document.createElement('a');
-  a.href=url;
-  a.download='alquimia-studio-backup-'+new Date().toISOString().slice(0,10)+'.json';
-  a.click();
-  URL.revokeObjectURL(url);
 }
 
 function importBackup(e){
@@ -433,20 +580,71 @@ function importBackup(e){
   if(!file)return;
   var reader=new FileReader();
   reader.onload=function(ev){
+    var backup;
     try{
-      var backup=JSON.parse(ev.target.result);
-      if(!backup.data){throw new Error('Formato inválido');}
-      Object.keys(backup.data).forEach(function(k){
-        localStorage.setItem(k,backup.data[k]);
+      backup=JSON.parse(ev.target.result);
+      if(!backup||!backup.data||typeof backup.data!=='object'||Array.isArray(backup.data)
+        ||(backup.version!==1&&backup.version!==2)
+        ||(backup.version===2&&(backup.format!=='alquimia-studio-backup'||!Array.isArray(backup.pdfs)))){
+        throw new Error('El archivo no tiene un formato de copia válido.');
+      }
+      Object.keys(backup.data).forEach(function(key){
+        if(!isBackupDataKey(key)||typeof backup.data[key]!=='string'){
+          throw new Error('La copia contiene ajustes no válidos.');
+        }
       });
-      alert('Respaldo importado correctamente. La página se recargará.');
-      location.reload();
     }catch(err){
-      alert('Error al importar: '+err.message);
+      alert('No se pudo leer la copia: '+err.message);
+      e.target.value='';
+      return;
     }
+    var pdfCount=backup.pdfs?backup.pdfs.length:0;
+    if(backup.version===2&&(!window.AlquimiaLibrary||!window.AlquimiaLibrary.importBackup)){
+      alert('No se pudo acceder a la biblioteca PDF. Recarga la página e inténtalo de nuevo.');
+      e.target.value='';
+      return;
+    }
+    if(!confirm('Se recuperarán los ajustes y datos de planners incluidos, y se agregarán o actualizarán los PDFs de la copia. Los demás PDFs de este dispositivo se conservarán. ¿Continuar?')){
+      e.target.value='';
+      return;
+    }
+    var previous={};
+    var keys=Object.keys(backup.data);
+    try{
+      keys.forEach(function(key){
+        previous[key]=localStorage.getItem(key);
+        localStorage.setItem(key,backup.data[key]);
+      });
+    }catch(err){
+      keys.forEach(function(key){
+        try{
+          if(previous[key]===null)localStorage.removeItem(key);
+          else if(previous[key]!==undefined)localStorage.setItem(key,previous[key]);
+        }catch(restoreError){console.error('No se pudo restaurar un ajuste local:',restoreError);}
+      });
+      alert('No se pudieron restaurar los ajustes: '+err.message);
+      e.target.value='';
+      return;
+    }
+    var restore=backup.version===2?window.AlquimiaLibrary.importBackup(backup.pdfs):Promise.resolve();
+    restore.then(function(){
+      alert('Copia restaurada correctamente ('+pdfCount+' PDF(s)). La página se recargará.');
+      location.reload();
+    }).catch(function(err){
+      keys.forEach(function(key){
+        try{
+          if(previous[key]===null)localStorage.removeItem(key);
+          else if(previous[key]!==undefined)localStorage.setItem(key,previous[key]);
+        }catch(restoreError){console.error('No se pudo restaurar un ajuste local:',restoreError);}
+      });
+      alert('No se pudo recuperar la copia: '+(err.message||'error desconocido'));
+    }).then(function(){e.target.value='';});
+  };
+  reader.onerror=function(){
+    alert('No se pudo leer el archivo de copia.');
+    e.target.value='';
   };
   reader.readAsText(file);
-  e.target.value='';
 }
 
 function handleSidebarSearch(q){
@@ -475,8 +673,17 @@ function handlePanelSearch(q){
 
 function initApp(){
   applyTheme(state.theme);
+  updateThemeButton();
   if(!state.sidebarOpen)$('sidebar').classList.add('collapsed');
   renderPlannerList();renderFavorites();renderWelcomeCards();setupEvents();
+  if(window.AlquimiaLibrary){
+    window.AlquimiaLibrary.onFavoritesChange(function(favorites){
+      libraryFavorites=favorites;
+      renderFavorites();
+    });
+    window.AlquimiaLibrary.onLibraryChange(renderRecentPdfs);
+    window.AlquimiaLibrary.init();
+  }
   setTimeout(function(){
     $('splash').classList.add('fade-out');
     $('app').classList.remove('hidden');
@@ -502,7 +709,7 @@ function initLicense(){
         $('licenseSuccess').classList.remove('hidden');
         setTimeout(function(){$('licenseScreen').style.display='none';initApp();},1500);
       }else{
-        $('licenseError').textContent='Codigo invalido. Verifica e intenta de nuevo.';
+        $('licenseError').textContent='Código inválido. Verifica e intenta de nuevo.';
         $('licenseError').classList.remove('hidden');
         $('licenseInput').classList.add('shake');
         setTimeout(function(){$('licenseInput').classList.remove('shake');},500);
@@ -515,21 +722,20 @@ function initLicense(){
 
 document.addEventListener('DOMContentLoaded',function(){
   setTimeout(function(){
-    var s=$('splash');var a=$('app');
+    var s=$('splash');
     if(s)s.style.display='none';
-    if(a)a.classList.remove('hidden');
   },3000);
   try{
     if(!initLicense())return;
     initApp();
   }catch(e){
-    var s=$('splash');var a=$('app');
+    var s=$('splash');
     if(s)s.style.display='none';
-    if(a)a.classList.remove('hidden');
+    console.error('No se pudo iniciar Alquimia Studio:',e);
   }
 });
 })();
   </script>
-  <a href="../" class="studio-back">&larr; Alquimia Lab</a>
+  <a class="studio-back" href="../" aria-label="Volver a Alquimia Lab">← Alquimia Lab</a>
 </body>
 </html>

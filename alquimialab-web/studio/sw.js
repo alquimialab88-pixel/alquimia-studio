@@ -1,25 +1,36 @@
-/* ===== Alquimia Studio — Service Worker ===== */
-const CACHE_NAME = 'alquimia-studio-v1';
+/* ===== Alquimia Studio - Service Worker ===== */
+
+const CACHE_NAME = 'alquimia-studio-v12';
 const ASSETS = [
   './',
   './index.html',
   './manifest.json',
   './icons/favicon.svg',
+  './icons/icon-192.png',
+  './icons/icon-512.png',
+  './css/style.css',
+  './css/library.css',
+  './css/premium.css',
+  './js/library.js',
+  './js/pdf.min.js',
+  './js/pdf.worker.min.js',
   './planners/calma-y-orden.html',
   './planners/planner-anual.html',
   './planners/planner-tdah.html',
-  './planners/planner-menstrual.html'
+  './planners/planner-menstrual.html',
+  './planners/planner-semanal.html'
 ];
 
+// Install: precache the app shell
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => cache.addAll(ASSETS))
       .then(() => self.skipWaiting())
-      .catch(() => {})
   );
 });
 
+// Activate: remove old caches
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -32,9 +43,13 @@ self.addEventListener('activate', (event) => {
   );
 });
 
+// Fetch: cache-first with background refresh
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
   if (!event.request.url.startsWith('http')) return;
+  // Never intercept Google Fonts or non-same-origin requests
+  if (new URL(event.request.url).origin !== self.location.origin) return;
+
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
