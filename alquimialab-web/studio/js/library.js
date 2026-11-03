@@ -334,7 +334,7 @@
     }).catch(function () { return ''; });
   }
 
-  function addFiles(fileList) {
+  function addFiles(fileList, openAfterAdd) {
     var files = Array.prototype.slice.call(fileList || []).filter(function (f) {
       return f && (f.type === 'application/pdf' || /\.pdf$/i.test(f.name));
     });
@@ -346,6 +346,7 @@
     if (box) box.classList.remove('hidden');
 
     var ok = 0, bad = 0;
+    var addedIds = [];
     var chain = Promise.resolve();
 
     files.forEach(function (file, i) {
@@ -371,6 +372,7 @@
               return putFile(rec.id, file);
             }).then(function () {
               metas.unshift(rec);
+              addedIds.push(rec.id);
               ok++;
             }).then(function () {
               try { doc.destroy(); } catch (e) {}
@@ -383,13 +385,17 @@
       });
     });
 
-    chain.then(function () {
+    return chain.then(function () {
       if (box) box.classList.add('hidden');
       renderLibrary();
       notifyLibraryChanged();
       if (ok && bad) toast(ok + ' PDF(s) agregados · ' + bad + ' con error');
       else if (ok) toast(ok + (ok === 1 ? ' PDF agregado a tu biblioteca ✓' : ' PDFs agregados a tu biblioteca ✓'));
       else toast('No se pudo agregar el PDF. Revisa que no esté dañado.');
+      if (openAfterAdd && addedIds.length) {
+        showLibrary();
+        openReader(addedIds[0]);
+      }
     });
   }
 
@@ -754,6 +760,8 @@
     hide: hideLibrary,
     exportBackup: exportBackup,
     importBackup: importBackup,
+    addFiles: function (files) { return addFiles(files, false); },
+    openFiles: function (files) { return addFiles(files, true); },
     onFavoritesChange: function (handler) {
       favoritesChangeHandler = handler;
       notifyFavoritesChanged();
