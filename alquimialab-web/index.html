@@ -191,6 +191,8 @@
         #sib-container .sib-form-block__button:hover { background: #b9b4e0 !important; transform: translateY(-2px); }
         #sib-container #success-message { background: #f1eefb !important; color: #6462ab !important; border-color: #6462ab !important; border-radius: 12px !important; font-family: 'Quicksand', sans-serif !important; }
         #sib-container #error-message { border-radius: 12px !important; font-family: 'Quicksand', sans-serif !important; }
+        #kit-form-status { max-width: 540px; margin: 12px auto 0; color: #ffffff; font-family: 'Quicksand', sans-serif; font-size: 14px; font-weight: 700; text-align: center; }
+        #kit-form-status[data-state="error"] { color: #ffe0e0; }
       </style>
       <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
       <div class="sib-form" style="text-align: center; background-color: transparent;">
@@ -273,6 +275,7 @@
           </div>
         </div>
       </div>
+      <p id="kit-form-status" role="status" aria-live="polite" hidden></p>
       <script>
         (function () {
           function setBrevoLang() {
@@ -302,9 +305,46 @@
           }
         })();
         var AUTOHIDE = Boolean(0);
-        document.getElementById('sib-form').addEventListener('submit', function () {
-          window.gtag && gtag('event', 'newsletter_submit');
-        });
+        var kitForm = document.getElementById('sib-form');
+        var kitFormStatus = document.getElementById('kit-form-status');
+        if (kitForm && kitFormStatus) {
+          kitForm.addEventListener('submit', async function (event) {
+            event.preventDefault();
+            if (kitForm.dataset.submitting === 'true') return;
+
+            var button = kitForm.querySelector('button[type="submit"]');
+            var isSpanish = document.documentElement.getAttribute('lang') === 'es';
+            kitForm.dataset.submitting = 'true';
+            if (button) button.disabled = true;
+            kitFormStatus.hidden = true;
+            kitFormStatus.removeAttribute('data-state');
+
+            try {
+              var response = await fetch(kitForm.action, {
+                method: 'POST',
+                headers: { Accept: 'application/json' },
+                body: new URLSearchParams(new FormData(kitForm))
+              });
+              var result = await response.json();
+              if (!response.ok || !result.success) throw new Error('Brevo no confirmó el registro.');
+
+              kitForm.reset();
+              kitFormStatus.textContent = isSpanish
+                ? '¡Enviamos el correo! Revisa tu bandeja de entrada 💜'
+                : 'We sent the email! Check your inbox 💜';
+              window.gtag && gtag('event', 'newsletter_submit');
+            } catch (error) {
+              kitFormStatus.dataset.state = 'error';
+              kitFormStatus.textContent = isSpanish
+                ? 'No pudimos enviar el formulario. Inténtalo de nuevo en un momento.'
+                : 'We could not send the form. Please try again in a moment.';
+            } finally {
+              kitFormStatus.hidden = false;
+              kitForm.dataset.submitting = 'false';
+              if (button) button.disabled = false;
+            }
+          });
+        }
       </script>
       <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
       <!-- End Brevo Form -->
@@ -819,8 +859,8 @@
     }
   </style>
   <div id="koreSticky" class="kore-sticky" role="region" aria-label="Kore app">
-    <span data-i18n="🦊 Kore is coming soon">🦊 Kore is coming soon</span>
-    <a href="https://wa.me/573104108483" data-kore-notify target="_blank" rel="noopener" class="kore-sticky-btn" data-i18n="Get launch updates" onclick="window.gtag&&gtag('event','click_sticky_kore_launch_updates')">Get launch updates</a>
+    <span data-i18n="🦊 Kore is now on Google Play!">🦊 Kore is now on Google Play!</span>
+    <a href="https://play.google.com/store/apps/details?id=com.alquimialab.kore" target="_blank" rel="noopener" class="kore-sticky-btn" data-i18n="Download Kore" onclick="window.gtag&&gtag('event','click_sticky_download_kore')">Download Kore</a>
     <button type="button" class="kore-sticky-x" aria-label="Close" onclick="document.getElementById('koreSticky').remove()">×</button>
   </div>
 

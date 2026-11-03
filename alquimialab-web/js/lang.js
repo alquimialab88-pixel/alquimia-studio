@@ -937,16 +937,17 @@
     "By using our Services after the publication of any change, you accept the revised version of these Terms of Service.": "Al usar nuestros Servicios después de la publicación de cualquier cambio, aceptas la versión revisada de estos Términos de Servicio.",
     "Coming soon · by Alquimia Lab": "Próximamente · por Alquimia Lab",
     "Coming soon": "Próximamente",
-    "Kore is coming soon": "Kore llega pronto",
-    "Kore is being prepared for launch. If you already have a test account, you can still request deletion below.": "Kore se está preparando para su lanzamiento. Si ya tienes una cuenta de prueba, puedes solicitar su eliminación más abajo.",
-    "🦊 Kore is coming soon": "🦊 Kore llega pronto",
+    "Kore is now on Google Play!": "¡Kore ya está en Google Play!",
+    "Delete Your Kore Account": "Eliminar tu cuenta de Kore",
+    "Request deletion of your Kore account and all associated data. This action is permanent and cannot be undone.": "Solicita la eliminación de tu cuenta de Kore y todos los datos asociados. Esta acción es permanente y no se puede deshacer.",
+    "🦊 Kore is now on Google Play!": "🦊 ¡Kore ya está en Google Play!",
     "Android · Coming soon": "Android · Próximamente",
-    "Get launch updates": "Recibir novedades de lanzamiento",
-    "Get launch updates →": "Recibir novedades de lanzamiento →",
-    "When can I download Kore?": "¿Cuándo podré descargar Kore?",
-    "Kore is being prepared for launch and isn't ready to download yet. Message us on WhatsApp and we'll let you know when it's ready.": "Kore se está preparando para su lanzamiento y todavía no está lista para descargar. Escríbenos por WhatsApp y te avisaremos cuando esté disponible.",
-    "📲 Kore is coming soon": "📲 Kore llega pronto",
-    "Kore is being prepared for Android. Get a WhatsApp message when it's ready.": "Kore se está preparando para Android. Recibe un mensaje por WhatsApp cuando esté lista."
+    "Download Kore": "Descargar Kore",
+    "When can I download Kore?": "¿Cuándo puedo descargar Kore?",
+    "Kore is <strong>available now on Google Play</strong>! Download it for Android and start organizing your life today.": "Kore está <strong>disponible ahora en Google Play</strong>! Descárgalo para Android y empieza a organizar tu vida hoy.",
+    "📲 Kore is on Google Play": "📲 Kore está en Google Play",
+    "Download Kore for Android and start building better habits today.": "Descarga Kore para Android y empieza a construir mejores hábitos hoy.",
+    "Get it on Google Play": "Descargar en Google Play"
   };
 
   var placeholders = {
