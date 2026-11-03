@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" data-i18n="meta_desc" content="Catálogo: libros para colorear, plantillas Notion, música lofi y más.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#f2f2f2">
+<title>Alquimia Lab · Catálogo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Quicksand', system-ui, -apple-system, sans-serif;
+    background: #f2f2f2;
+    color: #3b3866;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 56px 20px 64px;
+  }
+
+  .blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: .45;
+    z-index: -1;
+  }
+  .blob-1 { width: 320px; height: 320px; background: #ccc9e6; top: -90px; left: -90px; }
+  .blob-2 { width: 280px; height: 280px; background: #dbd7f0; bottom: -70px; right: -70px; }
+
+  .container { width: 100%; max-width: 520px; animation: rise .55s ease both; }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .delay-1 { animation-delay: .08s; }
+  .delay-2 { animation-delay: .16s; }
+  .delay-3 { animation-delay: .24s; }
+  .delay-4 { animation-delay: .32s; }
+
+  .profile { text-align: center; margin-bottom: 8px; }
+  .avatar {
+    width: 124px; height: 124px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6462ab, #a29de0);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 10px 26px rgba(100, 98, 171, .28);
+  }
+  .avatar svg { width: 42px; height: 42px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .avatar img, .avatar video { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+  .profile h1 { font-size: 23px; font-weight: 700; color: #37345c; }
+  .profile p { font-size: 14px; color: #8a87ad; margin-top: 6px; line-height: 1.55; }
+
+  .gallery-wrap {
+    position: relative;
+    margin-top: 28px;
+    animation: rise .55s ease both;
+    animation-delay: .12s;
+  }
+  .gallery {
+    position: relative;
+    display: block;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid #ccc9e6;
+    box-shadow: 0 12px 28px rgba(100, 98, 171, .16);
+    aspect-ratio: 16 / 9;
+    background: #eceaf7;
+  }
+  .gallery img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity .9s ease;
+  }
+  .gallery img.active { opacity: 1; }
+  .gallery-label {
+    position: absolute; left: 14px; bottom: 14px; z-index: 1;
+    font-size: 12px; font-weight: 700;
+    color: #37345c;
+    background: rgba(255, 255, 255, .85);
+    backdrop-filter: blur(6px);
+    padding: 7px 12px; border-radius: 99px;
+    box-shadow: 0 4px 12px rgba(59, 56, 102, .15);
+    pointer-events: none;
+  }
+  .dots {
+    position: absolute; right: 16px; bottom: 20px; z-index: 2;
+    display: flex; gap: 6px;
+  }
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(255, 255, 255, .65);
+    border: none; padding: 0; cursor: pointer;
+    transition: transform .25s ease, background .25s ease;
+  }
+  .dot.active { background: #6462ab; transform: scale(1.3); }
+
+  .product-hero {
+    margin-top: 24px;
+    background: #ffffff;
+    border: 1px solid #ccc9e6;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 12px 28px rgba(100, 98, 171, .16);
+    transition: box-shadow .25s ease;
+  }
+  .product-hero:hover { box-shadow: 0 16px 36px rgba(100, 98, 171, .22); }
+  .product-hero .gallery { border: none; border-radius: 0; box-shadow: none; }
+  .product-hero .gallery-label { background: rgba(100, 98, 171, .88); color: #fff; }
+  .product-hero .dots { bottom: 14px; right: 14px; }
+  .product-info { padding: 22px 22px 26px; }
+  .product-info h2 { font-size: 19px; font-weight: 700; color: #37345c; margin-bottom: 6px; }
+  .product-info p { font-size: 13.5px; color: #8a87ad; line-height: 1.55; margin-bottom: 16px; }
+  .buy-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 13px 26px;
+    background: #6462ab;
+    color: #fff;
+    font-family: 'Quicksand', system-ui, sans-serif;
+    font-size: 15px; font-weight: 700;
+    border: none; border-radius: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 6px 18px rgba(100, 98, 171, .3);
+    transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+  }
+  .buy-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(100, 98, 171, .4); background: #524f96; }
+  .buy-price { font-size: 18px; font-weight: 700; }
+
+  .link.link-featured {
+    background: #ccc9e6;
+    border: 1px solid #ccc9e6;
+  }
+  .link.link-featured:hover {
+    transform: translateY(-2px);
+    border-color: #6462ab;
+  }
+  .link-featured h3 { color: #37345c; }
+  .link-featured p { color: #6462ab; font-weight: 600; }
+  .icon-featured { background: rgba(255,255,255,.5); }
+  .icon-featured svg { stroke: #6462ab; }
+  .arrow-featured { stroke: #6462ab; }
+  .link-featured:hover .arrow-featured { stroke: #37345c; }
+
+  .section {
+    display: flex; align-items: center; gap: 14px;
+    margin: 34px 0 16px;
+  }
+  .section::before, .section::after { content: ""; flex: 1; height: 1px; background: #ddd9ec; }
+  .section span {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: .22em; text-transform: uppercase;
+    color: #6462ab;
+  }
+
+  a { text-decoration: none; color: inherit; }
+
+  .card-featured {
+    display: flex; align-items: center; gap: 16px;
+    padding: 20px; margin-bottom: 14px;
+    background: linear-gradient(135deg, #ffffff 30%, #edeaf8);
+    border: 1px solid #ccc9e6;
+    border-radius: 18px;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .card-featured:hover {
+    transform: translateY(-3px);
+    border-color: #6462ab;
+    box-shadow: 0 12px 28px rgba(100, 98, 171, .18);
+  }
+  .icon-lg {
+    flex-shrink: 0;
+    width: 54px; height: 54px;
+    border-radius: 15px;
+    background: #6462ab;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 6px 14px rgba(100, 98, 171, .3);
+  }
+  .icon-lg svg { width: 26px; height: 26px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  .btn-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 700;
+    padding: 7px 13px; border-radius: 99px;
+    background: #6462ab; color: #fff;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease, background .25s ease;
+    border: 1px solid #6462ab;
+  }
+  .pill svg { width: 14px; height: 14px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .pill:hover { transform: translateY(-1px); box-shadow: 0 6px 14px rgba(100, 98, 171, .35); }
+  .pill-alt { background: transparent; color: #6462ab; border-color: #b9b5dd; }
+  .pill-alt svg { stroke: #6462ab; }
+  .pill-alt:hover { border-color: #6462ab; background: #eceaf7; box-shadow: none; }
+
+  .card-body h2, .card-body h3 { color: #37345c; }
+  .card-body h2 { font-size: 17px; font-weight: 700; }
+  .card-body p { font-size: 13px; color: #8a87ad; margin-top: 3px; line-height: 1.45; }
+
+  .promo {
+    display: flex; align-items: center; gap: 16px;
+    margin-top: 14px;
+    padding: 20px;
+    background: #6462ab;
+    border-radius: 18px;
+    box-shadow: 0 8px 22px rgba(100, 98, 171, .28);
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .promo:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(100, 98, 171, .38); }
+  .promo-avatar {
+    flex-shrink: 0;
+    width: 84px; height: 84px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid rgba(255, 255, 255, .65);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .2);
+  }
+  .promo-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; transform: scale(1.22) translateY(-10%); }
+  .promo h2 { font-size: 15.5px; font-weight: 700; color: #fff; line-height: 1.4; }
+  .promo p { font-size: 12.5px; color: #d9d7f0; margin-top: 5px; line-height: 1.45; }
+
+  .links { display: flex; flex-direction: column; gap: 12px; }
+  .link {
+    display: flex; align-items: center; gap: 14px;
+    padding: 15px 18px;
+    background: #ffffff;
+    border: 1px solid #e3e0f0;
+    border-radius: 16px;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  }
+  .link:hover {
+    transform: translateY(-2px);
+    border-color: #b9b5dd;
+    box-shadow: 0 8px 20px rgba(100, 98, 171, .12);
+  }
+  .icon-sm {
+    flex-shrink: 0;
+    width: 42px; height: 42px;
+    border-radius: 12px;
+    background: #eceaf7;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .icon-sm svg { width: 20px; height: 20px; stroke: #6462ab; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  .arrow {
+    margin-left: auto; flex-shrink: 0;
+    width: 18px; height: 18px;
+    stroke: #bdbad9; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    transition: transform .25s ease, stroke .25s ease;
+  }
+  a:hover .arrow { transform: translateX(3px); stroke: #6462ab; }
+
+  .badge {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: .08em; text-transform: uppercase;
+    padding: 4px 9px; border-radius: 99px;
+    white-space: nowrap;
+  }
+  .badge-live { background: #6462ab; color: #fff; }
+  .badge-soon { background: #ccc9e6; color: #55528f; }
+  .badge-promo { background: #ffffff; color: #6462ab; }
+
+  .promo .arrow { stroke: rgba(255, 255, 255, .65); }
+  .promo:hover .arrow { stroke: #fff; transform: translateX(3px); }
+
+  .soon {
+    background: transparent;
+    border-style: dashed;
+    cursor: default;
+  }
+  .soon:hover { transform: none; box-shadow: none; border-color: #ccc9e6; }
+
+  .social {
+    display: flex; justify-content: center; gap: 14px;
+    margin-top: 32px;
+  }
+  .social a {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: #eceaf7;
+    border: 1px solid #e3e0f0;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform .25s ease, background .25s ease, border-color .25s ease;
+  }
+  .social a:hover { background: #6462ab; border-color: #6462ab; transform: translateY(-3px); }
+  .social svg {
+    width: 20px; height: 20px;
+    stroke: #6462ab; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    transition: stroke .25s ease;
+  }
+  .social a:hover svg { stroke: #fff; }
+
+  footer {
+    margin-top: 34px;
+    text-align: center;
+    font-size: 12px; font-weight: 500;
+    color: #a5a3bf;
+    letter-spacing: .04em;
+  }
+
+  /* Language Toggle */
+  .lang-toggle {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 100;
+    display: flex;
+    background: #fff;
+    border: 1px solid #ccc9e6;
+    border-radius: 99px;
+    padding: 3px;
+    box-shadow: 0 4px 14px rgba(100, 98, 171, .15);
+  }
+  .lang-btn {
+    font-family: 'Quicksand', system-ui, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border: none;
+    border-radius: 99px;
+    cursor: pointer;
+    background: transparent;
+    color: #8a87ad;
+    transition: background .2s ease, color .2s ease;
+  }
+  .lang-btn.active {
+    background: #6462ab;
+    color: #fff;
+  }
+
+  @media (max-width: 400px) {
+    body { padding: 40px 16px 48px; }
+    .card-featured { padding: 16px; gap: 13px; }
+    .icon-lg { width: 48px; height: 48px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+
+<div class="lang-toggle" id="langToggle">
+  <button class="lang-btn active" data-lang="es">ES</button>
+  <button class="lang-btn" data-lang="en">EN</button>
+</div>
+
+<main class="container">
+
+  <header class="profile delay-1">
+    <div class="avatar">
+      <video autoplay muted loop playsinline preload="metadata">
+        <source src="video.mp4" type="video/mp4">
+      </video>
+    </div>
+    <h1>Alquimia Lab</h1>
+    <p data-i18n="tagline">Libros para colorear · Plantillas Notion · Música Lo-fi</p>
+  </header>
+
+  <div class="product-hero anim d1">
+    <div class="gallery-wrap">
+      <div class="gallery">
+        <img class="active" src="planner-hero-1.jpg" alt="Planner 2027 Calma y Orden">
+        <img src="planner-hero-2.jpg" alt="Planner 2027 Calma y Orden - vista 2">
+        <img src="planner-hero-3.png" alt="Planner 2027 Calma y Orden - vista 3">
+        <img src="planner-hero-4.png" alt="Planner 2027 Calma y Orden - vista 4">
+        <img src="planner-hero-5.png" alt="Planner 2027 Calma y Orden - vista 5">
+        <span class="gallery-label" data-i18n="badge_new">Nuevo</span>
+      </div>
+      <div class="dots">
+        <button class="dot active" aria-label="Imagen 1"></button>
+        <button class="dot" aria-label="Imagen 2"></button>
+        <button class="dot" aria-label="Imagen 3"></button>
+        <button class="dot" aria-label="Imagen 4"></button>
+        <button class="dot" aria-label="Imagen 5"></button>
+      </div>
+    </div>
+    <div class="product-info">
+      <h2 data-i18n="planner_hero_title">Planner 2027 · Calma y Orden</h2>
+      <p data-i18n="planner_hero_desc">Organiza tu año con calma e intención · edición impresa en Amazon</p>
+      <a class="buy-btn" href="https://www.amazon.com/dp/B0HJ8J6MHG" target="_blank" rel="noopener">
+        <span data-i18n="planner_hero_cta">Ver en Amazon</span>
+      </a>
+    </div>
+  </div>
+
+  <a class="promo delay-1" href="https://alquimialab.app/portafolio.html" target="_blank" rel="noopener">
+    <div class="promo-avatar"><img src="isabel-3d.jpg" alt="Isabel en 3D"></div>
+    <div class="promo-body">
+      <h2 data-i18n="portfolio_promo_title">¿Necesitas diseño? Este es mi portafolio</h2>
+      <p data-i18n="portfolio_promo_desc">6 años creando marcas con calma</p>
+    </div>
+    <svg class="arrow" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+  </a>
+
+  <section class="section delay-2"><span data-i18n="sec_featured">Destacados</span></section>
+
+  <div class="delay-2">
+    <div class="card-featured">
+      <div class="icon-lg">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </div>
+      <div class="card-body">
+        <h2 data-i18n="maestro_title">Plan Maestro</h2>
+        <p data-i18n="maestro_desc">Parrilla de contenido para mantener tus redes y tu mente en orden</p>
+        <div class="btn-row">
+          <a class="pill" href="https://alquimialab.gumroad.com/l/PlantillaPlanMaestro" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            <span data-i18n="maestro_buy">Comprar · $7</span>
+          </a>
+        </div>
+      </div>
+      <span class="badge badge-live" data-i18n="badge_new">Nuevo</span>
+    </div>
+
+    <a class="card-featured" href="https://www.notion.com/@alquimialab?clientBuildTarget=client" target="_blank" rel="noopener">
+      <div class="icon-lg">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+      </div>
+      <div class="card-body">
+        <h2 data-i18n="notion_title">Plantillas Notion</h2>
+        <p data-i18n="notion_desc">Organiza tu vida con estilo · descarga digital al instante</p>
+      </div>
+      <svg class="arrow" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+
+    <div class="card-featured">
+      <div class="icon-lg">
+        <svg viewBox="0 0 24 24"><path d="M12 3l1.9 5.8H20l-4.9 3.6 1.9 5.8-5-3.6-5 3.6 1.9-5.8L4 8.8h6.1z"/></svg>
+      </div>
+      <div class="card-body">
+        <h2 data-i18n="studio_title">Alquimia Studio</h2>
+        <p data-i18n="studio_desc">Planners interactivos · 5 en 1 con modo oscuro</p>
+        <div class="btn-row">
+          <a class="pill" href="https://alquimialab.gumroad.com/l/AlquimiaStudio_Planner" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            <span data-i18n="studio_buy">Comprar · $3</span>
+          </a>
+        </div>
+      </div>
+      <span class="badge badge-live" data-i18n="badge_new">Nuevo</span>
+    </div>
+  </div>
+
+    <a class="promo delay-2" href="http://getfocusdock.com/isabel" target="_blank" rel="noopener">
+      <div class="promo-body">
+        <h2 data-i18n="promo_title">Tu Notion no está roto. Solo está mal diseñado.</h2>
+        <p data-i18n="promo_desc">Focus Dock · protocolo de recuperación de 43 páginas · pago único con garantía de 14 días</p>
+      </div>
+      <span class="badge badge-promo">$27</span>
+      <svg class="arrow" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+
+  <section class="section delay-3"><span data-i18n="sec_more">Más de mi universo</span></section>
+
+  <div class="links delay-3">
+    <a class="link link-featured" href="https://alquimialab.app/" target="_blank" rel="noopener">
+      <div class="icon-sm icon-featured">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+      <div class="card-body">
+        <h3 data-i18n="portfolio_title">Portafolio</h3>
+        <p data-i18n="portfolio_desc">Conoce todos mis proyectos</p>
+      </div>
+      <svg class="arrow arrow-featured" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+
+    <a class="link" href="https://www.instagram.com/boderdg08/" target="_blank" rel="noopener">
+      <div class="icon-sm">
+        <svg viewBox="0 0 24 24"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+      </div>
+      <div class="card-body">
+        <h3 data-i18n="design_title">Servicios de Diseño &amp; Branding</h3>
+        <p data-i18n="design_desc">Conoce mi trabajo en Instagram</p>
+      </div>
+      <svg class="arrow" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+
+    <a class="link" href="https://www.youtube.com/channel/UCWb7zKnOw5k_XDgfUcBn9eQ" target="_blank" rel="noopener">
+      <div class="icon-sm">
+        <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+      </div>
+      <div class="card-body">
+        <h3 data-i18n="lofi_title">Música Lofi</h3>
+        <p data-i18n="lofi_desc">Playlists para estudiar, crear y relajarte</p>
+      </div>
+      <svg class="arrow" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+
+    <a class="link" href="https://play.google.com/store/apps/details?id=com.alquimialab.kore" target="_blank" rel="noopener">
+      <div class="icon-sm">
+        <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9C.9 8.9 2.4 5.5 5.5 5.5c1.7 0 3.2.9 4 2.3.8-1.4 2.3-2.3 4-2.3 3.1 0 4.6 3.4 3 6.5-2.5 4.5-9.5 9-9.5 9z"/><circle cx="12" cy="12" r="2"/></svg>
+      </div>
+      <div class="card-body">
+        <h3 data-i18n="kore_title">Kore · Mi app de calma</h3>
+        <p data-i18n="kore_desc">Tu espacio de calma · ya disponible en Google Play</p>
+      </div>
+      <span class="badge badge-live" data-i18n="badge_available">Disponible</span>
+      <svg class="arrow" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+
+    <a class="link" href="https://alquimialab.app/productos.html#impresos" target="_blank" rel="noopener">
+      <div class="icon-sm">
+        <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      </div>
+      <div class="card-body">
+        <h3 data-i18n="cb_title">Libros para Colorear</h3>
+        <p data-i18n="cb_desc">Disponible en inglés y español</p>
+      </div>
+      <svg class="arrow" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+
+    <a class="link" href="https://www.amazon.com/dp/B0H2G98CGK" target="_blank" rel="noopener">
+      <div class="icon-sm">
+        <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </div>
+      <div class="card-body">
+        <h3 data-i18n="novel_title">Novela: Crimen &amp; Romance</h3>
+        <p data-i18n="novel_desc">Mi historia disponible en Amazon</p>
+      </div>
+      <svg class="arrow" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+
+    <a class="link" href="https://alquimialab.gumroad.com/" target="_blank" rel="noopener">
+      <div class="icon-sm">
+        <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      </div>
+      <div class="card-body">
+        <h3 data-i18n="store_title">Tienda Digital</h3>
+        <p data-i18n="store_desc">Descarga directa de mis productos en Gumroad</p>
+      </div>
+      <svg class="arrow" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+
+    <a class="link" href="https://www.amazon.com/dp/B0HJ8J6MHG" target="_blank" rel="noopener">
+      <div class="icon-sm" style="background:transparent;display:flex;align-items:center;justify-content:center;">
+        <img src="planner-journal.png" alt="Calma y Orden Journal" style="width:100%;height:100%;object-fit:cover;border-radius:12px;">
+      </div>
+      <div class="card-body">
+        <h3>Calma y Orden — Journal Híbrido de Autocuidado y Productividad</h3>
+        <p data-i18n="planner_desc">Planificador 2027 disponible en Amazon</p>
+      </div>
+      <span class="badge badge-live" data-i18n="badge_new">Nuevo</span>
+      <svg class="arrow" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+  </div>
+
+  <nav class="social delay-4">
+    <a href="https://www.instagram.com/alquimia.lab8/" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+    </a>
+    <a href="https://www.youtube.com/channel/UCWb7zKnOw5k_XDgfUcBn9eQ" target="_blank" rel="noopener" aria-label="YouTube">
+      <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+    </a>
+    <a href="https://www.facebook.com/profile.php?id=61592768576548" target="_blank" rel="noopener" aria-label="Facebook">
+      <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+    </a>
+  </nav>
+
+  <footer class="delay-4" data-i18n="footer">&copy; 2026 Alquimia Lab · Hecho con calma y café</footer>
+
+</main>
+
+<script>
+(function () {
+  var i18n = {
+    es: {
+      tagline: "Libros para colorear · Plantillas Notion · Música Lo-fi",
+      badge_new: "Nuevo",
+      crm_desc: "Sistema operativo en Notion para estructurar tu flujo de trabajo, eliminar el desorden administrativo y ver tus ingresos con claridad.",
+      sec_featured: "Destacados",
+      cb_title: "Libros para Colorear",
+      cb_desc: "Disponible en inglés y español",
+      cb_digital: "Edición digital",
+      notion_title: "Plantillas Notion",
+      notion_desc: "Organiza tu vida con estilo · descarga digital al instante",
+      promo_title: "Tu Notion no está roto. Solo está mal diseñado.",
+      promo_desc: "Focus Dock · protocolo de recuperación de 43 páginas · pago único con garantía de 14 días",
+      sec_more: "Más de mi universo",
+      design_title: "Servicios de Diseño & Branding",
+      design_desc: "Conoce mi trabajo en Instagram",
+      lofi_title: "Música Lofi",
+      lofi_desc: "Playlists para estudiar, crear y relajarte",
+      novel_title: "Novela: Crimen & Romance",
+      novel_desc: "Mi historia disponible en Amazon",
+      store_title: "Tienda Digital",
+      store_desc: "Descarga directa de mis productos en Gumroad",
+      planner_desc: "Planificador 2027 disponible en Amazon",
+      planner_hero_title: "Planner 2027 · Calma y Orden",
+      planner_hero_desc: "Organiza tu año con calma e intención · edición impresa en Amazon",
+      planner_hero_cta: "Ver en Amazon",
+      portfolio_promo_title: "¿Necesitas diseño? Este es mi portafolio",
+      portfolio_promo_desc: "6 años creando marcas con calma",
+      studio_title: "Alquimia Studio",
+      studio_desc: "Planners interactivos · 5 en 1 con modo oscuro",
+      studio_buy: "Comprar · $3",
+      kore_title: "Kore · Mi app de calma",
+      kore_desc: "Tu espacio de calma · ya disponible en Google Play",
+      maestro_title: "Plan Maestro",
+      maestro_desc: "Parrilla de contenido para mantener tus redes y tu mente en orden",
+      maestro_buy: "Comprar · $7",
+      badge_soon: "Pronto",
+      badge_available: "Disponible",
+      portfolio_title: "Portafolio",
+      portfolio_desc: "Conoce todos mis proyectos",
+      footer: "© 2026 Alquimia Lab · Hecho con calma y café"
+    },
+    en: {
+      tagline: "Coloring Books · Notion Templates · Lo-fi Music",
+      badge_new: "New",
+      crm_desc: "A Notion operating system to structure your workflow, eliminate admin chaos, and see your income clearly.",
+      sec_featured: "Featured",
+      cb_title: "Coloring Books",
+      cb_desc: "Available in English and Spanish",
+      cb_digital: "Digital Edition",
+      notion_title: "Notion Templates",
+      notion_desc: "Organize your life with style · instant digital download",
+      promo_title: "Your Notion isn't broken. It's just poorly designed.",
+      promo_desc: "Focus Dock · 43-page recovery protocol · one-time payment with 14-day guarantee",
+      sec_more: "More from my universe",
+      design_title: "Design & Branding Services",
+      design_desc: "Check out my work on Instagram",
+      lofi_title: "Lofi Music",
+      lofi_desc: "Playlists for studying, creating, and relaxing",
+      novel_title: "Novel: Crime & Romance",
+      novel_desc: "My story available on Amazon",
+      store_title: "Digital Store",
+      store_desc: "Direct download of my products on Gumroad",
+      planner_desc: "2027 Planner now available on Amazon",
+      planner_hero_title: "2027 Planner · Calma y Orden",
+      planner_hero_desc: "Organize your year with calm and intention · print edition on Amazon",
+      planner_hero_cta: "View on Amazon",
+      portfolio_promo_title: "Need design? This is my portfolio",
+      portfolio_promo_desc: "6 years crafting calm brands",
+      studio_title: "Alquimia Studio",
+      studio_desc: "Interactive planners · 5-in-1 with dark mode",
+      studio_buy: "Buy · $3",
+      kore_title: "Kore · My calm app",
+      kore_desc: "Your calm space · now available on Google Play",
+      maestro_title: "Plan Maestro",
+      maestro_desc: "Content calendar grid to keep your socials and mind in order",
+      maestro_buy: "Buy · $7",
+      badge_soon: "Soon",
+      badge_available: "Available",
+      portfolio_title: "Portfolio",
+      portfolio_desc: "Check out all my projects",
+      footer: "© 2026 Alquimia Lab · Made with calm and coffee"
+    }
+  };
+
+  var lang = localStorage.getItem('lang') || 'es';
+
+  function setLang(l) {
+    lang = l;
+    localStorage.setItem('lang', l);
+    var t = i18n[l];
+    document.documentElement.lang = l;
+    document.querySelectorAll('[data-i18n]').forEach(function (el) {
+      var key = el.getAttribute('data-i18n');
+      if (t[key]) el.textContent = t[key];
+    });
+    document.querySelectorAll('.lang-btn').forEach(function (btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-lang') === l);
+    });
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      setLang(btn.getAttribute('data-lang'));
+    });
+  });
+
+  setLang(lang);
+
+  // Gallery
+  document.querySelectorAll('.gallery-wrap').forEach(function (wrap) {
+    var imgs = wrap.querySelectorAll('.gallery img');
+    var dots = wrap.querySelectorAll('.dot');
+    var i = 0, timer;
+
+    function show(n) {
+      imgs[i].classList.remove('active');
+      dots[i].classList.remove('active');
+      i = (n + imgs.length) % imgs.length;
+      imgs[i].classList.add('active');
+      dots[i].classList.add('active');
+    }
+
+    function play() {
+      timer = setInterval(function () { show(i + 1); }, 4000);
+    }
+
+    dots.forEach(function (dot, k) {
+      dot.addEventListener('click', function () {
+        clearInterval(timer);
+        show(k);
+        play();
+      });
+    });
+
+    play();
+  });
+
+
+})();
+</script>
+
+</body>
+</html>
