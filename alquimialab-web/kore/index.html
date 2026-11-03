@@ -700,14 +700,14 @@ section{padding:88px 24px}
 <header class="hero">
   <div class="hero-inner">
     <div class="hero-copy">
-      <div class="hero-badge anim"><span class="badge-dot"></span> <span data-i18n="Coming soon · by Alquimia Lab">Coming soon · by Alquimia Lab</span></div>
+      <div class="hero-badge anim"><span class="badge-dot"></span> <span data-i18n="Now on Google Play · by Alquimia Lab">Now on Google Play · by Alquimia Lab</span></div>
       <h1 class="anim d1"><em>Your space of calm</em>, in an app</h1>
       <p class="hero-lead anim d2">Kore is your calm space: tasks, habits, notes, diary, lo‑fi music and an AI assistant — all in one app.</p>
       <div class="hero-ctas anim d3">
-        <a href="https://wa.me/573104108483" data-kore-notify target="_blank" rel="noopener" class="btn btn-lg" onclick="window.gtag&&gtag('event','click_kore_launch_updates')">Get launch updates</a>
+        <a href="https://play.google.com/store/apps/details?id=com.alquimialab.kore" target="_blank" rel="noopener" class="btn btn-lg" onclick="window.gtag&&gtag('event','click_download_kore')">Download on Google Play</a>
         <a href="#modules" class="btn btn-outline btn-lg">View modules</a>
       </div>
-      <p class="hero-note anim d3"><strong data-i18n="Android · Coming soon">Android · Coming soon</strong></p>
+      <p class="hero-note anim d3"><strong data-i18n="Android · Available now">Android · Available now</strong></p>
     </div>
 
     <div class="phone-stage anim d4">
@@ -1082,21 +1082,7 @@ section{padding:88px 24px}
   </a>
   <script>
     (function() {
-      var links = document.querySelectorAll('[data-kore-notify]');
-      function updateKoreLinks() {
-        var isSpanish = document.documentElement.lang === 'es';
-        var message = isSpanish
-          ? 'Hola Isabel, quiero que me avises cuando Kore esté disponible.'
-          : "Hi Isabel, please let me know when Kore is available.";
-        links.forEach(function(link) {
-          link.href = 'https://wa.me/573104108483?text=' + encodeURIComponent(message);
-        });
-      }
-      updateKoreLinks();
-      new MutationObserver(updateKoreLinks).observe(document.documentElement, {
-        attributes: true,
-        attributeFilter: ['lang']
-      });
+      // Kore launch notification links removed — app is now on Google Play
     })();
   </script>
 

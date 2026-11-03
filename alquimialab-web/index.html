@@ -509,11 +509,11 @@
       </div>
       <div class="promo-slide">
         <div class="promo-text">
-          <span class="promo-badge" data-i18n="Coming soon · by Alquimia Lab">Coming soon · by Alquimia Lab</span>
+          <span class="promo-badge" data-i18n="Now on Google Play · by Alquimia Lab">Now on Google Play · by Alquimia Lab</span>
           <h3><em>Your space of calm</em>, in an app</h3>
           <p>Your calm space: tasks, habits, notes, diary, lo‑fi music and an AI assistant — all in one app.</p>
-          <p class="promo-sub" data-i18n="Android · Coming soon">Android · Coming soon</p>
-          <a href="https://wa.me/573104108483" data-kore-notify class="promo-btn" data-i18n="Get launch updates →" onclick="window.gtag&&gtag('event','click_kore_launch_updates')" target="_blank" rel="noopener">Get launch updates →</a>
+          <p class="promo-sub" data-i18n="Android · Available now">Android · Available now</p>
+          <a href="https://play.google.com/store/apps/details?id=com.alquimialab.kore" class="promo-btn" data-i18n="Download Kore →" onclick="window.gtag&&gtag('event','click_download_kore')" target="_blank" rel="noopener">Download Kore →</a>
         </div>
         <div class="promo-media">
           <div class="promo-glow"></div>
@@ -870,21 +870,7 @@
   </a>
   <script>
     (function() {
-      var links = document.querySelectorAll('[data-kore-notify]');
-      function updateKoreLinks() {
-        var isSpanish = document.documentElement.lang === 'es';
-        var message = isSpanish
-          ? 'Hola Isabel, quiero que me avises cuando Kore esté disponible.'
-          : "Hi Isabel, please let me know when Kore is available.";
-        links.forEach(function(link) {
-          link.href = 'https://wa.me/573104108483?text=' + encodeURIComponent(message);
-        });
-      }
-      updateKoreLinks();
-      new MutationObserver(updateKoreLinks).observe(document.documentElement, {
-        attributes: true,
-        attributeFilter: ['lang']
-      });
+      // Kore launch notification links removed — app is now on Google Play
     })();
   </script>
 </body>

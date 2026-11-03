@@ -936,18 +936,23 @@
     "October 21, 2026": "21 de Octubre de 2026",
     "By using our Services after the publication of any change, you accept the revised version of these Terms of Service.": "Al usar nuestros Servicios después de la publicación de cualquier cambio, aceptas la versión revisada de estos Términos de Servicio.",
     "Coming soon · by Alquimia Lab": "Próximamente · por Alquimia Lab",
+    "Now on Google Play · by Alquimia Lab": "Ahora en Google Play · por Alquimia Lab",
     "Coming soon": "Próximamente",
     "Kore is now on Google Play!": "¡Kore ya está en Google Play!",
     "Delete Your Kore Account": "Eliminar tu cuenta de Kore",
     "Request deletion of your Kore account and all associated data. This action is permanent and cannot be undone.": "Solicita la eliminación de tu cuenta de Kore y todos los datos asociados. Esta acción es permanente y no se puede deshacer.",
     "🦊 Kore is now on Google Play!": "🦊 ¡Kore ya está en Google Play!",
     "Android · Coming soon": "Android · Próximamente",
+    "Android · Available now": "Android · Disponible ahora",
     "Download Kore": "Descargar Kore",
+    "Download Kore →": "Descargar Kore →",
+    "Download on Google Play": "Descargar en Google Play",
     "When can I download Kore?": "¿Cuándo puedo descargar Kore?",
     "Kore is <strong>available now on Google Play</strong>! Download it for Android and start organizing your life today.": "Kore está <strong>disponible ahora en Google Play</strong>! Descárgalo para Android y empieza a organizar tu vida hoy.",
     "📲 Kore is on Google Play": "📲 Kore está en Google Play",
     "Download Kore for Android and start building better habits today.": "Descarga Kore para Android y empieza a construir mejores hábitos hoy.",
-    "Get it on Google Play": "Descargar en Google Play"
+    "Get it on Google Play": "Descargar en Google Play",
+    "Available on Google Play": "Disponible en Google Play"
   };
 
   var placeholders = {
