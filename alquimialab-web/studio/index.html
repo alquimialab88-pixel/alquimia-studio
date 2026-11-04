@@ -322,6 +322,21 @@ body{font-family:var(--font-body);background:var(--bg-primary);color:var(--text-
   <input type="file" id="backupInput" accept=".json" style="display:none">
   <script>
 (function(){
+document.addEventListener('DOMContentLoaded',function(){
+  setTimeout(function(){
+    var splash=document.getElementById('splash');
+    if(!splash||splash.style.display==='none'||splash.classList.contains('fade-out'))return;
+    splash.style.display='none';
+    var licenseScreen=document.getElementById('licenseScreen');
+    var app=document.getElementById('app');
+    if(app&&app.classList.contains('hidden')&&(!licenseScreen||licenseScreen.style.display!=='flex')){
+      app.classList.remove('hidden');
+      showStartupNotice('Studio no pudo completar su inicio. Recarga la página e inténtalo de nuevo.');
+      console.error('Alquimia Studio no completó su inicio.');
+    }
+  },3000);
+},{once:true});
+
 var LICENSE_SECRET='ALQUIMIA2027';
 var LICENSE_KEY='alquimia-license';
 
@@ -357,13 +372,35 @@ var PLANNERS=[
   {id:'planner-menstrual',name:'Calendario Menstrual',icon:'&#127800;',description:'Ciclo, síntomas y bienestar',file:'planners/planner-menstrual.html',color:'#d4789c'}
 ];
 
+var startupStorageIssue=false;
+function readStoredValue(key){
+  try{return localStorage.getItem(key);}catch(e){
+    startupStorageIssue=true;
+    console.error('No se pudo leer el almacenamiento local de Alquimia Studio ('+key+').',e);
+    return null;
+  }
+}
+function readStoredArray(key){
+  var value=readStoredValue(key);
+  if(value===null)return [];
+  try{
+    var parsed=JSON.parse(value);
+    if(Array.isArray(parsed))return parsed;
+    throw new TypeError('Se esperaba una lista.');
+  }catch(e){
+    startupStorageIssue=true;
+    console.error('No se pudieron leer los datos guardados de Alquimia Studio ('+key+').',e);
+    return [];
+  }
+}
+
 var state={
   currentPlanner:null,
-  favorites:JSON.parse(localStorage.getItem('alquimia-favorites')||'[]'),
-  theme:localStorage.getItem('alquimia-theme')||'light',
+  favorites:readStoredArray('alquimia-favorites'),
+  theme:readStoredValue('alquimia-theme')||'light',
   language:window.AlquimiaI18n?window.AlquimiaI18n.getLanguage():'es',
-  sidebarOpen:localStorage.getItem('alquimia-sidebar')!=='false',
-  customFiles:JSON.parse(localStorage.getItem('alquimia-custom-files')||'[]')
+  sidebarOpen:readStoredValue('alquimia-sidebar')!=='false',
+  customFiles:readStoredArray('alquimia-custom-files')
 };
 var libraryFavorites=[];
 var restoringAppNavigation=false;
@@ -824,6 +861,7 @@ function initApp(){
   setTimeout(function(){
     $('splash').classList.add('fade-out');
     $('app').classList.remove('hidden');
+    if(startupStorageIssue)showStartupNotice('No se pudieron leer algunas preferencias guardadas. Studio se abrió con valores predeterminados; tus datos no se borraron.');
     setTimeout(function(){$('splash').style.display='none';},500);
   },800);
   loadStartupDependencies();
@@ -912,10 +950,6 @@ function initLicense(){
 }
 
 document.addEventListener('DOMContentLoaded',function(){
-  setTimeout(function(){
-    var s=$('splash');
-    if(s)s.style.display='none';
-  },3000);
   try{
     if(!initLicense())return;
     initApp();
