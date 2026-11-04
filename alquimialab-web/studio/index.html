@@ -11,7 +11,6 @@
   <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Eternalo&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <script src="js/i18n.js"></script>
   <style>
 :root{--bg-primary:#fff;--bg-secondary:#f7f6f3;--bg-sidebar:#f7f6f3;--bg-hover:#efefef;--bg-active:#e8e7e4;--text-primary:#37352f;--text-secondary:#6b6b6b;--text-muted:#9b9b9b;--border:#e4e4e4;--accent:#6463aa;--accent-light:#ccc9e6;--accent-hover:#5251a0;--shadow:rgba(0,0,0,.06);--shadow-lg:rgba(0,0,0,.1);--radius:6px;--radius-lg:12px;--transition:.2s ease;--sidebar-width:260px;--toolbar-height:44px;--font-body:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;--font-display:'Eternalo',Georgia,serif}
 [data-theme="dark"]{--bg-primary:#191919;--bg-secondary:#202020;--bg-sidebar:#1e1e1e;--bg-hover:#2a2a2a;--bg-active:#333;--text-primary:#e0e0e0;--text-secondary:#9b9b9b;--text-muted:#6b6b6b;--border:#333;--accent:#8f8dc7;--accent-light:#3d3d5c;--accent-hover:#a09ed6;--shadow:rgba(0,0,0,.2);--shadow-lg:rgba(0,0,0,.3)}
@@ -321,8 +320,6 @@ body{font-family:var(--font-body);background:var(--bg-primary);color:var(--text-
   <div id="libToast" class="lib-toast"></div>
   <input type="file" id="fileInput" accept=".html,.htm,text/html,application/pdf,.pdf" style="display:none" multiple>
   <input type="file" id="backupInput" accept=".json" style="display:none">
-  <script src="js/pdf.min.js"></script>
-  <script src="js/library.js"></script>
   <script>
 (function(){
 var LICENSE_SECRET='ALQUIMIA2027';
@@ -455,6 +452,7 @@ function updateLanguageButtons(){
   });
 }
 function setLanguage(language){
+  if(!window.AlquimiaI18n)return;
   state.language=language==='en'?'en':'es';
   window.AlquimiaI18n.setLanguage(state.language);
   updateLanguageButtons();
@@ -823,27 +821,63 @@ function initApp(){
   updateThemeButton();
   if(!state.sidebarOpen)$('sidebar').classList.add('collapsed');
   renderPlannerList();renderFavorites();renderWelcomeCards();setupEvents();
-  if(window.AlquimiaLibrary){
-    window.AlquimiaLibrary.onViewChange(function(view,id){
-      if(view==='library'){
-        state.currentPlanner=null;
-        renderPlannerList();
-      }
-      recordAppView(view,id);
-    });
-    window.AlquimiaLibrary.onFavoritesChange(function(favorites){
-      libraryFavorites=favorites;
-      renderFavorites();
-    });
-    window.AlquimiaLibrary.onLibraryChange(renderRecentPdfs);
-    window.AlquimiaLibrary.init();
-  }
   setTimeout(function(){
     $('splash').classList.add('fade-out');
     $('app').classList.remove('hidden');
     setTimeout(function(){$('splash').style.display='none';},500);
   },800);
-  if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(function(){});}
+  loadStartupDependencies();
+  if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(function(err){console.error('No se pudo actualizar la app sin conexión:',err);});}
+}
+
+function showStartupNotice(message){
+  var notice=$('libToast');
+  if(!notice)return;
+  notice.textContent=message;
+  notice.classList.add('show');
+  setTimeout(function(){notice.classList.remove('show');},5000);
+}
+
+function loadScript(src,onload){
+  var script=document.createElement('script');
+  script.src=src;
+  script.onload=onload;
+  script.onerror=function(){
+    var error=new Error('No se pudo cargar '+src);
+    console.error('No se pudo cargar un recurso de Alquimia Studio:',error);
+    showStartupNotice('Una función no pudo cargarse. Revisa tu conexión y recarga la página.');
+  };
+  document.head.appendChild(script);
+}
+
+function initializeLibrary(){
+  if(!window.AlquimiaLibrary)return;
+  window.AlquimiaLibrary.onViewChange(function(view,id){
+    if(view==='library'){
+      state.currentPlanner=null;
+      renderPlannerList();
+    }
+    recordAppView(view,id);
+  });
+  window.AlquimiaLibrary.onFavoritesChange(function(favorites){
+    libraryFavorites=favorites;
+    renderFavorites();
+  });
+  window.AlquimiaLibrary.onLibraryChange(renderRecentPdfs);
+  window.AlquimiaLibrary.init();
+}
+
+function loadStartupDependencies(){
+  loadScript('js/i18n.js',function(){
+    state.language=window.AlquimiaI18n.getLanguage();
+    window.AlquimiaI18n.apply(document.documentElement);
+    updateLanguageButtons();
+    updateThemeButton();
+    renderPlannerList();renderFavorites();renderWelcomeCards();
+  });
+  loadScript('js/pdf.min.js',function(){
+    loadScript('js/library.js',initializeLibrary);
+  });
 }
 
 function initLicense(){
@@ -888,6 +922,9 @@ document.addEventListener('DOMContentLoaded',function(){
   }catch(e){
     var s=$('splash');
     if(s)s.style.display='none';
+    var app=$('app');
+    if(app)app.classList.remove('hidden');
+    showStartupNotice('No se pudo iniciar Alquimia Studio. Recarga la página e inténtalo de nuevo.');
     console.error('No se pudo iniciar Alquimia Studio:',e);
   }
 });
