@@ -117,9 +117,9 @@
         count: metas.length
       });
     }
-    function notifyViewChanged(view, id) {
-      if (typeof viewChangeHandler === 'function') viewChangeHandler(view, id);
-    }
+  }
+  function notifyViewChanged(view, id) {
+    if (typeof viewChangeHandler === 'function') viewChangeHandler(view, id);
   }
   function saveFavorite(rec) {
     return putMeta(rec).then(function () {
