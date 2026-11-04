@@ -951,7 +951,11 @@ function initLicense(){
 
 document.addEventListener('DOMContentLoaded',function(){
   try{
-    if(!initLicense())return;
+    if(!initLicense()){
+      var splash=$('splash');
+      if(splash)splash.style.display='none';
+      return;
+    }
     initApp();
   }catch(e){
     var s=$('splash');

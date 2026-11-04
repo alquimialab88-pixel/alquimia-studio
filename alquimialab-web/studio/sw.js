@@ -1,6 +1,6 @@
 /* ===== Alquimia Studio - Service Worker ===== */
 
-const CACHE_NAME = 'alquimia-studio-v19';
+const CACHE_NAME = 'alquimia-studio-v20';
 const ASSETS = [
   './',
   './index.html',
