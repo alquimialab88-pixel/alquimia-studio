@@ -1,6 +1,6 @@
 /* ===== Alquimia Studio - Service Worker ===== */
 
-const CACHE_NAME = 'alquimia-studio-v20';
+const CACHE_NAME = 'alquimia-studio-v21';
 const ASSETS = [
   './',
   './index.html',
@@ -51,6 +51,25 @@ self.addEventListener('fetch', (event) => {
   // Never intercept Google Fonts or non-same-origin requests
   if (new URL(event.request.url).origin !== self.location.origin) return;
 
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request, { cache: 'no-cache' })
+        .then((response) => {
+          if (response && response.status === 200) {
+            const responseToCache = response.clone();
+            caches.open(CACHE_NAME)
+              .then((cache) => cache.put(event.request, responseToCache))
+              .catch((error) => console.error('No se pudo actualizar la página guardada de Studio:', error));
+          }
+          return response;
+        })
+        .catch(() => caches.match(event.request).then((response) => {
+          return response || caches.match('./index.html');
+        }))
+    );
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
@@ -63,10 +82,7 @@ self.addEventListener('fetch', (event) => {
           return fetchResponse;
         });
       })
-      .catch(() => {
-        if (event.request.mode === 'navigate') return caches.match('./index.html');
-        return null;
-      })
+      .catch(() => null)
   );
 });
 
