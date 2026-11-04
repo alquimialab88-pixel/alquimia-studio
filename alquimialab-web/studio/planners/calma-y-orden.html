@@ -113,7 +113,7 @@
 </style>
 </head>
 <body>
-<div id="toolbar"><a href="#idx" class="toolbtn">Índice</a><button id="printBtn" onclick="window.print()">Imprimir / PDF</button><button class="toolbtn" onclick="if(confirm('¿Borrar todo lo que escribiste en este journal?')){Object.keys(localStorage).forEach(function(key){if(key.indexOf('cyo2027:')===0)localStorage.removeItem(key);});location.reload();}">Borrar datos</button></div>
+<div id="toolbar"><a href="#idx" class="toolbtn">Índice</a><button id="printBtn" onclick="window.print()">Imprimir / PDF</button><button class="toolbtn" onclick="if(confirm(window.AlquimiaI18n?window.AlquimiaI18n.t('¿Borrar todo lo que escribiste en este journal?'):'¿Borrar todo lo que escribiste en este journal?')){Object.keys(localStorage).forEach(function(key){if(key.indexOf('cyo2027:')===0)localStorage.removeItem(key);});location.reload();}">Borrar datos</button></div>
 <div id="journal"></div>
 
 <script>
@@ -418,5 +418,6 @@ document.getElementById('journal').innerHTML = out;
   });
 })();
 </script>
+<script src="../js/i18n.js"></script>
 </body>
 </html>

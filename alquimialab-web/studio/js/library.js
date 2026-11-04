@@ -19,6 +19,7 @@
   var metas = [];
   var favoritesChangeHandler = null;
   var libraryChangeHandler = null;
+  var viewChangeHandler = null;
   var filter = 'all';
   var query = '';
   var inited = false;
@@ -35,6 +36,9 @@
 
   /* ---------- utilidades ---------- */
   function $(id) { return document.getElementById(id); }
+  function tr(text) {
+    return window.AlquimiaI18n ? window.AlquimiaI18n.t(text) : text;
+  }
   function esc(s) {
     return String(s == null ? '' : s)
       .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -52,7 +56,7 @@
   function toast(msg) {
     var el = $('libToast');
     if (!el) return;
-    el.textContent = msg;
+    el.textContent = tr(msg);
     el.classList.add('show');
     clearTimeout(el._t);
     el._t = setTimeout(function () { el.classList.remove('show'); }, 2600);
@@ -112,6 +116,9 @@
         }),
         count: metas.length
       });
+    }
+    function notifyViewChanged(view, id) {
+      if (typeof viewChangeHandler === 'function') viewChangeHandler(view, id);
     }
   }
   function saveFavorite(rec) {
@@ -256,9 +263,10 @@
       grid.classList.add('hidden');
       empty.classList.remove('hidden');
       empty.innerHTML = '<span class="ico">&#128218;</span>'
-        + '<h3>Tu biblioteca está vacía</h3>'
-        + '<p>Sube tus PDFs (libros, guías, apuntes) y léelos aquí como un ebook, en tu compu, tablet o celular.</p>'
-        + '<button class="lib-btn primary" id="libEmptyBtn">＋ Subir mi primer PDF</button>';
+        + '<h3>' + tr('Tu biblioteca está vacía') + '</h3>'
+        + '<p>' + tr('Sube tus PDFs (libros, guías, apuntes) y léelos aquí como un ebook, en tu compu, tablet o celular.') + '</p>'
+        + '<button class="lib-btn primary" id="libEmptyBtn">＋ ' + tr('Subir mi primer PDF') + '</button>';
+      if (window.AlquimiaI18n) window.AlquimiaI18n.apply(empty);
       var b = $('libEmptyBtn');
       if (b) b.addEventListener('click', pickFiles);
       return;
@@ -268,7 +276,7 @@
     grid.classList.remove('hidden');
 
     if (!list.length) {
-      grid.innerHTML = '<div style="grid-column:1/-1;padding:40px;text-align:center;color:var(--text-muted);font-size:13.5px">No hay PDFs que coincidan con tu búsqueda.</div>';
+      grid.innerHTML = '<div style="grid-column:1/-1;padding:40px;text-align:center;color:var(--text-muted);font-size:13.5px">' + tr('No hay PDFs que coincidan con tu búsqueda.') + '</div>';
       return;
     }
 
@@ -280,13 +288,13 @@
         : '<span class="pdf-ph">&#128196;</span>';
       return '<article class="pdf-card" data-id="' + esc(m.id) + '">'
         + '<div class="pdf-cover">' + cover
-        + '<button class="pdf-fav' + (m.favorite ? ' on' : '') + '" data-fav="' + esc(m.id) + '" title="' + (m.favorite ? 'Quitar de favoritos' : 'Agregar a favoritos') + '" aria-label="' + (m.favorite ? 'Quitar de favoritos' : 'Agregar a favoritos') + '">' + (m.favorite ? '★' : '☆') + '</button>'
-        + '<button class="pdf-edit" data-edit="' + esc(m.id) + '" title="Renombrar">&#9998;</button>'
-        + '<button class="pdf-del" data-del="' + esc(m.id) + '" title="Eliminar">✕</button>'
+        + '<button class="pdf-fav' + (m.favorite ? ' on' : '') + '" data-fav="' + esc(m.id) + '" title="' + esc(tr(m.favorite ? 'Quitar de favoritos' : 'Agregar a favoritos')) + '" aria-label="' + esc(tr(m.favorite ? 'Quitar de favoritos' : 'Agregar a favoritos')) + '">' + (m.favorite ? '★' : '☆') + '</button>'
+        + '<button class="pdf-edit" data-edit="' + esc(m.id) + '" title="' + esc(tr('Renombrar')) + '">&#9998;</button>'
+        + '<button class="pdf-del" data-del="' + esc(m.id) + '" title="' + esc(tr('Eliminar')) + '">✕</button>'
         + '</div>'
         + '<div class="pdf-meta">'
         + '<div class="pdf-title">' + esc(m.title) + '</div>'
-        + '<div class="pdf-sub"><span>' + (m.pages || '?') + ' pág.</span><span>' + fmtSize(m.size) + '</span></div>'
+        + '<div class="pdf-sub"><span>' + (m.pages || '?') + ' ' + tr('pág.') + '</span><span>' + fmtSize(m.size) + '</span></div>'
         + '<div class="pdf-bar"><i style="width:' + pct + '%"></i></div>'
         + '</div></article>';
     }).join('');
@@ -298,16 +306,20 @@
     if ($('welcomeScreen')) $('welcomeScreen').classList.add('hidden');
     if ($('viewer')) $('viewer').classList.add('hidden');
     if ($('searchPanel')) $('searchPanel').classList.add('hidden');
-    if ($('viewerFrame')) $('viewerFrame').src = '';
+    if ($('viewerFrame')) {
+      $('viewerFrame').onload = null;
+      $('viewerFrame').src = '';
+    }
     view.classList.remove('hidden');
     if ($('breadcrumbs')) {
       $('breadcrumbs').innerHTML = '<span class="breadcrumb-item" onclick="window._showWelcome()">Alquimia Studio</span>'
-        + '<span class="breadcrumb-separator">/</span><span class="breadcrumb-current">Mi Biblioteca</span>';
+        + '<span class="breadcrumb-separator">/</span><span class="breadcrumb-current">' + tr('Mi Biblioteca') + '</span>';
     }
     if ($('favoriteBtn')) $('favoriteBtn').classList.remove('active');
     if ($('favoriteBtn')) $('favoriteBtn').hidden = true;
     if ($('sidebar')) $('sidebar').classList.remove('mobile-open');
     renderLibrary();
+    notifyViewChanged('library');
   }
   function hideLibrary() {
     var view = $('libraryView');
@@ -351,7 +363,7 @@
 
     files.forEach(function (file, i) {
       chain = chain.then(function () {
-        if (txt) txt.innerHTML = 'Preparando <b>' + esc(file.name) + '</b><br><span style="font-size:12px;opacity:.75">' + (i + 1) + ' de ' + files.length + '</span>';
+        if (txt) txt.innerHTML = tr('Preparando ') + '<b>' + esc(file.name) + '</b><br><span style="font-size:12px;opacity:.75">' + (i + 1) + ' ' + tr(' de ') + files.length + '</span>';
         return file.arrayBuffer().then(function (buf) {
           return pdfjs.getDocument({ data: buf }).promise;
         }).then(function (doc) {
@@ -512,6 +524,7 @@
     var reader = $('pdfReader');
     if (!reader) return;
     reader.classList.remove('hidden');
+    notifyViewChanged('reader', id);
     document.body.style.overflow = 'hidden';
     var night = localStorage.getItem('alquimia-reader-night') === '1';
     reader.classList.toggle('night', night);
@@ -555,6 +568,7 @@
     currentRec = null;
     loadSeq++;
     renderLibrary();
+    notifyViewChanged('library');
   }
 
   /* ---------- eventos ---------- */
@@ -609,7 +623,7 @@
           var eid = edit.dataset.edit;
           var em = metas.filter(function (x) { return x.id === eid; })[0];
           if (!em) return;
-          var newTitle = window.prompt('Nuevo título para este PDF:', em.title);
+          var newTitle = window.prompt(tr('Nuevo título para este PDF:'), em.title);
           if (newTitle === null) return;
           newTitle = String(newTitle).replace(/\s+/g, ' ').trim();
           if (!newTitle) return;
@@ -628,7 +642,9 @@
           var did = del.dataset.del;
           var rec = metas.filter(function (x) { return x.id === did; })[0];
           if (!rec) return;
-          if (!window.confirm('¿Eliminar "' + rec.title + '" de tu biblioteca?\n\nEl archivo se borra de este dispositivo.')) return;
+          if (!window.confirm(window.AlquimiaI18n && window.AlquimiaI18n.getLanguage() === 'en'
+            ? 'Remove "' + rec.title + '" from your library?\n\nThe file will be deleted from this device.'
+            : '¿Eliminar "' + rec.title + '" de tu biblioteca?\n\nEl archivo se borra de este dispositivo.')) return;
           delMeta(did).then(function () { return delFile(did); }).then(function () {
             metas = metas.filter(function (x) { return x.id !== did; });
             notifyFavoritesChanged();
@@ -667,7 +683,10 @@
     }
 
     /* lector */
-    if ($('readerClose')) $('readerClose').addEventListener('click', closeReader);
+    if ($('readerClose')) $('readerClose').addEventListener('click', function () {
+      if (typeof window._alquimiaGoBack === 'function') window._alquimiaGoBack();
+      else closeReader();
+    });
     if ($('readerPrev')) $('readerPrev').addEventListener('click', function () { goTo(currentPage - 1); });
     if ($('readerNext')) $('readerNext').addEventListener('click', function () { goTo(currentPage + 1); });
     if ($('readerPage')) {
@@ -701,7 +720,11 @@
     document.addEventListener('keydown', function (e) {
       var r = $('pdfReader');
       if (!r || r.classList.contains('hidden')) return;
-      if (e.key === 'Escape') { closeReader(); return; }
+      if (e.key === 'Escape') {
+        if (typeof window._alquimiaGoBack === 'function') window._alquimiaGoBack();
+        else closeReader();
+        return;
+      }
       if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); goTo(currentPage + 1); }
       else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); goTo(currentPage - 1); }
       else if (e.key === 'Home') { e.preventDefault(); goTo(1); }
@@ -769,6 +792,14 @@
     onLibraryChange: function (handler) {
       libraryChangeHandler = handler;
       notifyLibraryChanged();
+    },
+    onViewChange: function (handler) {
+      viewChangeHandler = handler;
+    },
+    closeReader: closeReader,
+    isReaderOpen: function () {
+      var reader = document.getElementById('pdfReader');
+      return !!(reader && !reader.classList.contains('hidden'));
     },
     openFavorite: function (id) {
       showLibrary();

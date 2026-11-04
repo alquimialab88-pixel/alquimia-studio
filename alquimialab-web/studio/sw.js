@@ -1,6 +1,6 @@
 /* ===== Alquimia Studio - Service Worker ===== */
 
-const CACHE_NAME = 'alquimia-studio-v13';
+const CACHE_NAME = 'alquimia-studio-v16';
 const ASSETS = [
   './',
   './index.html',
@@ -12,6 +12,7 @@ const ASSETS = [
   './css/library.css',
   './css/premium.css',
   './js/library.js',
+  './js/i18n.js',
   './js/pdf.min.js',
   './js/pdf.worker.min.js',
   './planners/calma-y-orden.html',
