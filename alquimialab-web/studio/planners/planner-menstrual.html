@@ -14,12 +14,18 @@
   .page.cover{padding:0;}
   .pgfoot{position:absolute;bottom:.24in;left:0;right:0;text-align:center;font-size:8px;letter-spacing:.14em;color:#9a98bd;text-transform:uppercase;}
   .pagenum{position:absolute;left:50%;transform:translateX(-50%);bottom:87px;width:28px;height:28px;border-radius:50%;background:var(--rose);color:#fff;font-size:11px;font-weight:bold;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 1px var(--rose-light);}
-  @media print{body{background:#fff;padding:0;}#planner{display:block;gap:0;}.page{box-shadow:none;width:6in;height:9in;page-break-after:always;break-after:page;}.page:last-child{page-break-after:auto;}#toolbar{display:none;}}
+  @media print{body{background:#fff;padding:0;}#planner{display:block;gap:0;zoom:1!important;}.page{box-shadow:none;width:6in;height:9in;page-break-after:always;break-after:page;}.page:last-child{page-break-after:auto;}#toolbar{display:none;}}
   @page{size:6in 9in;margin:0;}
   #toolbar{position:fixed;top:14px;right:14px;z-index:99;display:flex;gap:8px;align-items:center;}
   .toolbtn{background:#fff;color:var(--rose);border:1.5px solid var(--rose-light);padding:9px 16px;border-radius:22px;font-family:inherit;font-size:13px;cursor:pointer;text-decoration:none;}
   .toolbtn:hover{background:var(--rose-light);}
   #printBtn{background:var(--rose);color:#fff;border:none;padding:10px 18px;border-radius:22px;font-family:inherit;font-size:13px;cursor:pointer;}
+  @media(max-width:620px){
+    body{padding:10px 0;}
+    #toolbar{position:sticky;top:8px;right:auto;justify-content:center;flex-wrap:wrap;width:fit-content;max-width:100%;margin:0 auto 12px;padding:0 8px;}
+    .toolbtn,#printBtn{padding:8px 12px;font-size:12px;}
+    #planner{zoom:var(--planner-scale,1);}
+  }
 
   .wline{display:block;width:100%;border:none;border-bottom:1px solid var(--line);height:26px;background:transparent;outline:none;font-family:inherit;font-size:12px;color:var(--ink);padding:0 2px;}
   .wline:focus{border-bottom-color:var(--rose);}
@@ -129,6 +135,12 @@ const QUOTES = [
 let out = '';
 let numPg = 0;
 let K = 0;
+function fitPlannerToScreen(){
+  const scale = Math.min(1, Math.max(0.35, (window.innerWidth - 16) / 576));
+  document.documentElement.style.setProperty('--planner-scale', scale);
+}
+fitPlannerToScreen();
+window.addEventListener('resize', fitPlannerToScreen);
 const key = () => 'mu' + (K++);
 function page(inner, foot, showNum, id, cls){
   numPg++;

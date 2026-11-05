@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Calma y Orden — Edición Digital Interactiva</title>
 <!-- Formato KDP: páginas de 6 x 9 pulgadas. Al imprimir: márgenes = Ninguno, activar "Gráficos de fondo". -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +25,7 @@
            display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 1px #ccc9e6;}
   @media print{
     body{background:#fff;padding:0;}
-    #journal{display:block;gap:0;}
+    #journal{display:block;gap:0;zoom:1!important;}
     .page{box-shadow:none;width:6in;height:9in;page-break-after:always;break-after:page;}
     .page:last-child{page-break-after:auto;}
     #toolbar{display:none;}
@@ -35,6 +36,12 @@
   .toolbtn{background:#fff;color:var(--accent);border:1.5px solid var(--soft);padding:9px 16px;border-radius:22px;font-family:inherit;font-size:13px;cursor:pointer;text-decoration:none;}
   .toolbtn:hover{background:var(--cream);}
   #printBtn{background:var(--sage);color:#fff;border:none;padding:10px 18px;border-radius:22px;font-family:inherit;font-size:13px;cursor:pointer;}
+  @media(max-width:620px){
+    body{padding:10px 0;}
+    #toolbar{position:sticky;top:8px;right:auto;justify-content:center;flex-wrap:wrap;width:fit-content;max-width:100%;margin:0 auto 12px;padding:0 8px;}
+    .toolbtn,#printBtn{padding:8px 12px;font-size:12px;}
+    #journal{zoom:var(--planner-scale,1);}
+  }
 
   /* ===== Edición interactiva ===== */
   .wline{display:block;width:100%;border:none;border-bottom:1px solid var(--line);height:26px;background:transparent;outline:none;font-family:inherit;font-size:12px;color:var(--ink);padding:0 2px;}
@@ -151,6 +158,12 @@ const PROMPTS = [
 let out = '';
 let numPg = 0;
 let K = 0;
+function fitPlannerToScreen(){
+  const scale = Math.min(1, Math.max(0.35, (window.innerWidth - 16) / 576));
+  document.documentElement.style.setProperty('--planner-scale', scale);
+}
+fitPlannerToScreen();
+window.addEventListener('resize', fitPlannerToScreen);
 const key = () => 'k' + (K++);
 function page(inner, foot, showNum, id, cls){
   numPg++;
