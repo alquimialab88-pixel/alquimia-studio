@@ -110,6 +110,44 @@
       .tablet-frame { width:230px; }
       .tablet-glow { width:260px; height:260px; }
     }
+    .studio-preview-trigger { display:block; width:100%; padding:0; border:0; background:transparent; cursor:pointer; }
+    .studio-preview-trigger:focus-visible { outline:3px solid #6462ab; outline-offset:3px; }
+    .studio-details-dialog {
+      width:min(980px, calc(100% - 32px));
+      max-width:none;
+      max-height:min(92dvh, 900px);
+      margin:auto;
+      padding:0;
+      border:0;
+      border-radius:24px;
+      color:#252342;
+      background:#fff;
+      box-shadow:0 28px 90px rgba(31,29,69,.32);
+    }
+    .studio-details-dialog::backdrop { background:rgba(30,27,64,.62); backdrop-filter:blur(5px); }
+    .studio-dialog-content { padding:clamp(22px,4vw,40px); }
+    .studio-dialog-header { display:flex; justify-content:space-between; align-items:flex-start; gap:20px; }
+    .studio-dialog-eyebrow { color:#6462ab; font-size:12px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+    .studio-dialog-header h2 { margin-top:6px; color:#252342; font-size:clamp(25px,4vw,36px); line-height:1.15; }
+    .studio-dialog-close { flex:0 0 auto; width:40px; height:40px; border:0; border-radius:50%; background:#efedfb; color:#4e4b85; font-size:25px; cursor:pointer; }
+    .studio-dialog-lead { max-width:760px; margin:14px 0 24px; color:#656282; line-height:1.65; }
+    .studio-screenshot-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+    .studio-screenshot { margin:0; overflow:hidden; border:1px solid #e6e3f2; border-radius:16px; background:#f7f6fb; }
+    .studio-screenshot img { display:block; width:100%; aspect-ratio:1.44; object-fit:cover; object-position:top left; }
+    .studio-screenshot figcaption { padding:10px 12px; color:#4e4b78; font-size:13px; font-weight:700; }
+    .studio-dialog-columns { display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:26px; }
+    .studio-dialog-columns h3 { margin-bottom:10px; color:#35335e; font-size:17px; }
+    .studio-dialog-columns ul,.studio-dialog-columns ol { padding-left:20px; color:#676582; line-height:1.65; }
+    .studio-dialog-columns li+li { margin-top:6px; }
+    .studio-data-note { margin-top:22px; padding:14px 16px; border-radius:14px; background:#f2f0fb; color:#57547d; font-size:13px; line-height:1.6; }
+    .studio-dialog-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
+    @media(max-width:680px) {
+      .studio-details-dialog { width:calc(100% - 20px); max-height:94dvh; border-radius:18px; }
+      .studio-screenshot-grid { grid-template-columns:1fr; }
+      .studio-screenshot img { aspect-ratio:1.6; }
+      .studio-dialog-columns { grid-template-columns:1fr; gap:20px; }
+      .studio-dialog-actions > a { width:100%; justify-content:center; }
+    }
   </style>
 </head>
 <body>
@@ -314,14 +352,18 @@
         </div>
 
         <!-- ALQUIMIA STUDIO -->
-        <div class="notion-card shop-card anim" data-cat="digital">
-          <img class="notion-thumb" src="assets/featured-alquimia.jpg?v=2" alt="Alquimia Studio" loading="lazy" decoding="async">
+        <div class="notion-card shop-card anim" data-cat="digital" id="p-alquimia-studio">
+          <button type="button" class="studio-preview-trigger" onclick="openStudioDetails()" aria-label="See Alquimia Studio features and screenshots">
+            <img class="notion-thumb" src="assets/alquimia-studio/screenshots/studio-overview.png?v=1" alt="" loading="lazy" decoding="async">
+          </button>
           <div class="notion-info">
-            <h3>Alquimia Studio</h3>
-            <p>Five interactive planners in one place: calm, annual, ADHD, menstrual, and weekly. Dark mode, favorites, and PDF export.</p>
+            <h3>Alquimia Studio — PDF Organizer + 5 Digital Planners</h3>
+            <p>Organize and read your PDFs in your browser, alongside five digital planners: Calm &amp; Order, Annual, ADHD, Menstrual Cycle, and Weekly. Includes light and dark mode, favorites, and backup and restore tools.</p>
+            <p>Your planners and PDFs are saved in each device's browser and do not sync automatically. Save a backup to move or restore your data. One-time purchase, no monthly subscription.</p>
             <span class="notion-price">$3.99</span>
             <div class="buy-stack">
-              <a href="https://alquimialab.gumroad.com/l/AlquimiaStudio_Planner" target="_blank" rel="noopener" class="btn-primary btn-sm" onclick="window.gtag&&gtag('event','click_buy_alquimia_studio')">Buy on Gumroad →</a>
+              <button type="button" class="btn-secondary btn-sm" onclick="openStudioDetails()">See features &amp; screenshots</button>
+              <a href="https://alquimialab.gumroad.com/l/AlquimiaStudio_Planner" target="_blank" rel="noopener" class="btn-primary btn-sm" onclick="window.gtag&&gtag('event','click_buy_alquimia_studio')">Get instant access on Gumroad →</a>
             </div>
           </div>
         </div>
@@ -490,6 +532,62 @@
 
       </div>
 
+      <dialog class="studio-details-dialog" id="studioDetailsDialog" aria-labelledby="studioDetailsTitle">
+        <div class="studio-dialog-content">
+          <div class="studio-dialog-header">
+            <div>
+              <p class="studio-dialog-eyebrow">Alquimia Studio · $3.99 · One-time purchase</p>
+              <h2 id="studioDetailsTitle">Your PDFs and five planners, together</h2>
+            </div>
+            <form method="dialog"><button class="studio-dialog-close" aria-label="Close details">&times;</button></form>
+          </div>
+          <p class="studio-dialog-lead">A calm, browser-based workspace to organize and read your PDFs, plan your year, and keep your routines in one place. Use it on your phone, tablet, or computer—no app-store download or monthly subscription required.</p>
+
+          <div class="studio-screenshot-grid" aria-label="Alquimia Studio screenshots">
+            <figure class="studio-screenshot">
+              <img src="assets/alquimia-studio/screenshots/studio-overview.png" alt="Alquimia Studio home screen with the PDF library and five planners" loading="lazy">
+              <figcaption>One home for your library and planners</figcaption>
+            </figure>
+            <figure class="studio-screenshot">
+              <img src="assets/alquimia-studio/screenshots/studio-planner.png" alt="Calm & Order planner open in Alquimia Studio" loading="lazy">
+              <figcaption>Plan and write right in your browser</figcaption>
+            </figure>
+            <figure class="studio-screenshot">
+              <img src="assets/alquimia-studio/screenshots/studio-library.png" alt="Alquimia Studio PDF reader displaying the Calma & Order planner cover" loading="lazy">
+              <figcaption>Read PDFs in the built-in reader</figcaption>
+            </figure>
+          </div>
+
+          <div class="studio-dialog-columns">
+            <section>
+              <h3>Five planners included</h3>
+              <ul>
+                <li><strong>Calm &amp; Order:</strong> self-care, habits, and everyday organization.</li>
+                <li><strong>Annual Planner:</strong> goals and plans for the year.</li>
+                <li><strong>ADHD Planner:</strong> visual priorities and flexible planning.</li>
+                <li><strong>Menstrual Cycle Calendar:</strong> track your cycle, symptoms, and energy.</li>
+                <li><strong>Weekly Planner:</strong> organize your seven days with room to adjust.</li>
+              </ul>
+            </section>
+            <section>
+              <h3>Also included</h3>
+              <ul>
+                <li>Upload and read PDFs in My PDF Library.</li>
+                <li>Light and dark modes, favorites, and planner-to-PDF printing.</li>
+                <li>Save and restore a backup of your planners and PDFs.</li>
+                <li>Instant access with a personal license code sent after purchase.</li>
+              </ul>
+            </section>
+          </div>
+
+          <p class="studio-data-note"><strong>Your data stays under your control.</strong> Planners and PDFs are stored in the browser on each device and do not automatically sync between devices. Use Save a Backup and Import Backup to move or restore your data. Studio may work offline after it has loaded, as long as your browser keeps its files and data.</p>
+          <div class="studio-dialog-actions">
+            <a href="https://alquimialab.gumroad.com/l/AlquimiaStudio_Planner" target="_blank" rel="noopener" class="btn-primary" onclick="window.gtag&&gtag('event','click_buy_alquimia_studio')">Get instant access on Gumroad · $3.99 →</a>
+            <a href="https://alquimialab.app/studio/" target="_blank" rel="noopener" class="btn-secondary">Open Alquimia Studio</a>
+          </div>
+        </div>
+      </dialog>
+
       <!-- EBOOK · HISTORIA (estilo Kore, sin cajas) -->
       <div class="ebook-story anim d2">
         <div>
@@ -602,6 +700,21 @@
       card.classList.remove('flash');
       void card.offsetWidth;
       card.classList.add('flash');
+    }
+
+    function openStudioDetails() {
+      var dialog = document.getElementById('studioDetailsDialog');
+      if (dialog && !dialog.open) dialog.showModal();
+    }
+    var studioDialog = document.getElementById('studioDetailsDialog');
+    if (studioDialog) {
+      studioDialog.addEventListener('click', function(event) {
+        if (event.target === studioDialog) studioDialog.close();
+      });
+    }
+    if (catFromHash() === 'p-alquimia-studio') {
+      goProduct('p-alquimia-studio');
+      openStudioDetails();
     }
   </script>
 
