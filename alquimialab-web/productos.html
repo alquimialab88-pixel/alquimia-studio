@@ -139,6 +139,9 @@
     .studio-dialog-columns h3 { margin-bottom:10px; color:#35335e; font-size:17px; }
     .studio-dialog-columns ul,.studio-dialog-columns ol { padding-left:20px; color:#676582; line-height:1.65; }
     .studio-dialog-columns li+li { margin-top:6px; }
+    .studio-install-guide { margin-top:26px; }
+    .studio-install-guide > p { margin-top:8px; color:#676582; line-height:1.65; }
+    .studio-install-guide h4 { margin:4px 0 8px; color:#35335e; font-size:15px; }
     .studio-data-note { margin-top:22px; padding:14px 16px; border-radius:14px; background:#f2f0fb; color:#57547d; font-size:13px; line-height:1.6; }
     .studio-dialog-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
     @media(max-width:680px) {
@@ -360,7 +363,7 @@
             <h3>Alquimia Studio — PDF Organizer + 5 Digital Planners</h3>
             <p>Organize and read your PDFs in your browser, alongside five digital planners: Calm &amp; Order, Annual, ADHD, Menstrual Cycle, and Weekly. Includes light and dark mode, favorites, and backup and restore tools.</p>
             <p>Your planners and PDFs are saved in each device's browser and do not sync automatically. Save a backup to move or restore your data. One-time purchase, no monthly subscription.</p>
-            <span class="notion-price">$3.99</span>
+            <span class="notion-price">$14.99</span>
             <div class="buy-stack">
               <button type="button" class="btn-secondary btn-sm" onclick="openStudioDetails()">See features &amp; screenshots</button>
               <a href="https://alquimialab.gumroad.com/l/AlquimiaStudio_Planner" target="_blank" rel="noopener" class="btn-primary btn-sm" onclick="window.gtag&&gtag('event','click_buy_alquimia_studio')">Get instant access on Gumroad →</a>
@@ -536,7 +539,7 @@
         <div class="studio-dialog-content">
           <div class="studio-dialog-header">
             <div>
-              <p class="studio-dialog-eyebrow">Alquimia Studio · $3.99 · One-time purchase</p>
+              <p class="studio-dialog-eyebrow">Alquimia Studio · $14.99 · One-time purchase</p>
               <h2 id="studioDetailsTitle">Your PDFs and five planners, together</h2>
             </div>
             <form method="dialog"><button class="studio-dialog-close" aria-label="Close details">&times;</button></form>
@@ -580,10 +583,32 @@
             </section>
           </div>
 
+          <section class="studio-install-guide">
+            <h3>File type &amp; mobile installation</h3>
+            <p>Alquimia Studio is a browser-based web app (PWA built with HTML), not an Android APK or an App Store app. After purchasing on Gumroad, use the access link and personal license code included with your purchase.</p>
+            <div class="studio-dialog-columns">
+              <section>
+                <h4>Android</h4>
+                <ol>
+                  <li>Open your access link in Chrome and enter your license code.</li>
+                  <li>Open the browser menu (⋮), then choose Install app or Add to Home screen.</li>
+                  <li>Confirm to add Studio to your home screen.</li>
+                </ol>
+              </section>
+              <section>
+                <h4>iPhone &amp; iPad</h4>
+                <ol>
+                  <li>Open your access link in Safari and enter your license code.</li>
+                  <li>Tap Share, then Add to Home Screen.</li>
+                  <li>Tap Add to put Studio on your home screen.</li>
+                </ol>
+              </section>
+            </div>
+          </section>
+
           <p class="studio-data-note"><strong>Your data stays under your control.</strong> Planners and PDFs are stored in the browser on each device and do not automatically sync between devices. Use Save a Backup and Import Backup to move or restore your data. Studio may work offline after it has loaded, as long as your browser keeps its files and data.</p>
           <div class="studio-dialog-actions">
-            <a href="https://alquimialab.gumroad.com/l/AlquimiaStudio_Planner" target="_blank" rel="noopener" class="btn-primary" onclick="window.gtag&&gtag('event','click_buy_alquimia_studio')">Get instant access on Gumroad · $3.99 →</a>
-            <a href="https://alquimialab.app/studio/" target="_blank" rel="noopener" class="btn-secondary">Open Alquimia Studio</a>
+            <a href="https://alquimialab.gumroad.com/l/AlquimiaStudio_Planner" target="_blank" rel="noopener" class="btn-primary" onclick="window.gtag&&gtag('event','click_buy_alquimia_studio')">Get instant access on Gumroad · $14.99 →</a>
           </div>
         </div>
       </dialog>
