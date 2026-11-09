@@ -93,7 +93,7 @@
 </style>
 </head>
 <body>
-<div id="toolbar"><a href="#idx" class="toolbtn">Índice</a><button id="printBtn" onclick="window.print()">Imprimir / PDF</button><button class="toolbtn" onclick="if(confirm('¿Borrar todo?')){localStorage.clear();location.reload();}">Borrar datos</button></div>
+<div id="toolbar"><a href="#idx" class="toolbtn">Índice</a><button id="printBtn" onclick="window.print()">Imprimir / PDF</button><button class="toolbtn" onclick="if(confirm('¿Borrar los datos de este planner?')){Object.keys(localStorage).forEach(function(key){if(key.indexOf('mu2027:')===0)localStorage.removeItem(key);});location.reload();}">Borrar datos</button></div>
 <div id="planner"></div>
 
 <script>

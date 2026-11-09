@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Plan Maestro · Alquimia</title>
+<title>Planora · Alquimia Lab</title>
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style id="pdfPageSize">@page{size:A4 landscape;margin:12mm;background:#fff}</style>
 <style>
 :root{
   --purple:#6462AB; --lilac:#CCC9E6; --white:#FFFFFF;
@@ -91,6 +92,12 @@ input,textarea,select{font-family:inherit;color:inherit}
 .b-frase{background:#f4f3fa;color:var(--purple)}
 .b-kore{background:#ede9ff;color:var(--purple-deep)}
 .b-gen{background:#eef0f4;color:#555}
+.b-custom-0{background:#fff0e1;color:#a8561a}
+.b-custom-1{background:#e8f1fb;color:#2f6fa8}
+.b-custom-2{background:#ffe9f0;color:#c23a68}
+.b-custom-3{background:#e3defa;color:#4E4C8A}
+.b-custom-4{background:#e4f4ec;color:#24734f}
+.b-custom-5{background:#e4f3f4;color:#28777c}
 
 .empty{
   text-align:center;padding:48px 24px;border:2px dashed var(--lilac);
@@ -151,13 +158,72 @@ select.field{cursor:pointer}
 .cal-cell.today{border-color:var(--purple);box-shadow:0 0 0 2px rgba(100,98,171,.15)}
 .cal-daynum{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--dark);margin-bottom:4px}
 .cal-cell.today .cal-daynum{color:var(--purple);background:#efe9ff;border-radius:6px;display:inline-block;padding:1px 5px}
-.cal-post{font-size:10.5px;font-weight:600;line-height:1.3;padding:4px 6px;border-radius:6px;margin-bottom:3px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:#efe9ff;color:var(--purple-deep)}
+/* Color por tipo de publicación (pilar): lo usan el calendario y el feed */
+.pil-mig{--pc:#2f6fa8;--pbg:#e8f1fb;--pt:#2f6fa8}
+.pil-prod{--pc:#c23a68;--pbg:#ffe9f0;--pt:#c23a68}
+.pil-amiga{--pc:#e08a3c;--pbg:#fff0e1;--pt:#a8561a}
+.pil-frase{--pc:#a8a6d4;--pbg:#f1effa;--pt:#5a58a0}
+.pil-kore{--pc:#6462AB;--pbg:#e3defa;--pt:#4E4C8A}
+.pil-gen{--pc:#8a909e;--pbg:#eef0f4;--pt:#555}
+.pil-custom-0{--pc:#e08a3c;--pbg:#fff0e1;--pt:#a8561a}
+.pil-custom-1{--pc:#2f6fa8;--pbg:#e8f1fb;--pt:#2f6fa8}
+.pil-custom-2{--pc:#c23a68;--pbg:#ffe9f0;--pt:#c23a68}
+.pil-custom-3{--pc:#6462AB;--pbg:#e3defa;--pt:#4E4C8A}
+.pil-custom-4{--pc:#24734f;--pbg:#e4f4ec;--pt:#24734f}
+.pil-custom-5{--pc:#28777c;--pbg:#e4f3f4;--pt:#28777c}
+.cal-post{font-size:10.5px;font-weight:600;line-height:1.3;padding:4px 6px;border-radius:6px;border-left:3px solid var(--pc,var(--lavender));margin-bottom:3px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:var(--pbg,#efe9ff);color:var(--pt,var(--purple-deep));-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;touch-action:none}
 .cal-post:hover{filter:brightness(.95)}
 .cal-post.done{opacity:.55;text-decoration:line-through}
+.cal-post.dragging{opacity:.3}
+.cal-ghost{position:fixed;z-index:9000;pointer-events:none;max-width:190px;margin:0;box-shadow:0 10px 24px rgba(46,45,82,.3);transform:rotate(-2deg);opacity:.95}
+.cal-cell.drop{border-color:var(--purple);background:#f3f1ff;box-shadow:0 0 0 3px rgba(100,98,171,.22)}
+body.cal-dragging,body.cal-dragging *{cursor:grabbing!important;-webkit-user-select:none;user-select:none}
 .cal-empty{font-size:9.5px;color:var(--lavender);text-align:center;margin-top:4px;opacity:.8}
 .cal-legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;font-size:11px;color:var(--muted)}
 .cal-legend span{display:flex;align-items:center;gap:5px}
-.cal-legend i{width:12px;height:12px;border-radius:4px;display:inline-block}
+.cal-legend i{width:12px;height:12px;border-radius:4px;display:inline-block;background:var(--pc,#ccc)}
+
+/* ===== PARRILLA + VISTA PREVIA DEL FEED ===== */
+#panel-parr{max-width:1400px}
+.parr-layout{display:grid;grid-template-columns:minmax(0,1fr) 350px;gap:22px;align-items:start}
+.parr-main{min-width:0}
+.feed-wrap{position:sticky;top:84px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:0 6px 20px rgba(46,45,82,.07);max-height:calc(100vh - 104px);overflow:auto}
+.feed-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.feed-head h3{font-size:15px;color:var(--purple);margin:0}
+.feed-toggle{display:none;border:1.5px solid var(--line);background:#fff;color:var(--purple);border-radius:99px;font-size:11px;font-weight:700;padding:5px 12px}
+.feed-hint{font-size:11.5px;color:var(--muted);line-height:1.45;margin:6px 0 10px}
+.feed-profile{display:flex;align-items:center;gap:10px;padding:8px 2px 12px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.feed-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#6462AB,#CCC9E6);color:#fff;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center;flex-shrink:0;text-transform:uppercase}
+.feed-name{font-size:13.5px;font-weight:700;color:var(--dark);word-break:break-word}
+.feed-stats{font-size:11px;color:var(--muted);margin-top:2px}
+.feed-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.feed-cell{position:relative;padding-top:133.33%;background:#eceaf6;cursor:pointer;overflow:hidden;border-radius:3px}
+.feed-in{position:absolute;top:0;left:0;right:0;bottom:0}
+.feed-in img{width:100%;height:100%;object-fit:cover;display:block}
+.feed-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:6px;text-align:center;background:var(--pbg,#eef0f4);color:var(--pt,#555)}
+.feed-ph b{font-family:'JetBrains Mono',monospace;font-size:15px}
+.feed-ph span{font-size:10px;font-weight:600;line-height:1.25;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;word-break:break-word}
+.feed-ph em{font-style:normal;font-size:10px;font-weight:700;background:rgba(255,255,255,.75);border-radius:99px;padding:3px 8px}
+.feed-bar{position:absolute;left:0;right:0;bottom:0;height:5px;background:var(--pc,#8a909e)}
+.feed-num,.feed-date,.feed-fmt,.feed-done{position:absolute;font-size:10px;font-weight:700;color:#fff;background:rgba(26,26,46,.55);border-radius:6px;padding:2px 5px;line-height:1.2}
+.feed-num{left:4px;top:4px;font-family:'JetBrains Mono',monospace}
+.feed-fmt{right:4px;top:4px;font-size:11px}
+.feed-date{left:4px;bottom:10px}
+.feed-done{right:4px;bottom:10px;background:rgba(13,138,85,.85)}
+.feed-act{position:absolute;width:26px;height:26px;border:none;border-radius:50%;background:rgba(255,255,255,.92);color:var(--purple);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 4px rgba(0,0,0,.25);padding:0}
+.feed-edit{right:4px;top:30px}
+.feed-hide{right:4px;top:58px}
+.feed-rm{right:4px;top:86px;color:var(--red)}
+@media(hover:hover){.feed-act{opacity:0;transition:opacity .12s}.feed-cell:hover .feed-act,.feed-cell:focus-within .feed-act{opacity:1}}
+.feed-post-option{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:8px 0 14px;font-size:12px;color:var(--muted)}
+.feed-empty{font-size:12px;color:var(--muted);text-align:center;padding:26px 8px}
+@media(max-width:1000px){
+  .parr-layout{grid-template-columns:1fr}
+  .feed-wrap{position:static;max-height:none;order:-1;margin-bottom:6px}
+  .feed-toggle{display:inline-block}
+  .feed-wrap.collapsed .feed-body{display:none}
+  .feed-grid{max-width:420px}
+}
 
 .ideas-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
 .ideas-head h3{margin:0}
@@ -261,30 +327,39 @@ body.compact .post-ctrl .date-in{padding:4px 6px;font-size:11px}
 #appModalBody p{font-size:13.5px;line-height:1.6;color:#3c3c55}
 /* ===== VISTA CLIENTE (solo PDF) ===== */
 #clientView{display:none}
+#pdfChoice .pdf-color-row{display:flex;gap:10px;align-items:center}
+#pdfChoice .pdf-color-row input[type=color]{width:54px;height:42px;padding:3px;flex:none;cursor:pointer}
+#pdfChoice .pdf-color-row input[type=text]{flex:1;min-width:0;font-family:'JetBrains Mono',monospace;text-transform:uppercase}
+#pdfChoice .pdf-error{color:#b43232;font-size:12px;margin-top:6px}
 @media print{
-  @page{size:A4 landscape;margin:10mm}
   body>*:not(#clientView){display:none!important}
-  #clientView{display:block!important;color:#1A1A2E;font-family:'Outfit',system-ui,sans-serif}
-  .cv-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
-  .cv-brand{font-size:15px;font-weight:700;color:#6462AB}
-  .cv-title{font-size:24px;font-weight:700;color:#1A1A2E;margin-top:2px}
-  .cv-logo{font-size:13px;font-weight:700;color:#6E6C96}
-  .cv-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #E4E3F1;border-radius:12px;overflow:hidden}
-  .cv-table th{background:#6462AB;color:#fff;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:9px 10px;text-align:left}
-  .cv-table td{border-top:1px solid #E4E3F1;padding:9px 10px;font-size:11.5px;vertical-align:top;color:#1A1A2E}
-  .cv-table tr:nth-child(even) td{background:#FAF9FF}
-  .cv-td-date{white-space:nowrap;font-weight:700;color:#6462AB}
-  .cv-td-title{font-weight:700}
-  .cv-td-fmt{font-size:10px;color:#6E6C96;font-weight:400;margin-top:2px}
-  .cv-td-copy{white-space:pre-wrap;line-height:1.5;max-width:340px}
-  .cv-legend{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap}
-  .cv-sec{margin-bottom:12px;border:1px solid #E4E3F1;border-radius:12px;padding:14px 16px;background:#fff}
-  .cv-sec h3{font-size:14px;color:#6462AB;margin-bottom:8px}
-  .cv-kv{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px}
-  .cv-k{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#6E6C96}
-  .cv-v{font-size:12.5px;color:#1A1A2E;margin-top:2px}
-  .cv-empty{color:#A8A6D4}
-  .cv-foot{margin-top:12px;text-align:center;font-size:10.5px;color:#6E6C96}
+  html,body{background:#fff!important}
+  body{padding:0}
+  #clientView{display:block!important;color:#20232b;font-family:Arial,sans-serif;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  .cv-head{border-bottom:4px solid var(--cv-accent);padding-bottom:12px;margin-bottom:18px}
+  .cv-brand{font-size:11px;font-weight:700;color:#555d69;text-transform:uppercase;letter-spacing:1px}
+  .cv-title{font-size:25px;font-weight:700;color:#20232b;margin-top:4px}
+  .cv-table{width:100%;border-collapse:collapse;table-layout:fixed}
+  .cv-table thead{display:table-header-group}
+  .cv-table tr{break-inside:avoid;page-break-inside:avoid}
+  .cv-table th{background:var(--cv-accent);color:var(--cv-accent-text);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;padding:9px 7px;text-align:left}
+  .cv-table th:nth-child(1){width:11%}
+  .cv-table th:nth-child(2){width:15%}
+  .cv-table th:nth-child(3){width:22%}
+  .cv-table th:nth-child(4){width:39%}
+  .cv-table th:nth-child(5){width:13%}
+  .cv-table td{border-bottom:1px solid #e1e4e9;padding:9px 7px;font-size:11px;vertical-align:top;overflow-wrap:anywhere}
+  .cv-table tr:nth-child(even) td{background:#f7f8fa}
+  .cv-table .badge{background:none;color:#343a45;padding:0;white-space:normal}
+  .cv-td-date,.cv-td-title{font-weight:700}
+  .cv-td-fmt{font-size:10px;color:#66707d;font-weight:400;margin-top:3px}
+  .cv-td-copy{white-space:pre-wrap;line-height:1.45}
+  .cv-sec{margin-bottom:14px;border:1px solid #e1e4e9;border-left:4px solid var(--cv-accent);padding:12px 14px;break-inside:avoid;page-break-inside:avoid}
+  .cv-sec h3{font-size:14px;color:#20232b;margin-bottom:10px}
+  .cv-kv{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px}
+  .cv-k{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#66707d}
+  .cv-v{font-size:12px;color:#20232b;margin-top:3px;white-space:pre-wrap;overflow-wrap:anywhere}
+  .cv-empty{color:#9aa0aa}
 }
 </style>
 </head>
@@ -293,7 +368,7 @@ body.compact .post-ctrl .date-in{padding:4px 6px;font-size:11px}
 <div id="pmLicense" class="pm-license" style="display:none">
   <div class="pm-license-card">
     <div class="pm-license-icon">✦</div>
-    <h1>Plan Maestro</h1>
+    <h1>Planora</h1>
     <p class="pm-license-sub" data-i18n="Tu parrilla de contenido interactiva">Tu parrilla de contenido interactiva</p>
     <div id="pmLicenseForm">
       <p class="pm-license-info" data-i18n="Ingresa tu código de acceso para activar">Ingresa tu código de acceso para activar</p>
@@ -302,7 +377,7 @@ body.compact .post-ctrl .date-in{padding:4px 6px;font-size:11px}
         <button type="button" id="pmActivateBtn" data-i18n="Activar">Activar</button>
       </div>
       <p id="pmLicenseError"></p>
-      <p class="pm-license-hint"><span data-i18n="¿No tienes código?">¿No tienes código?</span> <a href="https://alquimialab.gumroad.com/l/PlantillaPlanMaestro" data-href-es="https://alquimialab.gumroad.com/l/PlantillaPlanMaestro" data-href-en="https://alquimialab.gumroad.com/l/planmaestro-pro" target="_blank" rel="noopener" data-i18n="Consíguelo aquí">Consíguelo aquí</a></p>
+      <p class="pm-license-hint"><span data-i18n="¿No tienes código?">¿No tienes código?</span> <a href="https://alquimialab.gumroad.com/l/PlantillaPlanMaestro" target="_blank" rel="noopener" data-i18n="Consíguelo aquí">Consíguelo aquí</a></p>
     </div>
     <div id="pmLangStep" style="display:none">
       <p class="pm-license-info" data-i18n="Elige tu idioma">Elige tu idioma</p>
@@ -327,7 +402,7 @@ body.compact .post-ctrl .date-in{padding:4px 6px;font-size:11px}
 
 <div class="topbar">
   <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;min-width:0">
-    <h1 data-i18n="alquimia · Plan Maestro en blanco">alquimia <span>· Plan Maestro en blanco</span></h1>
+    <h1>Planora <span>· by Alquimia Lab</span></h1>
     <div class="brand-bar" data-i18n-title="Marca activa — cambia para filtrar todo el plan" title="Marca activa — cambia para filtrar todo el plan">
       <span class="lbl" data-i18n="Marca">Marca</span>
       <select id="brandSelect" onchange="switchBrand(this.value)" aria-label="Marca activa"></select>
@@ -422,12 +497,32 @@ body.compact .post-ctrl .date-in{padding:4px 6px;font-size:11px}
       <span style="font-size:12px;color:var(--muted)" data-i18n="Clic en un post para ver copy y notas">Clic en un post para ver copy y notas</span>
   </div>
 
-  <div id="calendarView" style="display:none"></div>
-  <div id="parrilla"></div>
-  <div id="parrEmpty" class="empty" style="display:none">
-      <h3 data-i18n="Tu parrilla está en blanco ✨">Tu parrilla está en blanco ✨</h3>
-      <p data-i18n="Agrega tu primer post: título, fecha, copy y CTA. También puedes verlo en calendario o soltar ideas sueltas en la pestaña Ideas.">Agrega tu primer post: título, fecha, copy y CTA. También puedes verlo en calendario o soltar ideas sueltas en la pestaña Ideas.</p>
-      <button class="btn btn-p" onclick="openPostModal()" data-i18n="+ Mi primer post">+ Mi primer post</button>
+  <div class="parr-layout">
+    <div class="parr-main">
+      <div id="calendarView" style="display:none"></div>
+      <div id="parrilla"></div>
+      <div id="parrEmpty" class="empty" style="display:none">
+          <h3 data-i18n="Tu parrilla está en blanco ✨">Tu parrilla está en blanco ✨</h3>
+          <p data-i18n="Agrega tu primer post: título, fecha, copy y CTA. También puedes verlo en calendario o soltar ideas sueltas en la pestaña Ideas.">Agrega tu primer post: título, fecha, copy y CTA. También puedes verlo en calendario o soltar ideas sueltas en la pestaña Ideas.</p>
+          <button class="btn btn-p" onclick="openPostModal()" data-i18n="+ Mi primer post">+ Mi primer post</button>
+      </div>
+    </div>
+
+    <aside class="feed-wrap" id="feedWrap">
+      <div class="feed-head">
+        <h3 data-i18n="📱 Vista previa del feed">📱 Vista previa del feed</h3>
+        <button class="feed-toggle" id="feedToggle" onclick="toggleFeed()" type="button"></button>
+      </div>
+      <div class="feed-body">
+        <p class="feed-hint" data-i18n="Toca un cuadro para añadir una imagen o usa − para ocultar el post del feed. Puedes volver a mostrarlo desde la parrilla.">Toca un cuadro para añadir una imagen o usa − para ocultar el post del feed. Puedes volver a mostrarlo desde la parrilla.</p>
+        <div class="feed-profile">
+          <div class="feed-avatar" id="feedAvatar">·</div>
+          <div><div class="feed-name" id="feedName">—</div><div class="feed-stats" id="feedStats"></div></div>
+        </div>
+        <div class="feed-grid" id="feedGrid"></div>
+        <input type="file" id="feedFile" accept="image/*" style="display:none" onchange="onFeedImage(event)">
+      </div>
+    </aside>
   </div>
 </section>
 
@@ -485,9 +580,9 @@ body.compact .post-ctrl .date-in{padding:4px 6px;font-size:11px}
   <div class="card">
       <h3 data-i18n="Cómo usarla">Cómo usarla</h3>
       <ul>
-        <li><b data-i18n="Escribe y Enter">Escribe y Enter</b><span data-i18n=" — aparece en la lista."> — aparece en la lista.</span></li>
-        <li><b data-i18n="Clic en la idea">Clic en la idea</b><span data-i18n=" para abrir: fecha soñada + copy borrador."> para abrir: fecha soñada + copy borrador.</span></li>
-        <li><b data-i18n="Hecha">Hecha</b><span data-i18n=" cuando la publiques;"> cuando la publiques;</span> <b>✕</b><span data-i18n=" para borrar."> para borrar.</span></li>
+        <li><b data-i18n="Escribe y Enter">Escribe y Enter</b><span data-i18n="— aparece en la lista."> — aparece en la lista.</span></li>
+        <li><b data-i18n="Clic en la idea">Clic en la idea</b><span data-i18n="para abrir: fecha soñada + copy borrador."> para abrir: fecha soñada + copy borrador.</span></li>
+        <li><b data-i18n="Hecha">Hecha</b><span data-i18n="cuando la publiques;"> cuando la publiques;</span> <b>✕</b><span data-i18n="para borrar."> para borrar.</span></li>
       </ul>
   </div>
 </section>
@@ -503,14 +598,14 @@ body.compact .post-ctrl .date-in{padding:4px 6px;font-size:11px}
     <label data-i18n="Formato">Formato</label>
     <input id="mFormat" placeholder="Ej: Carrusel 5 slides / Reel 30s" data-i18n-ph="Ej: Carrusel 5 slides / Reel 30s">
     <label data-i18n="Pilar">Pilar</label>
-    <select id="mPillar">
+    <select id="mPillar" onchange="handlePillarChange(this.value)">
       <option>Producto</option>
-      <option>Amiga</option>
       <option>Frase</option>
       <option>Venta</option>
       <option>Educativo</option>
       <option>Personal</option>
       <option>Batch</option>
+      <option value="__add_custom_pillar__">＋ Agregar pilar personalizado</option>
     </select>
     <label data-i18n="Fase">Fase</label>
     <select id="mPhase">
@@ -558,13 +653,48 @@ body.compact .post-ctrl .date-in{padding:4px 6px;font-size:11px}
 <script>
 /* ══════════ STORAGE ══════════ */
 const LS_KEY = 'alquimiaPlanMaestroBlanco_v1';
-const PILLARS = ['Producto','Amiga','Frase','Venta','Educativo','Personal','Batch'];
+const PILLARS = ['Producto','Frase','Venta','Educativo','Personal','Batch'];
+const ADD_CUSTOM_PILLAR = '__add_custom_pillar__';
 const PILLAR_CLASS = {'Producto':'b-prod','Amiga':'b-amiga','Frase':'b-frase','Venta':'b-kore','Educativo':'b-mig','Personal':'b-amiga','Batch':'b-gen'};
-const PILLAR_CAL = {'Producto':'prod','Amiga':'amiga','Frase':'frase','Venta':'kore','Educativo':'mig','Personal':'amiga','Batch':''};
+const PILLAR_CAL = {'Producto':'prod','Amiga':'amiga','Frase':'frase','Venta':'kore','Educativo':'mig','Personal':'amiga','Batch':'gen'};
+const CUSTOM_PILLAR_BADGE_CLASSES=['b-custom-0','b-custom-1','b-custom-2','b-custom-3','b-custom-4','b-custom-5'];
+const CUSTOM_PILLAR_CAL_CLASSES=['custom-0','custom-1','custom-2','custom-3','custom-4','custom-5'];
+function customPillarsFor(brandId=store.activeBrand){
+  if(!store.customPillars||typeof store.customPillars!=='object'||Array.isArray(store.customPillars))store.customPillars={};
+  if(!Array.isArray(store.customPillars[brandId]))store.customPillars[brandId]=[];
+  return store.customPillars[brandId];
+}
+function normalizeCustomPillars(){
+  if(!store.customPillars||typeof store.customPillars!=='object'||Array.isArray(store.customPillars))store.customPillars={};
+  store.brands.forEach(function(brand){
+    const seen=new Set(PILLARS.map(function(p){return p.toLocaleLowerCase();}));
+    const pillars=Array.isArray(store.customPillars[brand.id])?store.customPillars[brand.id]:[];
+    const normalized=[];
+    pillars.concat(store.posts.filter(function(post){return (post.brand||store.activeBrand)===brand.id;}).map(function(post){return post.pillar;})).forEach(function(value){
+      if(typeof value!=='string')return;
+      const name=value.trim(), key=name.toLocaleLowerCase();
+      if(name&&name.length<=40&&!seen.has(key)){seen.add(key);normalized.push(name);}
+    });
+    store.customPillars[brand.id]=normalized;
+  });
+}
+function customPillarIndex(name){return customPillarsFor().indexOf(name);}
+function pillarBadgeClass(name){
+  if(Object.prototype.hasOwnProperty.call(PILLAR_CLASS,name))return PILLAR_CLASS[name];
+  const index=customPillarIndex(name);
+  return index>=0?CUSTOM_PILLAR_BADGE_CLASSES[index%CUSTOM_PILLAR_BADGE_CLASSES.length]:'b-gen';
+}
+function pilCls(p){
+  const name=p&&p.pillar;
+  if(Object.prototype.hasOwnProperty.call(PILLAR_CAL,name))return 'pil-'+PILLAR_CAL[name];
+  const index=customPillarIndex(name);
+  return 'pil-'+(index>=0?CUSTOM_PILLAR_CAL_CLASSES[index%CUSTOM_PILLAR_CAL_CLASSES.length]:'gen');
+}
 
 let store = {
   brands: [],          // [{id,name}]
   activeBrand: null,   // brand id
+  customPillars: {},   // brandId -> custom content pillars
   posts: [],   // {id,brand,title,date,format,pillar,phase,story,cta,copy,notes,done,open}
   banco: [],   // {id,brand,title,tipo,date,copy,ideas,open}
   ideas: [],   // {id,brand,type,title,notes,date,done,open}
@@ -579,7 +709,7 @@ function loadStore(){
     const raw=localStorage.getItem(LS_KEY);
     if(raw){
       const p=JSON.parse(raw);
-      store=Object.assign({brands:[],activeBrand:null,posts:[],banco:[],ideas:[],strategy:{}},p);
+      store=Object.assign({brands:[],activeBrand:null,customPillars:{},posts:[],banco:[],ideas:[],strategy:{}},p);
       if(!Array.isArray(store.posts))store.posts=[];
       if(!Array.isArray(store.banco))store.banco=[];
       if(!Array.isArray(store.ideas))store.ideas=[];
@@ -604,10 +734,12 @@ function loadStore(){
     const b=defaultBrand();
     store.brands=[b];
     store.activeBrand=b.id;
+    store.customPillars={};
   }
+  normalizeCustomPillars();
 }
 function saveStore(){
-  try{localStorage.setItem(LS_KEY,JSON.stringify(store));}catch(e){console.warn(e);}
+  try{localStorage.setItem(LS_KEY,JSON.stringify(store));return true;}catch(e){console.warn(e);return false;}
 }
 function activeBrand(){
   return store.brands.find(b=>b.id===store.activeBrand) || store.brands[0];
@@ -646,6 +778,7 @@ function switchBrand(id){
   store.activeBrand=id;
   saveStore();
   renderBrandUI();
+  renderPillarSelect();
   loadStrategyUI();
   renderAll();
   toast(t('Marca activa: ')+brandName(id));
@@ -656,8 +789,10 @@ function addBrand(){
     const b={id:'b_'+Date.now().toString(36), name:v.trim()};
     store.brands.push(b);
     store.activeBrand=b.id;
+    customPillarsFor(b.id);
     saveStore();
     renderBrandUI();
+    renderPillarSelect();
     loadStrategyUI();
     renderAll();
     toast(t('Marca «')+b.name+t('» creada ✓'));
@@ -685,14 +820,20 @@ function deleteBrand(){
   const total=nPosts+nIdeas+nBanco;
   askConfirm(t('Eliminar marca'),t('¿Eliminar «')+esc(b.name)+t('»?')+(total?'<br><br>'+t('Se borran también: ')+nPosts+t(' posts, ')+nBanco+t(' piezas y ')+nIdeas+t(' ideas de esta marca.'):''),t('Eliminar'),function(ok){
     if(!ok)return;
-    store.posts=store.posts.filter(p=>brandOf(p)!==b.id);
+    store.posts=store.posts.filter(p=>{
+      if(brandOf(p)!==b.id)return true;
+      delFeedImage(p.id);
+      return false;
+    });
     store.banco=store.banco.filter(x=>brandOf(x)!==b.id);
     store.ideas=store.ideas.filter(i=>brandOf(i)!==b.id);
     delete store.strategy[b.id];
+    delete store.customPillars[b.id];
     store.brands=store.brands.filter(x=>x.id!==b.id);
     store.activeBrand=store.brands[0].id;
     saveStore();
     renderBrandUI();
+    renderPillarSelect();
     loadStrategyUI();
     renderAll();
     toast(t('Marca eliminada'));
@@ -725,7 +866,11 @@ function askConfirm(title,msgHTML,okText,cb){
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 /* ══════════ I18N ES/EN ══════════ */
 let pmLang='es';
-try{ pmLang=localStorage.getItem('pm-lang')||'es'; }catch(e){}
+let pmLangChosen=false;
+try{
+  const savedLang=localStorage.getItem('pm-lang');
+  if(savedLang==='es'||savedLang==='en'){pmLang=savedLang;pmLangChosen=true;}
+}catch(e){console.warn('Could not read language preference:',e);}
 if(pmLang!=='en')pmLang='es';
 const EN={
 'Estrategia':'Strategy','Tu plan editable':'Your editable plan',
@@ -752,8 +897,9 @@ const EN={
 '+ Primera pieza':'+ First piece',
 '💡 Ideas de publicación':'💡 Post ideas','Anota cuando se te ocurra algo. Ideas separadas por marca activa.':'Jot it down whenever inspiration strikes. Ideas live under the active brand.',
 '+ Agregar':'＋ Add','Todas abiertas':'Expand all','Aún no hay ideas. ¡La primera se te va a ocurrir en la ducha!':'No ideas yet. The first one will hit you in the shower!',
-'Cómo usarla':'How to use it','Escribe y Enter':'Type + Enter',' — aparece en la lista.':' — it appears in the list.','Clic en la idea':'Click an idea',' para abrir: fecha soñada + copy borrador.':' to open: dream date + draft copy.','Hecha':'Done',' cuando la publiques;':' when you publish;',
-'✕':'✕',' para borrar.':' to delete.','Nuevo post':'New post','Editar post':'Edit post','Título':'Title','Fecha':'Date','Formato':'Format','Pilar':'Pillar','Fase':'Stage','Story / nota de stories':'Story note','Copy':'Copy','CTA':'CTA','Notas':'Notes','Guardar':'Save','Cancelar':'Cancel','Eliminar':'Delete',
+'Cómo usarla':'How to use it','Escribe y Enter':'Type + Enter','— aparece en la lista.':'— it appears in the list.','Clic en la idea':'Click an idea','para abrir: fecha soñada + copy borrador.':'to open: dream date + draft copy.','Hecha':'Done','cuando la publiques;':'when you publish;',
+'✕':'✕','para borrar.':'to delete.','Nuevo post':'New post','Editar post':'Edit post','Título':'Title','Fecha':'Date','Formato':'Format','Pilar':'Pillar','Fase':'Stage','Story / nota de stories':'Story note','Copy':'Copy','CTA':'CTA','Notas':'Notes','Guardar':'Save','Cancelar':'Cancel','Eliminar':'Delete',
+'＋ Agregar pilar personalizado':'＋ Add a custom pillar','Agregar pilar':'Add a pillar','Agregar':'Add','Nombre del pilar':'Pillar name','Pilar agregado ✓':'Pillar added ✓','El pilar no puede estar vacío':'Pillar name cannot be empty','El nombre no puede superar 40 caracteres':'Pillar names must be 40 characters or fewer','Ese pilar ya existe':'That pillar already exists','No se pudo guardar el nuevo pilar':'Could not save the new pillar',
 'Nueva marca':'New brand','Nombre de la marca':'Brand name','Crear':'Create','Renombrar marca':'Rename brand','Nuevo nombre':'New name',
 'Debe quedar al menos una marca':'Keep at least one brand',
 'Eliminar marca':'Delete brand','Vaciar todo':'Reset everything','Todo vacío ✓':'All cleared ✓',
@@ -772,6 +918,12 @@ const EN={
 'Sin título':'Untitled','Sin fecha':'No date','+ Más':' more','· tachado = publicado · clic = abrir':'· crossed out = published · click to open',
 '🗓 Calendario de publicación':'🗓 Publishing calendar','Fecha soñada':'Dream date','Aún no hay ideas 💡':'No ideas yet 💡',
 '¿Qué exportamos en el PDF?':'What should we export to PDF?','Tip: mueve el calendario al mes que quieres mostrar en la parrilla.':'Tip: move the calendar to the month you want to show.',
+'Orientación':'Orientation','Horizontal':'Landscape','Vertical':'Portrait','Color de la marca (HEX)':'Brand color (HEX)',
+'Usa un código de seis dígitos, por ejemplo #6462AB.':'Enter a six-digit code, for example #6462AB.',
+'Escribe un color HEX válido, por ejemplo #6462AB.':'Enter a valid HEX color, for example #6462AB.',
+'Marca y promesa':'Brand & promise','Objetivos':'Goals','Audiencia':'Audience','Notas libres':'Free notes',
+'Post':'Post','Estado':'Status','Listo':'Done','Pendiente':'Pending',
+'Sin posts con fecha este mes. Agrega fechas en la app y vuelve a exportar.':'No dated posts this month. Add dates in the app and export again.',
 '📅 Parrilla del mes':'📅 Month grid','🧩 Estrategia de la marca':'🧩 Brand strategy',
 'Marca activa — cambia para filtrar todo el plan':'Active brand — switch to filter the whole plan','Agregar marca':'Add brand','Renombrar marca':'Rename brand','Eliminar marca activa':'Delete active brand',
 'Archivo inválido':'Invalid file','Copia descargada ⬇':'Copy downloaded ⬇','Copia restaurada ⬆':'Copy restored ⬆',
@@ -780,7 +932,7 @@ const EN={
 'Tu parrilla de contenido interactiva':'Your interactive content grid','Ingresa tu código de acceso para activar':'Enter your access code to activate',
 'Activar':'Activate','Código inválido. Verifica e intenta de nuevo.':'Invalid code. Check and try again.',
 '¿No tienes código?':'No code yet?','Consíguelo aquí':'Get it here','¡Activado correctamente!':'Activated!',
-'Hecho con calma · Plan Maestro · Alquimia Lab':'Made with calm · Plan Maestro · Alquimia Lab',
+'Hecho con calma · Planora · Alquimia Lab':'Made with calm · Planora · Alquimia Lab',
 'Borrar':'Delete','Notas / ideas':'Notes / ideas','Ordenado por fecha · ':'Sorted by date · ',
 'Sin fechas aún — pon fecha a cada pieza para ordenarlas':'No dates yet — set a date per piece to sort them',
 '✓ Publicada':'✓ Published',
@@ -789,7 +941,7 @@ const EN={
 ' piezas y ':' pieces and ',' ideas de esta marca.':' ideas for this brand.',
 'Se borran marcas, posts, banco, ideas y estrategia de este navegador.':'Deletes brands, posts, vault, ideas and strategy from this browser.',
 '📋 Ver lista':'📋 View list','Amiga / Personal':'Buddy / Personal',
-'alquimia · Plan Maestro en blanco':'alquimia · Blank Plan Maestro',
+'Planora · by Alquimia Lab':'Planora · by Alquimia Lab',
 'Elige tu idioma':'Choose your language','Continuar':'Continue',
 '🖨 PDF':'🖨 PDF','⬇ Descargar copia':'⬇ Download copy','⬆ Restaurar copia':'⬆ Restore copy',
 '+ Agregar post':'+ Add post','💡 Mis ideas':'💡 My ideas',
@@ -798,10 +950,10 @@ const EN={
 '+ Mi primer post':'+ My first post',
 '+ Agregar pieza':'+ Add piece','Pon fecha a cada pieza · se ordena sola':'Set a date per piece · it sorts itself',
 '+ Primera pieza':'+ First piece',
-'Escribe y Enter':'Type + Enter',' — aparece en la lista.':' — it appears in the list.',
-'Clic en la idea':'Click an idea',' para abrir: fecha soñada + copy borrador.':' to open: dream date + draft copy.',
-'Hecha':'Done',' cuando la publiques;':' when you publish;',
-' para borrar.':' to delete.',
+'Escribe y Enter':'Type + Enter','— aparece en la lista.':'— it appears in the list.',
+'Clic en la idea':'Click an idea','para abrir: fecha soñada + copy borrador.':'to open: dream date + draft copy.',
+'Hecha':'Done','cuando la publiques;':'when you publish;',
+'para borrar.':'to delete.',
 'Guardar post':'Save post','Guardar pieza':'Save piece',
 'Nueva pieza en banco':'New vault piece','Tipo':'Type','Fecha (opcional)':'Date (optional)',
 'Notas / ideas de reuso':'Reuse notes / ideas','Editar post':'Edit post','Nuevo post':'New post',
@@ -832,6 +984,24 @@ const EN={
 'IG · TikTok · email · YouTube…':'IG · TikTok · email · YouTube…','Qué vendes y a qué precio':'What you sell and at what price',
 'Embudo, fases, KPIs, lo que quieras…':'Funnel, phases, KPIs, whatever…'
 };
+Object.assign(EN,{
+  'Toca un cuadro para añadir una imagen o usa − para ocultar el post del feed. Puedes volver a mostrarlo desde la parrilla.':'Tap a tile to add an image or use − to hide the post from the feed. You can show it again from the grid.',
+  'Ocultar del feed':'Hide from feed','Mostrar en el feed':'Show in feed',
+  'Visible en el feed':'Visible in the feed','Oculto del feed':'Hidden from the feed',
+  'Post oculto del feed; sigue en tu parrilla':'Post hidden from the feed; it remains in your grid',
+  'Post añadido al feed':'Post added to the feed',
+  'No se pudo guardar el cambio del feed':'Could not save the feed change',
+  'No se pudo guardar el idioma en este dispositivo':'Could not save the language on this device',
+  'No se pudo guardar la activación en este dispositivo.':'Could not save activation on this device.',
+'📱 Vista previa del feed':'📱 Feed preview',
+'Así se vería tu perfil, con lo más reciente arriba. Toca un cuadro para subir o cambiar la imagen del post.':'This is how your profile would look, newest on top. Tap a tile to upload or change the post image.',
+'Subir imagen':'Upload image','Quitar imagen':'Remove image','Mostrar':'Show','Ocultar':'Hide',
+'Aún no hay posts en el feed':'No posts in the feed yet',
+'Imagen guardada ✓':'Image saved ✓','Imagen quitada':'Image removed','Elige una imagen válida':'Choose a valid image',
+'No se pudo procesar la imagen':'Could not process the image','No se pudo guardar la imagen en este dispositivo':'Could not store the image on this device',
+'Post movido al ':'Post moved to ',
+'· tachado = publicado · clic = abrir · arrastra para cambiar la fecha':'· crossed out = published · click to open · drag to change the date'
+});
 function t(s){ if(pmLang==='en'&&EN.hasOwnProperty(s))return EN[s]; return s; }
 const PLBL_EN={'Producto':'Product','Amiga':'Buddy','Frase':'Quote','Venta':'Sale','Educativo':'Educational','Personal':'Personal','Batch':'Batch'};
 const PHLBL_EN={'PRE':'PRE','DURANTE':'DURING','POST':'POST'};
@@ -849,10 +1019,42 @@ function loc(){ return pmLang==='en'?'en-US':'es-CO'; }
 function renderPillarSelect(){
   const sel=document.getElementById('mPillar');
   if(!sel)return;
-  const cur=sel.value||'Producto';
-  sel.innerHTML=['Producto','Amiga','Frase','Venta','Educativo','Personal','Batch'].map(function(p){
-    return '<option value="'+p+'"'+(p===cur?' selected':'')+'>'+esc(plbl(p))+'</option>';
-  }).join('');
+  const cur=sel.value&&sel.value!==ADD_CUSTOM_PILLAR?sel.value:'Producto';
+  const pillars=PILLARS.concat(customPillarsFor());
+  sel.innerHTML=pillars.map(function(p){
+    return '<option value="'+esc(p)+'"'+(p===cur?' selected':'')+'>'+esc(plbl(p))+'</option>';
+  }).join('')+'<option value="'+ADD_CUSTOM_PILLAR+'">'+esc(t('＋ Agregar pilar personalizado'))+'</option>';
+  sel.value=pillars.indexOf(cur)>=0?cur:'Producto';
+  sel.dataset.lastValue=sel.value;
+}
+function handlePillarChange(value){
+  const sel=document.getElementById('mPillar');
+  if(!sel)return;
+  if(value!==ADD_CUSTOM_PILLAR){sel.dataset.lastValue=value;return;}
+  const previous=sel.dataset.lastValue||'Producto';
+  sel.value=previous;
+  askInput(t('Agregar pilar'),t('Nombre del pilar'),'','Agregar',function(value){
+    const name=String(value||'').trim();
+    if(!name){toast(t('El pilar no puede estar vacío'));return;}
+    if(name.length>40){toast(t('El nombre no puede superar 40 caracteres'));return;}
+    if(name===ADD_CUSTOM_PILLAR){toast(t('Ese pilar ya existe'));return;}
+    const existing=PILLARS.concat(customPillarsFor());
+    if(existing.some(function(p){return p.toLocaleLowerCase()===name.toLocaleLowerCase();})){
+      toast(t('Ese pilar ya existe'));return;
+    }
+    const pillars=customPillarsFor();
+    pillars.push(name);
+    if(!saveStore()){
+      pillars.pop();
+      toast(t('No se pudo guardar el nuevo pilar'));return;
+    }
+    renderPillarSelect();
+    sel.value=name;
+    sel.dataset.lastValue=name;
+    toast(t('Pilar agregado ✓'));
+  });
+  const input=document.getElementById('appModalInput');
+  if(input)input.maxLength=40;
 }
 function renderIdeaTypes(){
   const sel=document.getElementById('ideaType');
@@ -872,20 +1074,16 @@ function renderPhaseSelect(){
 }
 function setLang(l){
   pmLang=(l==='en')?'en':'es';
-  try{localStorage.setItem('pm-lang',pmLang);}catch(e){}
+  try{localStorage.setItem('pm-lang',pmLang);}catch(e){console.warn('Could not save language preference:',e);toast(t('No se pudo guardar el idioma en este dispositivo'));}
   document.documentElement.lang=pmLang;
   document.querySelectorAll('[data-i18n]').forEach(function(el){
     el.textContent=t(el.getAttribute('data-i18n'));
   });
   document.querySelectorAll('[data-i18n-ph]').forEach(function(el){
     el.setAttribute('placeholder',t(el.getAttribute('data-i18n-ph')));
-    if(el.hasAttribute('data-ph'))el.setAttribute('data-ph',t(el.getAttribute('data-i18n-ph')));
   });
   document.querySelectorAll('[data-i18n-title]').forEach(function(el){
     el.setAttribute('title',t(el.getAttribute('data-i18n-title')));
-  });
-  document.querySelectorAll('[data-href-en]').forEach(function(el){
-    el.setAttribute('href',pmLang==='en'?el.getAttribute('data-href-en'):el.getAttribute('data-href-es'));
   });
   const lb=document.getElementById('langBtn'); if(lb)lb.textContent=(pmLang==='en')?'ES':'EN';
   renderPillarSelect(); renderIdeaTypes(); renderPhaseSelect();
@@ -923,6 +1121,7 @@ function openModal(id){document.getElementById(id).classList.add('on');}
 function closeModal(id){document.getElementById(id).classList.remove('on');}
 
 function openPostModal(id){
+  renderPillarSelect();
   editingPostId = id!=null?id:null;
   const ttl=document.getElementById('postModalTitle');
   if(id!=null){
@@ -950,6 +1149,7 @@ function openPostModal(id){
     document.getElementById('mCta').value='';
     document.getElementById('mCopy').value='';
   }
+  document.getElementById('mPillar').dataset.lastValue=document.getElementById('mPillar').value||'Producto';
   openModal('postModal');
   setTimeout(()=>document.getElementById('mTitle').focus(),50);
 }
@@ -1049,6 +1249,7 @@ function renderParrilla(){
   if(!list.length){
     empty.style.display='block';
     updateStats();
+    renderFeed();
     return;
   }
   empty.style.display='none';
@@ -1074,7 +1275,7 @@ function renderParrilla(){
           <div class="tt">${esc(p.title)}</div>
           <div class="sub">
             <span>${esc(p.format||'')}</span>
-            <span class="badge ${PILLAR_CLASS[p.pillar]||'b-gen'}">${esc(plbl(p.pillar||''))}</span>
+            <span class="badge ${pillarBadgeClass(p.pillar)}">${esc(plbl(p.pillar||''))}</span>
             <span class="badge ${p.phase==='PRE'?'b-pre':p.phase==='DURANTE'?'b-dur':p.phase==='POST'?'b-post':'b-gen'}">${esc(phlbl(p.phase||'—'))}</span>
           </div>
         </div>
@@ -1086,6 +1287,10 @@ function renderParrilla(){
         </div>
       </div>
       <div class="post-body">
+        <div class="feed-post-option">
+          <span>${esc(t(p.feedHidden?'Oculto del feed':'Visible en el feed'))}</span>
+          <button type="button" class="btn btn-ghost" onclick="togglePostFeed(${p.id})">${esc(t(p.feedHidden?'Mostrar en el feed':'Ocultar del feed'))}</button>
+        </div>
         <h5>${t('Story vinculada')}</h5>
         <textarea class="field" style="min-height:50px" onchange="setField(${p.id},'story',this.value)" placeholder="${t('Qué subir en stories…')}">${esc(p.story||'')}</textarea>
         <h5>${t('CTA')}</h5>
@@ -1098,6 +1303,7 @@ function renderParrilla(){
     root.appendChild(el);
   });
   updateStats();
+  renderFeed();
 }
 
 function weekLabel(dateStr){
@@ -1159,6 +1365,7 @@ function delPost(id){
   askConfirm(t('Borrar post'),t('¿Borrar este post de la parrilla?'), t('Borrar'),function(ok){
     if(!ok)return;
     store.posts=store.posts.filter(x=>x.id!==id);
+    delFeedImage(id);
     saveStore();
     renderParrilla();
     if(calVisible) renderCalendar();
@@ -1213,25 +1420,24 @@ function renderCalendar(){
 
   let cells='';
   for(let i=startDow-1;i>=0;i--){
-    cells+=`<div class="cal-cell out"><div class="cal-daynum">${daysPrev-i}</div></div>`;
+    cells+=`<div class="cal-cell out" data-date="${calIso(calYear,calMonth-1,daysPrev-i)}"><div class="cal-daynum">${daysPrev-i}</div></div>`;
   }
   for(let d=1;d<=daysInMonth;d++){
     const ds=calYear+'-'+String(calMonth+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
     const isToday=ds===todayStr;
     const posts=byDate[ds]||[];
     let chips=posts.slice(0,3).map((p,pi)=>{
-      const cls=PILLAR_CAL[p.pillar]||'';
       const label=(String(pi+1).padStart(2,'0'))+' · '+(p.title||'').slice(0,22)+((p.title||'').length>22?'…':'');
-      return `<div class="cal-post ${cls}${p.done?' done':''}" title="${esc(p.title)}" onclick="openFromCal(${p.id})">${esc(label)}</div>`;
+      return `<div class="cal-post ${pilCls(p)}${p.done?' done':''}" data-id="${p.id}" title="${esc(p.title)}" onclick="openFromCal(${p.id})">${esc(label)}</div>`;
     }).join('');
     if(posts.length>3) chips+=`<div class="cal-empty">+${posts.length-3}${pmLang==='en'?' more':' más'}</div>`;
     if(posts.length===0) chips=`<div class="cal-empty">·</div>`;
-    cells+=`<div class="cal-cell${isToday?' today':''}"><div class="cal-daynum">${d}</div>${chips}</div>`;
+    cells+=`<div class="cal-cell${isToday?' today':''}" data-date="${ds}"><div class="cal-daynum">${d}</div>${chips}</div>`;
   }
   const total=startDow+daysInMonth;
   const trail=(7-(total%7))%7;
   for(let i=1;i<=trail;i++){
-    cells+=`<div class="cal-cell out"><div class="cal-daynum">${i}</div></div>`;
+    cells+=`<div class="cal-cell out" data-date="${calIso(calYear,calMonth+1,i)}"><div class="cal-daynum">${i}</div></div>`;
   }
 
   root.innerHTML=`
@@ -1246,16 +1452,22 @@ function renderCalendar(){
       </div>
       <div class="cal-grid">${CDOW().map(d=>`<div class="cal-dow">${d}</div>`).join('')}${cells}</div>
       <div class="cal-legend">
-        <span><i style="background:#e8f1fb"></i> ${plbl('Educativo')}</span>
-        <span><i style="background:#ede9ff"></i> ${plbl('Venta')}</span>
-        <span><i style="background:#ffe9f0"></i> ${plbl('Producto')}</span>
-        <span><i style="background:#fff0e8"></i> ${t('Amiga / Personal')}</span>
-        <span><i style="background:#f4f3fa"></i> ${plbl('Frase')}</span>
-        <span>${t('· tachado = publicado · clic = abrir')}</span>
+        <span><i class="pil-mig"></i> ${plbl('Educativo')}</span>
+        <span><i class="pil-kore"></i> ${plbl('Venta')}</span>
+        <span><i class="pil-prod"></i> ${plbl('Producto')}</span>
+        <span><i class="pil-amiga"></i> ${t('Personal')}</span>
+        <span><i class="pil-frase"></i> ${plbl('Frase')}</span>
+        <span><i class="pil-gen"></i> ${plbl('Batch')}</span>
+        <span>${t('· tachado = publicado · clic = abrir · arrastra para cambiar la fecha')}</span>
       </div>
     </div>`;
 }
+function calIso(y,m,d){
+  const dt=new Date(y,m,d);
+  return dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0');
+}
 function openFromCal(id){
+  if(Date.now()<calNoClickUntil)return;
   if(calVisible) toggleView();
   const p=store.posts.find(x=>x.id===id);
   if(p){p.open=true;saveStore();}
@@ -1265,6 +1477,324 @@ function openFromCal(id){
     if(el){el.classList.add('open');el.scrollIntoView({behavior:'smooth',block:'center'});}
   },80);
 }
+
+/* ══════════ IMÁGENES DEL FEED (IndexedDB: no llenan el almacenamiento principal) ══════════ */
+const IMG_DB_NAME='pm-feed-images', IMG_STORE='images';
+let feedImgs={};
+let imgDbPromise=null;
+let feedPickId=null;
+function imgDb(){
+  if(imgDbPromise)return imgDbPromise;
+  imgDbPromise=new Promise(function(resolve,reject){
+    try{
+      const rq=indexedDB.open(IMG_DB_NAME,1);
+      rq.onupgradeneeded=function(){ rq.result.createObjectStore(IMG_STORE); };
+      rq.onsuccess=function(){ resolve(rq.result); };
+      rq.onerror=function(){ reject(rq.error); };
+    }catch(e){ reject(e); }
+  });
+  return imgDbPromise;
+}
+function imgTx(mode,fn){
+  return imgDb().then(function(db){
+    return new Promise(function(resolve,reject){
+      const tx=db.transaction(IMG_STORE,mode);
+      const result=fn(tx.objectStore(IMG_STORE));
+      tx.oncomplete=function(){ resolve(result); };
+      tx.onerror=tx.onabort=function(){ reject(tx.error); };
+    });
+  });
+}
+function imgPut(id,data){ return imgTx('readwrite',function(s){ s.put(data,String(id)); }); }
+function imgDelete(id){ return imgTx('readwrite',function(s){ s.delete(String(id)); }); }
+function imgClearAll(){ return imgTx('readwrite',function(s){ s.clear(); }); }
+function imgLoadAll(){
+  return imgTx('readonly',function(s){
+    const out={};
+    s.openCursor().onsuccess=function(e){
+      const c=e.target.result;
+      if(c){ out[c.key]=c.value; c.continue(); }
+    };
+    return out;
+  });
+}
+function loadFeedImages(){
+  imgLoadAll().then(function(all){
+    Object.keys(all).forEach(function(k){ if(typeof all[k]==='string') feedImgs[k]=all[k]; });
+    renderFeed();
+  }).catch(function(){ renderFeed(); });
+}
+function delFeedImage(id){
+  delete feedImgs[String(id)];
+  imgDelete(id).catch(function(){});
+}
+function readFeedImage(file,cb){
+  if(!file||!/^image\//.test(file.type||'')){ toast(t('Elige una imagen válida')); return; }
+  const reader=new FileReader();
+  reader.onload=function(){
+    const img=new Image();
+    img.onload=function(){
+      try{
+        const MAX=720;
+        const s=Math.min(1,MAX/Math.max(img.width,img.height));
+        const w=Math.max(1,Math.round(img.width*s)), h=Math.max(1,Math.round(img.height*s));
+        const c=document.createElement('canvas');
+        c.width=w; c.height=h;
+        const ctx=c.getContext('2d');
+        ctx.fillStyle='#fff'; ctx.fillRect(0,0,w,h);
+        ctx.drawImage(img,0,0,w,h);
+        cb(c.toDataURL('image/jpeg',0.8));
+      }catch(e){ toast(t('No se pudo procesar la imagen')); }
+    };
+    img.onerror=function(){ toast(t('No se pudo procesar la imagen')); };
+    img.src=reader.result;
+  };
+  reader.onerror=function(){ toast(t('No se pudo procesar la imagen')); };
+  reader.readAsDataURL(file);
+}
+function pickFeedImage(id){
+  feedPickId=id;
+  const input=document.getElementById('feedFile');
+  input.value='';
+  input.click();
+}
+function onFeedImage(e){
+  const file=e.target.files&&e.target.files[0];
+  const id=feedPickId;
+  feedPickId=null;
+  if(!file||id==null)return;
+  readFeedImage(file,function(data){
+    feedImgs[String(id)]=data;
+    renderFeed();
+    imgPut(id,data).then(function(){ toast(t('Imagen guardada ✓')); })
+      .catch(function(){ toast(t('No se pudo guardar la imagen en este dispositivo')); });
+  });
+}
+function removeFeedImage(id){
+  delFeedImage(id);
+  renderFeed();
+  toast(t('Imagen quitada'));
+}
+
+/* ══════════ VISTA PREVIA DEL FEED ══════════ */
+let feedOpen=(function(){
+  try{ const v=localStorage.getItem('pm-feed-open'); if(v!==null)return v==='1'; }catch(e){}
+  return window.innerWidth>1000;
+})();
+function toggleFeed(){
+  feedOpen=!feedOpen;
+  try{localStorage.setItem('pm-feed-open',feedOpen?'1':'0');}catch(e){}
+  updateFeedToggle();
+}
+function updateFeedToggle(){
+  const w=document.getElementById('feedWrap');
+  if(!w)return;
+  w.classList.toggle('collapsed',!feedOpen);
+  const b=document.getElementById('feedToggle');
+  if(b)b.textContent=feedOpen?t('Ocultar'):t('Mostrar');
+}
+function feedOrder(){
+  return activePosts().filter(function(p){return p.feedHidden!==true;}).sort(function(a,b){
+    const da=a.date||'', db=b.date||'';
+    if(da!==db){
+      if(!da)return 1;
+      if(!db)return -1;
+      return db.localeCompare(da);
+    }
+    return b.id-a.id;
+  });
+}
+function togglePostFeed(id){
+  const p=activePosts().find(function(post){return post.id===id;});
+  if(!p)return;
+  const previous=p.feedHidden;
+  p.feedHidden=p.feedHidden!==true;
+  if(!saveStore()){
+    p.feedHidden=previous;
+    toast(t('No se pudo guardar el cambio del feed'));
+    return;
+  }
+  renderParrilla();
+  toast(t(p.feedHidden?'Post oculto del feed; sigue en tu parrilla':'Post añadido al feed'));
+}
+function feedFmtIcon(p){
+  const f=(p.format||'').toLowerCase();
+  if(/reel|video|vídeo/.test(f))return '🎬';
+  if(/carrusel|carousel|slide/.test(f))return '🖼';
+  return '';
+}
+function renderFeed(){
+  const grid=document.getElementById('feedGrid');
+  if(!grid)return;
+  const num={};
+  sortedPosts().forEach(function(p,i){ num[p.id]=i+1; });
+  const posts=feedOrder();
+  const name=activeBrand()?activeBrand().name:'—';
+  document.getElementById('feedName').textContent=name;
+  document.getElementById('feedAvatar').textContent=(name||'').trim().charAt(0)||'·';
+  const pub=posts.filter(function(p){return p.done;}).length;
+  document.getElementById('feedStats').textContent=posts.length+' posts · '+pub+' '+t('Publicados').toLowerCase();
+  updateFeedToggle();
+  if(!posts.length){
+    grid.innerHTML='<div class="feed-empty" style="grid-column:1/-1">'+esc(t('Aún no hay posts en el feed'))+'</div>';
+    return;
+  }
+  grid.innerHTML=posts.map(function(p){
+    const img=feedImgs[String(p.id)];
+    const n=String(num[p.id]).padStart(2,'0');
+    const icon=feedFmtIcon(p);
+    return '<div class="feed-cell '+pilCls(p)+'" data-id="'+p.id+'" title="'+esc(p.title||'')+'" onclick="pickFeedImage('+p.id+')">'
+      +'<div class="feed-in">'
+      +(img?'<img src="'+img+'" alt="'+esc(p.title||'')+'">'
+           :'<div class="feed-ph"><span>'+esc(p.title||'')+'</span><em>📷 '+esc(t('Subir imagen'))+'</em></div>')
+      +'<span class="feed-num">'+n+'</span>'
+      +(icon?'<span class="feed-fmt">'+icon+'</span>':'')
+      +(p.date?'<span class="feed-date">'+esc(fmtShort(p.date))+'</span>':'')
+      +(p.done?'<span class="feed-done">✓</span>':'')
+      +'<span class="feed-bar"></span>'
+      +'<button class="feed-act feed-edit" type="button" title="'+esc(t('Editar'))+'" onclick="event.stopPropagation();openPostModal('+p.id+')">✎</button>'
+      +'<button class="feed-act feed-hide" type="button" title="'+esc(t('Ocultar del feed'))+'" aria-label="'+esc(t('Ocultar del feed')+': '+(p.title||''))+'" onclick="event.stopPropagation();togglePostFeed('+p.id+')">−</button>'
+      +(img?'<button class="feed-act feed-rm" type="button" title="'+esc(t('Quitar imagen'))+'" onclick="event.stopPropagation();removeFeedImage('+p.id+')">✕</button>':'')
+      +'</div></div>';
+  }).join('');
+}
+
+/* ══════════ ARRASTRAR POSTS EN EL CALENDARIO (mouse y táctil) ══════════ */
+let calNoClickUntil=0;
+const calDrag={id:null,src:null,touch:false,active:false,x0:0,y0:0,x:0,y:0,ghost:null,holdTimer:null,navTimer:null};
+function calCellAt(x,y){ const el=document.elementFromPoint(x,y); return el&&el.closest?el.closest('.cal-cell[data-date]'):null; }
+function calNavAt(x,y){ const el=document.elementFromPoint(x,y); return el&&el.closest?el.closest('.cal-nav button'):null; }
+function calDragBegin(){
+  const p=store.posts.find(function(q){return q.id===calDrag.id;});
+  if(!p)return;
+  calDrag.active=true;
+  const g=document.createElement('div');
+  g.className='cal-post cal-ghost '+pilCls(p);
+  g.textContent=p.title||'';
+  document.body.appendChild(g);
+  calDrag.ghost=g;
+  document.body.classList.add('cal-dragging');
+  if(calDrag.src)calDrag.src.classList.add('dragging');
+  if(calDrag.touch&&navigator.vibrate){ try{navigator.vibrate(12);}catch(e){} }
+  calDragMove(calDrag.x,calDrag.y);
+}
+function calNavTick(){
+  calDrag.navTimer=null;
+  if(!calDrag.active)return;
+  const nav=calNavAt(calDrag.x,calDrag.y);
+  if(!nav)return;
+  nav.click();
+  calDrag.navTimer=setTimeout(calNavTick,750);
+}
+function calDragMove(x,y){
+  calDrag.x=x; calDrag.y=y;
+  if(!calDrag.active)return;
+  calDrag.ghost.style.left=(x+12)+'px';
+  calDrag.ghost.style.top=(y+12)+'px';
+  document.querySelectorAll('.cal-cell.drop').forEach(function(c){c.classList.remove('drop');});
+  const cell=calCellAt(x,y);
+  if(cell)cell.classList.add('drop');
+  if(calNavAt(x,y)){ if(!calDrag.navTimer)calDrag.navTimer=setTimeout(calNavTick,500); }
+  else if(calDrag.navTimer){ clearTimeout(calDrag.navTimer); calDrag.navTimer=null; }
+}
+function calDragFinish(x,y,cancel){
+  clearTimeout(calDrag.holdTimer);
+  clearTimeout(calDrag.navTimer);
+  calDrag.navTimer=null;
+  const wasActive=calDrag.active;
+  let target=null;
+  if(wasActive){
+    calNoClickUntil=Date.now()+500;
+    const cell=cancel?null:calCellAt(x,y);
+    target=cell?cell.getAttribute('data-date'):null;
+    if(calDrag.ghost&&calDrag.ghost.parentNode)calDrag.ghost.parentNode.removeChild(calDrag.ghost);
+    document.body.classList.remove('cal-dragging');
+    document.querySelectorAll('.cal-cell.drop,.cal-post.dragging').forEach(function(c){ c.classList.remove('drop'); c.classList.remove('dragging'); });
+  }
+  const id=calDrag.id;
+  calDrag.id=null; calDrag.src=null; calDrag.active=false; calDrag.ghost=null;
+  if(wasActive&&target)calMovePost(id,target);
+}
+function calMovePost(id,ds){
+  const p=store.posts.find(function(q){return q.id===id;});
+  if(!p||p.date===ds)return;
+  p.date=ds;
+  saveStore();
+  renderParrilla();
+  if(calVisible)renderCalendar();
+  toast(t('Post movido al ')+fmtShort(ds));
+}
+(function initCalDrag(){
+  const root=document.getElementById('calendarView');
+  if(!root)return;
+  const chipOf=function(e){ return e.target&&e.target.closest?e.target.closest('.cal-post[data-id]'):null; };
+  const begin=function(chip,x,y,touch){
+    calDrag.id=Number(chip.getAttribute('data-id'));
+    calDrag.src=chip; calDrag.touch=touch;
+    calDrag.x0=calDrag.x=x; calDrag.y0=calDrag.y=y;
+  };
+
+  function onMouseMove(e){
+    if(calDrag.active){ calDragMove(e.clientX,e.clientY); return; }
+    calDrag.x=e.clientX; calDrag.y=e.clientY;
+    if(Math.abs(e.clientX-calDrag.x0)+Math.abs(e.clientY-calDrag.y0)>6)calDragBegin();
+  }
+  function onMouseUp(e){
+    document.removeEventListener('mousemove',onMouseMove);
+    document.removeEventListener('mouseup',onMouseUp);
+    calDragFinish(e.clientX,e.clientY,false);
+  }
+  root.addEventListener('mousedown',function(e){
+    if(e.button!==0)return;
+    const chip=chipOf(e);
+    if(!chip)return;
+    begin(chip,e.clientX,e.clientY,false);
+    document.addEventListener('mousemove',onMouseMove);
+    document.addEventListener('mouseup',onMouseUp);
+    e.preventDefault();
+  });
+
+  function removeTouchListeners(){
+    document.removeEventListener('touchmove',onTouchMove,{passive:false});
+    document.removeEventListener('touchend',onTouchEnd,{passive:false});
+    document.removeEventListener('touchcancel',onTouchCancel);
+  }
+  function onTouchMove(e){
+    const t0=e.touches[0];
+    if(!t0)return;
+    if(calDrag.active){ e.preventDefault(); calDragMove(t0.clientX,t0.clientY); return; }
+    calDrag.x=t0.clientX; calDrag.y=t0.clientY;
+    if(Math.abs(t0.clientX-calDrag.x0)+Math.abs(t0.clientY-calDrag.y0)>12){
+      // Se movió antes del toque largo: es un scroll, no un arrastre.
+      clearTimeout(calDrag.holdTimer);
+      calDrag.id=null; calDrag.src=null;
+      removeTouchListeners();
+    }
+  }
+  function onTouchEnd(e){
+    const t0=e.changedTouches[0];
+    if(calDrag.active)e.preventDefault();
+    removeTouchListeners();
+    calDragFinish(t0?t0.clientX:calDrag.x,t0?t0.clientY:calDrag.y,false);
+  }
+  function onTouchCancel(){
+    removeTouchListeners();
+    calDragFinish(calDrag.x,calDrag.y,true);
+  }
+  root.addEventListener('touchstart',function(e){
+    if(e.touches.length!==1)return;
+    const chip=chipOf(e);
+    if(!chip)return;
+    const t0=e.touches[0];
+    begin(chip,t0.clientX,t0.clientY,true);
+    clearTimeout(calDrag.holdTimer);
+    calDrag.holdTimer=setTimeout(calDragBegin,300);
+    document.addEventListener('touchmove',onTouchMove,{passive:false});
+    document.addEventListener('touchend',onTouchEnd,{passive:false});
+    document.addEventListener('touchcancel',onTouchCancel);
+  },{passive:true});
+  root.addEventListener('contextmenu',function(e){ if(chipOf(e))e.preventDefault(); });
+})();
 
 /* ══════════ BANCO ══════════ */
 function sortedBanco(){
@@ -1454,33 +1984,42 @@ function loadStrategyUI(){
 }
 
 /* ══════════ EXPORT PDF VISTA CLIENTE ══════════ */
-function openPdfChoice(){ document.getElementById('pdfChoice').classList.add('on'); }
+function openPdfChoice(){ document.getElementById('pdfColorError').hidden=true; document.getElementById('pdfChoice').classList.add('on'); }
 function closePdfChoice(){ document.getElementById('pdfChoice').classList.remove('on'); }
 function exportPDF(){ openPdfChoice(); }
+function pdfColorChanged(source){
+  var hex=document.getElementById('pdfHex'), picker=document.getElementById('pdfColor');
+  if(source==='picker') hex.value=picker.value.toUpperCase();
+  else if(/^#[0-9a-f]{6}$/i.test(hex.value.trim())) picker.value=hex.value.trim();
+  document.getElementById('pdfColorError').hidden=true;
+}
+function pdfTextColor(hex){
+  var rgb=[1,3,5].map(function(i){ var c=parseInt(hex.slice(i,i+2),16)/255; return c<=0.04045?c/12.92:Math.pow((c+0.055)/1.055,2.4); });
+  return (0.2126*rgb[0]+0.7152*rgb[1]+0.0722*rgb[2])>0.179?'#111111':'#ffffff';
+}
 function cvSlug(s){ return (s||'marca').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'')||'marca'; }
-function cvText(h){ var d=document.createElement('div'); d.innerHTML=h||''; return (d.textContent||'').trim(); }
-function cvBrandName(){ var b=activeBrand(); return (b&&(b.name||'').trim())||'Mi marca'; }
-function cvHead(sub){ return '<div class="cv-head"><div><div class="cv-brand">✦ Plan Maestro</div><div class="cv-title">'+esc(sub)+'</div></div><div class="cv-logo">Alquimia Lab</div></div>'; }
-function cvFoot(){ return '<div class="cv-foot">Hecho con calma · Plan Maestro · Alquimia Lab</div>'; }
+function cvText(h){
+  var d=document.createElement('div'); d.innerHTML=h||'';
+  d.querySelectorAll('br').forEach(function(el){ el.parentNode.replaceChild(document.createTextNode('\n'),el); });
+  d.querySelectorAll('div,p,li').forEach(function(el){ el.appendChild(document.createTextNode('\n')); });
+  return (d.textContent||'').trim();
+}
+function cvBrandName(){ var b=activeBrand(); return (b&&(b.name||'').trim())||t('Mi marca'); }
+function cvHead(sub){ return '<div class="cv-head"><div class="cv-brand">'+esc(cvBrandName())+'</div><div class="cv-title">'+esc(sub)+'</div></div>'; }
 function cvParrilla(){
   var list=activePosts().filter(function(p){ return p.date && p.date.slice(0,7)===calYear+'-'+String(calMonth+1).padStart(2,'0'); });
   list.sort(function(a,b){ return (a.date||'').localeCompare(b.date||''); });
-  var used={};
   var rows=list.map(function(p){
-    var cls=PILLAR_CLASS[p.pillar]||'b-gen';
-    if(p.pillar)used[p.pillar]=1;
+    var cls=pillarBadgeClass(p.pillar);
     return '<tr><td class="cv-td-date">'+esc(fmtShort(p.date))+'</td>'
-      +'<td><span class="badge '+cls+'">'+esc(p.pillar||'—')+'</span></td>'
-      +'<td class="cv-td-title">'+esc(p.title||'Sin título')+(p.format?'<div class="cv-td-fmt">'+esc(p.format)+'</div>':'')+'</td>'
-      +'<td class="cv-td-copy">'+esc(cvText(p.copy)||'—')+'</td>'
-      +'<td>'+(p.done?'<span class="badge b-post">Listo</span>':'<span class="badge b-gen">Pendiente</span>')+'</td></tr>';
+      +'<td><span class="badge '+cls+'">'+esc(plbl(p.pillar||'—'))+'</span></td>'
+      +'<td class="cv-td-title">'+esc(p.title||t('Sin título'))+(p.format?'<div class="cv-td-fmt">'+esc(p.format)+'</div>':'')+'</td>'
+      +'<td class="cv-td-copy">'+esc((p.copy||'').trim()||'—')+'</td>'
+      +'<td>'+esc(t(p.done?'Listo':'Pendiente'))+'</td></tr>';
   }).join('');
-  var legend=Object.keys(used).map(function(k){ return '<span class="badge '+(PILLAR_CLASS[k]||'b-gen')+'">'+esc(k)+'</span>'; }).join(' ');
-  return cvHead(cvBrandName()+' · Parrilla '+(CAL_MONTHS[calMonth]+' '+calYear))
-    +'<table class="cv-table"><thead><tr><th>Fecha</th><th>Pilar</th><th>Post</th><th>Copy</th><th>Estado</th></tr></thead>'
-    +'<tbody>'+(rows||'<tr><td colspan="5" style="text-align:center;color:#6E6C96">Sin posts con fecha este mes. Agrega fechas en la app y vuelve a exportar.</td></tr>')+'</tbody></table>'
-    +(legend?'<div class="cv-legend">'+legend+'</div>':'')
-    +cvFoot();
+  return cvHead(t('Parrilla')+' · '+CM()[calMonth]+' '+calYear)
+    +'<table class="cv-table"><thead><tr>'+['Fecha','Pilar','Post','Copy','Estado'].map(function(label){return '<th>'+esc(t(label))+'</th>';}).join('')+'</tr></thead>'
+    +'<tbody>'+(rows||'<tr><td colspan="5">'+esc(t('Sin posts con fecha este mes. Agrega fechas en la app y vuelve a exportar.'))+'</td></tr>')+'</tbody></table>';
 }
 function cvEstrategia(){
   var s=activeStrategy()||{};
@@ -1490,34 +2029,54 @@ function cvEstrategia(){
     ['Audiencia',[['Persona 1','p1'],['Persona 2','p2'],['Dónde están','canales'],['Producto / oferta','oferta']]],
     ['Notas libres',[['Notas','notasLibres']]]
   ];
-  var h=cvHead(cvBrandName()+' · Estrategia');
+  var h=cvHead(t('Estrategia'));
   secs.forEach(function(sec){
-    h+='<div class="cv-sec"><h3>'+sec[0]+'</h3><div class="cv-kv">';
+    h+='<div class="cv-sec"><h3>'+esc(t(sec[0]))+'</h3><div class="cv-kv">';
     sec[1].forEach(function(pair){
       var v=cvText(s[pair[1]]);
-      h+='<div class="cv-item"><div class="cv-k">'+pair[0]+'</div><div class="cv-v">'+(v?esc(v):'<span class="cv-empty">—</span>')+'</div></div>';
+      h+='<div class="cv-item"><div class="cv-k">'+esc(t(pair[0]))+'</div><div class="cv-v">'+(v?esc(v):'<span class="cv-empty">—</span>')+'</div></div>';
     });
     h+='</div></div>';
   });
-  return h+cvFoot();
+  return h;
 }
 function exportPDFDoc(kind){
+  var color=document.getElementById('pdfHex').value.trim();
+  if(!/^#[0-9a-f]{6}$/i.test(color)){
+    document.getElementById('pdfColorError').hidden=false;
+    document.getElementById('pdfHex').focus();
+    return;
+  }
+  var orientation=document.getElementById('pdfOrientation').value==='portrait'?'portrait':'landscape';
+  document.getElementById('pdfPageSize').textContent='@page{size:A4 '+orientation+';margin:12mm;background:#fff}';
+  var view=document.getElementById('clientView');
+  view.style.setProperty('--cv-accent',color);
+  view.style.setProperty('--cv-accent-text',pdfTextColor(color));
   closePdfChoice();
-  document.getElementById('clientView').innerHTML = kind==='estrategia' ? cvEstrategia() : cvParrilla();
+  view.innerHTML = kind==='estrategia' ? cvEstrategia() : cvParrilla();
   var fname = (kind==='estrategia' ? 'estrategia-' : 'parrilla-') + cvSlug(cvBrandName()) + '.pdf';
   setTimeout(function(){
     if(window.pmAPI && window.pmAPI.exportPDF){
-      window.pmAPI.exportPDF(fname).then(function(r){ toast(r&&r.ok?t('PDF guardado ⬇'):t('PDF cancelado')); }).catch(function(){ toast(t('No se pudo crear el PDF')); });
+      window.pmAPI.exportPDF(fname,orientation).then(function(r){
+        if(r&&r.pending)return;
+        toast(r&&r.ok?t('PDF guardado ⬇'):t(r&&r.canceled?'PDF cancelado':'No se pudo crear el PDF'));
+      }).catch(function(error){ console.error('PDF export failed:',error); toast(t('No se pudo crear el PDF')); });
     }else{ window.print(); }
   },150);
 }
 /* ══════════ EXPORT / IMPORT / RESET ══════════ */
+function exportData(){
+  const ids=new Set(store.posts.map(p=>String(p.id)));
+  const images={};
+  Object.keys(feedImgs).forEach(k=>{ if(ids.has(k))images[k]=feedImgs[k]; });
+  return {app:'alquimia-plan-maestro-blanco',v:2,exported:new Date().toISOString(),store:store,images:images};
+}
 function exportJSON(){
-  const data={app:'alquimia-plan-maestro-blanco',v:2,exported:new Date().toISOString(),store:store};
+  const data=exportData();
   const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
   const a=document.createElement('a');
   a.href=URL.createObjectURL(blob);
-  a.download='plan-maestro-blanco-'+new Date().toISOString().slice(0,10)+'.json';
+  a.download='planora-'+new Date().toISOString().slice(0,10)+'.json';
   a.click();
   URL.revokeObjectURL(a.href);
   toast(t('Copia descargada ⬇'));
@@ -1530,6 +2089,14 @@ function importJSON(e){
     try{
       const data=JSON.parse(r.result);
       const inc=(data&&typeof data.store==='object'&&data.store)?data.store:{};
+      const incImgs=(data&&data.images&&typeof data.images==='object')?data.images:{};
+      Object.keys(incImgs).forEach(k=>{
+        const v=incImgs[k];
+        if(typeof v==='string'&&v.indexOf('data:image/')===0&&v.length<6000000){
+          feedImgs[k]=v;
+          imgPut(k,v).catch(function(){});
+        }
+      });
       const mergeById=(cur,arr)=>{
         const out=Array.isArray(cur)?cur.slice():[];
         const idx=new Map();
@@ -1551,6 +2118,14 @@ function importJSON(e){
           store.strategy[k]=Object.assign({},store.strategy[k]||{},inc.strategy[k]);
         });
       }
+      if(inc.customPillars&&typeof inc.customPillars==='object'){
+        if(!store.customPillars||typeof store.customPillars!=='object'||Array.isArray(store.customPillars))store.customPillars={};
+        Object.keys(inc.customPillars).forEach(k=>{
+          const current=Array.isArray(store.customPillars[k])?store.customPillars[k]:[];
+          const incoming=Array.isArray(inc.customPillars[k])?inc.customPillars[k]:[];
+          store.customPillars[k]=current.concat(incoming);
+        });
+      }
       if(inc.kpi&&typeof inc.kpi==='object')store.kpi=Object.assign({},store.kpi||{},inc.kpi);
       if(!Array.isArray(store.posts))store.posts=[];
       if(!Array.isArray(store.banco))store.banco=[];
@@ -1568,8 +2143,10 @@ function importJSON(e){
       }
       const migrate=arr=>arr.forEach(x=>{if(!x.brand||!store.brands.some(b=>b.id===x.brand))x.brand=store.activeBrand;});
       migrate(store.posts); migrate(store.banco); migrate(store.ideas);
+      normalizeCustomPillars();
       saveStore();
       renderBrandUI();
+      renderPillarSelect();
       loadStrategyUI();
       renderAll();
       toast(t('Copia restaurada ⬆'));
@@ -1582,7 +2159,9 @@ function resetAll(){
   askConfirm(t('Vaciar todo'),t('Se borran marcas, posts, banco, ideas y estrategia de este navegador.'),t('Vaciar todo'),function(ok){
     if(!ok)return;
     const b=defaultBrand();
-    store={brands:[b],activeBrand:b.id,posts:[],banco:[],ideas:[],strategy:{}};
+    store={brands:[b],activeBrand:b.id,customPillars:{},posts:[],banco:[],ideas:[],strategy:{}};
+    feedImgs={};
+    imgClearAll().catch(function(){});
     saveStore();
     renderBrandUI();
     loadStrategyUI();
@@ -1630,10 +2209,19 @@ function bootApp(){
   calMonth=now.getMonth();
   initStrategy();
   setLang(pmLang);
+  loadFeedImages();
 }
-(function initLicenseGate(){
+document.addEventListener('DOMContentLoaded',function initLicenseGate(){
   var scr=document.getElementById('pmLicense');
-  if(pmStored()){ scr.style.display='none'; bootApp(); return; }
+  function finishActivation(){
+    if(pmLangChosen){scr.style.display='none';bootApp();return;}
+    scr.style.display='flex';
+    document.getElementById('pmLicenseForm').style.display='none';
+    document.getElementById('pmLangStep').style.display='block';
+    document.getElementById('pmLangEs').onclick=function(){ setLang('es'); scr.style.display='none'; bootApp(); };
+    document.getElementById('pmLangEn').onclick=function(){ setLang('en'); scr.style.display='none'; bootApp(); };
+  }
+  if(pmStored()){finishActivation();return;}
   scr.style.display='flex';
   var input=document.getElementById('pmLicenseInput');
   var btn=document.getElementById('pmActivateBtn');
@@ -1645,18 +2233,21 @@ function bootApp(){
   });
   btn.addEventListener('click',function(){
     if(pmValid(input.value.trim())){
-      try{localStorage.setItem(PM_KEY,input.value.trim());}catch(e){}
-      document.getElementById('pmLicenseForm').style.display='none';
-      document.getElementById('pmLangStep').style.display='block';
-      document.getElementById('pmLangEs').onclick=function(){ setLang('es'); scr.style.display='none'; bootApp(); };
-      document.getElementById('pmLangEn').onclick=function(){ setLang('en'); scr.style.display='none'; bootApp(); };
+      try{localStorage.setItem(PM_KEY,input.value.trim());}
+      catch(e){
+        console.warn('Could not save activation:',e);
+        err.textContent=t('No se pudo guardar la activación en este dispositivo.');
+        err.style.display='block';
+        return;
+      }
+      finishActivation();
     }else{
       err.textContent=t('Código inválido. Verifica e intenta de nuevo.');
       err.style.display='block';
     }
   });
   input.addEventListener('keypress',function(e){ if(e.key==='Enter') btn.click(); });
-})();
+});
 </script>
   <a href="https://alquimialab.app/" target="_blank" rel="noopener" class="pm-back" onclick="if(window.pmAPI&&window.pmAPI.openAlquimia){event.preventDefault();window.pmAPI.openAlquimia();}">&larr; Alquimia Lab</a>
 
@@ -1664,6 +2255,18 @@ function bootApp(){
     <div class="modal">
       <h3 data-i18n="¿Qué exportamos en el PDF?">¿Qué exportamos en el PDF?</h3>
       <p class="hint-line" data-i18n="Tip: mueve el calendario al mes que quieres mostrar en la parrilla.">Tip: mueve el calendario al mes que quieres mostrar en la parrilla.</p>
+      <label for="pdfOrientation" data-i18n="Orientación">Orientación</label>
+      <select id="pdfOrientation">
+        <option value="landscape" data-i18n="Horizontal">Horizontal</option>
+        <option value="portrait" data-i18n="Vertical">Vertical</option>
+      </select>
+      <label for="pdfHex" data-i18n="Color de la marca (HEX)">Color de la marca (HEX)</label>
+      <div class="pdf-color-row">
+        <input id="pdfColor" type="color" value="#6462ab" aria-label="Color" oninput="pdfColorChanged('picker')">
+        <input id="pdfHex" type="text" value="#6462AB" maxlength="7" spellcheck="false" aria-describedby="pdfColorHint pdfColorError" oninput="pdfColorChanged('hex')">
+      </div>
+      <p class="hint-line" id="pdfColorHint" data-i18n="Usa un código de seis dígitos, por ejemplo #6462AB.">Usa un código de seis dígitos, por ejemplo #6462AB.</p>
+      <p class="pdf-error" id="pdfColorError" role="alert" hidden data-i18n="Escribe un color HEX válido, por ejemplo #6462AB.">Escribe un color HEX válido, por ejemplo #6462AB.</p>
       <div class="modal-actions" style="flex-direction:column;align-items:stretch">
         <button class="btn btn-p" onclick="exportPDFDoc('parrilla')" data-i18n="📅 Parrilla del mes">📅 Parrilla del mes</button>
         <button class="btn btn-p" onclick="exportPDFDoc('estrategia')" data-i18n="🧩 Estrategia de la marca">🧩 Estrategia de la marca</button>
@@ -1672,5 +2275,14 @@ function bootApp(){
     </div>
   </div>
   <div id="clientView"></div>
+<script>
+if('serviceWorker' in navigator){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(error){
+      console.error('Could not register the offline app:',error);
+    });
+  });
+}
+</script>
 </body>
 </html>

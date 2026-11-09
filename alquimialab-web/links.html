@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f4fb">
+  <meta name="description" content="Encuentra Kore, recursos gratuitos, productos y redes de Alquimia Lab.">
+  <link rel="canonical" href="https://alquimialab.app/links">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>Alquimia Lab · Encuéntrame aquí</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --purple: #6462ab;
+      --purple-dark: #4e4c8a;
+      --lavender: #e8e6f4;
+      --ink: #292746;
+      --muted: #716e91;
+      --paper: #f6f4fb;
+      --white: #fff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 32px 18px;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 12% 9%, rgba(204, 201, 230, .7), transparent 25rem),
+        radial-gradient(circle at 92% 84%, rgba(232, 230, 244, .9), transparent 22rem),
+        var(--paper);
+      color: var(--ink);
+      font-family: "Quicksand", "Trebuchet MS", sans-serif;
+    }
+
+    main {
+      width: min(100%, 480px);
+      padding: 34px 26px 26px;
+      border: 1px solid rgba(100, 98, 171, .12);
+      border-radius: 30px;
+      background: rgba(255, 255, 255, .86);
+      box-shadow: 0 24px 70px rgba(62, 57, 110, .12);
+      text-align: center;
+      backdrop-filter: blur(14px);
+    }
+
+    .brand-mark {
+      width: 76px;
+      height: 76px;
+      margin: 0 auto 16px;
+      display: grid;
+      place-items: center;
+      border-radius: 25px;
+      background: var(--purple);
+      color: #fff;
+      font-size: 39px;
+      font-weight: 700;
+      box-shadow: 0 10px 24px rgba(100, 98, 171, .24);
+    }
+
+    h1 { margin: 0; font-size: 29px; letter-spacing: -.5px; }
+
+    .intro {
+      margin: 9px auto 24px;
+      max-width: 340px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .links { display: grid; gap: 11px; }
+
+    .link {
+      min-height: 58px;
+      padding: 13px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      border: 1px solid rgba(100, 98, 171, .16);
+      border-radius: 16px;
+      background: var(--white);
+      color: var(--ink);
+      font-size: 15px;
+      font-weight: 700;
+      text-align: left;
+      text-decoration: none;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    .link:hover, .link:focus-visible {
+      transform: translateY(-2px);
+      background: #fbfaff;
+      box-shadow: 0 8px 20px rgba(62, 57, 110, .1);
+      outline: none;
+    }
+
+    .link-primary {
+      border-color: var(--purple);
+      background: var(--purple);
+      color: #fff;
+    }
+
+    .link-primary:hover, .link-primary:focus-visible {
+      background: var(--purple-dark);
+    }
+
+    .link-name { display: flex; align-items: center; gap: 12px; }
+    .link-icon { width: 26px; flex: 0 0 26px; text-align: center; font-size: 19px; }
+    .arrow { color: currentColor; opacity: .58; font-size: 19px; }
+
+    .social-label {
+      margin: 23px 0 11px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+
+    .social-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 9px; }
+
+    .social-links a {
+      padding: 9px 14px;
+      border: 1px solid rgba(100, 98, 171, .16);
+      border-radius: 999px;
+      background: var(--white);
+      color: var(--purple-dark);
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    footer { margin-top: 24px; color: var(--muted); font-size: 12px; }
+    footer a { color: var(--purple-dark); font-weight: 700; text-decoration: none; }
+
+    @media (max-width: 380px) {
+      body { padding: 18px 12px; }
+      main { padding: 28px 18px 22px; border-radius: 24px; }
+      h1 { font-size: 26px; }
+      .link { min-height: 54px; padding: 12px 14px; font-size: 14px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="brand-mark" aria-hidden="true">✦</div>
+    <h1>Alquimia Lab</h1>
+    <p class="intro">Un espacio para organizarte con calma, descubrir recursos y crear a tu manera.</p>
+
+    <nav class="links" aria-label="Enlaces principales">
+      <a class="link link-primary" href="https://play.google.com/store/apps/details?id=com.alquimialab.kore" target="_blank" rel="noopener noreferrer">
+        <span class="link-name"><span class="link-icon" aria-hidden="true">📱</span><span>Kore · Descárgala en Google Play</span></span>
+        <span class="arrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="link" href="kore/">
+        <span class="link-name"><span class="link-icon" aria-hidden="true">💜</span><span>Conoce más sobre Kore</span></span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="link" href="kit-14-dias.html">
+        <span class="link-name"><span class="link-icon" aria-hidden="true">🌿</span><span>Descarga el kit gratuito de 14 días</span></span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="link" href="productos.html">
+        <span class="link-name"><span class="link-icon" aria-hidden="true">✨</span><span>Explora productos digitales</span></span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+      <a class="link" href="portafolio.html#services">
+        <span class="link-name"><span class="link-icon" aria-hidden="true">🎨</span><span>Servicios de diseño</span></span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+    </nav>
+
+    <p class="social-label">También puedes encontrarme en</p>
+    <div class="social-links">
+      <a href="https://www.instagram.com/alquimia.lab8/" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="https://www.youtube.com/@LofiAlquimiaLab88" target="_blank" rel="noopener noreferrer">YouTube</a>
+      <a href="https://www.facebook.com/profile.php?id=61592768576548" target="_blank" rel="noopener noreferrer">Facebook</a>
+      <a href="https://www.notion.com/es/@alquimialab" target="_blank" rel="noopener noreferrer">Notion</a>
+    </div>
+
+    <footer>Hecho con calma por <a href="./">Alquimia Lab</a> · <a href="mailto:alquimialab88@gmail.com">Escríbeme</a></footer>
+  </main>
+</body>
+</html>

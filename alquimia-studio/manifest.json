@@ -1,7 +1,7 @@
 {
   "name": "Alquimia Studio",
   "short_name": "Alquimia",
-  "description": "Tu espacio creativo para planners interactivos",
+  "description": "Planners interactivos y biblioteca personal de PDFs",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

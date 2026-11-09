@@ -49,7 +49,7 @@ function nodesOf(html) {
 const ALLOW = new Set([
   'Alquimia Lab', 'ES | EN', '▾', 'Products', 'Kore',
   'Amazon', 'Amazon EN', 'Amazon ES', 'Digital',
-  'Plan Maestro', 'Alquimia Studio', 'Focus Dock',
+  'Planora', 'Alquimia Studio', 'Focus Dock',
   'Freelancer CRM — Planner', 'YouTube Creator OS — Planner & Script',
   'Student OS & Study Planner', 'Social Media Planner',
   'Finance Planner Pro', 'Finance Planner Free',

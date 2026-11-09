@@ -1,21 +1,26 @@
-/* ===== Alquimia Studio — Service Worker ===== */
+/* ===== Alquimia Studio - Service Worker ===== */
 
-const CACHE_NAME = 'alquimia-studio-v2';
+const CACHE_NAME = 'alquimia-studio-v10';
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/css/style.css',
-  '/js/app.js',
-  '/manifest.json',
-  '/icons/favicon.svg',
-  '/planners/calma-y-orden.html',
-  '/planners/planner-anual.html',
-  '/planners/planner-tdah.html',
-  '/planners/planner-menstrual.html',
-  '/planners/planner-semanal.html'
+  './',
+  './index.html',
+  './manifest.json',
+  './icons/favicon.svg',
+  './css/style.css',
+  './css/library.css',
+  './css/premium.css',
+  './js/app.js',
+  './js/library.js',
+  './js/pdf.min.js',
+  './js/pdf.worker.min.js',
+  './planners/calma-y-orden.html',
+  './planners/planner-anual.html',
+  './planners/planner-tdah.html',
+  './planners/planner-menstrual.html',
+  './planners/planner-semanal.html'
 ];
 
-// Install event
+// Install: precache the app shell
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -24,7 +29,7 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// Activate event
+// Activate: remove old caches
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -37,47 +42,32 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch event
+// Fetch: cache-first with background refresh
 self.addEventListener('fetch', (event) => {
-  // Skip non-GET requests
   if (event.request.method !== 'GET') return;
-
-  // Skip chrome-extension and other non-http requests
   if (!event.request.url.startsWith('http')) return;
+  // Never intercept Google Fonts or non-same-origin requests
+  if (new URL(event.request.url).origin !== self.location.origin) return;
 
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
-        // Return cached version or fetch from network
         return response || fetch(event.request).then((fetchResponse) => {
-          // Don't cache if not a success response
-          if (!fetchResponse || fetchResponse.status !== 200) {
-            return fetchResponse;
-          }
-
-          // Clone the response
+          if (!fetchResponse || fetchResponse.status !== 200) return fetchResponse;
           const responseToCache = fetchResponse.clone();
-
           caches.open(CACHE_NAME).then((cache) => {
             cache.put(event.request, responseToCache);
           });
-
           return fetchResponse;
         });
       })
       .catch(() => {
-        // Return offline fallback for navigation requests
-        if (event.request.mode === 'navigate') {
-          return caches.match('/index.html');
-        }
+        if (event.request.mode === 'navigate') return caches.match('./index.html');
         return null;
       })
   );
 });
 
-// Handle messages
 self.addEventListener('message', (event) => {
-  if (event.data === 'skipWaiting') {
-    self.skipWaiting();
-  }
+  if (event.data === 'skipWaiting') self.skipWaiting();
 });

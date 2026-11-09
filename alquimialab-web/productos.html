@@ -31,7 +31,7 @@
     "itemListElement": [
       {"@type": "ListItem", "position": 1, "name": "Planner 2027", "url": "https://alquimialab.app/planner-2027"},
       {"@type": "ListItem", "position": 2, "name": "Kore app", "url": "https://alquimialab.app/kore/"},
-      {"@type": "ListItem", "position": 3, "name": "Plan Maestro", "url": "https://alquimialab.app/plan-maestro/"}
+      {"@type": "ListItem", "position": 3, "name": "Planora", "url": "https://alquimialab.app/productos#p-planora"}
     ]
   }
   </script>
@@ -94,6 +94,11 @@
     .shop-hero .btn-hero { background:#fff; color:#524f96; border:none; margin-top:16px; position:relative; z-index:1; box-shadow:0 8px 20px rgba(26,24,50,.2); }
     .shop-hero .btn-hero:hover { transform:translateY(-2px); }
     .shop-card.hidden { display:none; }
+    .planora-details { margin: 0 0 12px; font-size: 13px; color: var(--text-muted); }
+    .planora-details summary { color: var(--purple); font-weight: 700; cursor: pointer; }
+    .planora-details ul { padding-left: 18px; margin: 10px 0; }
+    .planora-details li { margin-bottom: 5px; line-height: 1.45; }
+    .planora-details p { flex: none; margin: 8px 0; }
     .buy-stack { display:flex; gap:8px; flex-wrap:wrap; margin-top: 4px; }
     .buy-stack .btn-primary, .buy-stack .btn-secondary { flex: 1 1 auto; justify-content:center; min-width: 90px; }
     .soon { opacity:.7; cursor:default !important; }
@@ -339,17 +344,20 @@
           </div>
         </div>
 
-        <!-- PLAN MAESTRO (destacado) -->
-        <div class="notion-card shop-card anim" data-cat="digital">
-          <img class="notion-thumb" src="assets/featured-maestro.jpg?v=2" alt="Plan Maestro" loading="lazy" decoding="async">
+        <!-- PLANORA (destacado) -->
+        <div class="notion-card shop-card anim" data-cat="digital" id="p-planora">
+          <button type="button" class="studio-preview-trigger" onclick="openPlanoraDetails()" aria-label="See Planora features and screenshots">
+            <img class="notion-thumb" src="assets/featured-maestro.jpg?v=2" alt="Planora content planner for Windows" loading="lazy" decoding="async">
+          </button>
           <div class="notion-info">
             <span class="badge" style="background:#e5533d;color:#fff;font-size:10px;font-weight:700;padding:4px 10px;border-radius:99px;align-self:flex-start;">NEW</span>
-            <h3>Plan Maestro</h3>
-            <p>Plan a month of content for multiple brands in one place: pillars, calendar, captions, and ideas—without juggling spreadsheets.</p>
-            <span class="notion-price">$6</span>
+            <h3>Planora</h3>
+            <p>Your ideas deserve a plan—not to get lost among notes and spreadsheets. Planora is a Windows desktop app that helps you organize your content, give your ideas direction, and turn inspiration into action.</p>
+            <p><em>Less chaos, more room to create.</em></p>
+            <span class="notion-price">$7</span>
             <div class="buy-stack">
-              <a href="https://alquimialab.gumroad.com/l/PlantillaPlanMaestro" target="_blank" rel="noopener" class="btn-primary btn-sm" onclick="window.gtag&&gtag('event','click_buy_plan_maestro')">Buy on Gumroad →</a>
-              <a href="plan-maestro/" target="_blank" rel="noopener" class="btn-secondary btn-sm">Try online</a>
+              <button type="button" class="btn-secondary btn-sm" onclick="openPlanoraDetails()">See features &amp; screenshots</button>
+              <a href="https://alquimialab.gumroad.com/l/Planora?wanted=true" target="_blank" rel="noopener" class="btn-primary btn-sm" onclick="window.gtag&&gtag('event','click_buy_planora')">Buy on Gumroad →</a>
             </div>
           </div>
         </div>
@@ -534,6 +542,62 @@
       </div>
 
       </div>
+
+      <dialog class="studio-details-dialog" id="planoraDetailsDialog" aria-labelledby="planoraDetailsTitle">
+        <div class="studio-dialog-content">
+          <div class="studio-dialog-header">
+            <div>
+              <p class="studio-dialog-eyebrow">Planora · $7 · One-time purchase</p>
+              <h2 id="planoraDetailsTitle">All your content planning in one calm workspace</h2>
+            </div>
+            <form method="dialog"><button class="studio-dialog-close" aria-label="Close details">&times;</button></form>
+          </div>
+          <p class="studio-dialog-lead">Stop planning across scattered spreadsheets and messy notes. Planora is an interactive content planner built for Windows that brings your strategy, grid, captions, calendar, and feed preview together—with no monthly subscription.</p>
+
+          <div class="studio-screenshot-grid" aria-label="Planora screenshots">
+            <figure class="studio-screenshot">
+              <img src="assets/pm-maestro-1.png" alt="Planora brand strategy and custom pillars workspace" loading="lazy">
+              <figcaption>Brand strategy &amp; custom pillars</figcaption>
+            </figure>
+            <figure class="studio-screenshot">
+              <img src="assets/pm-maestro-2.png" alt="Planora content bank and piece vault" loading="lazy">
+              <figcaption>Content bank &amp; piece vault</figcaption>
+            </figure>
+            <figure class="studio-screenshot">
+              <img src="assets/pm-maestro-3.png" alt="Planora quick ideas and inspiration capture" loading="lazy">
+              <figcaption>Capture ideas &amp; drafts on the fly</figcaption>
+            </figure>
+          </div>
+
+          <div class="studio-dialog-columns">
+            <section>
+              <h3>What can you do with Planora?</h3>
+              <ul>
+                <li><strong>Interactive grid &amp; feed preview:</strong> plan posts, write copy, and preview your Instagram layout.</li>
+                <li><strong>Custom content pillars:</strong> create and save unique categories tailored to each brand.</li>
+                <li><strong>Visual calendar:</strong> view your entire month at a glance and drag to reschedule.</li>
+                <li><strong>Client-ready PDF export:</strong> choose portrait or landscape and personalize with your brand's HEX color.</li>
+                <li><strong>Multi-brand workspace:</strong> keep content and strategy separate for every client.</li>
+              </ul>
+            </section>
+            <section>
+              <h3>Also included</h3>
+              <ul>
+                <li>Piece vault to save and reuse your best-performing copy.</li>
+                <li>Idea incubator to capture hooks, formats, and dream dates.</li>
+                <li>Full bilingual experience: switch between English and Spanish anytime.</li>
+                <li>100% private and offline: your data stays on your computer.</li>
+                <li>Windows desktop application: installable and portable versions included.</li>
+              </ul>
+            </section>
+          </div>
+
+          <p class="studio-data-note"><strong>Your data stays under your control.</strong> Planora stores your content directly on your computer with no cloud tracking, no logins, and no monthly fees. Save and restore JSON backups anytime.</p>
+          <div class="studio-dialog-actions">
+            <a href="https://alquimialab.gumroad.com/l/Planora?wanted=true" target="_blank" rel="noopener" class="btn-primary" onclick="window.gtag&&gtag('event','click_buy_planora')">Buy on Gumroad →</a>
+          </div>
+        </div>
+      </dialog>
 
       <dialog class="studio-details-dialog" id="studioDetailsDialog" aria-labelledby="studioDetailsTitle">
         <div class="studio-dialog-content">
@@ -741,8 +805,23 @@
       goProduct('p-alquimia-studio');
       openStudioDetails();
     }
+
+    function openPlanoraDetails() {
+      var dialog = document.getElementById('planoraDetailsDialog');
+      if (dialog && !dialog.open) dialog.showModal();
+    }
+    var planoraDialog = document.getElementById('planoraDetailsDialog');
+    if (planoraDialog) {
+      planoraDialog.addEventListener('click', function(event) {
+        if (event.target === planoraDialog) planoraDialog.close();
+      });
+    }
+    if (catFromHash() === 'p-planora') {
+      goProduct('p-planora');
+      openPlanoraDetails();
+    }
   </script>
 
-  <script src="js/lang.js?v=6"></script>
+  <script src="js/lang.js?v=8"></script>
 </body>
 </html>

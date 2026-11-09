@@ -1,6 +1,6 @@
 {
-  "name": "Plan Maestro · Alquimia",
-  "short_name": "Plan Maestro",
+  "name": "Planora · Alquimia Lab",
+  "short_name": "Planora",
   "description": "Tu parrilla de contenido interactiva",
   "start_url": "./index.html",
   "scope": "./",
@@ -8,6 +8,18 @@
   "background_color": "#F7F5FB",
   "theme_color": "#6462AB",
   "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
     {
       "src": "icons/favicon.svg",
       "sizes": "any",
