@@ -665,7 +665,7 @@
     "Get instant access on Gumroad · $9.99 →": "Obtén acceso inmediato en Gumroad · $9.99 →",
 
     /* PLANORA DETAILS DIALOG */
-    "Planora · $7 · One-time purchase": "Planora · $7 · Pago único",
+    "Planora · $9.99 · One-time purchase": "Planora · $9.99 · Pago único",
     "All your content planning in one calm workspace": "Toda tu planificación de contenido en un solo espacio tranquilo",
     "Stop planning across scattered spreadsheets and messy notes. Planora is an interactive content planner built for Windows that brings your strategy, grid, captions, calendar, and feed preview together—with no monthly subscription.": "Deja de planear en hojas de cálculo dispersas y notas desordenadas. Planora es un planificador de contenido interactivo para Windows que reúne tu estrategia, parrilla, textos, calendario y vista previa del feed, sin suscripción mensual.",
     "Brand strategy & custom pillars": "Estrategia de marca y pilares personalizados",

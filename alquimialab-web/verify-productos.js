@@ -56,7 +56,7 @@ const ALLOW = new Set([
   'Quiet Mind Planner', 'Habit Planner', 'Pet Control',
   'El diario imperfecto de una creadora', 'Isabel · Alquimia Lab',
   'Lo-Fi · Alquimia Lab', 'Freelancer CRM', 'Quiet Mind', 'Coloring Books', 'Planner 2027',
-  '$7', '$3', '$14.99', '$12.99', '$27', '$9.99', '$15', '$5.99', '$4', '$5', '$19', 'FREE',
+  '$9.99', '$3', '$14.99', '$12.99', '$27', '$15', '$5.99', '$4', '$5', '$19', 'FREE',
   '📖', '🧾', '🌱', '🎨', '📓', '🎓', '🐾', '🐼',
 ]);
 
