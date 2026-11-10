@@ -44,6 +44,7 @@
     }
     .v-copy:hover { background: var(--purple); border-color: var(--purple); color: #fff; }
     .v-copy svg { width: 14px; height: 14px; }
+    .v-top-actions .lang-toggle { margin-left: 0; }
 
     .v-wrap { max-width: 1180px; margin: 0 auto; padding: 26px 24px 48px; }
 
@@ -315,11 +316,12 @@
   <header class="v-topbar">
     <a href="./" class="v-logo">Alquimia Lab<span>.</span></a>
     <div class="v-top-actions">
-      <span class="v-private">🔒 Vitrina privada</span>
+      <span class="v-private" id="vPrivate">🔒 Vitrina privada</span>
       <button type="button" class="v-copy" id="copyLink">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
-        Copiar enlace
+        <span id="copyLabel">Copiar enlace</span>
       </button>
+      <button type="button" class="lang-toggle" id="vLang" data-lang="es" aria-label="Switch language"><span class="cur">ES</span><span class="sep">|</span><span class="cur">EN</span></button>
     </div>
   </header>
 
@@ -327,14 +329,14 @@
 
     <section class="v-hero">
       <div class="v-hero-copy">
-        <span class="v-eyebrow">Catálogo completo · 2026</span>
-        <h1>Todos mis productos,<br><em>en vista rápida.</em></h1>
-        <p>Explora, compara y compra en segundos. Toca cualquier producto para ver todos los detalles sin salir de la página.</p>
+        <span class="v-eyebrow" id="vEyebrow">Catálogo completo · 2026</span>
+        <h1 id="vHeroTitle">Todos mis productos,<br><em>en vista rápida.</em></h1>
+        <p id="vHeroP">Explora, compara y compra en segundos. Toca cualquier producto para ver todos los detalles sin salir de la página.</p>
       </div>
       <div class="v-stats" aria-label="Resumen del catálogo">
-        <div class="v-stat"><b id="statTotal">15</b><span>productos</span></div>
-        <div class="v-stat"><b id="statFree">3</b><span>gratis</span></div>
-        <div class="v-stat"><b id="statFrom">$3.49</b><span>desde</span></div>
+        <div class="v-stat"><b id="statTotal">15</b><span id="statProductsLabel">productos</span></div>
+        <div class="v-stat"><b id="statFree">3</b><span id="statFreeLabel">gratis</span></div>
+        <div class="v-stat"><b id="statFrom">$3.49</b><span id="statFromLabel">desde</span></div>
       </div>
     </section>
 
@@ -354,14 +356,14 @@
     <div class="v-grid" id="grid"></div>
 
     <div class="v-empty" id="empty" hidden>
-      <b>No encontré ese producto</b>
-      Prueba con otra palabra o mira todo el catálogo.
+      <b id="vEmptyTitle">No encontré ese producto</b>
+      <span id="vEmptyText">Prueba con otra palabra o mira todo el catálogo.</span>
       <div style="margin-top:16px;"><button type="button" class="btn-primary btn-sm" id="resetEmpty">Ver todos</button></div>
     </div>
 
     <footer class="v-foot">
-      <p>Vitrina privada de Alquimia Lab · No aparece en el menú, el sitemap ni en buscadores.</p>
-      <a href="./">Volver al inicio →</a>
+      <p id="vFootText">Vitrina privada de Alquimia Lab · No aparece en el menú, el sitemap ni en buscadores.</p>
+      <a href="./" id="vFootLink">Volver al inicio →</a>
     </footer>
 
   </main>
@@ -627,14 +629,157 @@
         }
       ];
 
-      var CATS = { digital: 'Digital', print: 'Impreso', notion: 'Plantilla Notion' };
-      var FILTERS = [
-        { id: 'all', label: 'Todos' },
-        { id: 'digital', label: 'Digitales' },
-        { id: 'print', label: 'Impresos' },
-        { id: 'notion', label: 'Notion' },
-        { id: 'free', label: 'Gratis' }
-      ];
+      var I18N = {
+        es: {
+          private: '🔒 Vitrina privada',
+          copy: 'Copiar enlace',
+          eyebrow: 'Catálogo completo · 2026',
+          heroTitle: 'Todos mis productos,<br><em>en vista rápida.</em>',
+          heroP: 'Explora, compara y compra en segundos. Toca cualquier producto para ver todos los detalles sin salir de la página.',
+          products: 'productos',
+          freeLabel: 'gratis',
+          from: 'desde',
+          search: 'Buscar producto…',
+          filters: { all: 'Todos', digital: 'Digitales', print: 'Impresos', notion: 'Notion', free: 'Gratis' },
+          resultOne: 'producto',
+          resultMany: 'productos',
+          resultFor: ' para ',
+          clear: 'Limpiar filtros',
+          emptyTitle: 'No encontré ese producto',
+          emptyText: 'Prueba con otra palabra o mira todo el catálogo.',
+          viewAll: 'Ver todos',
+          footer: 'Vitrina privada de Alquimia Lab · No aparece en el menú, el sitemap ni en buscadores.',
+          back: 'Volver al inicio →',
+          close: 'Cerrar vista rápida',
+          quick: 'Vista rápida',
+          buy: 'Comprar',
+          download: 'Descargar gratis',
+          freePrice: 'Gratis',
+          soonPrice: 'Próximamente',
+          noteFree: 'Descarga gratuita en Notion · Sin costo',
+          noteSoon: 'Te aviso en cuanto esté disponible.',
+          noteBuy: 'Pago único · Acceso inmediato · Compra segura',
+          copied: 'Enlace copiado ✔',
+          copyFallback: 'Copia el enlace de la barra',
+          cats: { digital: 'Digital', print: 'Impreso', notion: 'Plantilla Notion' }
+        },
+        en: {
+          private: '🔒 Private showcase',
+          copy: 'Copy link',
+          eyebrow: 'Full catalog · 2026',
+          heroTitle: 'All my products,<br><em>in quick view.</em>',
+          heroP: 'Explore, compare, and buy in seconds. Tap any product to see every detail without leaving the page.',
+          products: 'products',
+          freeLabel: 'free',
+          from: 'from',
+          search: 'Search products…',
+          filters: { all: 'All', digital: 'Digital', print: 'Print', notion: 'Notion', free: 'Free' },
+          resultOne: 'product',
+          resultMany: 'products',
+          resultFor: ' for ',
+          clear: 'Clear filters',
+          emptyTitle: 'I couldn’t find that product',
+          emptyText: 'Try another word or browse the full catalog.',
+          viewAll: 'View all',
+          footer: 'Private Alquimia Lab showcase · Not listed in the menu, sitemap, or search engines.',
+          back: 'Back to home →',
+          close: 'Close quick view',
+          quick: 'Quick view',
+          buy: 'Buy',
+          download: 'Download free',
+          freePrice: 'Free',
+          soonPrice: 'Coming soon',
+          noteFree: 'Free download on Notion · No cost',
+          noteSoon: 'I’ll let you know as soon as it’s available.',
+          noteBuy: 'One-time purchase · Instant access · Secure checkout',
+          copied: 'Link copied ✔',
+          copyFallback: 'Copy the link from the address bar',
+          cats: { digital: 'Digital', print: 'Print', notion: 'Notion template' }
+        }
+      };
+
+      var EN_PRODUCTS = {
+        diario: {
+          name: 'The Imperfect Diary of a Creator',
+          short: 'The real story of my leap into freelance life, with 15 prompts and exercises.',
+          desc: 'The real story of my leap into freelance life: 15 prompts to copy and paste, exercises with space to write, and a launch checklist. A notebook to start without waiting to feel ready.',
+          note: 'Pay what you want · From COP 19.687 · PDF + EPUB'
+        },
+        planora: {
+          name: 'Planora — Social Media Organizer | Planner',
+          short: 'Desktop app to organize and plan your social media content.',
+          desc: 'Planora is a Windows desktop app that helps you organize your content, give your ideas direction, and turn inspiration into action. Less chaos, more room to create.'
+        },
+        studio: {
+          name: 'Alquimia Studio',
+          short: 'PDF organizer + 5 digital planners, with light and dark mode.',
+          desc: 'Organize and read your PDFs in your browser, alongside five digital planners: Calm & Order, Annual, ADHD, Menstrual Cycle, and Weekly. Includes light and dark mode, favorites, and backup and restore tools. One-time purchase, no monthly subscription.'
+        },
+        planner: {
+          name: 'Planner 2027 — Calm & Order',
+          short: 'A minimalist planner to organize your year with calm and intention.',
+          desc: 'A minimalist planner to organize your year with calm and intention. Print or digital edition, with space for your goals, projects, and daily rituals.'
+        },
+        coloring: {
+          name: 'Coloring Books — Lofi Coloring',
+          short: 'The same book in Spanish and English. Print and digital edition.',
+          desc: 'The same book in Spanish and English, with lofi illustrations to color and unwind. Available in print and digital editions.'
+        },
+        crm: {
+          name: 'Freelancer CRM — Planner',
+          short: 'An operating system to structure your workflow from start to finish.',
+          desc: 'An operating system to structure your workflow from start to finish: clients, projects, proposals, and deliveries in one place.'
+        },
+        youtube: {
+          name: 'YouTube Creator OS — Planner & Script',
+          short: 'Scripts, ideas, and strategy for your channel, from shorts to long videos.',
+          desc: 'Stop losing video ideas with a comprehensive Notion workspace built for creators and producers. Strategic clarity for your channel, from long-form scripts to viral shorts.'
+        },
+        student: {
+          name: 'Student OS & Study Planner',
+          short: 'Tasks, exams, and notes in one minimalist dashboard.',
+          desc: 'Say goodbye to scattered notes and missed deadlines with a single minimalist dashboard. Run your entire student life smoothly, from daily tasks to final exams.'
+        },
+        social: {
+          name: 'Social Media Planner',
+          short: 'Plan posts, campaigns, and ideas in one Notion workspace.',
+          desc: 'Plan your posts, campaigns, and content ideas in one Notion workspace — a calmer way for creators and small businesses to show up online.'
+        },
+        financepro: {
+          name: 'Finance Planner Pro',
+          short: 'Advanced financial tracking with reports and projections.',
+          desc: 'Advanced financial tracking with detailed reports and projections to understand where your money goes and plan with calm.'
+        },
+        quiet: {
+          name: 'Quiet Mind Planner',
+          short: 'A minimalist sanctuary to quiet mental noise and protect your energy.',
+          desc: 'Free your mind from mental noise with a minimalist sanctuary designed to protect your energy and bring calm. Transform your daily routines into a gentle flow of intentional reflection.'
+        },
+        habit: {
+          name: 'Habit Planner',
+          short: 'Habits without guilt, with a clean slate focused on your growth.',
+          desc: 'Transform your habits without the visual guilt of missed days. A clean-slate design to keep your mind clear and focused on your growth.'
+        },
+        financefree: {
+          name: 'Finance Planner Free',
+          short: 'Organize your personal finances with a visual, intuitive system.',
+          desc: 'Organize your personal finances with a visual and intuitive system. A simple base to start ordering your numbers today.'
+        },
+        pet: {
+          name: 'Pet Planner',
+          short: 'Vaccines, vet visits, meds, and food in one dashboard.',
+          desc: 'Vaccines, vet visits, meds, and food in one dashboard. For Bonnie, Luna and every furry member of the family.'
+        }
+      };
+
+      var lang = 'es';
+      try {
+        var savedLang = localStorage.getItem('alquimia-lang');
+        if (savedLang === 'en' || savedLang === 'es') lang = savedLang;
+      } catch (e) { /* ignore */ }
+      var T = I18N[lang];
+
+      var FILTERS = ['all', 'digital', 'print', 'notion', 'free'];
 
       var grid = document.getElementById('grid');
       var chipsEl = document.getElementById('vChips');
@@ -645,6 +790,18 @@
       var dlg = document.getElementById('quickView');
       var lastTrigger = null;
       var activeCat = 'all';
+      var currentId = null;
+
+      function localized(p, field) {
+        var en = EN_PRODUCTS[p.id];
+        return (lang === 'en' && en && en[field]) ? en[field] : p[field];
+      }
+      function catLabel(cat) {
+        return T.cats[cat] || cat;
+      }
+      function badgeLabel(p) {
+        return (lang === 'en' && p.badge === 'Nuevo') ? 'New' : p.badge;
+      }
 
       function norm(s) {
         return String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
@@ -659,8 +816,8 @@
       }
       function priceHTML(p) {
         if (p.priceLabel) return '<span class="v-price v-price-label">' + esc(p.priceLabel) + '</span>';
-        if (p.soon) return '<span class="v-price v-soon">Próximamente</span>';
-        if (p.free) return '<span class="v-price v-free">Gratis</span>';
+        if (p.soon) return '<span class="v-price v-soon">' + esc(T.soonPrice) + '</span>';
+        if (p.free) return '<span class="v-price v-free">' + esc(T.freePrice) + '</span>';
         var html = '<span class="v-price">' + fmt(p.price) + '</span>';
         if (p.old && p.old > p.price) {
           html += '<s class="v-old">' + fmt(p.old) + '</s>';
@@ -670,7 +827,7 @@
       }
       function linksFor(p) {
         if (p.links && p.links.length) return p.links;
-        return [{ label: p.cta, link: p.link, primary: !(p.free || p.soon) }];
+        return [{ label: p.free ? T.download : T.buy, link: p.link, primary: !(p.free || p.soon) }];
       }
       function extLink(link) {
         return /^https?:/i.test(link) ? ' target="_blank" rel="noopener"' : '';
@@ -691,18 +848,20 @@
         return '<img src="' + esc(p.img) + '" alt="" decoding="async">';
       }
       function cardHTML(p) {
+        var name = localized(p, 'name');
+        var short = localized(p, 'short');
         return '' +
           '<article class="v-card">' +
             '<button type="button" class="v-media' + (p.fit === 'contain' ? ' contain' : '') + '" data-qv="' + p.id + '">' +
               mediaHTML(p) +
-              '<span class="v-sr">' + esc(p.name) + '</span>' +
-              '<span class="v-cat">' + esc(CATS[p.cat]) + '</span>' +
-              (p.badge ? '<span class="v-badge">' + esc(p.badge) + '</span>' : '') +
-              '<span class="v-quick">Vista rápida</span>' +
+              '<span class="v-sr">' + esc(name) + '</span>' +
+              '<span class="v-cat">' + esc(catLabel(p.cat)) + '</span>' +
+              (p.badge ? '<span class="v-badge">' + esc(badgeLabel(p)) + '</span>' : '') +
+              '<span class="v-quick">' + esc(T.quick) + '</span>' +
             '</button>' +
             '<div class="v-body">' +
-              '<h2><button type="button" class="v-name" data-qv="' + p.id + '">' + esc(p.name) + '</button></h2>' +
-              '<p class="v-short">' + esc(p.short) + '</p>' +
+              '<h2><button type="button" class="v-name" data-qv="' + p.id + '">' + esc(name) + '</button></h2>' +
+              '<p class="v-short">' + esc(short) + '</p>' +
               '<div class="v-price-row">' + priceHTML(p) + '</div>' +
               buyHTML(p) +
             '</div>' +
@@ -713,15 +872,19 @@
         var catOk = activeCat === 'all' || (activeCat === 'free' ? p.free : p.cat === activeCat);
         if (!catOk) return false;
         if (!q) return true;
-        return norm(p.name + ' ' + p.short + ' ' + p.desc + ' ' + CATS[p.cat]).indexOf(q) !== -1;
+        var en = EN_PRODUCTS[p.id];
+        var hay = p.name + ' ' + p.short + ' ' + p.desc + ' ' + catLabel(p.cat);
+        if (en) hay += ' ' + en.name + ' ' + en.short + ' ' + en.desc;
+        return norm(hay).indexOf(q) !== -1;
       }
       function render() {
         var list = PRODUCTS.filter(matches);
         grid.innerHTML = list.map(cardHTML).join('');
-        resultEl.textContent = list.length + (list.length === 1 ? ' producto' : ' productos') +
-          (searchEl.value.trim() ? ' para “' + searchEl.value.trim() + '”' : '');
+        var q = searchEl.value.trim();
+        resultEl.textContent = list.length + ' ' + (list.length === 1 ? T.resultOne : T.resultMany) +
+          (q ? T.resultFor + '“' + q + '”' : '');
         emptyEl.hidden = list.length !== 0;
-        clearEl.hidden = !(activeCat !== 'all' || searchEl.value.trim());
+        clearEl.hidden = !(activeCat !== 'all' || q);
       }
       function setCat(id) {
         activeCat = id;
@@ -733,13 +896,17 @@
         render();
       }
 
-      chipsEl.innerHTML = FILTERS.map(function (f) {
-        var count = f.id === 'all' ? PRODUCTS.length :
-          f.id === 'free' ? PRODUCTS.filter(function (p) { return p.free; }).length :
-          PRODUCTS.filter(function (p) { return p.cat === f.id; }).length;
-        return '<button type="button" class="v-chip' + (f.id === 'all' ? ' active' : '') + '" data-cat="' + f.id + '" aria-pressed="' + (f.id === 'all') + '">' +
-          f.label + '<b>' + count + '</b></button>';
-      }).join('');
+      function chipCount(id) {
+        return id === 'all' ? PRODUCTS.length :
+          id === 'free' ? PRODUCTS.filter(function (p) { return p.free; }).length :
+          PRODUCTS.filter(function (p) { return p.cat === id; }).length;
+      }
+      function buildChips() {
+        chipsEl.innerHTML = FILTERS.map(function (id) {
+          return '<button type="button" class="v-chip' + (id === activeCat ? ' active' : '') + '" data-cat="' + id + '" aria-pressed="' + (id === activeCat) + '">' +
+            esc(T.filters[id]) + '<b>' + chipCount(id) + '</b></button>';
+        }).join('');
+      }
 
       chipsEl.addEventListener('click', function (e) {
         var chip = e.target.closest('.v-chip');
@@ -769,25 +936,30 @@
         }
         if (!p) return;
 
-        document.getElementById('qvImg').src = p.img || '';
-        document.getElementById('qvImg').alt = p.name;
+        currentId = id;
+        var name = localized(p, 'name');
+        var desc = localized(p, 'desc');
         var media = document.getElementById('qvMedia');
         media.className = 'v-dialog-media' + (p.fit === 'contain' ? ' contain' : '');
         if (!p.img) {
           media.innerHTML = '<span class="v-emoji" aria-hidden="true">' + (p.emoji || '✨') + '</span>';
         } else {
-          media.innerHTML = '<img id="qvImg" src="' + esc(p.img) + '" alt="' + esc(p.name) + '">';
+          media.innerHTML = '<img id="qvImg" src="' + esc(p.img) + '" alt="' + esc(name) + '">';
         }
-        document.getElementById('qvCat').textContent = CATS[p.cat];
-        document.getElementById('qvName').textContent = p.name;
-        document.getElementById('qvDesc').textContent = p.desc;
+        document.getElementById('qvCat').textContent = catLabel(p.cat);
+        document.getElementById('qvName').textContent = name;
+        document.getElementById('qvDesc').textContent = desc;
         document.getElementById('qvPrice').innerHTML = priceHTML(p);
         document.getElementById('qvBuyWrap').innerHTML = buyHTML(p, true);
-        document.getElementById('qvNote').textContent = p.note
-          ? p.note
-          : (p.free
-            ? 'Descarga gratuita en Notion · Sin costo'
-            : (p.soon ? 'Te aviso en cuanto esté disponible.' : 'Pago único · Acceso inmediato · Compra segura'));
+
+        var en = EN_PRODUCTS[p.id];
+        var note;
+        if (lang === 'en' && en && en.note) note = en.note;
+        else if (p.note) note = p.note;
+        else if (p.free) note = T.noteFree;
+        else if (p.soon) note = T.noteSoon;
+        else note = T.noteBuy;
+        document.getElementById('qvNote').textContent = note;
 
         if (dlg.showModal) { if (!dlg.open) dlg.showModal(); }
         else { window.location.href = p.link; }
@@ -807,7 +979,7 @@
       }
       document.getElementById('copyLink').addEventListener('click', function () {
         var url = location.href.split('#')[0];
-        var done = function () { toast('Enlace copiado ✔'); };
+        var done = function () { toast(T.copied); };
         if (navigator.clipboard && navigator.clipboard.writeText) {
           navigator.clipboard.writeText(url).then(done).catch(fallback);
         } else {
@@ -821,9 +993,55 @@
           document.body.appendChild(ta);
           ta.select();
           try { document.execCommand('copy'); done(); }
-          catch (err) { toast('Copia el enlace de la barra'); }
+          catch (err) { toast(T.copyFallback); }
           document.body.removeChild(ta);
         }
+      });
+
+      function updateLangButton() {
+        var btn = document.getElementById('vLang');
+        btn.setAttribute('data-lang', lang);
+        btn.removeAttribute('aria-label');
+        var action = lang === 'es' ? 'Switch to English' : 'Cambiar a Español';
+        btn.innerHTML = '<span class="cur">ES</span><span class="sep">|</span><span class="cur">EN</span><span class="v-sr">' + action + '</span>';
+        var cur = btn.querySelectorAll('.cur');
+        cur[0].style.opacity = '1';
+        cur[1].style.opacity = '1';
+        cur[0].style.fontWeight = lang === 'es' ? '800' : '500';
+        cur[1].style.fontWeight = lang === 'en' ? '800' : '500';
+      }
+      function applyStatic() {
+        document.documentElement.lang = lang;
+        document.getElementById('vPrivate').textContent = T.private;
+        document.getElementById('copyLabel').textContent = T.copy;
+        document.getElementById('vEyebrow').textContent = T.eyebrow;
+        document.getElementById('vHeroTitle').innerHTML = T.heroTitle;
+        document.getElementById('vHeroP').textContent = T.heroP;
+        document.getElementById('statProductsLabel').textContent = T.products;
+        document.getElementById('statFreeLabel').textContent = T.freeLabel;
+        document.getElementById('statFromLabel').textContent = T.from;
+        searchEl.placeholder = T.search;
+        searchEl.setAttribute('aria-label', T.search);
+        clearEl.textContent = T.clear;
+        document.getElementById('vEmptyTitle').textContent = T.emptyTitle;
+        document.getElementById('vEmptyText').textContent = T.emptyText;
+        document.getElementById('resetEmpty').textContent = T.viewAll;
+        document.getElementById('vFootText').textContent = T.footer;
+        document.getElementById('vFootLink').textContent = T.back;
+        document.getElementById('qvClose').setAttribute('aria-label', T.close);
+        updateLangButton();
+      }
+      function setLang(l) {
+        lang = l === 'en' ? 'en' : 'es';
+        T = I18N[lang];
+        try { localStorage.setItem('alquimia-lang', lang); } catch (e) { /* ignore */ }
+        applyStatic();
+        buildChips();
+        setCat(activeCat);
+        if (dlg.open && currentId) openQuick(currentId);
+      }
+      document.getElementById('vLang').addEventListener('click', function () {
+        setLang(lang === 'es' ? 'en' : 'es');
       });
 
       var paid = PRODUCTS.filter(function (p) { return !p.free && !p.soon && typeof p.price === 'number'; });
@@ -831,7 +1049,9 @@
       document.getElementById('statFree').textContent = PRODUCTS.filter(function (p) { return p.free; }).length;
       document.getElementById('statFrom').textContent = fmt(Math.min.apply(null, paid.map(function (p) { return p.price; })));
 
-      render();
+      applyStatic();
+      buildChips();
+      setCat('all');
     })();
   </script>
 
