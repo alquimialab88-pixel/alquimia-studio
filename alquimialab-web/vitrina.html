@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <script>(function(){try{var p=location.pathname,n=p;if(/\/index\.html$/i.test(n))n=n.replace(/index\.html$/i,'');else if(/\.html$/i.test(n))n=n.replace(/\.html$/i,'');if(n!==p)history.replaceState(null,'',n+location.search+location.hash);}catch(e){}})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="description" content="Vitrina privada de productos de Alquimia Lab.">
+  <meta name="theme-color" content="#f2f2f2">
+  <meta name="color-scheme" content="light">
+  <title>Vitrina · Alquimia Lab</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=20">
+  <style>
+    /* ===== VITRINA PRIVADA ===== */
+    .v-page { background: var(--bg); }
+    .v-topbar {
+      position: sticky; top: 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 14px 28px;
+      background: rgba(242,242,242,.9);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--lavender);
+    }
+    .v-logo { font-size: 18px; font-weight: 700; color: var(--purple); letter-spacing: .02em; }
+    .v-logo span { color: #e5533d; }
+    .v-top-actions { display: flex; align-items: center; gap: 10px; }
+    .v-private {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 12px; border-radius: 99px;
+      background: var(--lavender-light); color: #5c598a;
+      font-size: 10.5px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
+    }
+    .v-copy {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 8px 14px; border-radius: 99px;
+      border: 1.5px solid var(--lavender); background: #fff; color: var(--purple);
+      font-family: inherit; font-size: 12px; font-weight: 700; cursor: pointer;
+      transition: background .2s, color .2s, border-color .2s;
+    }
+    .v-copy:hover { background: var(--purple); border-color: var(--purple); color: #fff; }
+    .v-copy svg { width: 14px; height: 14px; }
+
+    .v-wrap { max-width: 1180px; margin: 0 auto; padding: 26px 24px 48px; }
+
+    .v-hero {
+      position: relative; overflow: hidden;
+      display: flex; align-items: flex-end; justify-content: space-between; gap: 32px;
+      padding: clamp(28px,5vw,48px);
+      border-radius: 26px;
+      background: linear-gradient(135deg,#6462ab 0%,#524f96 55%,#3f3c7a 100%);
+      color: #fff;
+      box-shadow: 0 20px 48px rgba(74,74,133,.28);
+    }
+    .v-hero::before {
+      content: ""; position: absolute; top: -180px; right: 8%;
+      width: 420px; height: 420px; border-radius: 50%;
+      background: radial-gradient(circle,rgba(255,255,255,.18),transparent 65%);
+      pointer-events: none;
+    }
+    .v-hero::after {
+      content: ""; position: absolute; bottom: -150px; left: -60px;
+      width: 260px; height: 260px; border-radius: 50%;
+      background: radial-gradient(circle,rgba(229,83,61,.34),transparent 65%);
+      pointer-events: none;
+    }
+    .v-hero-copy { position: relative; z-index: 1; max-width: 620px; }
+    .v-eyebrow {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      letter-spacing: .16em; text-transform: uppercase;
+      color: rgba(255,255,255,.72);
+    }
+    .v-hero h1 {
+      margin: 10px 0 14px;
+      font-size: clamp(30px,4.6vw,48px); line-height: 1.08; letter-spacing: -.02em;
+    }
+    .v-hero h1 em { font-style: normal; color: #ffd9cf; }
+    .v-hero p { max-width: 470px; color: rgba(255,255,255,.82); font-size: 15px; line-height: 1.6; }
+    .v-stats { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 10px; }
+    .v-stat {
+      min-width: 92px; padding: 12px 16px; text-align: center;
+      border-radius: 16px; border: 1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.12);
+      backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+    }
+    .v-stat b { display: block; font-size: 22px; line-height: 1.15; }
+    .v-stat span {
+      font-size: 10px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: rgba(255,255,255,.7);
+    }
+
+    .v-toolbar { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin: 26px 0 14px; }
+    .v-search { position: relative; flex: 1 1 260px; max-width: 360px; }
+    .v-search svg {
+      position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+      width: 17px; height: 17px; color: var(--text-muted); pointer-events: none;
+    }
+    .v-search input {
+      width: 100%; padding: 11px 16px 11px 40px;
+      border: 1.5px solid var(--lavender); border-radius: 99px;
+      background: #fff; color: var(--text);
+      font-family: inherit; font-size: 14px; outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .v-search input:focus { border-color: var(--purple); box-shadow: 0 0 0 3px rgba(100,98,171,.12); }
+    .v-chips {
+      display: flex; flex: 1 1 auto; gap: 8px;
+      overflow-x: auto; padding: 2px;
+      scrollbar-width: none;
+    }
+    .v-chips::-webkit-scrollbar { display: none; }
+    .v-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 14px; border-radius: 99px; white-space: nowrap;
+      border: 1.5px solid var(--lavender); background: #fff; color: #5c598a;
+      font-family: inherit; font-size: 12.5px; font-weight: 700; cursor: pointer;
+      transition: background .2s, color .2s, border-color .2s;
+    }
+    .v-chip b {
+      padding: 2px 7px; border-radius: 99px;
+      background: #efedf8; color: var(--purple); font-size: 10.5px;
+    }
+    .v-chip:hover { border-color: var(--purple-light); color: var(--purple); }
+    .v-chip.active { background: var(--purple); border-color: var(--purple); color: #fff; }
+    .v-chip.active b { background: rgba(26,24,50,.28); color: #fff; }
+
+    .v-meta {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      margin-bottom: 14px; padding: 0 4px;
+      font-size: 12.5px; font-weight: 600; color: #5c598a;
+    }
+    .v-clear {
+      padding: 0; border: none; background: none; cursor: pointer;
+      color: var(--purple); font-family: inherit; font-size: 12.5px; font-weight: 700;
+      text-decoration: underline; text-underline-offset: 3px;
+    }
+
+    .v-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(230px,1fr)); gap: 18px; }
+    .v-card {
+      display: flex; flex-direction: column; overflow: hidden;
+      background: #fff; border: 1px solid var(--lavender); border-radius: 20px;
+      transition: transform .22s, box-shadow .22s, border-color .22s;
+    }
+    .v-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--purple-light);
+      box-shadow: 0 14px 30px rgba(100,98,171,.14);
+    }
+    .v-media {
+      position: relative; display: block; width: 100%;
+      aspect-ratio: 3/2; padding: 0; border: none; overflow: hidden;
+      background: #efedf8; cursor: pointer;
+    }
+    .v-media img { width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease; }
+    .v-media.contain img { object-fit: contain; padding: 14px; }
+    .v-card:hover .v-media img { transform: scale(1.04); }
+    .v-cat {
+      position: absolute; left: 10px; top: 10px;
+      padding: 4px 9px; border-radius: 99px;
+      background: rgba(255,255,255,.93); color: #4a4790;
+      font-size: 9.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+    }
+    .v-badge {
+      position: absolute; right: 10px; top: 10px;
+      padding: 4px 9px; border-radius: 99px;
+      background: #c43c28; color: #fff;
+      font-size: 9.5px; font-weight: 700; letter-spacing: .04em;
+    }
+    .v-quick {
+      position: absolute; left: 50%; bottom: 10px;
+      padding: 6px 12px; border-radius: 99px;
+      background: rgba(26,24,50,.84); color: #fff;
+      font-size: 11px; font-weight: 700; white-space: nowrap;
+      opacity: 0; transform: translate(-50%,8px);
+      transition: opacity .22s, transform .22s; pointer-events: none;
+    }
+    .v-card:hover .v-quick, .v-media:focus-visible .v-quick { opacity: 1; transform: translate(-50%,0); }
+    .v-sr {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+
+    .v-body { display: flex; flex-direction: column; flex: 1; padding: 14px 16px 16px; }
+    .v-body h2 { margin: 0; }
+    .v-name {
+      padding: 0; border: none; background: none; cursor: pointer; text-align: left;
+      color: var(--text); font-family: inherit; font-size: 15.5px; font-weight: 700; line-height: 1.3;
+    }
+    .v-name:hover { color: var(--purple); }
+    .v-short {
+      flex: 1; margin: 6px 0 12px;
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+      color: #6b6890; font-size: 12.5px; line-height: 1.5;
+    }
+    .v-price-row { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; min-height: 26px; margin-bottom: 12px; }
+    .v-price { color: var(--purple); font-size: 20px; font-weight: 700; line-height: 1; }
+    .v-old { color: #6b6890; font-size: 12.5px; text-decoration: line-through; }
+    .v-off { padding: 3px 7px; border-radius: 99px; background: #fde9e5; color: #b33522; font-size: 10px; font-weight: 700; }
+    .v-price.v-free { color: #2e8b6f; }
+    .v-price.v-soon { padding: 4px 9px; border-radius: 99px; background: #fde9e5; color: #b33522; font-size: 13px; }
+    .v-buy { width: 100%; justify-content: center; padding: 10px 14px; border-radius: 10px; font-size: 12.5px; box-shadow: none; }
+    .v-buy.btn-secondary { border-width: 1.5px; }
+    .v-buy.btn-primary:hover { transform: none; box-shadow: 0 6px 14px rgba(100,98,171,.28); }
+
+    .v-empty {
+      padding: 60px 20px; text-align: center;
+      background: #fff; border: 1px dashed var(--lavender); border-radius: 20px;
+      color: #6b6890; font-size: 14px;
+    }
+    .v-empty b { display: block; margin-bottom: 6px; color: var(--text); font-size: 18px; }
+
+    .v-foot {
+      display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;
+      margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--lavender);
+      color: #5c598a; font-size: 12px;
+    }
+    .v-foot a { color: var(--purple); font-weight: 700; }
+
+    /* ===== VISTA RÁPIDA ===== */
+    .v-dialog {
+      width: min(900px, calc(100vw - 28px));
+      max-height: min(92dvh, 860px);
+      margin: auto; padding: 0; border: 0; border-radius: 24px;
+      background: #fff; color: var(--text);
+      box-shadow: 0 30px 90px rgba(31,29,69,.35);
+      overflow: auto;
+    }
+    .v-dialog::backdrop { background: rgba(30,27,64,.55); backdrop-filter: blur(6px); }
+    .v-dialog-inner { position: relative; padding: clamp(18px,3vw,30px); }
+    .v-close {
+      position: absolute; right: 14px; top: 14px; z-index: 2;
+      display: flex; align-items: center; justify-content: center;
+      width: 38px; height: 38px; border: none; border-radius: 50%;
+      background: #efedf8; color: #4e4b85; font-size: 24px; line-height: 1; cursor: pointer;
+      transition: background .2s, color .2s;
+    }
+    .v-close:hover { background: var(--purple); color: #fff; }
+    .v-dialog-grid {
+      display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+      gap: clamp(18px,3vw,30px); align-items: start; margin-top: 16px;
+    }
+    .v-dialog-media { aspect-ratio: 4/3; overflow: hidden; border-radius: 18px; background: #efedf8; }
+    .v-dialog-media img { width: 100%; height: 100%; object-fit: cover; }
+    .v-dialog-media.contain img { object-fit: contain; padding: 20px; }
+    .v-dialog-info { padding: 6px 4px; }
+    .v-dialog-eyebrow {
+      display: inline-block; color: var(--purple);
+      font-size: 10.5px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+    }
+    .v-dialog-info h2 { margin: 8px 0 10px; font-size: clamp(22px,3vw,30px); line-height: 1.15; letter-spacing: -.02em; }
+    .v-desc { margin-bottom: 18px; color: #6b6890; font-size: 14px; line-height: 1.65; }
+    .v-dialog .v-price-row { margin-bottom: 18px; }
+    .v-dialog .v-buy { width: auto; min-width: 200px; padding: 13px 26px; font-size: 14px; }
+    .v-dialog-note { margin-top: 12px; color: #6b6890; font-size: 11.5px; line-height: 1.5; }
+
+    #vToast {
+      position: fixed; left: 50%; bottom: 24px; z-index: 200;
+      padding: 11px 20px; border-radius: 99px;
+      background: #1a1832; color: #fff;
+      font-size: 13px; font-weight: 700;
+      opacity: 0; transform: translateX(-50%) translateY(80px);
+      transition: opacity .3s, transform .3s; pointer-events: none;
+    }
+    #vToast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    @media (max-width: 900px) {
+      .v-hero { flex-direction: column; align-items: flex-start; }
+      .v-stats { width: 100%; }
+    }
+    @media (max-width: 640px) {
+      .v-topbar { padding: 12px 16px; }
+      .v-private { display: none; }
+      .v-wrap { padding: 18px 14px 36px; }
+      .v-hero { border-radius: 22px; }
+      .v-toolbar { gap: 10px; }
+      .v-search { flex-basis: 100%; max-width: none; }
+      .v-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+      .v-body { padding: 12px 12px 13px; }
+      .v-name { font-size: 13.5px; }
+      .v-short { margin: 5px 0 10px; font-size: 11.5px; }
+      .v-price { font-size: 17px; }
+      .v-old { font-size: 11px; }
+      .v-off { font-size: 9px; }
+      .v-buy { padding: 9px 8px; font-size: 11.5px; }
+      .v-quick { display: none; }
+      .v-dialog-grid { grid-template-columns: 1fr; }
+      .v-dialog-media { max-height: 42vh; }
+      .v-dialog .v-buy { width: 100%; }
+    }
+    @media (max-width: 380px) {
+      .v-grid { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body class="v-page">
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <header class="v-topbar">
+    <a href="./" class="v-logo">Alquimia Lab<span>.</span></a>
+    <div class="v-top-actions">
+      <span class="v-private">🔒 Vitrina privada</span>
+      <button type="button" class="v-copy" id="copyLink">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+        Copiar enlace
+      </button>
+    </div>
+  </header>
+
+  <main class="v-wrap">
+
+    <section class="v-hero">
+      <div class="v-hero-copy">
+        <span class="v-eyebrow">Catálogo completo · 2026</span>
+        <h1>Todos mis productos,<br><em>en vista rápida.</em></h1>
+        <p>Explora, compara y compra en segundos. Toca cualquier producto para ver todos los detalles sin salir de la página.</p>
+      </div>
+      <div class="v-stats" aria-label="Resumen del catálogo">
+        <div class="v-stat"><b id="statTotal">15</b><span>productos</span></div>
+        <div class="v-stat"><b id="statFree">3</b><span>gratis</span></div>
+        <div class="v-stat"><b id="statFrom">$3.49</b><span>desde</span></div>
+      </div>
+    </section>
+
+    <section class="v-toolbar" aria-label="Filtros de productos">
+      <div class="v-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" id="vSearch" placeholder="Buscar producto…" aria-label="Buscar producto" autocomplete="off">
+      </div>
+      <div class="v-chips" id="vChips"></div>
+    </section>
+
+    <div class="v-meta">
+      <span id="resultCount">15 productos</span>
+      <button type="button" class="v-clear" id="clearFilters" hidden>Limpiar filtros</button>
+    </div>
+
+    <div class="v-grid" id="grid"></div>
+
+    <div class="v-empty" id="empty" hidden>
+      <b>No encontré ese producto</b>
+      Prueba con otra palabra o mira todo el catálogo.
+      <div style="margin-top:16px;"><button type="button" class="btn-primary btn-sm" id="resetEmpty">Ver todos</button></div>
+    </div>
+
+    <footer class="v-foot">
+      <p>Vitrina privada de Alquimia Lab · No aparece en el menú, el sitemap ni en buscadores.</p>
+      <a href="./">Volver al inicio →</a>
+    </footer>
+
+  </main>
+
+  <dialog class="v-dialog" id="quickView" aria-labelledby="qvName">
+    <div class="v-dialog-inner">
+      <button type="button" class="v-close" id="qvClose" aria-label="Cerrar vista rápida">&times;</button>
+      <div class="v-dialog-grid">
+        <div class="v-dialog-media" id="qvMedia"><img id="qvImg" src="" alt=""></div>
+        <div class="v-dialog-info">
+          <span class="v-dialog-eyebrow" id="qvCat"></span>
+          <h2 id="qvName"></h2>
+          <p class="v-desc" id="qvDesc"></p>
+          <div class="v-price-row" id="qvPrice"></div>
+          <a class="btn-sm btn-primary v-buy" id="qvBuy" href="#">Comprar →</a>
+          <p class="v-dialog-note" id="qvNote"></p>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <div id="vToast" role="status" aria-live="polite"></div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var PRODUCTS = [
+        {
+          id: 'diario',
+          name: 'El diario imperfecto de una creadora',
+          cat: 'digital',
+          short: 'La historia real de mi salto a la vida freelance, con 15 prompts y ejercicios.',
+          desc: 'La historia real de mi salto a la vida freelance: 15 prompts para copiar y pegar, ejercicios con espacio para escribir y una lista de lanzamiento. Un cuaderno para empezar sin esperar a estar lista.',
+          price: null,
+          old: null,
+          free: false,
+          soon: true,
+          img: 'assets/ebook-portada.jpg',
+          fit: 'contain',
+          badge: '',
+          cta: 'Avísame',
+          link: 'https://wa.me/573104108483?text=Hola%20Isabel%20%F0%9F%91%8B%20av%C3%ADsame%20cuando%20salga%20El%20diario%20imperfecto%20de%20una%20creadora'
+        },
+        {
+          id: 'planora',
+          name: 'Planora',
+          cat: 'digital',
+          short: 'App de escritorio para organizar tu contenido y convertir ideas en acción.',
+          desc: 'Planora es una app de escritorio para Windows que te ayuda a organizar tu contenido, darle dirección a tus ideas y convertir inspiración en acción. Menos caos, más espacio para crear.',
+          price: 7.99,
+          old: 9.99,
+          free: false,
+          soon: false,
+          img: 'assets/featured-maestro.jpg',
+          fit: 'contain',
+          badge: 'Nuevo',
+          cta: 'Comprar',
+          link: 'https://alquimialab.gumroad.com/l/Planora-pro?wanted=true'
+        },
+        {
+          id: 'studio',
+          name: 'Alquimia Studio',
+          cat: 'digital',
+          short: 'Organizador de PDFs + 5 planners digitales, con modo claro y oscuro.',
+          desc: 'Organiza y lee tus PDFs en el navegador, junto con cinco planners digitales: Calma y Orden, Anual, TDAH, Ciclo Menstrual y Semanal. Incluye modo claro y oscuro, favoritos, y herramientas de respaldo y restauración. Compra única, sin suscripción mensual.',
+          price: 7.99,
+          old: 9.99,
+          free: false,
+          soon: false,
+          img: 'assets/featured-alquimia.jpg',
+          fit: 'contain',
+          badge: '',
+          cta: 'Comprar',
+          link: 'https://alquimialab.gumroad.com/l/AlquimiaStudio?wanted=true'
+        },
+        {
+          id: 'planner',
+          name: 'Planner 2027 — Calma y Orden',
+          cat: 'print',
+          short: 'Un planner minimalista para ordenar tu año con calma e intención.',
+          desc: 'Un planner minimalista para organizar tu año con calma e intención. Edición impresa o digital, con espacio para tus metas, proyectos y rituales del día a día.',
+          price: 11.99,
+          old: 14.99,
+          free: false,
+          soon: false,
+          img: 'journal-cover.webp',
+          fit: 'contain',
+          badge: '',
+          cta: 'Comprar',
+          link: 'pagar.html?product=Planner%202027%20%E2%80%94%20Calma%20y%20Orden'
+        },
+        {
+          id: 'coloring',
+          name: 'Libros para colorear — Lofi Coloring',
+          cat: 'print',
+          short: 'El mismo libro en español e inglés. Edición impresa y digital.',
+          desc: 'El mismo libro en español e inglés, con ilustraciones lofi para colorear y desconectar. Disponible en edición impresa y digital.',
+          price: 9.99,
+          old: 12.99,
+          free: false,
+          soon: false,
+          img: 'print-coloring.webp',
+          fit: 'cover',
+          badge: '',
+          cta: 'Comprar',
+          link: 'pagar.html?product=Lofi%20Coloring'
+        },
+        {
+          id: 'focus',
+          name: 'Focus Dock',
+          cat: 'print',
+          short: 'Protocolo de 43 páginas para rediseñar tu Notion y recuperar el foco.',
+          desc: 'Tu Notion no está roto, solo está mal diseñado. Un protocolo de 43 páginas para rediseñar tu espacio y recuperar el foco, con un sistema mínimo de 3 bases de datos y un siguiente paso claro cada vez que lo abres.',
+          price: 19.99,
+          old: 27,
+          free: false,
+          soon: false,
+          img: 'print-focus.webp',
+          fit: 'cover',
+          badge: '',
+          cta: 'Comprar',
+          link: 'pagar.html?product=Focus%20Dock'
+        },
+        {
+          id: 'crm',
+          name: 'Freelancer CRM — Planner',
+          cat: 'notion',
+          short: 'Sistema operativo para ordenar tu flujo de trabajo de principio a fin.',
+          desc: 'Un sistema operativo para estructurar tu flujo de trabajo de principio a fin: clientes, proyectos, propuestas y entregas en un solo lugar.',
+          price: 7.99,
+          old: 9.99,
+          free: false,
+          soon: false,
+          img: 'cover-freelancer-crm.webp',
+          fit: 'cover',
+          badge: '',
+          cta: 'Comprar',
+          link: 'https://alquimialab.gumroad.com/l/FreelancerCRM?wanted=true'
+        },
+        {
+          id: 'youtube',
+          name: 'YouTube Creator OS — Planner & Script',
+          cat: 'notion',
+          short: 'Guiones, ideas y estrategia para tu canal, de shorts a videos largos.',
+          desc: 'Deja de perder ideas de video con un espacio de trabajo completo de Notion creado para creadores y productores. Claridad estratégica para tu canal, desde guiones largos hasta shorts virales.',
+          price: 11.99,
+          old: 15,
+          free: false,
+          soon: false,
+          img: 'cover-youtube.webp',
+          fit: 'cover',
+          badge: '',
+          cta: 'Comprar',
+          link: 'https://alquimialab.gumroad.com/l/YouTube-Creator-OS?wanted=true'
+        },
+        {
+          id: 'student',
+          name: 'Student OS & Study Planner',
+          cat: 'notion',
+          short: 'Tareas, exámenes y apuntes en un solo panel minimalista.',
+          desc: 'Di adiós a notas dispersas y fechas límite olvidadas con un único panel minimalista. Lleva toda tu vida estudiantil, desde tareas diarias hasta exámenes finales.',
+          price: 4.99,
+          old: 5.99,
+          free: false,
+          soon: false,
+          img: '',
+          fit: 'cover',
+          emoji: '🎓',
+          badge: '',
+          cta: 'Comprar',
+          link: 'https://alquimialab.gumroad.com/l/Student-OS?wanted=true'
+        },
+        {
+          id: 'social',
+          name: 'Planner de Redes Sociales',
+          cat: 'notion',
+          short: 'Planea publicaciones, campañas e ideas en un solo espacio de Notion.',
+          desc: 'Planea tus publicaciones, campañas e ideas de contenido en un solo espacio de Notion — una forma más tranquila para creadores y pequeños negocios de mostrarse en línea.',
+          price: 3.49,
+          old: 4,
+          free: false,
+          soon: false,
+          img: 'cover-social-media.webp',
+          fit: 'cover',
+          badge: '',
+          cta: 'Comprar',
+          link: 'https://alquimialab.gumroad.com/l/Social-Media-Planner?wanted=true'
+        },
+        {
+          id: 'financepro',
+          name: 'Finance Planner Pro',
+          cat: 'notion',
+          short: 'Seguimiento financiero avanzado con reportes y proyecciones.',
+          desc: 'Seguimiento financiero avanzado con reportes detallados y proyecciones para entender a dónde va tu dinero y planear con calma.',
+          price: 7.99,
+          old: 9.99,
+          free: false,
+          soon: false,
+          img: 'cover-finance-pro.webp',
+          fit: 'cover',
+          badge: '',
+          cta: 'Comprar',
+          link: 'https://alquimialab.gumroad.com/l/Finance-Planner-Pro?wanted=true'
+        },
+        {
+          id: 'quiet',
+          name: 'Quiet Mind Planner',
+          cat: 'notion',
+          short: 'Un santuario minimalista para bajar el ruido mental y proteger tu energía.',
+          desc: 'Libera tu mente del ruido mental con un santuario minimalista diseñado para proteger tu energía y traer calma. Transforma tus rutinas diarias en un flujo suave de reflexión intencional.',
+          price: null,
+          old: null,
+          free: true,
+          soon: false,
+          img: 'cover-quiet-mind.webp',
+          fit: 'cover',
+          badge: '',
+          cta: 'Descargar gratis',
+          link: 'https://www.notion.com/templates/quiet-mind-planner'
+        },
+        {
+          id: 'habit',
+          name: 'Habit Planner',
+          cat: 'notion',
+          short: 'Hábitos sin culpa, con una pizarra limpia enfocada en tu crecimiento.',
+          desc: 'Transforma tus hábitos sin la culpa visual de días perdidos. Un diseño de pizarra limpia para mantener tu mente clara y enfocada en tu crecimiento.',
+          price: null,
+          old: null,
+          free: true,
+          soon: false,
+          img: 'cover-habit.webp',
+          fit: 'cover',
+          badge: '',
+          cta: 'Descargar gratis',
+          link: 'https://www.notion.com/templates/habit-planner'
+        },
+        {
+          id: 'financefree',
+          name: 'Finance Planner Free',
+          cat: 'notion',
+          short: 'Organiza tus finanzas personales con un sistema visual e intuitivo.',
+          desc: 'Organiza tus finanzas personales con un sistema visual e intuitivo. Una base simple para empezar a ordenar tus números hoy.',
+          price: null,
+          old: null,
+          free: true,
+          soon: false,
+          img: 'cover-finance-free.webp',
+          fit: 'cover',
+          badge: '',
+          cta: 'Descargar gratis',
+          link: 'https://www.notion.com/templates/finance-planner-785'
+        },
+        {
+          id: 'pet',
+          name: 'Pet Planner',
+          cat: 'notion',
+          short: 'Vacunas, veterinario, medicamentos y comida en un solo panel.',
+          desc: 'Vacunas, visitas al veterinario, medicamentos y comida en un solo panel. Para Bonnie, Luna y cada miembro peludo de la familia.',
+          price: 15,
+          old: null,
+          free: false,
+          soon: false,
+          img: 'cover-pet-planner.jpg',
+          fit: 'cover',
+          badge: '',
+          cta: 'Comprar',
+          link: 'https://alquimialab.gumroad.com/l/Pet-Planner?wanted=true'
+        }
+      ];
+
+      var CATS = { digital: 'Digital', print: 'Impreso', notion: 'Plantilla Notion' };
+      var FILTERS = [
+        { id: 'all', label: 'Todos' },
+        { id: 'digital', label: 'Digitales' },
+        { id: 'print', label: 'Impresos' },
+        { id: 'notion', label: 'Notion' },
+        { id: 'free', label: 'Gratis' }
+      ];
+
+      var grid = document.getElementById('grid');
+      var chipsEl = document.getElementById('vChips');
+      var searchEl = document.getElementById('vSearch');
+      var resultEl = document.getElementById('resultCount');
+      var clearEl = document.getElementById('clearFilters');
+      var emptyEl = document.getElementById('empty');
+      var dlg = document.getElementById('quickView');
+      var lastTrigger = null;
+      var activeCat = 'all';
+
+      function norm(s) {
+        return String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+      }
+      function esc(s) {
+        return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+        });
+      }
+      function fmt(n) {
+        return '$' + (Number.isInteger(n) ? n : Number(n).toFixed(2));
+      }
+      function priceHTML(p) {
+        if (p.soon) return '<span class="v-price v-soon">Próximamente</span>';
+        if (p.free) return '<span class="v-price v-free">Gratis</span>';
+        var html = '<span class="v-price">' + fmt(p.price) + '</span>';
+        if (p.old && p.old > p.price) {
+          html += '<s class="v-old">' + fmt(p.old) + '</s>';
+          html += '<span class="v-off">-' + Math.round((1 - p.price / p.old) * 100) + '%</span>';
+        }
+        return html;
+      }
+      function buyClass(p) {
+        return (p.free || p.soon) ? 'btn-secondary' : 'btn-primary';
+      }
+      function ext(p) {
+        return /^https?:/i.test(p.link) ? ' target="_blank" rel="noopener"' : '';
+      }
+      function mediaHTML(p) {
+        if (!p.img) {
+          return '<span class="v-emoji" aria-hidden="true">' + (p.emoji || '✨') + '</span>';
+        }
+        return '<img src="' + esc(p.img) + '" alt="" loading="lazy" decoding="async">';
+      }
+      function cardHTML(p) {
+        return '' +
+          '<article class="v-card">' +
+            '<button type="button" class="v-media' + (p.fit === 'contain' ? ' contain' : '') + '" data-qv="' + p.id + '">' +
+              mediaHTML(p) +
+              '<span class="v-sr">' + esc(p.name) + '</span>' +
+              '<span class="v-cat">' + esc(CATS[p.cat]) + '</span>' +
+              (p.badge ? '<span class="v-badge">' + esc(p.badge) + '</span>' : '') +
+              '<span class="v-quick">Vista rápida</span>' +
+            '</button>' +
+            '<div class="v-body">' +
+              '<h2><button type="button" class="v-name" data-qv="' + p.id + '">' + esc(p.name) + '</button></h2>' +
+              '<p class="v-short">' + esc(p.short) + '</p>' +
+              '<div class="v-price-row">' + priceHTML(p) + '</div>' +
+              '<a class="btn-sm ' + buyClass(p) + ' v-buy" href="' + esc(p.link) + '"' + ext(p) + '>' + esc(p.cta) + ' →</a>' +
+            '</div>' +
+          '</article>';
+      }
+      function matches(p) {
+        var q = norm(searchEl.value.trim());
+        var catOk = activeCat === 'all' || (activeCat === 'free' ? p.free : p.cat === activeCat);
+        if (!catOk) return false;
+        if (!q) return true;
+        return norm(p.name + ' ' + p.short + ' ' + p.desc + ' ' + CATS[p.cat]).indexOf(q) !== -1;
+      }
+      function render() {
+        var list = PRODUCTS.filter(matches);
+        grid.innerHTML = list.map(cardHTML).join('');
+        resultEl.textContent = list.length + (list.length === 1 ? ' producto' : ' productos') +
+          (searchEl.value.trim() ? ' para “' + searchEl.value.trim() + '”' : '');
+        emptyEl.hidden = list.length !== 0;
+        clearEl.hidden = !(activeCat !== 'all' || searchEl.value.trim());
+      }
+      function setCat(id) {
+        activeCat = id;
+        Array.prototype.forEach.call(chipsEl.querySelectorAll('.v-chip'), function (chip) {
+          var on = chip.getAttribute('data-cat') === id;
+          chip.classList.toggle('active', on);
+          chip.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+        render();
+      }
+
+      chipsEl.innerHTML = FILTERS.map(function (f) {
+        var count = f.id === 'all' ? PRODUCTS.length :
+          f.id === 'free' ? PRODUCTS.filter(function (p) { return p.free; }).length :
+          PRODUCTS.filter(function (p) { return p.cat === f.id; }).length;
+        return '<button type="button" class="v-chip' + (f.id === 'all' ? ' active' : '') + '" data-cat="' + f.id + '" aria-pressed="' + (f.id === 'all') + '">' +
+          f.label + '<b>' + count + '</b></button>';
+      }).join('');
+
+      chipsEl.addEventListener('click', function (e) {
+        var chip = e.target.closest('.v-chip');
+        if (chip) setCat(chip.getAttribute('data-cat'));
+      });
+      searchEl.addEventListener('input', render);
+      clearEl.addEventListener('click', function () {
+        searchEl.value = '';
+        setCat('all');
+      });
+      document.getElementById('resetEmpty').addEventListener('click', function () {
+        searchEl.value = '';
+        setCat('all');
+      });
+
+      grid.addEventListener('click', function (e) {
+        var trigger = e.target.closest('[data-qv]');
+        if (!trigger) return;
+        lastTrigger = trigger;
+        openQuick(trigger.getAttribute('data-qv'));
+      });
+
+      function openQuick(id) {
+        var p = null;
+        for (var i = 0; i < PRODUCTS.length; i++) {
+          if (PRODUCTS[i].id === id) { p = PRODUCTS[i]; break; }
+        }
+        if (!p) return;
+
+        document.getElementById('qvImg').src = p.img || '';
+        document.getElementById('qvImg').alt = p.name;
+        var media = document.getElementById('qvMedia');
+        media.className = 'v-dialog-media' + (p.fit === 'contain' ? ' contain' : '');
+        if (!p.img) {
+          media.innerHTML = '<span class="v-emoji" aria-hidden="true">' + (p.emoji || '✨') + '</span>';
+        } else {
+          media.innerHTML = '<img id="qvImg" src="' + esc(p.img) + '" alt="' + esc(p.name) + '">';
+        }
+        document.getElementById('qvCat').textContent = CATS[p.cat];
+        document.getElementById('qvName').textContent = p.name;
+        document.getElementById('qvDesc').textContent = p.desc;
+        document.getElementById('qvPrice').innerHTML = priceHTML(p);
+
+        var buy = document.getElementById('qvBuy');
+        buy.href = p.link;
+        buy.textContent = p.cta + ' →';
+        buy.className = 'btn-sm ' + buyClass(p) + ' v-buy';
+        if (/^https?:/i.test(p.link)) {
+          buy.setAttribute('target', '_blank');
+          buy.setAttribute('rel', 'noopener');
+        } else {
+          buy.removeAttribute('target');
+          buy.removeAttribute('rel');
+        }
+        document.getElementById('qvNote').textContent = p.free
+          ? 'Descarga gratuita en Notion · Sin costo'
+          : (p.soon ? 'Te aviso en cuanto esté disponible.' : 'Pago único · Acceso inmediato · Compra segura');
+
+        if (dlg.showModal) { if (!dlg.open) dlg.showModal(); }
+        else { window.location.href = p.link; }
+      }
+
+      document.getElementById('qvClose').addEventListener('click', function () { dlg.close(); });
+      dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+      dlg.addEventListener('close', function () { if (lastTrigger && lastTrigger.focus) lastTrigger.focus(); });
+
+      var toastTimer = null;
+      function toast(msg) {
+        var t = document.getElementById('vToast');
+        t.textContent = msg;
+        t.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () { t.classList.remove('show'); }, 2200);
+      }
+      document.getElementById('copyLink').addEventListener('click', function () {
+        var url = location.href.split('#')[0];
+        var done = function () { toast('Enlace copiado ✔'); };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(url).then(done).catch(fallback);
+        } else {
+          fallback();
+        }
+        function fallback() {
+          var ta = document.createElement('textarea');
+          ta.value = url;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand('copy'); done(); }
+          catch (err) { toast('Copia el enlace de la barra'); }
+          document.body.removeChild(ta);
+        }
+      });
+
+      var paid = PRODUCTS.filter(function (p) { return !p.free && !p.soon; });
+      document.getElementById('statTotal').textContent = PRODUCTS.length;
+      document.getElementById('statFree').textContent = PRODUCTS.filter(function (p) { return p.free; }).length;
+      document.getElementById('statFrom').textContent = fmt(Math.min.apply(null, paid.map(function (p) { return p.price; })));
+
+      render();
+    })();
+  </script>
+
+  <style>
+    .v-emoji {
+      display: flex; align-items: center; justify-content: center;
+      width: 100%; height: 100%; font-size: 48px;
+      background: linear-gradient(135deg,#6462ab 0%,#524f96 100%);
+    }
+    .v-dialog-media .v-emoji { border-radius: 18px; }
+  </style>
+</body>
+</html>
