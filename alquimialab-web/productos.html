@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <script>(function(){try{var p=location.pathname,n=p;if(/\/index\.html$/i.test(n))n=n.replace(/index\.html$/i,'');else if(/\.html$/i.test(n))n=n.replace(/\.html$/i,'');if(n!==p)history.replaceState(null,'',n+location.search+location.hash);}catch(e){}})();</script>
   <meta charset="UTF-8">
@@ -9,7 +9,7 @@
   <link rel="canonical" href="https://alquimialab.app/productos">
   <meta name="color-scheme" content="light">
   <meta name="p:domain_verify" content="873c3dceab38058f2ad57c008b30e2ee"/>
-  <title>Products · Alquimia Lab</title>
+  <title>Productos · Alquimia Lab</title>
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,18 +22,6 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-Y8Z50HWV3J');
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "name": "Alquimia Lab Products",
-    "itemListElement": [
-      {"@type": "ListItem", "position": 1, "name": "Planner 2027", "url": "https://alquimialab.app/planner-2027"},
-      {"@type": "ListItem", "position": 2, "name": "Kore app", "url": "https://alquimialab.app/kore/"},
-      {"@type": "ListItem", "position": 3, "name": "Planora", "url": "https://alquimialab.app/productos#p-planora"}
-    ]
-  }
   </script>
   <style>
     .shop-hero { text-align:center; padding: 42px 24px 36px; border-radius: 24px; background: linear-gradient(135deg, #6462ab 0%, #524f96 100%); border:none; color:#fff; position:relative; overflow:hidden; margin-top:-48px; box-shadow:0 20px 48px rgba(74,74,133,.35); }
@@ -156,6 +144,17 @@
       .studio-dialog-columns { grid-template-columns:1fr; gap:20px; }
       .studio-dialog-actions > a { width:100%; justify-content:center; }
     }
+
+    /* ===== Modal genérico de producto (detalles) ===== */
+    .producto-detalle-dialog { width: min(900px, 95%); max-height: 90vh; }
+    .producto-detalle-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px; }
+    @media(max-width:640px){ .producto-detalle-grid { grid-template-columns: 1fr; } }
+    .precio-lanzamiento { display:inline-flex; align-items:center; gap:6px; margin-top:8px; }
+    .precio-antes { text-decoration: line-through; color: #a29de0; font-size: 0.9em; }
+    .precio-ahora { font-weight: 700; color: #e5533d; }
+    .badge-lanzamiento { background:#e5533d; color:#fff; font-size:10px; font-weight:700; padding:3px 8px; border-radius:99px; }
+    .notion-card.shop-card { cursor: pointer; transition: transform .2s, box-shadow .2s; }
+    .notion-card.shop-card:hover { transform: translateY(-4px); }
   </style>
 </head>
 <body>
@@ -175,10 +174,10 @@
           <a href="portafolio#about">About Me</a>
           <a href="portafolio#experience">Work Experience</a>
           <a href="portafolio#education">Education</a>
-          <a href="pagar">Pay here 💜</a>
+          <a href="pagar" class="active">Pay here 💜</a>
         </div>
       </div>
-      <a href="productos" class="active">Products</a>
+      <a href="productos" class="active">Productos</a>
       <a href="kore/">Kore</a>
       <a href="blog">Blog</a>
       <a href="contacto">Contact</a>
@@ -194,60 +193,53 @@
         <div class="banner-track" id="bannerTrack">
           <div class="banner-slide s1 active">
             <div class="bs-text">
-              <div class="bs-eyebrow">Digital Products</div>
-              <h2 class="bs-title">Digital tools for calm days</h2>
-              <p class="bs-desc">Planners and dashboards that bring order to your content and your day.</p>
-              <a class="btn-primary" href="#shop" onclick="openShop('digitales');return false;">Shop digital →</a>
+              <div class="bs-eyebrow">Productos digitales</div>
+              <h2 class="bs-title">Herramientas digitales para días con calma</h2>
+              <p class="bs-desc">Planners y dashboards que ordenan tu contenido y tu día.</p>
+              <a class="btn-primary" href="#shop" onclick="openShop('digitales');return false;">Ver digitales →</a>
             </div>
             <div class="bs-media">
               <div class="bs-media-img">
-                <div class="bs-fallback"><span class="bf-emoji">🐼</span><span>Your image here ✨</span></div>
-                <img src="assets/banner-digital.png" alt="Digital products" loading="lazy" onerror="this.remove()">
+                <img src="assets/banner-digital.png" alt="Productos digitales" loading="lazy" onerror="this.remove()">
               </div>
-              <span class="bs-bubble">From $3</span>
+              <span class="bs-bubble">Desde $3</span>
             </div>
           </div>
           <div class="banner-slide s2">
             <div class="bs-text">
-              <div class="bs-eyebrow">Notion Templates</div>
-              <h2 class="bs-title">Your life, organized in one place</h2>
-              <p class="bs-desc">CRM, finance, habits, student and creator systems — ready in seconds.</p>
-              <a class="btn-primary" href="#shop" onclick="openShop('notion');return false;">Shop templates →</a>
+              <div class="bs-eyebrow">Plantillas Notion</div>
+              <h2 class="bs-title">Tu vida, organizada en un solo lugar</h2>
+              <p class="bs-desc">CRM, finanzas, hábitos, sistemas para estudiantes y creadores — listos en segundos.</p>
+              <a class="btn-primary" href="#shop" onclick="openShop('notion');return false;">Ver plantillas →</a>
             </div>
             <div class="bs-media">
-              <div class="bs-media-img">
-                <div class="bs-fallback"><span class="bf-emoji">🐼</span><span>Your image here ✨</span></div>
-                <img src="assets/banner-notion.png" alt="Notion templates" loading="lazy" onerror="this.remove()">
-              </div>
-              <span class="bs-bubble">7 templates</span>
+              <img src="assets/banner-notion.png" alt="Plantillas Notion" loading="lazy" onerror="this.remove()">
             </div>
+            <span class="bs-bubble">7 plantillas</span>
           </div>
           <div class="banner-slide s3">
             <div class="bs-text">
-              <div class="bs-eyebrow">Printed Products</div>
-              <h2 class="bs-title">Color, plan, unwind on paper</h2>
-              <p class="bs-desc">Coloring books and the 2027 planner — print or digital edition.</p>
-              <a class="btn-primary" href="#shop" onclick="openShop('impresos');return false;">Shop printed →</a>
+              <div class="bs-eyebrow">Productos impresos</div>
+              <h2 class="bs-title">Colorea, planea y descansa en papel</h2>
+              <p class="bs-desc">Libros para colorear y el planner 2027 — edición impresa o digital.</p>
+              <a class="btn-primary" href="#shop" onclick="openShop('impresos');return false;">Ver impresos →</a>
             </div>
             <div class="bs-media">
-              <div class="bs-media-img">
-                <div class="bs-fallback"><span class="bf-emoji">🐼</span><span>Your image here ✨</span></div>
-                <img src="assets/banner-impresos.png" alt="Printed products" loading="lazy" onerror="this.remove()">
-              </div>
-              <span class="bs-bubble">From $12.99</span>
+              <img src="assets/banner-impresos.png" alt="Productos impresos" loading="lazy" onerror="this.remove()">
             </div>
+            <span class="bs-bubble">Desde $12.99</span>
           </div>
         </div>
-        <button class="banner-arrow left" type="button" aria-label="Previous slide">
+        <button class="banner-arrow left" type="button" aria-label="Slide anterior">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
         </button>
-        <button class="banner-arrow right" type="button" aria-label="Next slide">
+        <button class="banner-arrow right" type="button" aria-label="Siguiente slide">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
         </button>
         <div class="banner-dots">
-          <button class="banner-dot active" type="button" aria-label="Go to slide 1"></button>
-          <button class="banner-dot" type="button" aria-label="Go to slide 2"></button>
-          <button class="banner-dot" type="button" aria-label="Go to slide 3"></button>
+          <button class="banner-dot active" type="button" aria-label="Ir al slide 1"></button>
+          <button class="banner-dot" type="button" aria-label="Ir al slide 2"></button>
+          <button class="banner-dot" type="button" aria-label="Ir al slide 3"></button>
         </div>
       </div>
 
@@ -258,10 +250,10 @@
 
       <!-- AVISO · LA TIENDA COMPLETA -->
       <div class="shop-hero anim d1">
-        <h2>The whole shop 🛍️</h2>
-        <p>Templates, planners, books, and digital tools — all in one place, made with calm.</p>
-        <p class="trust-note">🔒 Secure checkout on Amazon &amp; Gumroad</p>
-        <button class="btn-primary btn-hero" onclick="document.getElementById('categories-grid').scrollIntoView({behavior:'smooth'})">Browse categories ↓</button>
+        <h2>La tienda completa 🛍️</h2>
+        <p>Plantillas, planners, libros y herramientas digitales — todo en un solo lugar, hecho con calma.</p>
+        <p class="trust-note">🔒 Compra segura mediante PayPal, Bancolombia, Nequi y Nu</p>
+        <button class="btn-primary btn-hero" onclick="document.getElementById('categories-grid').scrollIntoView({behavior:'smooth'})">Ver categorías ↓</button>
       </div>
 
       <!-- YOUTUBE -->
@@ -270,57 +262,57 @@
           <video src="lofi-video.mp4" autoplay muted loop playsinline preload="metadata" poster="lofi-poster.png"></video>
         </div>
         <div class="youtube-text">
-          <h3>My Lofi Music</h3>
+          <h3>Mi Música Lofi</h3>
           <p>Lo-Fi · Alquimia Lab</p>
-          <a href="https://www.youtube.com/channel/UCWb7zKnOw5k_XDgfUcBn9eQ" target="_blank" rel="noopener" class="btn-secondary btn-sm">Subscribe on YouTube →</a>
+          <a href="https://www.youtube.com/channel/UCWb7zKnOw5k_XDgfUcBn9eQ" target="_blank" rel="noopener" class="btn-secondary btn-sm">Suscríbete en YouTube →</a>
         </div>
       </div>
 
       <!-- CATEGORÍAS -->
       <div class="category-grid anim d1" id="categories-grid" style="margin-top: 34px;">
         <div class="category-card" id="cat-notion">
-          <div class="category-media"><img src="notion-featured.webp" alt="Notion Templates" loading="lazy" decoding="async"></div>
-          <h3>Notion Templates</h3>
-          <p>Productivity, planning, and personal &amp; professional organization systems. 7 templates available.</p>
-          <button class="btn-primary btn-sm" onclick="openShop('notion')">View all</button>
+          <div class="category-media"><img src="notion-featured.webp" alt="Plantillas de Notion" loading="lazy" decoding="async"></div>
+          <h3>Plantillas de Notion</h3>
+          <p>Sistemas de productividad, planificación y organización personal y profesional. 7 plantillas disponibles.</p>
+          <button class="btn-primary btn-sm" onclick="openShop('notion')">Ver todo</button>
         </div>
         <div class="category-card" id="cat-impresos">
-          <div class="category-media"><img src="printed-featured.webp" alt="Printed Products" loading="lazy" decoding="async"></div>
-          <h3>Printed Products</h3>
-          <p>Coloring books, productivity PDFs, and more. Available on Amazon and Gumroad.</p>
-          <button class="btn-primary btn-sm" onclick="openShop('impresos')">View all</button>
+          <div class="category-media"><img src="printed-featured.webp" alt="Productos impresos" loading="lazy" decoding="async"></div>
+          <h3>Productos impresos</h3>
+          <p>Libros para colorear, planners en PDF y más. Disponibles en Amazon y Gumroad.</p>
+          <button class="btn-primary btn-sm" onclick="openShop('impresos')">Ver todo</button>
         </div>
         <div class="category-card" id="cat-digitales">
-          <div class="category-media"><img src="products/digital-tools.jpg" alt="Digital Products" loading="lazy" decoding="async"></div>
-          <h3>Digital Products</h3>
-          <p>Apps, planners, and digital tools that bring calm order to your content and daily life. Ready on desktop and mobile.</p>
-          <button class="btn-primary btn-sm" onclick="openShop('digitales')">View all</button>
+          <div class="category-media"><img src="products/digital-tools.jpg" alt="Productos digitales" loading="lazy" decoding="async"></div>
+          <h3>Productos digitales</h3>
+          <p>Apps, planners y herramientas digitales que traen orden tranquilo a tu contenido y vida diaria. Listos en computadora y móvil.</p>
+          <button class="btn-primary btn-sm" onclick="openShop('digitales')">Ver todo</button>
         </div>
       </div>
 
       <!-- GUÍA: ¿cuál es para ti? -->
       <div class="match-wrap anim d2">
-        <h3 class="match-title">Which one is for you?</h3>
-        <p class="match-sub">Pick your chaos:</p>
+        <h3 class="match-title">¿Cuál es para ti?</h3>
+        <p class="match-sub">Elige tu caos:</p>
         <div class="match-grid">
           <div class="match-card">
             <div class="match-emoji">🧾</div>
-            <p>I need a content plan for my business</p>
-            <button class="btn-primary btn-sm" onclick="goProduct('p-social')">Social Media Planner</button>
+            <p>Necesito un plan de contenido para mi negocio</p>
+            <button class="btn-primary btn-sm" onclick="goProduct('p-social')">Planner de Redes Sociales</button>
           </div>
           <div class="match-card">
             <div class="match-emoji">🌱</div>
-            <p>I want calm and order</p>
+            <p>Quiero calma y orden</p>
             <button class="btn-primary btn-sm" onclick="goProduct('p-quiet')">Quiet Mind</button>
           </div>
           <div class="match-card">
             <div class="match-emoji">🎨</div>
-            <p>I relax by coloring</p>
-            <button class="btn-primary btn-sm" onclick="goProduct('p-coloring')">Coloring Books</button>
+            <p>Me relajo coloreando</p>
+            <button class="btn-primary btn-sm" onclick="goProduct('p-coloring')">Libros para colorear</button>
           </div>
           <div class="match-card">
             <div class="match-emoji">📓</div>
-            <p>I want a paper planner</p>
+            <p>Quiero un planner en papel</p>
             <button class="btn-primary btn-sm" onclick="goProduct('p-planner')">Planner 2027</button>
           </div>
         </div>
@@ -328,351 +320,243 @@
 
       <!-- PRODUCTOS · OCULTOS HASTA ABRIR UNA CATEGORÍA -->
       <div class="shop-products" id="shop-products" style="display:none; margin-top:34px;">
-        <button class="btn-secondary btn-sm" onclick="openShop()" style="margin-bottom:18px;">← Back</button>
-        <div class="section-title"><span>All products</span></div>
+        <button class="btn-secondary btn-sm" onclick="openShop()" style="margin-bottom:18px;">← Atrás</button>
+        <div class="section-title"><span>Todos los productos</span></div>
         <div class="notion-grid" id="shop">
 
         <!-- EL DIARIO IMPERFECTO · lleva al artículo del blog (sinopsis + compra) -->
-        <div class="notion-card shop-card anim" data-cat="digital">
+        <div class="notion-card shop-card anim" data-cat="digital" id="p-diario" onclick="abrirProductoDetalle('p-diario')">
           <img class="notion-thumb" src="assets/ebook-portada.jpg" alt="El diario imperfecto de una creadora" loading="lazy" decoding="async" style="height:220px;object-fit:contain;background:#e8e6f4;padding:14px;">
           <div class="notion-info">
             <h3>El diario imperfecto de una creadora</h3>
-            <p>The real story of my leap into the freelance life — with 15 prompts to copy and paste, exercises with space to write, and a launch checklist.</p>
+            <p>La historia real de mi salto a la vida freelance — con 15 prompts para copiar y pegar, ejercicios con espacio para escribir, y una lista de lanzamiento.</p>
             <div class="buy-stack">
-              <a href="blog" class="btn-primary btn-sm">Read synopsis</a>
+              <a href="pagar.html?product=El diario imperfecto de una creadora" class="btn-primary btn-sm">Pagar ahora →</a>
             </div>
           </div>
         </div>
 
         <!-- PLANORA (destacado) -->
-        <div class="notion-card shop-card anim" data-cat="digital" id="p-planora">
-          <button type="button" class="studio-preview-trigger" onclick="openPlanoraDetails()" aria-label="See Planora features and screenshots">
+        <div class="notion-card shop-card anim" data-cat="digital" id="p-planora" onclick="abrirProductoDetalle('p-planora')">
+          <button type="button" class="studio-preview-trigger" onclick="event.stopPropagation(); openPlanoraDetails();" aria-label="Ver características y capturas de Planora">
             <img class="notion-thumb" src="assets/featured-maestro.jpg?v=2" alt="Planora content planner for Windows" loading="lazy" decoding="async">
           </button>
           <div class="notion-info">
-            <span class="badge" style="background:#e5533d;color:#fff;font-size:10px;font-weight:700;padding:4px 10px;border-radius:99px;align-self:flex-start;">NEW</span>
+            <span class="badge" style="background:#e5533d;color:#fff;font-size:10px;font-weight:700;padding:4px 10px;border-radius:99px;align-self:flex-start;">Nuevo</span>
             <h3>Planora</h3>
-            <p>Your ideas deserve a plan—not to get lost among notes and spreadsheets. Planora is a Windows desktop app that helps you organize your content, give your ideas direction, and turn inspiration into action.</p>
-            <p><em>Less chaos, more room to create.</em></p>
-            <span class="notion-price">$9.99</span>
+            <p>Tus ideas merecen un plan—no perderse entre notas y hojas de cálculo. Planora es una app de escritorio para Windows que te ayuda a organizar tu contenido, darle dirección a tus ideas y convertir inspiración en acción.</p>
+            <p><em>Menos caos, más espacio para crear.</em></p>
+            <div class="precio-lanzamiento"><span class="badge-lanzamiento">Lanzamiento</span> <span class="precio-antes">$9.99</span> <span class="precio-ahora">$7.99</span></div>
             <div class="buy-stack">
-              <button type="button" class="btn-secondary btn-sm" onclick="openPlanoraDetails()">See features &amp; screenshots</button>
-              <a href="https://alquimialab.gumroad.com/l/Planora?wanted=true" target="_blank" rel="noopener" class="btn-primary btn-sm" onclick="window.gtag&&gtag('event','click_buy_planora')">Buy on Gumroad →</a>
+              <button type="button" class="btn-secondary btn-sm" onclick="event.stopPropagation(); openPlanoraDetails();">Ver características &amp; capturas</button>
+              <a href="pagar.html?product=Planora" class="btn-primary btn-sm" onclick="window.gtag&&gtag('event','click_buy_planora')">Pagar ahora →</a>
             </div>
           </div>
         </div>
 
         <!-- ALQUIMIA STUDIO -->
-        <div class="notion-card shop-card anim" data-cat="digital" id="p-alquimia-studio">
-          <button type="button" class="studio-preview-trigger" onclick="openStudioDetails()" aria-label="See Alquimia Studio features and screenshots">
+        <div class="notion-card shop-card anim" data-cat="digital" id="p-alquimia-studio" onclick="abrirProductoDetalle('p-alquimia-studio')">
+          <button type="button" class="studio-preview-trigger" onclick="event.stopPropagation(); openStudioDetails();" aria-label="Ver características y capturas de Alquimia Studio">
             <img class="notion-thumb" src="assets/alquimia-studio/screenshots/studio-overview.png?v=1" alt="" loading="lazy" decoding="async">
           </button>
           <div class="notion-info">
-            <h3>Alquimia Studio — PDF Organizer + 5 Digital Planners</h3>
-            <p>Organize and read your PDFs in your browser, alongside five digital planners: Calm &amp; Order, Annual, ADHD, Menstrual Cycle, and Weekly. Includes light and dark mode, favorites, and backup and restore tools.</p>
-            <p>Your planners and PDFs are saved in each device's browser and do not sync automatically. Save a backup to move or restore your data. One-time purchase, no monthly subscription.</p>
-            <span class="notion-price">$9.99</span>
+            <h3>Alquimia Studio — Organizador de PDFs + 5 Planners Digitales</h3>
+            <p>Organiza y lee tus PDFs en el navegador, junto con cinco planners digitales: Calma y Orden, Anual, TDAH, Ciclo Menstrual y Semanal. Incluye modo claro y oscuro, favoritos, y herramientas de respaldo y restauración.</p>
+            <p>Tus planners y PDFs se guardan en el navegador de cada dispositivo y no se sincronizan automáticamente. Guarda una copia de respaldo para mover o restaurar tus datos. Compra única, sin suscripción mensual.</p>
+            <div class="precio-lanzamiento"><span class="badge-lanzamiento">Lanzamiento</span> <span class="precio-antes">$9.99</span> <span class="precio-ahora">$7.99</span></div>
             <div class="buy-stack">
-              <button type="button" class="btn-secondary btn-sm" onclick="openStudioDetails()">See features &amp; screenshots</button>
-              <a href="https://alquimialab.gumroad.com/l/AlquimiaStudio_Planner" target="_blank" rel="noopener" class="btn-primary btn-sm" onclick="window.gtag&&gtag('event','click_buy_alquimia_studio')">Get instant access on Gumroad →</a>
+              <button type="button" class="btn-secondary btn-sm" onclick="event.stopPropagation(); openStudioDetails();">Ver características &amp; capturas</button>
+              <a href="pagar.html?product=Alquimia Studio" class="btn-primary btn-sm" onclick="window.gtag&&gtag('event','click_buy_alquimia_studio')">Obtener acceso instantáneo en Gumroad →</a>
             </div>
           </div>
         </div>
 
         <!-- PLANNER 2027 -->
-        <div class="notion-card shop-card anim" data-cat="print" id="p-planner">
+        <div class="notion-card shop-card anim" data-cat="print" id="p-planner" onclick="abrirProductoDetalle('p-planner')">
           <img class="notion-thumb" src="journal-cover.webp" alt="Planner 2027" loading="lazy" decoding="async">
           <div class="notion-info">
             <h3>Planner 2027 — Calma y Orden</h3>
-            <p>A minimalist planner to organize your year with calm and intention.</p>
-            <span class="notion-price">$14.99</span>
+            <p>Un planner minimalista para organizar tu año con calma e intención.</p>
+            <div class="precio-lanzamiento"><span class="badge-lanzamiento">Lanzamiento</span> <span class="precio-antes">$14.99</span> <span class="precio-ahora">$11.99</span></div>
             <div class="buy-stack">
-              <a href="https://www.amazon.com/dp/B0HJ8J6MHG" target="_blank" rel="noopener" class="btn-primary btn-sm">Buy on Amazon</a>
-              <a href="https://alquimialab.gumroad.com/l/bvzpd?wanted=true" target="_blank" rel="noopener" class="btn-secondary btn-sm">Get digital edition</a>
+              <a href="pagar.html?product=Planner 2027 — Calma y Orden" class="btn-primary btn-sm">Pagar ahora →</a>
+              <a href="https://alquimialab.gumroad.com/l/bvzpd?wanted=true" target="_blank" rel="noopener" class="btn-secondary btn-sm">Edición digital</a>
             </div>
           </div>
         </div>
 
         <!-- COLORING BOOKS -->
-        <div class="notion-card shop-card anim" data-cat="print" id="p-coloring">
-          <img class="notion-thumb" src="print-coloring.webp" alt="Coloring Books" loading="lazy" decoding="async">
+        <div class="notion-card shop-card anim" data-cat="print" id="p-coloring" onclick="abrirProductoDetalle('p-coloring')">
+          <img class="notion-thumb" src="print-coloring.webp" alt="Libros para colorear" loading="lazy" decoding="async">
           <div class="notion-info">
-            <h3>Coloring Books — Lofi Coloring</h3>
-            <p>Same book in English and Spanish. Print and digital edition.</p>
-            <span class="notion-price">$12.99</span>
+            <h3>Libros para colorear — Lofi Coloring</h3>
+            <p>Mismo libro en español e inglés. Edición impresa y digital.</p>
+            <div class="precio-lanzamiento"><span class="badge-lanzamiento">Lanzamiento</span> <span class="precio-antes">$12.99</span> <span class="precio-ahora">$9.99</span></div>
             <div class="buy-stack">
-              <a href="https://www.amazon.com/dp/B0HBML5LCP" target="_blank" rel="noopener" class="btn-primary btn-sm">Buy on Amazon · EN</a>
-              <a href="https://www.amazon.com/dp/B0HJ9713N5" target="_blank" rel="noopener" class="btn-primary btn-sm">Buy on Amazon · ES</a>
-              <a href="https://alquimialab.gumroad.com/l/LofiColoringBookAlquimia" target="_blank" rel="noopener" class="btn-secondary btn-sm">Get digital edition</a>
+              <a href="pagar.html?product=Lofi Coloring" class="btn-primary btn-sm">Pagar ahora →</a>
+              <a href="https://alquimialab.gumroad.com/l/LofiColoringBookAlquimia" target="_blank" rel="noopener" class="btn-secondary btn-sm">Edición digital</a>
             </div>
           </div>
         </div>
 
         <!-- FOCUS DOCK -->
-        <div class="notion-card shop-card anim" data-cat="print">
+        <div class="notion-card shop-card anim" data-cat="print" id="p-focus" onclick="abrirProductoDetalle('p-focus')">
           <img class="notion-thumb" src="print-focus.webp" alt="Focus Dock" loading="lazy" decoding="async">
           <div class="notion-info">
             <h3>Focus Dock</h3>
-            <p>Your Notion isn't broken. It's just poorly designed. 43-page protocol.</p>
-            <span class="notion-price">$27</span>
+            <p>Tu Notion no está roto. Solo está mal diseñado. Protocolo de 43 páginas.</p>
+            <div class="precio-lanzamiento"><span class="badge-lanzamiento">Lanzamiento</span> <span class="precio-antes">$27</span> <span class="precio-ahora">$19.99</span></div>
             <div class="buy-stack">
-              <a href="http://getfocusdock.com/isabel" target="_blank" rel="noopener" class="btn-primary btn-sm">Buy Focus Dock</a>
+              <a href="pagar.html?product=Focus Dock" class="btn-primary btn-sm">Pagar ahora →</a>
             </div>
           </div>
         </div>
 
         <!-- FREELANCER CRM -->
-        <div class="notion-card shop-card anim" data-cat="notion" id="p-crm">
+        <div class="notion-card shop-card anim" data-cat="notion" id="p-crm" onclick="abrirProductoDetalle('p-crm')">
           <img class="notion-thumb" src="cover-freelancer-crm.webp" alt="Freelancer CRM" loading="lazy" decoding="async">
           <div class="notion-info">
             <h3>Freelancer CRM — Planner</h3>
-            <p>Operating system to structure your workflow from start to finish.</p>
-            <span class="notion-price">$9.99</span>
+            <p>Sistema operativo para estructurar tu flujo de trabajo de principio a fin.</p>
+            <div class="precio-lanzamiento"><span class="badge-lanzamiento">Lanzamiento</span> <span class="precio-antes">$9.99</span> <span class="precio-ahora">$7.99</span></div>
             <div class="buy-stack">
-              <a href="https://alquimialab.gumroad.com/l/FreelancerCRM?wanted=true" target="_blank" rel="noopener" class="btn-primary btn-sm" onclick="window.gtag&&gtag('event','click_buy_freelancer_crm')">Buy on Gumroad →</a>
+              <a href="pagar.html?product=Freelancer CRM — Planner" class="btn-primary btn-sm" onclick="window.gtag&&gtag('event','click_buy_freelancer_crm')">Pagar ahora →</a>
             </div>
           </div>
         </div>
 
         <!-- YOUTUBE CREATOR OS -->
-        <div class="notion-card shop-card anim" data-cat="notion">
+        <div class="notion-card shop-card anim" data-cat="notion" id="p-yt" onclick="abrirProductoDetalle('p-yt')">
           <img class="notion-thumb" src="cover-youtube.webp" alt="YouTube Creator OS" loading="lazy" decoding="async">
           <div class="notion-info">
             <h3>YouTube Creator OS — Planner &amp; Script</h3>
-            <p>Stop losing video ideas with a comprehensive Notion workspace built for creators and producers. Bring strategic clarity to your channel, from long-form scripts to viral shorts.</p>
-            <span class="notion-price">$15</span>
+            <p>Deja de perder ideas de video con un espacio de trabajo completo de Notion creado para creadores y productores. Trae claridad estratégica a tu canal, desde guiones largos hasta shorts virales.</p>
+            <div class="precio-lanzamiento"><span class="badge-lanzamiento">Lanzamiento</span> <span class="precio-antes">$15</span> <span class="precio-ahora">$11.99</span></div>
             <div class="buy-stack">
-              <a href="https://www.notion.com/templates/youtube-creator-os-automated-social-media-planner-script" target="_blank" rel="noopener" class="btn-primary btn-sm">Buy on Notion →</a>
+              <a href="pagar.html?product=YouTube Creator OS — Planner &amp; Script" class="btn-primary btn-sm">Pagar ahora →</a>
             </div>
           </div>
         </div>
 
         <!-- STUDENT OS -->
-        <div class="notion-card shop-card anim" data-cat="notion">
+        <div class="notion-card shop-card anim" data-cat="notion" id="p-student" onclick="abrirProductoDetalle('p-student')">
           <div class="notion-thumb" style="background: linear-gradient(135deg, #6462ab 0%, #524f96 100%); display:flex; align-items:center; justify-content:center; color:#fff; font-size:32px;">🎓</div>
           <div class="notion-info">
             <h3>Student OS &amp; Study Planner</h3>
-            <p>Say goodbye to scattered notes and missed deadlines with a single minimalist dashboard. Run your entire student life smoothly, from daily tasks to final exams.</p>
-            <span class="notion-price">$5.99</span>
+            <p>Di adiós a notas dispersas y fechas límite olvidadas con un único panel minimalista. Lleva toda tu vida estudiantil sin problemas, desde tareas diarias hasta exámenes finales.</p>
+            <div class="precio-lanzamiento"><span class="badge-lanzamiento">Lanzamiento</span> <span class="precio-antes">$5.99</span> <span class="precio-ahora">$4.99</span></div>
             <div class="buy-stack">
-              <a href="https://www.notion.com/templates/student-os-study-planner" target="_blank" rel="noopener" class="btn-primary btn-sm">Buy on Notion →</a>
+              <a href="pagar.html?product=Student OS &amp; Study Planner" class="btn-primary btn-sm">Pagar ahora →</a>
             </div>
           </div>
         </div>
 
         <!-- SOCIAL MEDIA PLANNER -->
-        <div class="notion-card shop-card anim" data-cat="notion" id="p-social">
-          <img class="notion-thumb" src="cover-social-media.webp" alt="Social Media Planner" loading="lazy" decoding="async">
+        <div class="notion-card shop-card anim" data-cat="notion" id="p-social" onclick="abrirProductoDetalle('p-social')">
+          <img class="notion-thumb" src="cover-social-media.webp" alt="Planner de Redes Sociales" loading="lazy" decoding="async">
           <div class="notion-info">
-            <span class="badge" style="background:#6462ab;color:#fff;font-size:10px;font-weight:700;padding:4px 10px;border-radius:99px;align-self:flex-start;">A GOOD FIRST STEP</span>
-            <h3>Social Media Planner</h3>
-            <p>Plan your posts, campaigns, and content ideas in one Notion workspace—a calmer way for creators and small businesses to show up online.</p>
-            <span class="notion-price">$4</span>
+            <span class="badge" style="background:#6462ab;color:#fff;font-size:10px;font-weight:700;padding:4px 10px;border-radius:99px;align-self:flex-start;">Un buen primer paso</span>
+            <h3>Planner de Redes Sociales</h3>
+            <p>Planea tus publicaciones, campañas e ideas de contenido en un solo espacio de Notion — una forma más tranquila para creadores y pequeños negocios de mostrarse en línea.</p>
+            <div class="precio-lanzamiento"><span class="badge-lanzamiento">Lanzamiento</span> <span class="precio-antes">$4</span> <span class="precio-ahora">$3.49</span></div>
             <div class="buy-stack">
-              <a href="https://www.notion.com/templates/social-media-planner-256" target="_blank" rel="noopener" class="btn-primary btn-sm" onclick="window.gtag&&gtag('event','click_buy_social_media_planner')">Buy on Notion →</a>
+              <a href="pagar.html?product=Planner de Redes Sociales" class="btn-primary btn-sm" onclick="window.gtag&&gtag('event','click_buy_social_media_planner')">Pagar ahora →</a>
             </div>
           </div>
         </div>
 
         <!-- FINANCE PRO -->
-        <div class="notion-card shop-card anim" data-cat="notion">
+        <div class="notion-card shop-card anim" data-cat="notion" id="p-financepro" onclick="abrirProductoDetalle('p-financepro')">
           <img class="notion-thumb" src="cover-finance-pro.webp" alt="Finance Planner Pro" loading="lazy" decoding="async">
           <div class="notion-info">
             <h3>Finance Planner Pro</h3>
-            <p>Advanced financial tracking with detailed reports and projections.</p>
-            <span class="notion-price">$9.99</span>
+            <p>Seguimiento financiero avanzado con reportes detallados y proyecciones.</p>
+            <div class="precio-lanzamiento"><span class="badge-lanzamiento">Lanzamiento</span> <span class="precio-antes">$9.99</span> <span class="precio-ahora">$7.99</span></div>
             <div class="buy-stack">
-              <a href="https://www.notion.com/templates/finance-planner-pro" target="_blank" rel="noopener" class="btn-primary btn-sm">Buy on Notion →</a>
+              <a href="pagar.html?product=Finance Planner Pro" class="btn-primary btn-sm">Pagar ahora →</a>
             </div>
           </div>
         </div>
 
         <!-- QUIET MIND (free) -->
-        <div class="notion-card shop-card anim" data-cat="notion" id="p-quiet">
+        <div class="notion-card shop-card anim" data-cat="notion" id="p-quiet" onclick="abrirProductoDetalle('p-quiet')">
           <img class="notion-thumb" src="cover-quiet-mind.webp" alt="Quiet Mind Planner" loading="lazy" decoding="async">
           <div class="notion-info">
             <h3>Quiet Mind Planner</h3>
-            <p>Free your mind from mental noise with a minimalist sanctuary designed to protect your energy and bring calm. Transform your daily routines into a gentle daily flow of intentional reflection.</p>
-            <span class="notion-price" style="color:var(--text-muted);">Free</span>
+            <p>Libera tu mente del ruido mental con un santuario minimalista diseñado para proteger tu energía y traer calma. Transforma tus rutinas diarias en un flujo suave de reflexión intencional.</p>
+            <span class="notion-price" style="color:var(--text-muted);">Gratis</span>
             <div class="buy-stack">
-              <a href="https://www.notion.com/templates/quiet-mind-planner" target="_blank" rel="noopener" class="btn-secondary btn-sm">Download free</a>
+              <a href="pagar.html?product=Quiet Mind Planner" class="btn-secondary btn-sm">Descargar gratis</a>
             </div>
           </div>
         </div>
 
         <!-- HABIT (free) -->
-        <div class="notion-card shop-card anim" data-cat="notion">
+        <div class="notion-card shop-card anim" data-cat="notion" id="p-habit" onclick="abrirProductoDetalle('p-habit')">
           <img class="notion-thumb" src="cover-habit.webp" alt="Habit Planner" loading="lazy" decoding="async">
           <div class="notion-info">
             <h3>Habit Planner</h3>
-            <p>Transform your habits without the visual guilt of missed days from the past. A clean-slate design to keep your mind clear and focused entirely on your growth.</p>
-            <span class="notion-price" style="color:var(--text-muted);">Free</span>
+            <p>Transforma tus hábitos sin la culpa visual de días perdidos del pasado. Un diseño de pizarra limpia para mantener tu mente clara y enfocada en tu crecimiento.</p>
+            <span class="notion-price" style="color:var(--text-muted);">Gratis</span>
             <div class="buy-stack">
-              <a href="https://www.notion.com/templates/habit-planner" target="_blank" rel="noopener" class="btn-secondary btn-sm">Download free</a>
+              <a href="pagar.html?product=Habit Planner" class="btn-secondary btn-sm">Descargar gratis</a>
             </div>
           </div>
         </div>
 
         <!-- FINANCE FREE -->
-        <div class="notion-card shop-card anim" data-cat="notion">
+        <div class="notion-card shop-card anim" data-cat="notion" id="p-financefree" onclick="abrirProductoDetalle('p-financefree')">
           <img class="notion-thumb" src="cover-finance-free.webp" alt="Finance Planner Free" loading="lazy" decoding="async">
           <div class="notion-info">
             <h3>Finance Planner Free</h3>
-            <p>Organize your personal finances with a visual and intuitive system.</p>
-            <span class="notion-price" style="color:var(--text-muted);">Free</span>
+            <p>Organiza tus finanzas personales con un sistema visual e intuitivo.</p>
+            <span class="notion-price" style="color:var(--text-muted);">Gratis</span>
             <div class="buy-stack">
-              <a href="https://www.notion.com/templates/finance-planner-785" target="_blank" rel="noopener" class="btn-secondary btn-sm">Download free</a>
+              <a href="pagar.html?product=Finance Planner Free" class="btn-secondary btn-sm">Descargar gratis</a>
             </div>
           </div>
         </div>
 
-        <!-- PET PLANNER (publicado — solo EN por ahora) -->
-        <div class="notion-card shop-card anim" data-cat="notion">
+        <!-- PET PLANNER -->
+        <div class="notion-card shop-card anim" data-cat="notion" id="p-pet" onclick="abrirProductoDetalle('p-pet')">
           <img class="notion-thumb" src="cover-pet-planner.jpg" alt="Pet Planner" loading="lazy" decoding="async">
           <div class="notion-info">
             <h3>Pet Planner</h3>
-            <p>Vaccines, vet visits, meds, and food in one dashboard. For Bonnie, Luna and every fur baby.</p>
+            <p>Vacunas, visitas al veterinario, medicamentos y comida en un solo panel. Para Bonnie, Luna y cada miembro peludo.</p>
             <span class="notion-price">$15</span>
             <div class="buy-stack">
-              <a href="https://keen-coral-bd2.notion.site/Pet-Planner-your-pet-s-life-in-order-health-vet-visits-spending-7d1b648b4c2182d1b9f081a0d3e11d8f" target="_blank" rel="noopener" class="btn-primary btn-sm">View details →</a>
+              <a href="pagar.html?product=Pet Planner" class="btn-primary btn-sm">Pagar ahora →</a>
             </div>
           </div>
         </div>
 
-      </div>
-
-      </div>
-
-      <dialog class="studio-details-dialog" id="planoraDetailsDialog" aria-labelledby="planoraDetailsTitle">
-        <div class="studio-dialog-content">
-          <div class="studio-dialog-header">
-            <div>
-              <p class="studio-dialog-eyebrow">Planora · $9.99 · One-time purchase</p>
-              <h2 id="planoraDetailsTitle">All your content planning in one calm workspace</h2>
-            </div>
-            <form method="dialog"><button class="studio-dialog-close" aria-label="Close details">&times;</button></form>
-          </div>
-          <p class="studio-dialog-lead">Stop planning across scattered spreadsheets and messy notes. Planora is an interactive content planner built for Windows that brings your strategy, grid, captions, calendar, and feed preview together—with no monthly subscription.</p>
-
-          <div class="studio-screenshot-grid" aria-label="Planora screenshots">
-            <figure class="studio-screenshot">
-              <img src="assets/pm-maestro-1.png" alt="Planora brand strategy and custom pillars workspace" loading="lazy">
-              <figcaption>Brand strategy &amp; custom pillars</figcaption>
-            </figure>
-            <figure class="studio-screenshot">
-              <img src="assets/pm-maestro-2.png" alt="Planora content bank and piece vault" loading="lazy">
-              <figcaption>Content bank &amp; piece vault</figcaption>
-            </figure>
-            <figure class="studio-screenshot">
-              <img src="assets/pm-maestro-3.png" alt="Planora quick ideas and inspiration capture" loading="lazy">
-              <figcaption>Capture ideas &amp; drafts on the fly</figcaption>
-            </figure>
-          </div>
-
-          <div class="studio-dialog-columns">
-            <section>
-              <h3>What can you do with Planora?</h3>
-              <ul>
-                <li><strong>Interactive grid &amp; feed preview:</strong> plan posts, write copy, and preview your Instagram layout.</li>
-                <li><strong>Custom content pillars:</strong> create and save unique categories tailored to each brand.</li>
-                <li><strong>Visual calendar:</strong> view your entire month at a glance and drag to reschedule.</li>
-                <li><strong>Client-ready PDF export:</strong> choose portrait or landscape and personalize with your brand's HEX color.</li>
-                <li><strong>Multi-brand workspace:</strong> keep content and strategy separate for every client.</li>
-              </ul>
-            </section>
-            <section>
-              <h3>Also included</h3>
-              <ul>
-                <li>Piece vault to save and reuse your best-performing copy.</li>
-                <li>Idea incubator to capture hooks, formats, and dream dates.</li>
-                <li>Full bilingual experience: switch between English and Spanish anytime.</li>
-                <li>100% private and offline: your data stays on your computer.</li>
-                <li>Windows desktop application: installable and portable versions included.</li>
-              </ul>
-            </section>
-          </div>
-
-          <p class="studio-data-note"><strong>Your data stays under your control.</strong> Planora stores your content directly on your computer with no cloud tracking, no logins, and no monthly fees. Save and restore JSON backups anytime.</p>
-          <div class="studio-dialog-actions">
-            <a href="https://alquimialab.gumroad.com/l/Planora?wanted=true" target="_blank" rel="noopener" class="btn-primary" onclick="window.gtag&&gtag('event','click_buy_planora')">Buy on Gumroad →</a>
-          </div>
         </div>
-      </dialog>
+      </div>
 
-      <dialog class="studio-details-dialog" id="studioDetailsDialog" aria-labelledby="studioDetailsTitle">
+      </div>
+
+      <!-- Modal genérico de detalles de producto -->
+      <dialog class="studio-details-dialog producto-detalle-dialog" id="productoDetalleDialog" aria-labelledby="productoDetalleTitle">
         <div class="studio-dialog-content">
           <div class="studio-dialog-header">
             <div>
-              <p class="studio-dialog-eyebrow">Alquimia Studio · $9.99 · One-time purchase</p>
-              <h2 id="studioDetailsTitle">Your PDFs and five planners, together</h2>
+              <p class="studio-dialog-eyebrow" id="prodEyebrow"></p>
+              <h2 id="productoDetalleTitle"></h2>
             </div>
-            <form method="dialog"><button class="studio-dialog-close" aria-label="Close details">&times;</button></form>
+            <form method="dialog"><button class="studio-dialog-close" aria-label="Cerrar detalles">&times;</button></form>
           </div>
-          <p class="studio-dialog-lead">A calm, browser-based workspace to organize and read your PDFs, plan your year, and keep your routines in one place. Use it on your phone, tablet, or computer—no app-store download or monthly subscription required.</p>
-
-          <div class="studio-screenshot-grid" aria-label="Alquimia Studio screenshots">
-            <figure class="studio-screenshot">
-              <img src="assets/alquimia-studio/screenshots/studio-overview.png" alt="Alquimia Studio home screen with the PDF library and five planners" loading="lazy">
-              <figcaption>One home for your library and planners</figcaption>
-            </figure>
-            <figure class="studio-screenshot">
-              <img src="assets/alquimia-studio/screenshots/studio-planner.png" alt="Calm & Order planner open in Alquimia Studio" loading="lazy">
-              <figcaption>Plan and write right in your browser</figcaption>
-            </figure>
-            <figure class="studio-screenshot">
-              <img src="assets/alquimia-studio/screenshots/studio-library.png" alt="Alquimia Studio PDF reader displaying the Calma & Order planner cover" loading="lazy">
-              <figcaption>Read PDFs in the built-in reader</figcaption>
-            </figure>
-          </div>
-
-          <div class="studio-dialog-columns">
-            <section>
-              <h3>Five planners included</h3>
-              <ul>
-                <li><strong>Calm &amp; Order:</strong> self-care, habits, and everyday organization.</li>
-                <li><strong>Annual Planner:</strong> goals and plans for the year.</li>
-                <li><strong>ADHD Planner:</strong> visual priorities and flexible planning.</li>
-                <li><strong>Menstrual Cycle Calendar:</strong> track your cycle, symptoms, and energy.</li>
-                <li><strong>Weekly Planner:</strong> organize your seven days with room to adjust.</li>
-              </ul>
-            </section>
-            <section>
-              <h3>Also included</h3>
-              <ul>
-                <li>Upload and read PDFs in My PDF Library.</li>
-                <li>Light and dark modes, favorites, and planner-to-PDF printing.</li>
-                <li>Save and restore a backup of your planners and PDFs.</li>
-                <li>Instant access with a personal license code sent after purchase.</li>
-              </ul>
-            </section>
-          </div>
-
-          <section class="studio-install-guide">
-            <h3>File type &amp; mobile installation</h3>
-            <p>Alquimia Studio is a browser-based web app (PWA built with HTML), not an Android APK or an App Store app. After purchasing on Gumroad, use the access link and personal license code included with your purchase.</p>
-            <div class="studio-dialog-columns">
-              <section>
-                <h4>Android</h4>
-                <ol>
-                  <li>Open your access link in Chrome and enter your license code.</li>
-                  <li>Open the browser menu (⋮), then choose Install app or Add to Home screen.</li>
-                  <li>Confirm to add Studio to your home screen.</li>
-                </ol>
-              </section>
-              <section>
-                <h4>iPhone &amp; iPad</h4>
-                <ol>
-                  <li>Open your access link in Safari and enter your license code.</li>
-                  <li>Tap Share, then Add to Home Screen.</li>
-                  <li>Tap Add to put Studio on your home screen.</li>
-                </ol>
-              </section>
+          <p class="studio-dialog-lead" id="prodLead"></p>
+          <div class="producto-detalle-grid">
+            <div>
+              <img id="prodImg" src="" alt="" style="width:100%;height:auto;border-radius:16px;object-fit:cover;">
             </div>
-          </section>
-
-          <p class="studio-data-note"><strong>Your data stays under your control.</strong> Planners and PDFs are stored in the browser on each device and do not automatically sync between devices. Use Save a Backup and Import Backup to move or restore your data. Studio may work offline after it has loaded, as long as your browser keeps its files and data.</p>
-          <div class="studio-dialog-actions">
-            <a href="https://alquimialab.gumroad.com/l/AlquimiaStudio_Planner" target="_blank" rel="noopener" class="btn-primary" onclick="window.gtag&&gtag('event','click_buy_alquimia_studio')">Get instant access on Gumroad · $9.99 →</a>
+            <div>
+              <div id="prodPrecio"></div>
+              <div id="prodDetalleExtra" style="margin-top:16px;line-height:1.6;color:#656282;"></div>
+              <div class="studio-dialog-actions" style="margin-top:24px;">
+                <a id="prodBtnPagar" href="pagar.html" class="btn-primary">Pagar ahora →</a>
+              </div>
+            </div>
           </div>
         </div>
       </dialog>
@@ -680,11 +564,11 @@
       <!-- EBOOK · HISTORIA (estilo Kore, sin cajas) -->
       <div class="ebook-story anim d2">
         <div>
-          <span class="story-label">Coming soon</span>
+          <span class="story-label">Próximamente</span>
           <h3>El diario imperfecto de una creadora</h3>
-          <p>The real story of my leap into the freelance life — with 15 prompts to copy and paste, exercises with space to write, and a launch checklist.</p>
-          <div class="es-quote">The leap into freelance life, told without filters.</div>
-          <a class="btn-primary" href="https://wa.me/573104108483?text=Hola%20Isabel%20%F0%9F%91%8B%20av%C3%ADsame%20cuando%20salga%20El%20diario%20imperfecto%20de%20una%20creadora" target="_blank" rel="noopener" style="margin-top:18px;">Notify me when it launches 🔔</a>
+          <p>La historia real de mi salto a la vida freelance — con 15 prompts para copiar y pegar, ejercicios con espacio para escribir, y una lista de lanzamiento.</p>
+          <div class="es-quote">El salto a la vida freelance, contado sin filtros.</div>
+          <a class="btn-primary" href="https://wa.me/573104108483?text=Hola%20Isabel%20%F0%9F%91%8B%20av%C3%ADsame%20cuando%20salga%20El%20diario%20imperfecto%20de%20una%20creadora" target="_blank" rel="noopener" style="margin-top:18px;">Avísame cuando se lance 🔔</a>
         </div>
         <div class="es-side">
           <div class="es-book" aria-hidden="true">
@@ -705,7 +589,7 @@
   </div>
 
   <!-- FOOTER -->
-  <footer class="footer">&copy; 2026 Alquimia Lab &middot; Made with calm &amp; coffee &middot; <a href="politica-privacidad">Privacy Policy</a> &middot; <a href="terminos">Terms of Service</a></footer>
+  <footer class="footer">&copy; 2026 Alquimia Lab &middot; Hecho con calma y café &middot; <a href="politica-privacidad">Política de Privacidad</a> &middot; <a href="terminos">Términos de Servicio</a></footer>
 
   <!-- WHATSAPP -->
   <a href="https://wa.me/573104108483" target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">
@@ -819,6 +703,51 @@
     if (catFromHash() === 'p-planora') {
       goProduct('p-planora');
       openPlanoraDetails();
+    }
+
+    /* ===== Modal genérico de detalles de producto ===== */
+    function abrirProductoDetalle(id) {
+      var card = document.getElementById(id);
+      if (!card) return;
+      var dlg = document.getElementById('productoDetalleDialog');
+      if (!dlg) return;
+
+      var titleEl = card.querySelector('h3');
+      var priceEl = card.querySelector('.notion-price, .precio-ahora');
+      var descEl = card.querySelector('.notion-info p');
+      var imgEl = card.querySelector('img');
+      var cat = card.getAttribute('data-cat') || '';
+
+      document.getElementById('productoDetalleTitle').textContent = titleEl ? titleEl.textContent : '';
+      document.getElementById('prodEyebrow').textContent = cat === 'notion' ? 'Plantilla Notion' : (cat === 'print' ? 'Producto impreso' : 'Producto digital');
+      document.getElementById('prodLead').textContent = descEl ? descEl.textContent : '';
+      if (imgEl) {
+        document.getElementById('prodImg').src = imgEl.src;
+        document.getElementById('prodImg').alt = titleEl ? titleEl.textContent : '';
+      }
+
+      var precioBox = document.getElementById('prodPrecio');
+      precioBox.innerHTML = '';
+      if (priceEl) {
+        var precioTexto = priceEl.textContent;
+        var launchEl = card.querySelector('.badge-lanzamiento');
+        if (launchEl) {
+          var antesEl = card.querySelector('.precio-antes');
+          precioBox.innerHTML = '<div class="precio-lanzamiento"><span class="badge-lanzamiento">Lanzamiento</span> <span class="precio-antes">' + (antesEl ? antesEl.textContent : precioTexto) + '</span> <span class="precio-ahora">' + precioTexto + '</span></div>';
+        } else {
+          precioBox.innerHTML = '<span class="notion-price" style="font-size:1.2rem;font-weight:700">' + precioTexto + '</span>';
+        }
+      }
+
+      document.getElementById('prodBtnPagar').href = 'pagar.html?product=' + encodeURIComponent(titleEl ? titleEl.textContent : id);
+
+      if (dlg && !dlg.open) dlg.showModal();
+    }
+    var productoDialog = document.getElementById('productoDetalleDialog');
+    if (productoDialog) {
+      productoDialog.addEventListener('click', function(event) {
+        if (event.target === productoDialog) productoDialog.close();
+      });
     }
   </script>
 
