@@ -254,7 +254,7 @@
         <h2>La tienda completa 🛍️</h2>
         <p>Plantillas, planners, libros y herramientas digitales — todo en un solo lugar, hecho con calma.</p>
         <p class="trust-note">🔒 Compra segura mediante PayPal, Bancolombia, Nequi y Nu</p>
-        <button class="btn-primary btn-hero" onclick="openShop();document.getElementById('categories-grid').scrollIntoView({behavior:'smooth'})">Ver categorías ↓</button>
+        <button class="btn-primary btn-hero" onclick="scrollToCategories()">Ver categorías ↓</button>
       </div>
 
       <!-- YOUTUBE -->
@@ -648,6 +648,12 @@
     function catFromHash() { return (location.hash || '').replace('#', '').toLowerCase(); }
     window.addEventListener('hashchange', function() { openShop(catFromHash()); });
     if (CAT_FILTER[catFromHash()]) openShop(catFromHash(), true);
+
+    function scrollToCategories() {
+      openShop();
+      var el = document.getElementById('categories-grid');
+      if (el) el.scrollIntoView({ block: 'start' });
+    }
 
     /* Guía "¿cuál es para ti?": abre la tienda, filtra y resalta la tarjeta */
     function goProduct(id) {
