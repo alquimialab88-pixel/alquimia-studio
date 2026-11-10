@@ -92,6 +92,7 @@
     .soon { opacity:.7; cursor:default !important; }
     @keyframes cardFlash { 0%,100% { box-shadow: 0 0 0 0 rgba(100,98,171,0); } 25%,75% { box-shadow: 0 0 0 5px rgba(100,98,171,.45); } }
     .flash { animation: cardFlash 1.6s ease; }
+    #categories-grid { scroll-margin-top: 92px; }
     @media (max-width: 640px) {
       .shop-hero h2 { font-size: 26px; }
       .banner-slide { flex-direction:column; align-items:flex-start; justify-content:center; padding:100px 26px 130px; gap:26px; }
@@ -200,7 +201,7 @@
             </div>
             <div class="bs-media">
               <div class="bs-media-img">
-                <img src="assets/banner-digital.png" alt="Productos digitales" loading="lazy" onerror="this.remove()">
+                <img src="assets/banner-digital.png" alt="Productos digitales"  onerror="this.remove()">
               </div>
               <span class="bs-bubble">Desde $3</span>
             </div>
@@ -213,7 +214,7 @@
               <a class="btn-primary" href="#shop" onclick="openShop('notion');return false;">Ver plantillas →</a>
             </div>
             <div class="bs-media">
-              <img src="assets/banner-notion.png" alt="Plantillas Notion" loading="lazy" onerror="this.remove()">
+              <img src="assets/banner-notion.png" alt="Plantillas Notion"  onerror="this.remove()">
             </div>
             <span class="bs-bubble">7 plantillas</span>
           </div>
@@ -225,7 +226,7 @@
               <a class="btn-primary" href="#shop" onclick="openShop('impresos');return false;">Ver impresos →</a>
             </div>
             <div class="bs-media">
-              <img src="assets/banner-impresos.png" alt="Productos impresos" loading="lazy" onerror="this.remove()">
+              <img src="assets/banner-impresos.png" alt="Productos impresos"  onerror="this.remove()">
             </div>
             <span class="bs-bubble">Desde $12.99</span>
           </div>
@@ -253,7 +254,7 @@
         <h2>La tienda completa 🛍️</h2>
         <p>Plantillas, planners, libros y herramientas digitales — todo en un solo lugar, hecho con calma.</p>
         <p class="trust-note">🔒 Compra segura mediante PayPal, Bancolombia, Nequi y Nu</p>
-        <button class="btn-primary btn-hero" onclick="document.getElementById('categories-grid').scrollIntoView({behavior:'smooth'})">Ver categorías ↓</button>
+        <button class="btn-primary btn-hero" onclick="openShop();document.getElementById('categories-grid').scrollIntoView({behavior:'smooth'})">Ver categorías ↓</button>
       </div>
 
       <!-- YOUTUBE -->
@@ -271,19 +272,19 @@
       <!-- CATEGORÍAS -->
       <div class="category-grid anim d1" id="categories-grid" style="margin-top: 34px;">
         <div class="category-card" id="cat-notion">
-          <div class="category-media"><img src="notion-featured.webp" alt="Plantillas de Notion" loading="lazy" decoding="async"></div>
+          <div class="category-media"><img src="notion-featured.webp" alt="Plantillas de Notion"  decoding="async"></div>
           <h3>Plantillas de Notion</h3>
           <p>Sistemas de productividad, planificación y organización personal y profesional. 7 plantillas disponibles.</p>
           <button class="btn-primary btn-sm" onclick="openShop('notion')">Ver todo</button>
         </div>
         <div class="category-card" id="cat-impresos">
-          <div class="category-media"><img src="printed-featured.webp" alt="Productos impresos" loading="lazy" decoding="async"></div>
+          <div class="category-media"><img src="printed-featured.webp" alt="Productos impresos"  decoding="async"></div>
           <h3>Productos impresos</h3>
           <p>Libros para colorear, planners en PDF y más. Disponibles en Amazon y Gumroad.</p>
           <button class="btn-primary btn-sm" onclick="openShop('impresos')">Ver todo</button>
         </div>
         <div class="category-card" id="cat-digitales">
-          <div class="category-media"><img src="products/digital-tools.jpg" alt="Productos digitales" loading="lazy" decoding="async"></div>
+          <div class="category-media"><img src="products/digital-tools.jpg" alt="Productos digitales"  decoding="async"></div>
           <h3>Productos digitales</h3>
           <p>Apps, planners y herramientas digitales que traen orden tranquilo a tu contenido y vida diaria. Listos en computadora y móvil.</p>
           <button class="btn-primary btn-sm" onclick="openShop('digitales')">Ver todo</button>
@@ -326,7 +327,7 @@
 
         <!-- EL DIARIO IMPERFECTO (no-Notion: modal detalles) -->
         <div class="notion-card shop-card anim" data-cat="digital" id="p-diario" onclick="abrirProductoDetalle('p-diario')">
-          <img class="notion-thumb" src="assets/ebook-portada.jpg" alt="El diario imperfecto de una creadora" loading="lazy" decoding="async" style="height:220px;object-fit:contain;background:#e8e6f4;padding:14px;">
+          <img class="notion-thumb" src="assets/ebook-portada.jpg" alt="El diario imperfecto de una creadora"  decoding="async" style="height:220px;object-fit:contain;background:#e8e6f4;padding:14px;">
           <div class="notion-info">
             <h3>El diario imperfecto de una creadora</h3>
             <p>La historia real de mi salto a la vida freelance — con 15 prompts para copiar y pegar, ejercicios con espacio para escribir, y una lista de lanzamiento.</p>
@@ -340,9 +341,10 @@
 
         <!-- PLANORA (no-Notion: modal detalles) -->
         <div class="notion-card shop-card anim" data-cat="digital" id="p-planora" onclick="abrirProductoDetalle('p-planora')">
+          <img class="notion-thumb" src="assets/featured-maestro.jpg" alt="Planora — Organizador y planificador de redes sociales"  decoding="async">
           <div class="notion-info">
             <span class="badge" style="background:#e5533d;color:#fff;font-size:10px;font-weight:700;padding:4px 10px;border-radius:99px;align-self:flex-start;">Nuevo</span>
-            <h3>Planora</h3>
+            <h3>Planora — Organizador | Planificador de Redes Sociales</h3>
             <p>Tus ideas merecen un plan—no perderse entre notas y hojas de cálculo. Planora es una app de escritorio para Windows que te ayuda a organizar tu contenido, darle dirección a tus ideas y convertir inspiración en acción.</p>
             <p><em>Menos caos, más espacio para crear.</em></p>
             <div class="precio-lanzamiento"><span class="badge-lanzamiento">Lanzamiento</span> <span class="precio-antes">$9.99</span> <span class="precio-ahora">$7.99</span></div>
@@ -355,6 +357,7 @@
 
         <!-- ALQUIMIA STUDIO (no-Notion: modal detalles) -->
         <div class="notion-card shop-card anim" data-cat="digital" id="p-alquimia-studio" onclick="abrirProductoDetalle('p-alquimia-studio')">
+          <img class="notion-thumb" src="assets/featured-alquimia.jpg" alt="Alquimia Studio — Organizador de PDFs y planners digitales"  decoding="async">
           <div class="notion-info">
             <h3>Alquimia Studio — Organizador de PDFs + 5 Planners Digitales</h3>
             <p>Organiza y lee tus PDFs en el navegador, junto con cinco planners digitales: Calma y Orden, Anual, TDAH, Ciclo Menstrual y Semanal. Incluye modo claro y oscuro, favoritos, y herramientas de respaldo y restauración.</p>
@@ -369,7 +372,7 @@
 
         <!-- PLANNER 2027 (no-Notion: modal detalles) -->
         <div class="notion-card shop-card anim" data-cat="print" id="p-planner" onclick="abrirProductoDetalle('p-planner')">
-          <img class="notion-thumb" src="journal-cover.webp" alt="Planner 2027" loading="lazy" decoding="async">
+          <img class="notion-thumb" src="journal-cover.webp" alt="Planner 2027"  decoding="async">
           <div class="notion-info">
             <h3>Planner 2027 — Calma y Orden</h3>
             <p>Un planner minimalista para organizar tu año con calma e intención.</p>
@@ -384,7 +387,7 @@
 
         <!-- COLORING BOOKS (no-Notion: modal detalles) -->
         <div class="notion-card shop-card anim" data-cat="print" id="p-coloring" onclick="abrirProductoDetalle('p-coloring')">
-          <img class="notion-thumb" src="print-coloring.webp" alt="Libros para colorear" loading="lazy" decoding="async">
+          <img class="notion-thumb" src="print-coloring.webp" alt="Libros para colorear"  decoding="async">
           <div class="notion-info">
             <h3>Libros para colorear — Lofi Coloring</h3>
             <p>Mismo libro en español e inglés. Edición impresa y digital.</p>
@@ -401,7 +404,7 @@
 
         <!-- FREELANCER CRM -->
         <div class="notion-card shop-card anim" data-cat="notion" id="p-crm">
-          <img class="notion-thumb" src="cover-freelancer-crm.webp" alt="Freelancer CRM" loading="lazy" decoding="async">
+          <img class="notion-thumb" src="cover-freelancer-crm.webp" alt="Freelancer CRM"  decoding="async">
           <div class="notion-info">
             <h3>Freelancer CRM — Planner</h3>
             <p>Sistema operativo para estructurar tu flujo de trabajo de principio a fin.</p>
@@ -414,7 +417,7 @@
 
         <!-- YOUTUBE CREATOR OS -->
         <div class="notion-card shop-card anim" data-cat="notion" id="p-yt">
-          <img class="notion-thumb" src="cover-youtube.webp" alt="YouTube Creator OS" loading="lazy" decoding="async">
+          <img class="notion-thumb" src="cover-youtube.webp" alt="YouTube Creator OS"  decoding="async">
           <div class="notion-info">
             <h3>YouTube Creator OS — Planner &amp; Script</h3>
             <p>Deja de perder ideas de video con un espacio de trabajo completo de Notion creado para creadores y productores. Trae claridad estratégica a tu canal, desde guiones largos hasta shorts virales.</p>
@@ -427,7 +430,7 @@
 
         <!-- STUDENT OS -->
         <div class="notion-card shop-card anim" data-cat="notion" id="p-student">
-          <img class="notion-thumb" src="assets/student-os-cover.jpg" alt="Student OS &amp; Study Planner" loading="lazy" decoding="async">
+          <img class="notion-thumb" src="assets/student-os-cover.jpg" alt="Student OS &amp; Study Planner"  decoding="async">
           <div class="notion-info">
             <h3>Student OS &amp; Study Planner</h3>
             <p>Di adiós a notas dispersas y fechas límite olvidadas con un único panel minimalista. Lleva toda tu vida estudiantil sin problemas, desde tareas diarias hasta exámenes finales.</p>
@@ -440,7 +443,7 @@
 
         <!-- SOCIAL MEDIA PLANNER -->
         <div class="notion-card shop-card anim" data-cat="notion" id="p-social">
-          <img class="notion-thumb" src="cover-social-media.webp" alt="Planner de Redes Sociales" loading="lazy" decoding="async">
+          <img class="notion-thumb" src="cover-social-media.webp" alt="Planner de Redes Sociales"  decoding="async">
           <div class="notion-info">
             <span class="badge" style="background:#6462ab;color:#fff;font-size:10px;font-weight:700;padding:4px 10px;border-radius:99px;align-self:flex-start;">Un buen primer paso</span>
             <h3>Planner de Redes Sociales</h3>
@@ -454,7 +457,7 @@
 
         <!-- FINANCE PRO -->
         <div class="notion-card shop-card anim" data-cat="notion" id="p-financepro">
-          <img class="notion-thumb" src="cover-finance-pro.webp" alt="Finance Planner Pro" loading="lazy" decoding="async">
+          <img class="notion-thumb" src="cover-finance-pro.webp" alt="Finance Planner Pro"  decoding="async">
           <div class="notion-info">
             <h3>Finance Planner Pro</h3>
             <p>Seguimiento financiero avanzado con reportes detallados y proyecciones.</p>
@@ -467,7 +470,7 @@
 
         <!-- QUIET MIND (free) -->
         <div class="notion-card shop-card anim" data-cat="notion" id="p-quiet">
-          <img class="notion-thumb" src="cover-quiet-mind.webp" alt="Quiet Mind Planner" loading="lazy" decoding="async">
+          <img class="notion-thumb" src="cover-quiet-mind.webp" alt="Quiet Mind Planner"  decoding="async">
           <div class="notion-info">
             <h3>Quiet Mind Planner</h3>
             <p>Libera tu mente del ruido mental con un santuario minimalista diseñado para proteger tu energía y traer calma. Transforma tus rutinas diarias en un flujo suave de reflexión intencional.</p>
@@ -480,7 +483,7 @@
 
         <!-- HABIT (free) -->
         <div class="notion-card shop-card anim" data-cat="notion" id="p-habit">
-          <img class="notion-thumb" src="cover-habit.webp" alt="Habit Planner" loading="lazy" decoding="async">
+          <img class="notion-thumb" src="cover-habit.webp" alt="Habit Planner"  decoding="async">
           <div class="notion-info">
             <h3>Habit Planner</h3>
             <p>Transforma tus hábitos sin la culpa visual de días perdidos del pasado. Un diseño de pizarra limpia para mantener tu mente clara y enfocada en tu crecimiento.</p>
@@ -493,7 +496,7 @@
 
         <!-- FINANCE FREE -->
         <div class="notion-card shop-card anim" data-cat="notion" id="p-financefree">
-          <img class="notion-thumb" src="cover-finance-free.webp" alt="Finance Planner Free" loading="lazy" decoding="async">
+          <img class="notion-thumb" src="cover-finance-free.webp" alt="Finance Planner Free"  decoding="async">
           <div class="notion-info">
             <h3>Finance Planner Free</h3>
             <p>Organiza tus finanzas personales con un sistema visual e intuitivo.</p>
@@ -506,7 +509,7 @@
 
         <!-- PET PLANNER -->
         <div class="notion-card shop-card anim" data-cat="notion" id="p-pet">
-          <img class="notion-thumb" src="cover-pet-planner.jpg" alt="Pet Planner" loading="lazy" decoding="async">
+          <img class="notion-thumb" src="cover-pet-planner.jpg" alt="Pet Planner"  decoding="async">
           <div class="notion-info">
             <h3>Pet Planner</h3>
             <p>Vacunas, visitas al veterinario, medicamentos y comida en un solo panel. Para Bonnie, Luna y cada miembro peludo.</p>
@@ -561,7 +564,7 @@
               <div class="tablet-glow"></div>
               <div class="tablet-frame">
                 <div class="tablet-screen">
-                  <img src="assets/ebook-portada.jpg" alt="" loading="lazy" decoding="async">
+                  <img src="assets/ebook-portada.jpg" alt=""  decoding="async">
                 </div>
               </div>
             </div>

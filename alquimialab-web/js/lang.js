@@ -1137,6 +1137,62 @@
 
   var nodes = [], phNodes = [], titleSnap, descSnap;
 
+  function reverseMap(source) {
+    var out = {};
+    for (var k in source) {
+      if (!Object.prototype.hasOwnProperty.call(source, k)) continue;
+      var v = source[k];
+      if (!Object.prototype.hasOwnProperty.call(out, v)) out[v] = k;
+    }
+    return out;
+  }
+  var reverseDict = reverseMap(dict);
+  var reversePlaceholders = reverseMap(placeholders);
+  var reverseTitles = reverseMap(titles);
+  var reverseDescriptions = reverseMap(descriptions);
+
+  var reverseExtra = {
+    "Plantillas Notion": "Notion Templates",
+    "Plantillas de Notion": "Notion Templates",
+    "CRM, finanzas, hábitos, sistemas para estudiantes y creadores — listos en segundos.": "CRM, finance, habits, student and creator systems — ready in seconds.",
+    "🔒 Compra segura mediante PayPal, Bancolombia, Nequi y Nu": "🔒 Secure checkout via PayPal, Bancolombia, Nequi and Nu",
+    "Libros para colorear, planners en PDF y más. Disponibles en Amazon y Gumroad.": "Coloring books, PDF planners and more. Available on Amazon and Gumroad.",
+    "Apps, planners y herramientas digitales que traen orden tranquilo a tu contenido y vida diaria. Listos en computadora y móvil.": "Apps, planners and digital tools that bring calm order to your content and daily life. Ready on desktop and mobile.",
+    "Necesito un plan de contenido para mi negocio": "I need a content plan for my business",
+    "Planner de Redes Sociales": "Social Media Planner",
+    "← Atrás": "← Back",
+    "El diario imperfecto de una creadora": "The Imperfect Diary of a Creator",
+    "La historia real de mi salto a la vida freelance — con 15 prompts para copiar y pegar, ejercicios con espacio para escribir, y una lista de lanzamiento.": "The real story of my leap into freelance life — with 15 prompts to copy and paste, exercises with space to write, and a launch checklist.",
+    "Ver detalles": "View details",
+    "Pagar ahora →": "Buy now →",
+    "Nuevo": "New",
+    "Planora — Organizador | Planificador de Redes Sociales": "Planora — Social Media Organizer | Planner",
+    "Tus ideas merecen un plan—no perderse entre notas y hojas de cálculo. Planora es una app de escritorio para Windows que te ayuda a organizar tu contenido, darle dirección a tus ideas y convertir inspiración en acción.": "Your ideas deserve a plan—not to get lost among notes and spreadsheets. Planora is a Windows desktop app that helps you organize your content, give your ideas direction, and turn inspiration into action.",
+    "Lanzamiento": "Launch",
+    "Alquimia Studio — Organizador de PDFs + 5 Planners Digitales": "Alquimia Studio — PDF Organizer + 5 Digital Planners",
+    "Organiza y lee tus PDFs en el navegador, junto con cinco planners digitales: Calma y Orden, Anual, TDAH, Ciclo Menstrual y Semanal. Incluye modo claro y oscuro, favoritos, y herramientas de respaldo y restauración.": "Organize and read your PDFs in your browser, alongside five digital planners: Calm & Order, Annual, ADHD, Menstrual Cycle, and Weekly. Includes light and dark mode, favorites, and backup and restore tools.",
+    "Tus planners y PDFs se guardan en el navegador de cada dispositivo y no se sincronizan automáticamente. Guarda una copia de respaldo para mover o restaurar tus datos. Compra única, sin suscripción mensual.": "Your planners and PDFs are saved in each device's browser and do not sync automatically. Save a backup to move or restore your data. One-time purchase, no monthly subscription.",
+    "Planner 2027 — Calma y Orden": "Planner 2027 — Calm & Order",
+    "Un planner minimalista para organizar tu año con calma e intención.": "A minimalist planner to organize your year with calm and intention.",
+    "Libros para colorear — Lofi Coloring": "Coloring Books — Lofi Coloring",
+    "Mismo libro en español e inglés. Edición impresa y digital.": "Same book in Spanish and English. Print and digital edition.",
+    "Deja de perder ideas de video con un espacio de trabajo completo de Notion creado para creadores y productores. Trae claridad estratégica a tu canal, desde guiones largos hasta shorts virales.": "Stop losing video ideas with a comprehensive Notion workspace built for creators and producers. Bring strategic clarity to your channel, from long-form scripts to viral shorts.",
+    "Di adiós a notas dispersas y fechas límite olvidadas con un único panel minimalista. Lleva toda tu vida estudiantil sin problemas, desde tareas diarias hasta exámenes finales.": "Say goodbye to scattered notes and missed deadlines with a single minimalist dashboard. Run your entire student life smoothly, from daily tasks to final exams.",
+    "Un buen primer paso": "A good first step",
+    "Planea tus publicaciones, campañas e ideas de contenido en un solo espacio de Notion — una forma más tranquila para creadores y pequeños negocios de mostrarse en línea.": "Plan your posts, campaigns, and content ideas in one Notion workspace — a calmer way for creators and small businesses to show up online.",
+    "Seguimiento financiero avanzado con reportes detallados y proyecciones.": "Advanced financial tracking with detailed reports and projections.",
+    "Transforma tus hábitos sin la culpa visual de días perdidos del pasado. Un diseño de pizarra limpia para mantener tu mente clara y enfocada en tu crecimiento.": "Transform your habits without the visual guilt of missed days from the past. A clean-slate design to keep your mind clear and focused entirely on your growth.",
+    "Vacunas, visitas al veterinario, medicamentos y comida en un solo panel. Para Bonnie, Luna y cada miembro peludo.": "Vaccines, vet visits, meds, and food in one dashboard. For Bonnie, Luna and every fur baby.",
+    "Disponible ahora": "Available now",
+    "El salto a la vida freelance, contado sin filtros.": "The leap into freelance life, told without filters.",
+    "Comprar ahora →": "Buy now →"
+  };
+  for (var ek in reverseExtra) {
+    if (Object.prototype.hasOwnProperty.call(reverseExtra, ek) && !Object.prototype.hasOwnProperty.call(reverseDict, ek)) {
+      reverseDict[ek] = reverseExtra[ek];
+    }
+  }
+
   (function capture() {
     var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
       acceptNode: function (n) {
@@ -1194,6 +1250,27 @@
       }
       document.documentElement.setAttribute("lang", "es");
     } else {
+      var keyEn, nodeEn, leadEn, trailEn;
+      for (var k = 0; k < nodes.length; k++) {
+        nodeEn = nodes[k].n;
+        if (!nodeEn.nodeValue) continue;
+        keyEn = nodeEn.nodeValue.replace(/\s+/g, " ").trim();
+        if (reverseDict.hasOwnProperty(keyEn)) {
+          leadEn = nodeEn.nodeValue.match(/^\s*/)[0];
+          trailEn = nodeEn.nodeValue.match(/\s*$/)[0];
+          nodeEn.nodeValue = leadEn + reverseDict[keyEn] + trailEn;
+        }
+      }
+      for (var m = 0; m < phNodes.length; m++) {
+        if (reversePlaceholders.hasOwnProperty(phNodes[m].v)) {
+          phNodes[m].el.setAttribute("placeholder", reversePlaceholders[phNodes[m].v]);
+        }
+      }
+      if (reverseTitles.hasOwnProperty(titleSnap)) document.title = reverseTitles[titleSnap];
+      var metaEn = document.querySelector('meta[name="description"]');
+      if (descSnap !== null && metaEn && reverseDescriptions.hasOwnProperty(descSnap)) {
+        metaEn.setAttribute("content", reverseDescriptions[descSnap]);
+      }
       document.documentElement.setAttribute("lang", "en");
     }
     var btn = document.getElementById("langToggle");
