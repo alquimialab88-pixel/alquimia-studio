@@ -676,7 +676,7 @@
         if (!p.img) {
           return '<span class="v-emoji" aria-hidden="true">' + (p.emoji || '✨') + '</span>';
         }
-        return '<img src="' + esc(p.img) + '" alt="" loading="lazy" decoding="async">';
+        return '<img src="' + esc(p.img) + '" alt="" decoding="async">';
       }
       function cardHTML(p) {
         return '' +
