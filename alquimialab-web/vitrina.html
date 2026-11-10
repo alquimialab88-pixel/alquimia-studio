@@ -27,7 +27,7 @@
       border-bottom: 1px solid var(--lavender);
     }
     .v-logo { font-size: 18px; font-weight: 700; color: var(--purple); letter-spacing: .02em; }
-    .v-logo span { color: #e5533d; }
+    .v-logo span { color: #a29de0; }
     .v-top-actions { display: flex; align-items: center; gap: 10px; }
     .v-private {
       display: inline-flex; align-items: center; gap: 6px;
@@ -65,7 +65,7 @@
     .v-hero::after {
       content: ""; position: absolute; bottom: -150px; left: -60px;
       width: 260px; height: 260px; border-radius: 50%;
-      background: radial-gradient(circle,rgba(229,83,61,.34),transparent 65%);
+      background: radial-gradient(circle,rgba(162,157,224,.5),transparent 65%);
       pointer-events: none;
     }
     .v-hero-copy { position: relative; z-index: 1; max-width: 620px; }
@@ -78,7 +78,7 @@
       margin: 10px 0 14px;
       font-size: clamp(30px,4.6vw,48px); line-height: 1.08; letter-spacing: -.02em;
     }
-    .v-hero h1 em { font-style: normal; color: #ffd9cf; }
+    .v-hero h1 em { font-style: normal; color: #e3dfff; }
     .v-hero p { max-width: 470px; color: rgba(255,255,255,.82); font-size: 15px; line-height: 1.6; }
     .v-stats { position: relative; z-index: 1; display: flex; flex-wrap: wrap; gap: 10px; }
     .v-stat {
@@ -168,7 +168,7 @@
     .v-badge {
       position: absolute; right: 10px; top: 10px;
       padding: 4px 9px; border-radius: 99px;
-      background: #c43c28; color: #fff;
+      background: #6462ab; color: #fff;
       font-size: 9.5px; font-weight: 700; letter-spacing: .04em;
     }
     .v-quick {
@@ -200,9 +200,13 @@
     .v-price-row { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; min-height: 26px; margin-bottom: 12px; }
     .v-price { color: var(--purple); font-size: 20px; font-weight: 700; line-height: 1; }
     .v-old { color: #6b6890; font-size: 12.5px; text-decoration: line-through; }
-    .v-off { padding: 3px 7px; border-radius: 99px; background: #fde9e5; color: #b33522; font-size: 10px; font-weight: 700; }
-    .v-price.v-free { color: #2e8b6f; }
-    .v-price.v-soon { padding: 4px 9px; border-radius: 99px; background: #fde9e5; color: #b33522; font-size: 13px; }
+    .v-off { padding: 3px 7px; border-radius: 99px; background: #efedf8; color: #524f96; font-size: 10px; font-weight: 700; }
+    .v-price.v-free { color: var(--purple); }
+    .v-price.v-soon { padding: 4px 9px; border-radius: 99px; background: #efedf8; color: #524f96; font-size: 13px; }
+    .v-price.v-price-label { font-size: 16px; letter-spacing: -.01em; }
+    .v-buy-row { display: flex; gap: 6px; }
+    .v-buy-row .v-buy { flex: 1 1 0; min-width: 0; width: auto; }
+    .v-buy-row-split .v-buy { padding-left: 6px; padding-right: 6px; font-size: 11.5px; }
     .v-buy { width: 100%; justify-content: center; padding: 10px 14px; border-radius: 10px; font-size: 12.5px; box-shadow: none; }
     .v-buy.btn-secondary { border-width: 1.5px; }
     .v-buy.btn-primary:hover { transform: none; box-shadow: 0 6px 14px rgba(100,98,171,.28); }
@@ -256,6 +260,8 @@
     .v-desc { margin-bottom: 18px; color: #6b6890; font-size: 14px; line-height: 1.65; }
     .v-dialog .v-price-row { margin-bottom: 18px; }
     .v-dialog .v-buy { width: auto; min-width: 200px; padding: 13px 26px; font-size: 14px; }
+    .v-buy-row-modal { flex-wrap: wrap; }
+    .v-buy-row-modal.v-buy-row-split .v-buy { min-width: 150px; }
     .v-dialog-note { margin-top: 12px; color: #6b6890; font-size: 11.5px; line-height: 1.5; }
 
     #vToast {
@@ -291,6 +297,7 @@
       .v-dialog-grid { grid-template-columns: 1fr; }
       .v-dialog-media { max-height: 42vh; }
       .v-dialog .v-buy { width: 100%; }
+      .v-buy-row-modal { flex-direction: column; }
     }
     @media (max-width: 380px) {
       .v-grid { grid-template-columns: 1fr; }
@@ -369,7 +376,7 @@
           <h2 id="qvName"></h2>
           <p class="v-desc" id="qvDesc"></p>
           <div class="v-price-row" id="qvPrice"></div>
-          <a class="btn-sm btn-primary v-buy" id="qvBuy" href="#">Comprar →</a>
+          <div class="v-buy-row v-buy-row-modal" id="qvBuyWrap"></div>
           <p class="v-dialog-note" id="qvNote"></p>
         </div>
       </div>
@@ -391,13 +398,15 @@
           desc: 'La historia real de mi salto a la vida freelance: 15 prompts para copiar y pegar, ejercicios con espacio para escribir y una lista de lanzamiento. Un cuaderno para empezar sin esperar a estar lista.',
           price: null,
           old: null,
+          priceLabel: 'COP 19.687+',
+          note: 'Precio libre · Paga desde COP 19.687 · PDF + EPUB',
           free: false,
-          soon: true,
+          soon: false,
           img: 'assets/ebook-portada.jpg',
           fit: 'contain',
           badge: '',
-          cta: 'Avísame',
-          link: 'https://wa.me/573104108483?text=Hola%20Isabel%20%F0%9F%91%8B%20av%C3%ADsame%20cuando%20salga%20El%20diario%20imperfecto%20de%20una%20creadora'
+          cta: 'Comprar',
+          link: 'https://alquimialab.gumroad.com/l/Elplanimperfectodeunacredora'
         },
         {
           id: 'planora',
@@ -445,7 +454,11 @@
           fit: 'contain',
           badge: '',
           cta: 'Comprar',
-          link: 'pagar.html?product=Planner%202027%20%E2%80%94%20Calma%20y%20Orden'
+          link: 'https://alquimialab.gumroad.com/l/bvzpd',
+          links: [
+            { label: 'Digital', link: 'https://alquimialab.gumroad.com/l/bvzpd', primary: true },
+            { label: 'Amazon', link: 'https://www.amazon.com/dp/B0HJ8J6MHG', primary: false }
+          ]
         },
         {
           id: 'coloring',
@@ -461,7 +474,11 @@
           fit: 'cover',
           badge: '',
           cta: 'Comprar',
-          link: 'pagar.html?product=Lofi%20Coloring'
+          link: 'https://alquimialab.gumroad.com/l/LofiColoringBookAlquimia',
+          links: [
+            { label: 'Digital', link: 'https://alquimialab.gumroad.com/l/LofiColoringBookAlquimia', primary: true },
+            { label: 'Amazon', link: 'https://www.amazon.com/dp/B0HBML5LCP', primary: false }
+          ]
         },
         {
           id: 'focus',
@@ -485,15 +502,15 @@
           cat: 'notion',
           short: 'Sistema operativo para ordenar tu flujo de trabajo de principio a fin.',
           desc: 'Un sistema operativo para estructurar tu flujo de trabajo de principio a fin: clientes, proyectos, propuestas y entregas en un solo lugar.',
-          price: 7.99,
-          old: 9.99,
+          price: 9.99,
+          old: null,
           free: false,
           soon: false,
           img: 'cover-freelancer-crm.webp',
           fit: 'cover',
           badge: '',
           cta: 'Comprar',
-          link: 'https://alquimialab.gumroad.com/l/FreelancerCRM?wanted=true'
+          link: 'https://www.notion.com/templates/freelancercrmplanner'
         },
         {
           id: 'youtube',
@@ -501,15 +518,15 @@
           cat: 'notion',
           short: 'Guiones, ideas y estrategia para tu canal, de shorts a videos largos.',
           desc: 'Deja de perder ideas de video con un espacio de trabajo completo de Notion creado para creadores y productores. Claridad estratégica para tu canal, desde guiones largos hasta shorts virales.',
-          price: 11.99,
-          old: 15,
+          price: 15,
+          old: null,
           free: false,
           soon: false,
           img: 'cover-youtube.webp',
           fit: 'cover',
           badge: '',
           cta: 'Comprar',
-          link: 'https://alquimialab.gumroad.com/l/YouTube-Creator-OS?wanted=true'
+          link: 'https://www.notion.com/templates/youtube-creator-os-automated-social-media-planner-script'
         },
         {
           id: 'student',
@@ -517,16 +534,16 @@
           cat: 'notion',
           short: 'Tareas, exámenes y apuntes en un solo panel minimalista.',
           desc: 'Di adiós a notas dispersas y fechas límite olvidadas con un único panel minimalista. Lleva toda tu vida estudiantil, desde tareas diarias hasta exámenes finales.',
-          price: 4.99,
-          old: 5.99,
+          price: 5.99,
+          old: null,
           free: false,
           soon: false,
-          img: '',
+          img: 'assets/student-os-cover.jpg',
           fit: 'cover',
           emoji: '🎓',
           badge: '',
           cta: 'Comprar',
-          link: 'https://alquimialab.gumroad.com/l/Student-OS?wanted=true'
+          link: 'https://www.notion.com/templates/student-os-study-planner'
         },
         {
           id: 'social',
@@ -534,15 +551,15 @@
           cat: 'notion',
           short: 'Planea publicaciones, campañas e ideas en un solo espacio de Notion.',
           desc: 'Planea tus publicaciones, campañas e ideas de contenido en un solo espacio de Notion — una forma más tranquila para creadores y pequeños negocios de mostrarse en línea.',
-          price: 3.49,
-          old: 4,
+          price: 4,
+          old: null,
           free: false,
           soon: false,
           img: 'cover-social-media.webp',
           fit: 'cover',
           badge: '',
           cta: 'Comprar',
-          link: 'https://alquimialab.gumroad.com/l/Social-Media-Planner?wanted=true'
+          link: 'https://www.notion.com/templates/social-media-planner-256'
         },
         {
           id: 'financepro',
@@ -550,15 +567,15 @@
           cat: 'notion',
           short: 'Seguimiento financiero avanzado con reportes y proyecciones.',
           desc: 'Seguimiento financiero avanzado con reportes detallados y proyecciones para entender a dónde va tu dinero y planear con calma.',
-          price: 7.99,
-          old: 9.99,
+          price: 9.99,
+          old: null,
           free: false,
           soon: false,
           img: 'cover-finance-pro.webp',
           fit: 'cover',
           badge: '',
           cta: 'Comprar',
-          link: 'https://alquimialab.gumroad.com/l/Finance-Planner-Pro?wanted=true'
+          link: 'https://www.notion.com/templates/finance-planner-pro'
         },
         {
           id: 'quiet',
@@ -622,7 +639,7 @@
           fit: 'cover',
           badge: '',
           cta: 'Comprar',
-          link: 'https://alquimialab.gumroad.com/l/Pet-Planner?wanted=true'
+          link: 'https://www.notion.com/templates/pet-planner-your-pet-s-life-in-order'
         }
       ];
 
@@ -657,6 +674,7 @@
         return '$' + (Number.isInteger(n) ? n : Number(n).toFixed(2));
       }
       function priceHTML(p) {
+        if (p.priceLabel) return '<span class="v-price v-price-label">' + esc(p.priceLabel) + '</span>';
         if (p.soon) return '<span class="v-price v-soon">Próximamente</span>';
         if (p.free) return '<span class="v-price v-free">Gratis</span>';
         var html = '<span class="v-price">' + fmt(p.price) + '</span>';
@@ -666,11 +684,21 @@
         }
         return html;
       }
-      function buyClass(p) {
-        return (p.free || p.soon) ? 'btn-secondary' : 'btn-primary';
+      function linksFor(p) {
+        if (p.links && p.links.length) return p.links;
+        return [{ label: p.cta, link: p.link, primary: !(p.free || p.soon) }];
       }
-      function ext(p) {
-        return /^https?:/i.test(p.link) ? ' target="_blank" rel="noopener"' : '';
+      function extLink(link) {
+        return /^https?:/i.test(link) ? ' target="_blank" rel="noopener"' : '';
+      }
+      function buyHTML(p, modal) {
+        var links = linksFor(p);
+        var html = '<div class="v-buy-row' + (links.length > 1 ? ' v-buy-row-split' : '') + (modal ? ' v-buy-row-modal' : '') + '">';
+        links.forEach(function (l) {
+          var cls = l.primary ? 'btn-primary' : 'btn-secondary';
+          html += '<a class="btn-sm ' + cls + ' v-buy" href="' + esc(l.link) + '"' + extLink(l.link) + '>' + esc(l.label) + (l.primary ? ' →' : '') + '</a>';
+        });
+        return html + '</div>';
       }
       function mediaHTML(p) {
         if (!p.img) {
@@ -692,7 +720,7 @@
               '<h2><button type="button" class="v-name" data-qv="' + p.id + '">' + esc(p.name) + '</button></h2>' +
               '<p class="v-short">' + esc(p.short) + '</p>' +
               '<div class="v-price-row">' + priceHTML(p) + '</div>' +
-              '<a class="btn-sm ' + buyClass(p) + ' v-buy" href="' + esc(p.link) + '"' + ext(p) + '>' + esc(p.cta) + ' →</a>' +
+              buyHTML(p) +
             '</div>' +
           '</article>';
       }
@@ -770,21 +798,12 @@
         document.getElementById('qvName').textContent = p.name;
         document.getElementById('qvDesc').textContent = p.desc;
         document.getElementById('qvPrice').innerHTML = priceHTML(p);
-
-        var buy = document.getElementById('qvBuy');
-        buy.href = p.link;
-        buy.textContent = p.cta + ' →';
-        buy.className = 'btn-sm ' + buyClass(p) + ' v-buy';
-        if (/^https?:/i.test(p.link)) {
-          buy.setAttribute('target', '_blank');
-          buy.setAttribute('rel', 'noopener');
-        } else {
-          buy.removeAttribute('target');
-          buy.removeAttribute('rel');
-        }
-        document.getElementById('qvNote').textContent = p.free
-          ? 'Descarga gratuita en Notion · Sin costo'
-          : (p.soon ? 'Te aviso en cuanto esté disponible.' : 'Pago único · Acceso inmediato · Compra segura');
+        document.getElementById('qvBuyWrap').innerHTML = buyHTML(p, true);
+        document.getElementById('qvNote').textContent = p.note
+          ? p.note
+          : (p.free
+            ? 'Descarga gratuita en Notion · Sin costo'
+            : (p.soon ? 'Te aviso en cuanto esté disponible.' : 'Pago único · Acceso inmediato · Compra segura'));
 
         if (dlg.showModal) { if (!dlg.open) dlg.showModal(); }
         else { window.location.href = p.link; }
@@ -823,7 +842,7 @@
         }
       });
 
-      var paid = PRODUCTS.filter(function (p) { return !p.free && !p.soon; });
+      var paid = PRODUCTS.filter(function (p) { return !p.free && !p.soon && typeof p.price === 'number'; });
       document.getElementById('statTotal').textContent = PRODUCTS.length;
       document.getElementById('statFree').textContent = PRODUCTS.filter(function (p) { return p.free; }).length;
       document.getElementById('statFrom').textContent = fmt(Math.min.apply(null, paid.map(function (p) { return p.price; })));
