@@ -164,10 +164,6 @@
     .producto-detalle-dialog { width: min(900px, 95%); max-height: 90vh; }
     .producto-detalle-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px; }
     @media(max-width:640px){ .producto-detalle-grid { grid-template-columns: 1fr; } }
-    .precio-lanzamiento { display:inline-flex; align-items:center; gap:6px; margin-top:8px; }
-    .precio-antes { text-decoration: line-through; color: #a29de0; font-size: 0.9em; }
-    .precio-ahora { font-weight: 700; color: #e5533d; }
-    .badge-lanzamiento { background:#e5533d; color:#fff; font-size:10px; font-weight:700; padding:3px 8px; border-radius:99px; }
     .notion-card.shop-card { cursor: pointer; transition: transform .2s, box-shadow .2s; }
     .notion-card.shop-card:hover { transform: translateY(-4px); }
   </style>
@@ -691,7 +687,7 @@
       if (!dlg) return;
 
       var titleEl = card.querySelector('h3');
-      var priceEl = card.querySelector('.notion-price, .precio-ahora');
+      var priceEl = card.querySelector('.notion-price');
       var descEl = card.querySelector('.notion-info p');
       var imgEl = card.querySelector('img');
       var cat = card.getAttribute('data-cat') || '';
