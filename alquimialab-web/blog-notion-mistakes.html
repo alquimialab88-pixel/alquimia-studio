@@ -39,7 +39,7 @@
     .ed-quote { background:#e8e6f4; border-left:4px solid #6462ab; border-radius:0 14px 14px 0; padding:18px 22px; margin:22px 0 4px; font-size:16px; color:#3b3866; font-weight:700; line-height:1.6; max-width:560px; }
     .ed-rule { display:flex; align-items:center; gap:14px; margin:30px 0 6px; color:#6462ab; font-size:20px; }
     .ed-rule::before, .ed-rule::after { content:""; height:1px; background:#e8e6f4; flex:1; }
-    .ed-inside h3 { font-size:clamp(22px,3vw,30px); font-weight:700; color:#1a1a2e; margin-bottom:6px; }
+    .ed-inside h2, .ed-inside h3 { font-size:clamp(22px,3vw,30px); font-weight:700; color:#1a1a2e; margin-bottom:6px; }
     .ed-row { display:grid; grid-template-columns:52px 1fr; gap:14px; align-items:baseline; padding:13px 4px; border-top:1px solid #e8e6f4; }
     .ed-row:last-child { border-bottom:1px solid #e8e6f4; }
     .ed-num { font-size:20px; font-weight:700; color:#a29de0; }
@@ -49,7 +49,7 @@
     .doodle.d1 { top:26px; right:34px; transform:rotate(12deg); }
     .doodle.d2 { bottom:120px; left:26px; transform:rotate(-10deg); font-size:24px; }
     .more-articles { margin-top:34px; }
-    .more-articles h3 { font-size:clamp(22px,3vw,30px); font-weight:700; color:#1a1a2e; margin-bottom:14px; }
+    .more-articles h2, .more-articles h3 { font-size:clamp(22px,3vw,30px); font-weight:700; color:#1a1a2e; margin-bottom:14px; }
     .ma-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; }
     .ma-card { display:block; text-decoration:none; background:#fff; border:1px solid #e8e6f4; border-radius:16px; padding:20px 22px; box-shadow:0 10px 26px rgba(100,98,171,.10); transition:transform .18s ease, box-shadow .18s ease; }
     .ma-card:hover { transform:translateY(-3px); box-shadow:0 16px 34px rgba(100,98,171,.16); }
@@ -95,7 +95,7 @@
     </button>
   </nav>
 
-  <div class="page">
+  <main class="page">
     <section class="section">
 
       <article class="ed-sheet anim">
@@ -116,7 +116,7 @@
         <div class="ed-rule" aria-hidden="true">✶</div>
 
         <div class="ed-inside">
-          <h3>The 5 mistakes (and their fixes)</h3>
+          <h2>The 5 mistakes (and their fixes)</h2>
           <div class="ed-row"><span class="ed-num">01</span><div><div class="t">Building before deciding</div><div class="d">You design pages before knowing what you actually track. Start with the 3 things you check every day — build only around them.</div></div></div>
           <div class="ed-row"><span class="ed-num">02</span><div><div class="t">The page-everything trap</div><div class="d">One page per idea, forever. Group related pages into 3–5 areas instead — chaos is just ungrouped information.</div></div></div>
           <div class="ed-row"><span class="ed-num">03</span><div><div class="t">Databases nobody opens</div><div class="d">A beautiful database you never open is decoration. If a view doesn't save you time weekly, delete it or automate it.</div></div></div>
@@ -132,7 +132,7 @@
 
       <!-- MÁS ARTÍCULOS -->
       <div class="more-articles anim d1">
-        <h3>More from the blog</h3>
+        <h2>More from the blog</h2>
         <div class="ma-grid">
           <a class="ma-card" href="blog">
             <div class="k">The book</div>
@@ -170,17 +170,17 @@
       </div>
 
     </section>
-  </div>
+  </main>
 
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-grid">
       <div class="footer-col">
-        <h4>Alquimia Lab</h4>
+        <h3>Alquimia Lab</h3>
         <p>Order, Calm and Autonomy for your day to day.</p>
       </div>
       <div class="footer-col">
-        <h4>Links</h4>
+        <h3>Links</h3>
         <ul>
           <li><a href="./">Home</a></li>
           <li><a href="productos">Products</a></li>
@@ -192,7 +192,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Social</h4>
+        <h3>Social</h3>
         <ul>
           <li><a href="https://www.facebook.com/profile.php?id=61592768576548" target="_blank" rel="noopener">Facebook</a></li>
           <li><a href="https://www.instagram.com/alquimia.lab8/" target="_blank" rel="noopener">Instagram</a></li>

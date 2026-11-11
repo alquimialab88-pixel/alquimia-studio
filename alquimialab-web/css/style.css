@@ -1702,7 +1702,7 @@ a.featured-card {
 }
 .privacy-badges .badge {
   background: var(--lavender-light, #e8e6f4);
-  color: var(--purple, #6462ab);
+  color: #565390;
   padding: 6px 16px;
   border-radius: 20px;
   font-size: 13px;

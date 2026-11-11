@@ -45,7 +45,7 @@
     .polaroid figcaption { font-style:italic; font-size:15px; color:#6462ab; text-align:center; padding-top:10px; }
     .polaroid::before { content:""; position:absolute; top:-14px; left:50%; transform:translateX(-50%) rotate(-3deg); width:110px; height:30px; background:rgba(204,201,230,.7); border-left:1px dashed rgba(100,98,171,.35); border-right:1px dashed rgba(100,98,171,.35); }
     .ed-inside { margin-top:26px; }
-    .ed-inside h3 { font-size:clamp(22px,3vw,30px); font-weight:700; color:#1a1a2e; margin-bottom:6px; }
+    .ed-inside h2, .ed-inside h3 { font-size:clamp(22px,3vw,30px); font-weight:700; color:#1a1a2e; margin-bottom:6px; }
     .ed-row { display:grid; grid-template-columns:52px 1fr; gap:14px; align-items:baseline; padding:13px 4px; border-top:1px solid #e8e6f4; }
     .ed-row:last-child { border-bottom:1px solid #e8e6f4; }
     .ed-num { font-size:20px; font-weight:700; color:#a29de0; }
@@ -60,7 +60,7 @@
     .ticker-track span { padding:0 6px; }
     .ticker-track b { color:#ccc9e6; font-weight:700; }
     .more-articles { margin-top:34px; }
-    .more-articles h3 { font-size:clamp(22px,3vw,30px); font-weight:700; color:#1a1a2e; margin-bottom:14px; }
+    .more-articles h2, .more-articles h3 { font-size:clamp(22px,3vw,30px); font-weight:700; color:#1a1a2e; margin-bottom:14px; }
     .ma-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; }
     .ma-card { display:block; text-decoration:none; background:#fff; border:1px solid #e8e6f4; border-radius:16px; padding:20px 22px; box-shadow:0 10px 26px rgba(100,98,171,.10); transition:transform .18s ease, box-shadow .18s ease; }
     .ma-card:hover { transform:translateY(-3px); box-shadow:0 16px 34px rgba(100,98,171,.16); }
@@ -112,7 +112,7 @@
     </button>
   </nav>
 
-  <div class="page">
+  <main class="page">
     <section class="section">
 
       <!-- ARTÍCULO · SINOPSIS -->
@@ -143,7 +143,7 @@
         <div class="ed-rule" aria-hidden="true">✶</div>
 
         <div class="ed-inside">
-          <h3>What's inside the diary</h3>
+          <h2>What's inside the diary</h2>
           <div class="ed-row"><span class="ed-num">01</span><div><div class="t">Carta de una amiga</div><div class="d">Where it all begins.</div></div></div>
           <div class="ed-row"><span class="ed-num">02</span><div><div class="t">Renuncié y me tembló todo</div><div class="d">The night I decided: no more.</div></div></div>
           <div class="ed-row"><span class="ed-num">03</span><div><div class="t">Los hilos invisibles</div><div class="d">How Alquimia was born.</div></div></div>
@@ -162,7 +162,7 @@
 
       <!-- MÁS ARTÍCULOS -->
       <div class="more-articles anim d1">
-        <h3>More from the blog</h3>
+        <h2>More from the blog</h2>
         <div class="ma-grid">
           <a class="ma-card" href="blog-notion-mistakes">
             <div class="k">Notion</div>
@@ -200,17 +200,18 @@
       </div>
 
     </section>
-  </div>
+
+  </main>
 
   <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-grid">
       <div class="footer-col">
-        <h4>Alquimia Lab</h4>
+        <h3>Alquimia Lab</h3>
         <p>Order, Calm and Autonomy for your day to day.</p>
       </div>
       <div class="footer-col">
-        <h4>Links</h4>
+        <h3>Links</h3>
         <ul>
           <li><a href="./">Home</a></li>
           <li><a href="productos">Products</a></li>
@@ -222,7 +223,7 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h4>Social</h4>
+        <h3>Social</h3>
         <ul>
           <li><a href="https://www.facebook.com/profile.php?id=61592768576548" target="_blank" rel="noopener">Facebook</a></li>
           <li><a href="https://www.instagram.com/alquimia.lab8/" target="_blank" rel="noopener">Instagram</a></li>
