@@ -41,12 +41,12 @@
   --bg:#f2f2f2;
   --surface:#ffffff;
   --text:#3b3866;
-  --muted:#8a87ad;
+  --muted:#6a6788;
   --shadow:rgba(100,98,171,.12);
   --shadow-lg:rgba(100,98,171,.22);
   --roc-dark:#1a1a2e;
   --line:#e8e6f4;
-  --green:#2e9e5b;
+  --green:#1d7a44;
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -416,7 +416,7 @@ section{padding:88px 24px}
 }
 .modules-hint{
   text-align:center;font-size:13px;color:var(--muted);
-  margin:0 0 4px;opacity:.7;
+  margin:0 0 4px;
 }
 .full-desc{
   background:linear-gradient(135deg,var(--lavender-light) 0%,rgba(204,201,230,.45) 100%);
@@ -454,7 +454,8 @@ section{padding:88px 24px}
   background:var(--purple);color:#fff;font-weight:700;font-size:14px;
 }
 .price-table th:first-child,
-.price-table td:first-child{text-align:left;font-weight:600;color:var(--text)}
+.price-table td:first-child{text-align:left;font-weight:600}
+.price-table td:first-child{color:var(--text)}
 .price-table tr:last-child td{border-bottom:none}
 .price-table tbody tr:nth-child(even){background:#faf9ff}
 .price-table .yes{color:var(--green);font-weight:700}
@@ -619,13 +620,19 @@ section{padding:88px 24px}
   pointer-events:none;border-radius:18px 18px 0 0;z-index:2;
 }
 .showcase-dots{
-  display:flex;justify-content:center;gap:7px;margin-top:14px;
+  display:flex;justify-content:center;gap:6px;margin-top:14px;
 }
 .showcase-dots button{
-  width:8px;height:8px;border-radius:50%;border:none;padding:0;
-  background:rgba(100,98,171,.3);cursor:pointer;transition:all .25s;
+  width:24px;height:24px;border-radius:50%;border:none;padding:0;
+  background:transparent;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;
+  transition:all .25s;
 }
-.showcase-dots button.on{background:var(--purple);width:20px;border-radius:99px}
+.showcase-dots button::before{
+  content:"";width:8px;height:8px;border-radius:50%;
+  background:rgba(100,98,171,.35);transition:all .25s;
+}
+.showcase-dots button.on::before{background:var(--purple);width:20px;border-radius:99px}
 
 
 
@@ -723,6 +730,8 @@ section{padding:88px 24px}
     </div>
   </div>
 </header>
+
+<main>
 
 <div class="container">
   <div class="stats-band anim">
@@ -883,7 +892,7 @@ section{padding:88px 24px}
       </div>
     </div>
   </div>
-  <div class="showcase-dots" id="showcaseDots" role="tablist" aria-label="Screenshots"></div>
+  <div class="showcase-dots" id="showcaseDots" role="group" aria-label="Screenshots"></div>
 </section>
 
 <!-- 6. FREE VS PREMIUM -->
@@ -1040,8 +1049,10 @@ section{padding:88px 24px}
 
 <!-- Datos: link sutil -->
 <section style="max-width: 600px; margin: 0 auto; padding: 0 1.5rem 1.5rem; text-align: center;">
-  <a href="../delete-account" style="font-size: 13px; color: var(--muted, #8a87ad); text-decoration: none; opacity: .85;">Want to delete your data? <span aria-hidden="true">→</span></a>
+  <a href="../delete-account" style="font-size: 13px; color: var(--muted); text-decoration: none;">Want to delete your data? <span aria-hidden="true">→</span></a>
 </section>
+
+</main>
 
   <!-- FOOTER -->
   <footer class="footer">
