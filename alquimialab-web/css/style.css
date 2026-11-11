@@ -151,7 +151,7 @@ img { max-width: 100%; display: block; }
   color: var(--purple); background: var(--surface);
   border: 1.5px solid var(--lavender); border-radius: 99px;
   cursor: pointer;
-  transition: background .25s ease, transform .25s ease, box-shadow .25s ease;
+  transition: transform .25s ease, box-shadow .25s ease;
   letter-spacing: .02em;
 }
 .lang-toggle:hover {
@@ -1007,7 +1007,8 @@ img { max-width: 100%; display: block; }
 .footer-inner {
   padding-bottom: 20px;
 }
-.footer-col h4 {
+.footer-col h4,
+.footer-col h3 {
   font-size: 14px;
   font-weight: 700;
   color: var(--text, #333);
@@ -2580,14 +2581,22 @@ a.featured-card {
   gap: 8px;
 }
 .promo-dot {
-  width: 8px; height: 8px;
+  width: 24px; height: 24px;
   padding: 0; border: none;
   border-radius: 50%;
-  background: rgba(255,255,255,.4);
+  background: transparent;
+  display: flex; align-items: center; justify-content: center;
   cursor: pointer;
   transition: transform .25s ease, background .25s ease;
 }
-.promo-dot.is-on {
+.promo-dot::before {
+  content: "";
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.45);
+  transition: transform .25s ease, background .25s ease;
+}
+.promo-dot.is-on::before {
   background: #fff;
   transform: scale(1.3);
 }

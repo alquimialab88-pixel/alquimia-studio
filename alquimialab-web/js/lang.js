@@ -1118,6 +1118,7 @@
     "Alquimia Lab Portfolio — AI Characters.": "Portafolio Alquimia Lab — Personajes IA.",
     "Alquimia Lab Portfolio — Brand Identity Exploration.": "Portafolio Alquimia Lab — Exploración de Identidad de Marca.",
     "Alquimia Lab Products — Notion templates, coloring books, and productivity tools.": "Productos Alquimia Lab — Plantillas de Notion, libros para colorear y herramientas de productividad.",
+    "Notion templates, digital planners, coloring books and productivity tools. Secure checkout and instant download on Gumroad and Amazon.": "Plantillas de Notion, planners digitales, libros para colorear y herramientas de productividad. Compra segura y descarga inmediata en Gumroad y Amazon.",
     "Alquimia Lab Contact — Let's talk about your next project.": "Contacto Alquimia Lab — Hablemos de tu próximo proyecto.",
     "Calma y Orden — Planner 2027. A minimalist hybrid journal for self-care and productivity. Print on Amazon, digital on Gumroad.": "Calma y Orden — Planificador 2027. Un journal híbrido minimalista de autocuidado y productividad. Impreso en Amazon, digital en Gumroad.",
     "Alquimia Lab — Privacy Policy · GDPR/LOPD Compliance": "Alquimia Lab — Política de Privacidad · Cumplimiento GDPR/LOPD",

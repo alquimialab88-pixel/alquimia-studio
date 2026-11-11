@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20">
+  <link rel="stylesheet" href="css/style.css?v=21">
   <style>
     /* ===== VITRINA PRIVADA ===== */
     .v-page { background: var(--bg); }
@@ -117,6 +117,11 @@
     .v-bf h2 { margin: 10px 0 5px; font-size: clamp(21px,2.8vw,29px); line-height: 1.15; letter-spacing: -.02em; color: var(--text); }
     .v-bf h2 b { color: var(--purple); }
     .v-bf-sub { margin: 0; color: #6b6890; font-size: 13px; line-height: 1.5; }
+    .v-bf-preview {
+      display: inline-block; margin: 10px 0 0; padding: 6px 14px; border-radius: 99px;
+      background: #efedf8; color: #4a4790; font-size: 12.5px; font-weight: 700;
+    }
+    .v-bf-preview[hidden] { display: none; }
     .v-bf-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 14px; }
     .v-bf .v-buy.btn-primary { background: linear-gradient(135deg,#ff8a3d,#e85d04); border-color: #e85d04; color: #fff; }
     .v-bf .v-buy.btn-primary:hover { transform: none; box-shadow: 0 8px 18px rgba(232,93,4,.34); }
@@ -377,6 +382,7 @@
         <span class="v-bf-tag" id="bfTag">Black Friday</span>
         <h2 id="bfTitle">Black Friday: <b>50%</b> en estos productos digitales</h2>
         <p class="v-bf-sub" id="bfSub">Solo del 12 al 28 de noviembre · Pago único · Sin suscripción</p>
+        <p class="v-bf-preview" id="bfPreview" hidden>Vista previa · La promo no está activa en este momento, el código no aplica descuento.</p>
       </div>
       <div class="v-bf-grid" id="bfGrid"></div>
       <p class="v-bf-note" id="bfNote">El 50% se aplica automáticamente al comprar desde aquí. La edición impresa en Amazon mantiene su precio.</p>
@@ -414,7 +420,7 @@
     <div class="v-dialog-inner">
       <button type="button" class="v-close" id="qvClose" aria-label="Cerrar vista rápida">&times;</button>
       <div class="v-dialog-grid">
-        <div class="v-dialog-media" id="qvMedia"><img id="qvImg" src="" alt=""></div>
+        <div class="v-dialog-media" id="qvMedia"><span class="v-emoji" aria-hidden="true">✨</span></div>
         <div class="v-dialog-info">
           <span class="v-dialog-eyebrow" id="qvCat"></span>
           <h2 id="qvName"></h2>
@@ -446,7 +452,7 @@
           note: 'Precio libre · Paga desde COP 19.687 · PDF + EPUB',
           free: false,
           soon: false,
-          img: 'assets/ebook-portada.jpg',
+          img: 'assets/ebook-portada.webp',
           fit: 'contain',
           badge: '',
           cta: 'Comprar',
@@ -463,7 +469,7 @@
           bf: true,
           free: false,
           soon: false,
-          img: 'assets/featured-maestro.jpg',
+          img: 'assets/featured-maestro.webp',
           fit: 'contain',
           badge: 'Nuevo',
           cta: 'Comprar',
@@ -482,7 +488,7 @@
           bf: true,
           free: false,
           soon: false,
-          img: 'assets/featured-alquimia.jpg',
+          img: 'assets/featured-alquimia.webp',
           fit: 'contain',
           badge: '',
           cta: 'Comprar',
@@ -576,7 +582,7 @@
           old: null,
           free: false,
           soon: false,
-          img: 'assets/student-os-cover.jpg',
+          img: 'assets/student-os-cover.webp',
           fit: 'cover',
           emoji: '🎓',
           badge: '',
@@ -695,6 +701,7 @@
           bfTitle: 'Black Friday: <b>50%</b> en estos productos digitales',
           bfSub: 'Solo del 12 al 28 de noviembre · Pago único · Sin suscripción',
           bfNote: 'El 50% se aplica automáticamente al comprar desde aquí. La edición impresa en Amazon mantiene su precio.',
+          bfPreview: 'Vista previa · La promo no está activa ahora, el código no aplica descuento.',
           search: 'Buscar producto…',
           filters: { all: 'Todos', digital: 'Digitales', print: 'Impresos', notion: 'Notion', free: 'Gratis' },
           resultOne: 'producto',
@@ -732,6 +739,7 @@
           bfTitle: 'Black Friday: <b>50%</b> off these digital products',
           bfSub: 'November 12–28 only · One-time payment · No subscription',
           bfNote: 'The 50% discount is applied automatically when you buy from here. The print edition on Amazon keeps its own price.',
+          bfPreview: 'Preview · The promo is not active right now, so the code will not apply a discount.',
           search: 'Search products…',
           filters: { all: 'All', digital: 'Digital', print: 'Print', notion: 'Notion', free: 'Free' },
           resultOne: 'product',
@@ -846,9 +854,13 @@
       var PROMO_END = new Date(2026, 10, 28, 23, 0, 0);
       var promoParam = null;
       try { promoParam = new URLSearchParams(location.search).get('promo'); } catch (e) { /* ignore */ }
+      var now = new Date();
+      var IN_PROMO_WINDOW = now >= PROMO_START && now <= PROMO_END;
       var PROMO_ON = promoParam === '1' ? true :
         promoParam === '0' ? false :
-        (new Date() >= PROMO_START && new Date() <= PROMO_END);
+        IN_PROMO_WINDOW;
+      // Preview override used outside the promo dates: show the section but warn that the code is not active.
+      var PROMO_PREVIEW = promoParam === '1' && !IN_PROMO_WINDOW;
       if (!PROMO_ON) {
         PRODUCTS.forEach(function (p) {
           if (!p.bf) return;
@@ -860,6 +872,10 @@
         });
         var bfSection = document.getElementById('blackFriday');
         if (bfSection) bfSection.style.display = 'none';
+      }
+      if (PROMO_PREVIEW) {
+        var bfPrevEl = document.getElementById('bfPreview');
+        if (bfPrevEl) bfPrevEl.hidden = false;
       }
 
       var grid = document.getElementById('grid');
@@ -944,7 +960,7 @@
         if (!p.img) {
           return '<span class="v-emoji" aria-hidden="true">' + (p.emoji || '✨') + '</span>';
         }
-        return '<img src="' + esc(p.img) + '" alt="" decoding="async">';
+        return '<img src="' + esc(p.img) + '" alt="" loading="lazy" decoding="async">';
       }
       function cardHTML(p, feat) {
         var name = localized(p, 'name');
@@ -1139,6 +1155,8 @@
         document.getElementById('bfTitle').innerHTML = T.bfTitle;
         document.getElementById('bfSub').textContent = T.bfSub;
         document.getElementById('bfNote').textContent = T.bfNote;
+        var bfPrev = document.getElementById('bfPreview');
+        if (bfPrev) bfPrev.textContent = T.bfPreview;
         renderBF();
         updateLangButton();
       }
