@@ -467,7 +467,8 @@
           fit: 'contain',
           badge: 'Nuevo',
           cta: 'Comprar',
-          link: 'https://alquimialab.gumroad.com/l/Planora-pro?wanted=true'
+          link: 'https://alquimialab.gumroad.com/l/Planora-pro?wanted=true',
+          bfLink: 'https://alquimialab.gumroad.com/l/Planora/BLACKFRIDAY88'
         },
         {
           id: 'studio',
@@ -484,7 +485,8 @@
           fit: 'contain',
           badge: '',
           cta: 'Comprar',
-          link: 'https://alquimialab.gumroad.com/l/AlquimiaStudio?wanted=true'
+          link: 'https://alquimialab.gumroad.com/l/AlquimiaStudio?wanted=true',
+          bfLink: 'https://alquimialab.gumroad.com/l/AlquimiaStudio_Planner/BLACKFRIDAY88'
         },
         {
           id: 'planner',
@@ -502,6 +504,7 @@
           badge: '',
           cta: 'Comprar',
           link: 'https://alquimialab.gumroad.com/l/bvzpd',
+          bfLink: 'https://alquimialab.gumroad.com/l/bvzpd/BLACKFRIDAY88',
           links: [
             { label: 'Digital', link: 'https://alquimialab.gumroad.com/l/bvzpd', primary: true },
             { label: 'Amazon', link: 'https://www.amazon.com/dp/B0HJ8J6MHG', primary: false }
@@ -523,6 +526,7 @@
           badge: '',
           cta: 'Comprar',
           link: 'https://alquimialab.gumroad.com/l/LofiColoringBookAlquimia',
+          bfLink: 'https://alquimialab.gumroad.com/l/LofiColoringBookAlquimia/BLACKFRIDAY88',
           links: [
             { label: 'Digital', link: 'https://alquimialab.gumroad.com/l/LofiColoringBookAlquimia', primary: true },
             { label: 'Amazon', link: 'https://www.amazon.com/dp/B0HBML5LCP', primary: false }
@@ -688,7 +692,7 @@
           bfTag: 'Black Friday',
           bfTitle: 'Estos productos digitales por solo <b>$4</b>',
           bfSub: 'Solo por tiempo limitado · Pago único · Sin suscripción',
-          bfNote: 'El precio de $4 aplica a la edición digital. La edición impresa en Amazon mantiene su precio.',
+          bfNote: 'El descuento se aplica automáticamente al comprar desde aquí. El precio de $4 aplica a la edición digital; la edición impresa en Amazon mantiene su precio.',
           search: 'Buscar producto…',
           filters: { all: 'Todos', digital: 'Digitales', print: 'Impresos', notion: 'Notion', free: 'Gratis' },
           resultOne: 'producto',
@@ -725,7 +729,7 @@
           bfTag: 'Black Friday',
           bfTitle: 'These digital products for just <b>$4</b>',
           bfSub: 'Limited time only · One-time payment · No subscription',
-          bfNote: 'The $4 price applies to the digital edition. The print edition on Amazon keeps its own price.',
+          bfNote: 'The discount is applied automatically when you buy from here. The $4 price applies to the digital edition; the print edition on Amazon keeps its own price.',
           search: 'Search products…',
           filters: { all: 'All', digital: 'Digital', print: 'Print', notion: 'Notion', free: 'Free' },
           resultOne: 'product',
@@ -890,8 +894,12 @@
       }
       function buyHTML(p, modal, feat) {
         var links = linksFor(p);
-        if (feat && links.length > 1) {
-          links = [{ label: p.free ? T.download : T.buy, link: links[0].link, primary: true }];
+        if (feat) {
+          links = [{
+            label: p.free ? T.download : T.buy,
+            link: p.bfLink || links[0].link,
+            primary: true
+          }];
         }
         var html = '<div class="v-buy-row' + (links.length > 1 ? ' v-buy-row-split' : '') + (modal ? ' v-buy-row-modal' : '') + '">';
         links.forEach(function (l) {
