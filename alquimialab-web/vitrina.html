@@ -939,7 +939,7 @@
       }
       function render() {
         var list = PRODUCTS.filter(matches);
-        grid.innerHTML = list.map(cardHTML).join('');
+        grid.innerHTML = list.map(function (p) { return cardHTML(p, false); }).join('');
         var q = searchEl.value.trim();
         resultEl.textContent = list.length + ' ' + (list.length === 1 ? T.resultOne : T.resultMany) +
           (q ? T.resultFor + '“' + q + '”' : '');
