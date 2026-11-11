@@ -13,7 +13,7 @@
   --bg: #f2f2f2;
   --surface: #ffffff;
   --text: #3b3866;
-  --text-muted: #8a87ad;
+  --text-muted: #6a6788;
   --shadow: rgba(100, 98, 171, .12);
   --shadow-lg: rgba(100, 98, 171, .22);
   --border: #e8e6f4;
@@ -1274,7 +1274,7 @@ a.featured-card {
   object-fit: cover;
   display: block;
 }
-.youtube-text h3 {
+.youtube-text h2, .youtube-text h3 {
   font-size: 18px;
   margin-bottom: 4px;
 }

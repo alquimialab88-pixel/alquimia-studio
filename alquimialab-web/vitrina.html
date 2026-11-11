@@ -366,7 +366,7 @@
         <p id="vHeroP">Explora, compara y compra en segundos. Toca cualquier producto para ver todos los detalles sin salir de la página.</p>
       </div>
       <div class="v-stats" aria-label="Resumen del catálogo">
-        <div class="v-stat"><b id="statTotal">15</b><span id="statProductsLabel">productos</span></div>
+        <div class="v-stat"><b id="statTotal">14</b><span id="statProductsLabel">productos</span></div>
         <div class="v-stat"><b id="statFree">3</b><span id="statFreeLabel">gratis</span></div>
         <div class="v-stat"><b id="statFrom">$3.99</b><span id="statFromLabel">desde</span></div>
       </div>
@@ -468,7 +468,8 @@
           badge: 'Nuevo',
           cta: 'Comprar',
           link: 'https://alquimialab.gumroad.com/l/Planora-pro?wanted=true',
-          bfLink: 'https://alquimialab.gumroad.com/l/Planora/BLACKFRIDAY88'
+          bfLink: 'https://alquimialab.gumroad.com/l/Planora/BLACKFRIDAY88',
+          bfLinkEn: 'https://alquimialab.gumroad.com/l/Planora-pro/BLACKFRIDAY88'
         },
         {
           id: 'studio',
@@ -486,7 +487,8 @@
           badge: '',
           cta: 'Comprar',
           link: 'https://alquimialab.gumroad.com/l/AlquimiaStudio?wanted=true',
-          bfLink: 'https://alquimialab.gumroad.com/l/AlquimiaStudio_Planner/BLACKFRIDAY88'
+          bfLink: 'https://alquimialab.gumroad.com/l/AlquimiaStudio_Planner/BLACKFRIDAY88',
+          bfLinkEn: 'https://alquimialab.gumroad.com/l/AlquimiaStudio/BLACKFRIDAY88'
         },
         {
           id: 'planner',
@@ -854,6 +856,7 @@
           p.old = null;
           p.bf = false;
           p.bfLink = null;
+          p.bfLinkEn = null;
         });
         var bfSection = document.getElementById('blackFriday');
         if (bfSection) bfSection.style.display = 'none';
@@ -875,6 +878,9 @@
       function localized(p, field) {
         var en = EN_PRODUCTS[p.id];
         return (lang === 'en' && en && en[field]) ? en[field] : p[field];
+      }
+      function promoLink(p) {
+        return (lang === 'en' && p.bfLinkEn) ? p.bfLinkEn : p.bfLink;
       }
       function catLabel(cat) {
         return T.cats[cat] || cat;
@@ -906,8 +912,14 @@
         return html;
       }
       function linksFor(p) {
-        if (p.links && p.links.length) return p.links;
-        return [{ label: p.free ? T.download : T.buy, link: p.link, primary: !(p.free || p.soon) }];
+        var promo = PROMO_ON && p.bf && promoLink(p);
+        if (p.links && p.links.length) {
+          if (!promo) return p.links;
+          return p.links.map(function (l) {
+            return l.primary ? { label: l.label, link: promoLink(p), primary: true } : l;
+          });
+        }
+        return [{ label: p.free ? T.download : T.buy, link: promo ? promoLink(p) : p.link, primary: !(p.free || p.soon) }];
       }
       function extLink(link) {
         return /^https?:/i.test(link) ? ' target="_blank" rel="noopener"' : '';
@@ -917,7 +929,7 @@
         if (feat) {
           links = [{
             label: p.free ? T.download : T.buy,
-            link: p.bfLink || links[0].link,
+            link: promoLink(p) || links[0].link,
             primary: true
           }];
         }

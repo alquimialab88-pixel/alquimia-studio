@@ -1277,9 +1277,11 @@
       btn.setAttribute("data-lang", l);
       btn.innerHTML = '<span class="cur" data-cur>ES</span><span class="sep">|</span><span class="cur" data-cur>EN</span>';
       var cur = btn.querySelectorAll("[data-cur]");
-      cur[0].style.opacity = l === "es" ? "1" : ".45";
-      cur[1].style.opacity = l === "en" ? "1" : ".45";
-      btn.setAttribute("aria-label", l === "es" ? "Switch to English" : "Cambiar a Español");
+      cur[0].style.opacity = "1";
+      cur[1].style.opacity = "1";
+      cur[0].style.fontWeight = l === "es" ? "800" : "500";
+      cur[1].style.fontWeight = l === "en" ? "800" : "500";
+      btn.setAttribute("aria-label", l === "es" ? "ES|EN — Switch to English" : "ES|EN — Cambiar a Español");
     }
     try { localStorage.setItem(STORE_KEY, l); } catch (e) { /* ignore */ }
   }
