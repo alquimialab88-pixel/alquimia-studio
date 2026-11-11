@@ -94,6 +94,34 @@
       text-transform: uppercase; color: rgba(255,255,255,.7);
     }
 
+    /* ===== BLACK FRIDAY ===== */
+    .v-bf {
+      position: relative; overflow: hidden;
+      margin-top: 22px; padding: clamp(18px,3vw,28px);
+      border-radius: 24px; border: 1px solid var(--lavender);
+      background: #fff;
+      box-shadow: 0 10px 26px rgba(74,74,133,.07);
+    }
+    .v-bf-head { margin-bottom: 16px; }
+    .v-bf-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 14px; border-radius: 99px;
+      background: linear-gradient(135deg,#ff8a3d,#e85d04); color: #fff;
+      font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+      box-shadow: 0 6px 16px rgba(232,93,4,.24);
+    }
+    .v-bf-tag::before {
+      content: ""; width: 7px; height: 7px; border-radius: 50%;
+      background: #fff; box-shadow: 0 0 0 3px rgba(255,255,255,.32);
+    }
+    .v-bf h2 { margin: 10px 0 5px; font-size: clamp(21px,2.8vw,29px); line-height: 1.15; letter-spacing: -.02em; color: var(--text); }
+    .v-bf h2 b { color: var(--purple); }
+    .v-bf-sub { margin: 0; color: #6b6890; font-size: 13px; line-height: 1.5; }
+    .v-bf-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap: 14px; }
+    .v-bf .v-buy.btn-primary { background: linear-gradient(135deg,#ff8a3d,#e85d04); border-color: #e85d04; color: #fff; }
+    .v-bf .v-buy.btn-primary:hover { transform: none; box-shadow: 0 8px 18px rgba(232,93,4,.34); }
+    .v-bf-note { margin: 14px 0 0; color: #6b6890; font-size: 11.5px; line-height: 1.5; }
+
     .v-toolbar { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin: 26px 0 14px; }
     .v-search { position: relative; flex: 1 1 260px; max-width: 360px; }
     .v-search svg {
@@ -287,6 +315,9 @@
       .v-toolbar { gap: 10px; }
       .v-search { flex-basis: 100%; max-width: none; }
       .v-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+      .v-bf { border-radius: 20px; padding: 16px 14px; }
+      .v-bf-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+      .v-bf-sub { font-size: 12px; }
       .v-body { padding: 12px 12px 13px; }
       .v-name { font-size: 13.5px; }
       .v-short { margin: 5px 0 10px; font-size: 11.5px; }
@@ -302,6 +333,7 @@
     }
     @media (max-width: 380px) {
       .v-grid { grid-template-columns: 1fr; }
+      .v-bf-grid { grid-template-columns: 1fr; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { transition: none !important; animation: none !important; }
@@ -338,6 +370,16 @@
         <div class="v-stat"><b id="statFree">3</b><span id="statFreeLabel">gratis</span></div>
         <div class="v-stat"><b id="statFrom">$3.49</b><span id="statFromLabel">desde</span></div>
       </div>
+    </section>
+
+    <section class="v-bf" id="blackFriday" aria-labelledby="bfTitle">
+      <div class="v-bf-head">
+        <span class="v-bf-tag" id="bfTag">Black Friday</span>
+        <h2 id="bfTitle">4 favoritos a <b>$4</b></h2>
+        <p class="v-bf-sub" id="bfSub">Solo por tiempo limitado · Pago único · Sin suscripción</p>
+      </div>
+      <div class="v-bf-grid" id="bfGrid"></div>
+      <p class="v-bf-note" id="bfNote">El precio de $4 aplica a la edición digital. La edición impresa en Amazon mantiene su precio.</p>
     </section>
 
     <section class="v-toolbar" aria-label="Filtros de productos">
@@ -416,8 +458,9 @@
           cat: 'digital',
           short: 'App de escritorio para organizar y planificar el contenido de tus redes.',
           desc: 'Planora es una app de escritorio para Windows que te ayuda a organizar tu contenido, darle dirección a tus ideas y convertir inspiración en acción. Menos caos, más espacio para crear.',
-          price: 7.99,
+          price: 4,
           old: 9.99,
+          bf: true,
           free: false,
           soon: false,
           img: 'assets/featured-maestro.jpg',
@@ -432,8 +475,9 @@
           cat: 'digital',
           short: 'Organizador de PDFs + 5 planners digitales, con modo claro y oscuro.',
           desc: 'Organiza y lee tus PDFs en el navegador, junto con cinco planners digitales: Calma y Orden, Anual, TDAH, Ciclo Menstrual y Semanal. Incluye modo claro y oscuro, favoritos, y herramientas de respaldo y restauración. Compra única, sin suscripción mensual.',
-          price: 7.99,
+          price: 4,
           old: 9.99,
+          bf: true,
           free: false,
           soon: false,
           img: 'assets/featured-alquimia.jpg',
@@ -448,8 +492,9 @@
           cat: 'print',
           short: 'Un planner minimalista para ordenar tu año con calma e intención.',
           desc: 'Un planner minimalista para organizar tu año con calma e intención. Edición impresa o digital, con espacio para tus metas, proyectos y rituales del día a día.',
-          price: 11.99,
+          price: 4,
           old: 14.99,
+          bf: true,
           free: false,
           soon: false,
           img: 'journal-cover.webp',
@@ -468,8 +513,9 @@
           cat: 'print',
           short: 'El mismo libro en español e inglés. Edición impresa y digital.',
           desc: 'El mismo libro en español e inglés, con ilustraciones lofi para colorear y desconectar. Disponible en edición impresa y digital.',
-          price: 9.99,
+          price: 4,
           old: 12.99,
+          bf: true,
           free: false,
           soon: false,
           img: 'print-coloring.webp',
@@ -639,6 +685,10 @@
           products: 'productos',
           freeLabel: 'gratis',
           from: 'desde',
+          bfTag: 'Black Friday',
+          bfTitle: 'Estos productos digitales por solo <b>$4</b>',
+          bfSub: 'Solo por tiempo limitado · Pago único · Sin suscripción',
+          bfNote: 'El precio de $4 aplica a la edición digital. La edición impresa en Amazon mantiene su precio.',
           search: 'Buscar producto…',
           filters: { all: 'Todos', digital: 'Digitales', print: 'Impresos', notion: 'Notion', free: 'Gratis' },
           resultOne: 'producto',
@@ -672,6 +722,10 @@
           products: 'products',
           freeLabel: 'free',
           from: 'from',
+          bfTag: 'Black Friday',
+          bfTitle: 'These digital products for just <b>$4</b>',
+          bfSub: 'Limited time only · One-time payment · No subscription',
+          bfNote: 'The $4 price applies to the digital edition. The print edition on Amazon keeps its own price.',
           search: 'Search products…',
           filters: { all: 'All', digital: 'Digital', print: 'Print', notion: 'Notion', free: 'Free' },
           resultOne: 'product',
@@ -782,6 +836,7 @@
       var FILTERS = ['all', 'digital', 'print', 'notion', 'free'];
 
       var grid = document.getElementById('grid');
+      var bfGrid = document.getElementById('bfGrid');
       var chipsEl = document.getElementById('vChips');
       var searchEl = document.getElementById('vSearch');
       var resultEl = document.getElementById('resultCount');
@@ -791,6 +846,7 @@
       var lastTrigger = null;
       var activeCat = 'all';
       var currentId = null;
+      var currentFeat = false;
 
       function localized(p, field) {
         var en = EN_PRODUCTS[p.id];
@@ -832,8 +888,11 @@
       function extLink(link) {
         return /^https?:/i.test(link) ? ' target="_blank" rel="noopener"' : '';
       }
-      function buyHTML(p, modal) {
+      function buyHTML(p, modal, feat) {
         var links = linksFor(p);
+        if (feat && links.length > 1) {
+          links = [{ label: p.free ? T.download : T.buy, link: links[0].link, primary: true }];
+        }
         var html = '<div class="v-buy-row' + (links.length > 1 ? ' v-buy-row-split' : '') + (modal ? ' v-buy-row-modal' : '') + '">';
         links.forEach(function (l) {
           var cls = l.primary ? 'btn-primary' : 'btn-secondary';
@@ -847,15 +906,16 @@
         }
         return '<img src="' + esc(p.img) + '" alt="" decoding="async">';
       }
-      function cardHTML(p) {
+      function cardHTML(p, feat) {
         var name = localized(p, 'name');
         var short = localized(p, 'short');
+        var cat = feat ? T.cats.digital : catLabel(p.cat);
         return '' +
           '<article class="v-card">' +
             '<button type="button" class="v-media' + (p.fit === 'contain' ? ' contain' : '') + '" data-qv="' + p.id + '">' +
               mediaHTML(p) +
               '<span class="v-sr">' + esc(name) + '</span>' +
-              '<span class="v-cat">' + esc(catLabel(p.cat)) + '</span>' +
+              '<span class="v-cat">' + esc(cat) + '</span>' +
               (p.badge ? '<span class="v-badge">' + esc(badgeLabel(p)) + '</span>' : '') +
               '<span class="v-quick">' + esc(T.quick) + '</span>' +
             '</button>' +
@@ -863,7 +923,7 @@
               '<h2><button type="button" class="v-name" data-qv="' + p.id + '">' + esc(name) + '</button></h2>' +
               '<p class="v-short">' + esc(short) + '</p>' +
               '<div class="v-price-row">' + priceHTML(p) + '</div>' +
-              buyHTML(p) +
+              buyHTML(p, false, feat) +
             '</div>' +
           '</article>';
       }
@@ -885,6 +945,11 @@
           (q ? T.resultFor + '“' + q + '”' : '');
         emptyEl.hidden = list.length !== 0;
         clearEl.hidden = !(activeCat !== 'all' || q);
+      }
+      function renderBF() {
+        bfGrid.innerHTML = PRODUCTS.filter(function (p) { return p.bf; }).map(function (p) {
+          return cardHTML(p, true);
+        }).join('');
       }
       function setCat(id) {
         activeCat = id;
@@ -922,14 +987,14 @@
         setCat('all');
       });
 
-      grid.addEventListener('click', function (e) {
+      document.addEventListener('click', function (e) {
         var trigger = e.target.closest('[data-qv]');
         if (!trigger) return;
         lastTrigger = trigger;
-        openQuick(trigger.getAttribute('data-qv'));
+        openQuick(trigger.getAttribute('data-qv'), !!trigger.closest('.v-bf'));
       });
 
-      function openQuick(id) {
+      function openQuick(id, feat) {
         var p = null;
         for (var i = 0; i < PRODUCTS.length; i++) {
           if (PRODUCTS[i].id === id) { p = PRODUCTS[i]; break; }
@@ -937,6 +1002,7 @@
         if (!p) return;
 
         currentId = id;
+        currentFeat = !!feat;
         var name = localized(p, 'name');
         var desc = localized(p, 'desc');
         var media = document.getElementById('qvMedia');
@@ -950,7 +1016,7 @@
         document.getElementById('qvName').textContent = name;
         document.getElementById('qvDesc').textContent = desc;
         document.getElementById('qvPrice').innerHTML = priceHTML(p);
-        document.getElementById('qvBuyWrap').innerHTML = buyHTML(p, true);
+        document.getElementById('qvBuyWrap').innerHTML = buyHTML(p, true, currentFeat);
 
         var en = EN_PRODUCTS[p.id];
         var note;
@@ -1029,6 +1095,11 @@
         document.getElementById('vFootText').textContent = T.footer;
         document.getElementById('vFootLink').textContent = T.back;
         document.getElementById('qvClose').setAttribute('aria-label', T.close);
+        document.getElementById('bfTag').textContent = T.bfTag;
+        document.getElementById('bfTitle').innerHTML = T.bfTitle;
+        document.getElementById('bfSub').textContent = T.bfSub;
+        document.getElementById('bfNote').textContent = T.bfNote;
+        renderBF();
         updateLangButton();
       }
       function setLang(l) {
@@ -1038,7 +1109,7 @@
         applyStatic();
         buildChips();
         setCat(activeCat);
-        if (dlg.open && currentId) openQuick(currentId);
+        if (dlg.open && currentId) openQuick(currentId, currentFeat);
       }
       document.getElementById('vLang').addEventListener('click', function () {
         setLang(lang === 'es' ? 'en' : 'es');
