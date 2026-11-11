@@ -603,7 +603,6 @@
     "Browse categories ↓": "Ver categorías ↓",
     "The leap into freelance life, told without filters.": "El salto a la vida freelance, contado sin filtro.",
     "The real story of my leap into the freelance life — with 15 prompts to copy and paste, exercises with space to write, and a launch checklist.": "La historia real de mi salto a la vida freelance — con 15 prompts para copiar y pegar, ejercicios con espacio para escribir y un checklist de lanzamiento.",
-    "Planner 2027 — Calma y Orden": "Planificador 2027 — Calma y Orden",
     "© 2026 Alquimia Lab · Made with calm & coffee ·": "© 2026 Alquimia Lab · Hecho con calma y café ·",
     "Your image here ✨": "Tu imagen aquí ✨",
     "Digital tools for calm days": "Herramientas digitales para días con calma",
