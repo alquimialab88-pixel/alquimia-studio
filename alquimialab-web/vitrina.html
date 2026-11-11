@@ -368,7 +368,7 @@
       <div class="v-stats" aria-label="Resumen del catálogo">
         <div class="v-stat"><b id="statTotal">15</b><span id="statProductsLabel">productos</span></div>
         <div class="v-stat"><b id="statFree">3</b><span id="statFreeLabel">gratis</span></div>
-        <div class="v-stat"><b id="statFrom">$3.49</b><span id="statFromLabel">desde</span></div>
+        <div class="v-stat"><b id="statFrom">$3.99</b><span id="statFromLabel">desde</span></div>
       </div>
     </section>
 
@@ -838,6 +838,26 @@
       var T = I18N[lang];
 
       var FILTERS = ['all', 'digital', 'print', 'notion', 'free'];
+
+      // Black Friday promo window (local time). Override with ?promo=1 or ?promo=0.
+      var PROMO_START = new Date(2026, 10, 12, 0, 0, 0);
+      var PROMO_END = new Date(2026, 10, 28, 23, 0, 0);
+      var promoParam = null;
+      try { promoParam = new URLSearchParams(location.search).get('promo'); } catch (e) { /* ignore */ }
+      var PROMO_ON = promoParam === '1' ? true :
+        promoParam === '0' ? false :
+        (new Date() >= PROMO_START && new Date() <= PROMO_END);
+      if (!PROMO_ON) {
+        PRODUCTS.forEach(function (p) {
+          if (!p.bf) return;
+          if (typeof p.old === 'number') p.price = p.old;
+          p.old = null;
+          p.bf = false;
+          p.bfLink = null;
+        });
+        var bfSection = document.getElementById('blackFriday');
+        if (bfSection) bfSection.style.display = 'none';
+      }
 
       var grid = document.getElementById('grid');
       var bfGrid = document.getElementById('bfGrid');
