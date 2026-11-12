@@ -46,6 +46,7 @@ body {
     radial-gradient(700px 500px at -10% 110%, #F0E8F8 0%, transparent 55%),
     var(--bg);
   color: var(--text);
+  min-height: 100vh;
   min-height: 100dvh;
   -webkit-tap-highlight-color: transparent;
   overscroll-behavior-y: none;
@@ -92,12 +93,14 @@ h1, h2, h3, h4, p { margin: 0; }
   position: relative;
   width: 100%;
   max-width: 600px;
+  min-height: 100vh;
   min-height: 100dvh;
   margin: 0 auto;
   background: var(--bg);
 }
 
 .view {
+  min-height: 100vh;
   min-height: 100dvh;
   padding: calc(20px + env(safe-area-inset-top)) 20px calc(100px + env(safe-area-inset-bottom));
   outline: none;
@@ -120,6 +123,7 @@ h1, h2, h3, h4, p { margin: 0; }
   }
   #app {
     box-shadow: 0 0 70px rgba(70, 67, 130, .14);
+    min-height: 100vh;
     min-height: 100dvh;
   }
 }
@@ -1370,6 +1374,7 @@ select.input {
 /* ============ Onboarding ============ */
 
 .onb {
+  min-height: 100vh;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
@@ -1605,6 +1610,7 @@ dialog.dialog::backdrop { background: rgba(28, 27, 50, .46); backdrop-filter: bl
 .sheet {
   width: 100%;
   max-width: 600px;
+  max-height: 90vh;
   max-height: 90dvh;
   overflow-y: auto;
   background: var(--bg);

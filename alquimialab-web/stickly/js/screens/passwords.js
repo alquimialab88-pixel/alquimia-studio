@@ -44,14 +44,6 @@ function gate(ctx, hasPin) {
         const ok = hasPin ? await promptPin("unlock") : await promptPin("setup");
         if (ok) ctx.rerender();
       });
-      if (hasPin) {
-        setTimeout(async () => {
-          if (!store.isUnlocked()) {
-            const ok = await promptPin("unlock");
-            if (ok) ctx.rerender();
-          }
-        }, 180);
-      }
     },
     cleanup: () => {}
   };

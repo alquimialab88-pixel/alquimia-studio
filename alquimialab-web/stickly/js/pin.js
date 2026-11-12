@@ -10,8 +10,17 @@ import * as ui from "./ui.js";
 
 const root = document.getElementById("pinRoot");
 
+/** Cierra cualquier teclado de PIN abierto (por ejemplo al cambiar de ruta). */
+export function closePins() {
+  root.querySelectorAll(".pin-screen").forEach((el) => {
+    if (typeof el._cerrar === "function") el._cerrar(false);
+    else el.remove();
+  });
+}
+
 export function promptPin(mode, options) {
   const opts = options || {};
+  if (root.querySelector(".pin-screen")) return Promise.resolve(false);
   return new Promise((resolve) => {
     const overlay = document.createElement("div");
     overlay.className = "pin-screen";
@@ -113,6 +122,8 @@ export function promptPin(mode, options) {
       void body.offsetWidth;
       body.classList.add("shake");
     }
+
+    overlay._cerrar = (ok) => finish(ok);
 
     function finish(ok) {
       if (finished) return;

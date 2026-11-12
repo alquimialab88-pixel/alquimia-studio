@@ -39,12 +39,6 @@ function lockedScreen(ctx, note) {
           const ok = await promptPin("unlock");
           if (ok) ctx.rerender();
         });
-        setTimeout(async () => {
-          if (!store.isUnlocked()) {
-            const ok = await promptPin("unlock");
-            if (ok) ctx.rerender();
-          }
-        }, 160);
       }
       const reset = root.querySelector("[data-reset]");
       if (reset) {

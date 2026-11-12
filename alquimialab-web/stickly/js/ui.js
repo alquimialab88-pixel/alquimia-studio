@@ -264,6 +264,11 @@ export function compressImage(file, maxSize) {
 /* ===== Archivos ===== */
 
 export function downloadText(filename, text, mime) {
+  // En el APK se comparte con el selector del sistema.
+  if (window.SticklyAndroid && typeof window.SticklyAndroid.saveFile === "function") {
+    window.SticklyAndroid.saveFile(filename, text);
+    return;
+  }
   const blob = new Blob([text], { type: mime || "application/json" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");

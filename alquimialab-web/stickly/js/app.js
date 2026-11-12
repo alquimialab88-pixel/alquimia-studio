@@ -6,6 +6,7 @@ import { t, setLang, detectLang, getLang } from "./i18n.js";
 import * as store from "./store.js";
 import * as ui from "./ui.js";
 import * as pwa from "./pwa.js";
+import { closePins } from "./pin.js";
 
 import * as onboarding from "./screens/onboarding.js";
 import * as home from "./screens/home.js";
@@ -130,6 +131,7 @@ async function renderRoute() {
     currentCleanup = null;
   }
   leaveGuard = null;
+  closePins();
   ui.closeSheets();
 
   view.setAttribute("data-screen", route.name);

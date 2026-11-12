@@ -39,6 +39,19 @@ export function isIos() {
 export function initPWA(onUpdate) {
   onUpdateReady = onUpdate;
 
+  // En el APK los archivos vienen dentro de la app: no hace falta service worker.
+  if (window.SticklyAndroid) {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.getRegistrations()
+        .then((regs) => regs.forEach((reg) => reg.unregister()))
+        .catch(() => {});
+    }
+    if ("caches" in window) {
+      caches.keys().then((keys) => keys.forEach((key) => caches.delete(key))).catch(() => {});
+    }
+    return;
+  }
+
   window.addEventListener("beforeinstallprompt", (e) => {
     e.preventDefault();
     deferredPrompt = e;
