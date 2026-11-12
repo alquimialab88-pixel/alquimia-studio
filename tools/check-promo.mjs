@@ -23,14 +23,18 @@ const CODE = "BLACKFRIDAY88";
 const DISCOUNT = 0.5;
 
 // Precio de lista (Gumroad), precio tachado en la web y precio final mostrado.
+// Gumroad trunca el medio centavo (799 * 50% = 399.5 -> 399), verificado en el
+// checkout real el 12/11/2026: $7.99 -> COP 13.071 = $3.99, no $4.00.
 const PRODUCTS = [
-  { name: "Planora (ES)",        slug: "Planora",                  list: 7.99,  shown: 4.0 },
-  { name: "Planora (EN)",        slug: "Planora-pro",              list: 7.99,  shown: 4.0 },
-  { name: "Alquimia Studio (ES)", slug: "AlquimiaStudio_Planner",  list: 9.99,  shown: 5.0 },
-  { name: "Alquimia Studio (EN)", slug: "AlquimiaStudio",          list: 9.99,  shown: 5.0 },
-  { name: "Planner 2027",        slug: "bvzpd",                    list: 10.99, shown: 5.5 },
+  { name: "Planora (ES)",        slug: "Planora",                  list: 7.99,  shown: 3.99 },
+  { name: "Planora (EN)",        slug: "Planora-pro",              list: 7.99,  shown: 3.99 },
+  { name: "Alquimia Studio (ES)", slug: "AlquimiaStudio_Planner",  list: 9.99,  shown: 4.99 },
+  { name: "Alquimia Studio (EN)", slug: "AlquimiaStudio",          list: 9.99,  shown: 4.99 },
+  { name: "Planner 2027",        slug: "bvzpd",                    list: 10.99, shown: 5.49 },
   { name: "Lofi Coloring",       slug: "LofiColoringBookAlquimia", list: 5.0,   shown: 2.5 },
 ];
+
+const promoPrice = (list) => Math.floor(list * 100 * (1 - DISCOUNT)) / 100;
 
 const money = (n) => "$" + n.toFixed(2);
 const pad = (s, n) => String(s).padEnd(n);
@@ -67,9 +71,9 @@ async function checkGumroad() {
       valid,
       err: err ? err[1] : null,
       listFromGumroad: list,
-      discounted: list === null ? null : Math.round(list * (1 - DISCOUNT) * 100) / 100,
+      discounted: list === null ? null : promoPrice(list),
       listOk: list !== null && Math.abs(list - p.list) < 0.005,
-      shownOk: list !== null && Math.abs(Math.round(list * (1 - DISCOUNT) * 100) / 100 - p.shown) < 0.005,
+      shownOk: list !== null && Math.abs(promoPrice(list) - p.shown) < 0.005,
       currency,
     });
   }
