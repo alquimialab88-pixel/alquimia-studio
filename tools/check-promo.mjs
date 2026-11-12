@@ -83,20 +83,30 @@ async function checkGumroad() {
 function checkSite() {
   const vitrina = readFileSync(join(ROOT, "alquimialab-web", "vitrina.html"), "utf8");
   const productos = readFileSync(join(ROOT, "alquimialab-web", "productos.html"), "utf8");
+  const shop = readFileSync(join(ROOT, "alquimialab-web", "js", "shop.js"), "utf8");
   const issues = [];
 
   for (const p of PRODUCTS) {
-    if (!vitrina.includes(`/${p.slug}/${CODE}`)) {
-      issues.push(`vitrina.html: falta el enlace /${p.slug}/${CODE}`);
+    if (!shop.includes(`/${p.slug}/${CODE}`)) {
+      issues.push(`js/shop.js: falta el enlace /${p.slug}/${CODE}`);
     }
   }
-  if (!vitrina.includes("var PROMO_START = new Date(2026, 10, 12")) issues.push("vitrina.html: PROMO_START inesperado");
-  if (!vitrina.includes("var PROMO_END = new Date(2026, 10, 28, 23")) issues.push("vitrina.html: PROMO_END inesperado");
-  if (!vitrina.includes("bfPreview")) issues.push("vitrina.html: falta el aviso de vista previa");
+  if (!shop.includes("var PROMO_START = new Date(2026, 10, 12")) issues.push("js/shop.js: PROMO_START inesperado");
+  if (!shop.includes("var PROMO_END = new Date(2026, 10, 28, 23")) issues.push("js/shop.js: PROMO_END inesperado");
+  if (!shop.includes("bfPreview")) issues.push("js/shop.js: falta el aviso de vista previa");
+  if (!vitrina.includes("mode: 'private'")) issues.push("vitrina.html: no carga el catálogo en modo privado");
+  if (!productos.includes("mode: 'public'")) issues.push("productos.html: no carga el catálogo en modo público");
 
-  const shownOnCatalog = [7.99, 9.99, 10.99, 5.0];
-  for (const price of shownOnCatalog) {
-    if (!productos.includes(`$${price}`)) issues.push(`productos.html: no aparece el precio $${price}`);
+  // La promo no debe filtrarse al catálogo público.
+  for (const code of [CODE, "salePrice"]) {
+    if (productos.includes(code)) issues.push(`productos.html no debe contener "${code}"`);
+  }
+  if (/PROMO_ON\s*=\s*true/.test(shop)) issues.push("js/shop.js: la promo parece forzada");
+
+  // Precios de lista del catálogo público (deben coincidir con Gumroad).
+  for (const p of PRODUCTS) {
+    const pattern = new RegExp(`price:\\s*${p.list.toFixed(2).replace(/\.?0+$/, "")}[,\\n]`);
+    if (!pattern.test(shop)) issues.push(`js/shop.js: no aparece el precio de lista $${p.list}`);
   }
   return issues;
 }

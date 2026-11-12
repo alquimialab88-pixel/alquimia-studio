@@ -1285,6 +1285,10 @@
       btn.setAttribute("aria-label", l === "es" ? "ES|EN — Switch to English" : "ES|EN — Cambiar a Español");
     }
     try { localStorage.setItem(STORE_KEY, l); } catch (e) { /* ignore */ }
+    /* Aviso para componentes que generan contenido después de cargar (catálogo). */
+    try {
+      document.dispatchEvent(new CustomEvent("alquimia:lang", { detail: { lang: l } }));
+    } catch (e) { /* ignore */ }
   }
 
   function detectLang() {

@@ -28,6 +28,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=21">
+  <link rel="stylesheet" href="css/shop.css?v=1">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6568715444285154" crossorigin="anonymous"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y8Z50HWV3J"></script>
   <script>
@@ -37,12 +38,7 @@
     gtag('config', 'G-Y8Z50HWV3J');
   </script>
   <style>
-    .shop-hero { text-align:center; padding: 42px 24px 36px; border-radius: 24px; background: linear-gradient(135deg, #6462ab 0%, #524f96 100%); border:none; color:#fff; position:relative; overflow:hidden; margin-top:-48px; box-shadow:0 20px 48px rgba(74,74,133,.35); }
-    .shop-hero::before { content:""; position:absolute; top:-40%; left:-20%; width:55%; height:180%; background:linear-gradient(105deg, transparent, rgba(255,255,255,.18), transparent); animation:shineSweep 5s ease-in-out infinite; pointer-events:none; }
-    @keyframes shineSweep { 0% { transform:translateX(-120%) rotate(8deg); } 55% { transform:translateX(280%) rotate(8deg); } 100% { transform:translateX(280%) rotate(8deg); } }
-    .shop-hero h1, .shop-hero h2 { font-size: 34px; font-weight:700; margin-bottom: 10px; color:#fff; position:relative; z-index:1; }
-    .shop-hero p { font-size: 16px; color: rgba(255,255,255,.9); max-width: 560px; margin: 0 auto 8px; position:relative; z-index:1; }
-    .shop-hero .trust-note { font-size: 13px; opacity:.85; margin-top: 12px; }
+    /* ===== Banner carrusel ===== */
     .shop-banner { position:relative; width:100%; overflow:hidden; min-height:100vh; min-height:100svh; background:#f4f2ff; border:none; border-radius:0; }
     .banner-track { display:grid; }
     .banner-slide { position:relative; grid-area:1/1; min-height:100vh; min-height:100svh; display:flex; align-items:center; justify-content:space-between; gap:clamp(24px,4vw,56px); padding:110px clamp(72px,7vw,120px) 84px clamp(130px,15vw,270px); opacity:0; visibility:hidden; transform:scale(1.05); filter:blur(8px); transition:opacity .7s ease, transform .95s cubic-bezier(.22,.61,.36,1), filter .7s ease, visibility 0s linear .7s; }
@@ -57,9 +53,8 @@
     .bs-desc { font-size:clamp(15px,1.4vw,17px); line-height:1.6; color:#5c598a; margin-bottom:24px; }
     .bs-media { position:relative; z-index:2; flex:0 1 60%; max-width:840px; }
     .bs-media-img { position:relative; aspect-ratio:7/6; max-height:76vh; border-radius:20px; overflow:hidden; }
-    .bs-fallback { position:absolute; inset:0; display:flex; flex-direction:column; gap:6px; align-items:center; justify-content:center; color:#5c598a; font-weight:600; font-size:14px; }
-    .bs-fallback .bf-emoji { font-size:52px; }
     .bs-media-img img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; }
+    .bs-media > img { border-radius:20px; }
     .bs-bubble { position:absolute; top:-16px; left:6px; background:#fff; color:#1a1832; font-weight:800; font-size:15px; padding:13px 18px; border-radius:99px; box-shadow:0 12px 26px rgba(46,45,82,.25); z-index:3; animation:bob 3.2s ease-in-out infinite; white-space:nowrap; }
     @keyframes bob { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-8px); } }
     .banner-arrow { position:absolute; top:50%; transform:translateY(-50%); width:50px; height:50px; border-radius:50%; border:none; background:rgba(255,255,255,.85); color:#2e2d52; display:flex; align-items:center; justify-content:center; cursor:pointer; z-index:3; box-shadow:0 6px 16px rgba(26,24,50,.25); transition:all .2s; padding:0; }
@@ -71,7 +66,8 @@
     .banner-dot { width:24px; height:24px; border-radius:50%; border:none; background:transparent; cursor:pointer; padding:0; display:flex; align-items:center; justify-content:center; }
     .banner-dot::before { content:""; width:9px; height:9px; border-radius:50%; background:rgba(100,98,171,.35); transition:all .25s; }
     .banner-dot.active::before { width:24px; border-radius:99px; background:#6462ab; }
-    /* EBOOK · estilo Kore: texto suelto + tablet morada flotando (portada pendiente) */
+
+    /* ===== EBOOK · texto suelto + tablet morada ===== */
     .ebook-story { display:grid; grid-template-columns:1fr 1fr; gap:clamp(32px,5vw,64px); align-items:center; margin-top:64px; }
     .story-label { display:inline-block; background:#efedfb; color:#4a4790; border-radius:99px; padding:6px 16px; font-size:13px; font-weight:700; margin-bottom:16px; }
     .ebook-story h3 { font-size:clamp(26px,3.5vw,36px); font-weight:700; color:#1a1832; letter-spacing:-.5px; margin-bottom:16px; line-height:1.2; }
@@ -81,7 +77,6 @@
     .es-book { animation:floatBook 5s ease-in-out infinite; }
     .es-book:hover { animation-play-state:paused; }
     @keyframes floatBook { 0%,100% { transform:translateY(0) rotate(-3deg); } 50% { transform:translateY(-14px) rotate(-1deg); } }
-    /* Tablet estilo Kore — diferencial: morado del banner */
     .tablet-stage { position:relative; display:flex; justify-content:center; align-items:center; perspective:1200px; }
     .tablet-glow { position:absolute; width:340px; height:340px; border-radius:50%; background:radial-gradient(circle,rgba(100,98,171,.30),transparent 70%); filter:blur(22px); z-index:0; }
     .tablet-frame { position:relative; z-index:1; width:300px; padding:12px; border-radius:22px; background:linear-gradient(160deg,#807ec9 0%,#524f96 48%,#2e2d52 100%); border:2.5px solid #23214a; box-shadow:0 22px 44px rgba(46,45,82,.35), inset 0 0 0 1.5px rgba(255,255,255,.20), inset 0 1px 0 rgba(255,255,255,.35); transition:transform .55s cubic-bezier(.34,1.56,.64,1); }
@@ -93,22 +88,8 @@
     .es-book:hover .tablet-screen::before { animation:tabletShine .7s ease forwards; }
     @keyframes tabletShine { 0% { left:-80%; opacity:0; } 20% { opacity:1; } 100% { left:130%; opacity:0; } }
     .tablet-screen::after { content:""; position:absolute; top:0; left:0; right:0; height:40%; background:linear-gradient(165deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,.03) 40%,transparent 70%); pointer-events:none; z-index:2; }
-    .shop-hero .btn-hero { background:#fff; color:#524f96; border:none; margin-top:16px; position:relative; z-index:1; box-shadow:0 8px 20px rgba(26,24,50,.2); }
-    .shop-hero .btn-hero:hover { transform:translateY(-2px); }
-    .shop-card.hidden { display:none; }
-    .planora-details { margin: 0 0 12px; font-size: 13px; color: var(--text-muted); }
-    .planora-details summary { color: var(--purple); font-weight: 700; cursor: pointer; }
-    .planora-details ul { padding-left: 18px; margin: 10px 0; }
-    .planora-details li { margin-bottom: 5px; line-height: 1.45; }
-    .planora-details p { flex: none; margin: 8px 0; }
-    .buy-stack { display:flex; gap:8px; flex-wrap:wrap; margin-top: 4px; }
-    .buy-stack .btn-primary, .buy-stack .btn-secondary { flex: 1 1 auto; justify-content:center; min-width: 90px; }
-    .soon { opacity:.7; cursor:default !important; }
-    @keyframes cardFlash { 0%,100% { box-shadow: 0 0 0 0 rgba(100,98,171,0); } 25%,75% { box-shadow: 0 0 0 5px rgba(100,98,171,.45); } }
-    .flash { animation: cardFlash 1.6s ease; }
-    #categories-grid { scroll-margin-top: 92px; }
+
     @media (max-width: 640px) {
-      .shop-hero h1, .shop-hero h2 { font-size: 26px; }
       .banner-slide { flex-direction:column; align-items:flex-start; justify-content:center; padding:100px 26px 130px; gap:26px; }
       .bs-title { font-size:30px; }
       .bs-media { flex:1 1 auto; width:100%; max-width:none; }
@@ -118,54 +99,6 @@
       .tablet-frame { width:230px; }
       .tablet-glow { width:260px; height:260px; }
     }
-    .studio-preview-trigger { display:block; width:100%; padding:0; border:0; background:transparent; cursor:pointer; }
-    .studio-preview-trigger:focus-visible { outline:3px solid #6462ab; outline-offset:3px; }
-    .studio-details-dialog {
-      width:min(980px, calc(100% - 32px));
-      max-width:none;
-      max-height:min(92dvh, 900px);
-      margin:auto;
-      padding:0;
-      border:0;
-      border-radius:24px;
-      color:#252342;
-      background:#fff;
-      box-shadow:0 28px 90px rgba(31,29,69,.32);
-    }
-    .studio-details-dialog::backdrop { background:rgba(30,27,64,.62); backdrop-filter:blur(5px); }
-    .studio-dialog-content { padding:clamp(22px,4vw,40px); }
-    .studio-dialog-header { display:flex; justify-content:space-between; align-items:flex-start; gap:20px; }
-    .studio-dialog-eyebrow { color:#6462ab; font-size:12px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
-    .studio-dialog-header h2 { margin-top:6px; color:#252342; font-size:clamp(25px,4vw,36px); line-height:1.15; }
-    .studio-dialog-close { flex:0 0 auto; width:40px; height:40px; border:0; border-radius:50%; background:#efedfb; color:#4e4b85; font-size:25px; cursor:pointer; }
-    .studio-dialog-lead { max-width:760px; margin:14px 0 24px; color:#656282; line-height:1.65; }
-    .studio-screenshot-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
-    .studio-screenshot { margin:0; overflow:hidden; border:1px solid #e6e3f2; border-radius:16px; background:#f7f6fb; }
-    .studio-screenshot img { display:block; width:100%; aspect-ratio:1.44; object-fit:cover; object-position:top left; }
-    .studio-screenshot figcaption { padding:10px 12px; color:#4e4b78; font-size:13px; font-weight:700; }
-    .studio-dialog-columns { display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:26px; }
-    .studio-dialog-columns h3 { margin-bottom:10px; color:#35335e; font-size:17px; }
-    .studio-dialog-columns ul,.studio-dialog-columns ol { padding-left:20px; color:#676582; line-height:1.65; }
-    .studio-dialog-columns li+li { margin-top:6px; }
-    .studio-install-guide { margin-top:26px; }
-    .studio-install-guide > p { margin-top:8px; color:#676582; line-height:1.65; }
-    .studio-install-guide h4 { margin:4px 0 8px; color:#35335e; font-size:15px; }
-    .studio-data-note { margin-top:22px; padding:14px 16px; border-radius:14px; background:#f2f0fb; color:#57547d; font-size:13px; line-height:1.6; }
-    .studio-dialog-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
-    @media(max-width:680px) {
-      .studio-details-dialog { width:calc(100% - 20px); max-height:94dvh; border-radius:18px; }
-      .studio-screenshot-grid { grid-template-columns:1fr; }
-      .studio-screenshot img { aspect-ratio:1.6; }
-      .studio-dialog-columns { grid-template-columns:1fr; gap:20px; }
-      .studio-dialog-actions > a { width:100%; justify-content:center; }
-    }
-
-    /* ===== Modal genérico de producto (detalles) ===== */
-    .producto-detalle-dialog { width: min(900px, 95%); max-height: 90vh; }
-    .producto-detalle-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px; }
-    @media(max-width:640px){ .producto-detalle-grid { grid-template-columns: 1fr; } }
-    .notion-card.shop-card { cursor: pointer; transition: transform .2s, box-shadow .2s; }
-    .notion-card.shop-card:hover { transform: translateY(-4px); }
   </style>
 </head>
 <body>
@@ -199,390 +132,134 @@
     </button>
   </nav>
 
-  <!-- BANNER CARRUSEL — hero a pantalla completa -->
+  <!-- BANNER CARRUSEL -->
   <div class="shop-banner anim" id="shopBanner">
-        <div class="banner-track" id="bannerTrack">
-          <div class="banner-slide s1 active">
-            <div class="bs-text">
-              <div class="bs-eyebrow">Productos digitales</div>
-              <h2 class="bs-title">Herramientas digitales para días con calma</h2>
-              <p class="bs-desc">Planners y dashboards que ordenan tu contenido y tu día.</p>
-              <a class="btn-primary" href="#shop" onclick="openShop('digitales');return false;">Ver digitales →</a>
-            </div>
-            <div class="bs-media">
-              <div class="bs-media-img">
-                <img src="assets/banner-digital.webp" width="720" height="922" alt="Productos digitales" fetchpriority="high" decoding="async" onerror="this.remove()">
-              </div>
-              <span class="bs-bubble">Desde $5.00</span>
-            </div>
-          </div>
-          <div class="banner-slide s2">
-            <div class="bs-text">
-              <div class="bs-eyebrow">Plantillas Notion</div>
-              <h2 class="bs-title">Tu vida, organizada en un solo lugar</h2>
-              <p class="bs-desc">CRM, finanzas, hábitos, sistemas para estudiantes y creadores — listos en segundos.</p>
-              <a class="btn-primary" href="#shop" onclick="openShop('notion');return false;">Ver plantillas →</a>
-            </div>
-            <div class="bs-media">
-              <img src="assets/banner-notion.webp" width="638" height="768" alt="Plantillas Notion" loading="lazy" decoding="async" onerror="this.remove()">
-            </div>
-            <span class="bs-bubble">9 plantillas</span>
-          </div>
-          <div class="banner-slide s3">
-            <div class="bs-text">
-              <div class="bs-eyebrow">Productos impresos</div>
-              <h2 class="bs-title">Colorea, planea y descansa en papel</h2>
-              <p class="bs-desc">Libros para colorear y el planner 2027 — edición impresa o digital.</p>
-              <a class="btn-primary" href="#shop" onclick="openShop('impresos');return false;">Ver impresos →</a>
-            </div>
-            <div class="bs-media">
-              <img src="assets/banner-impresos.webp" width="614" height="768" alt="Productos impresos" loading="lazy" decoding="async" onerror="this.remove()">
-            </div>
-            <span class="bs-bubble">Desde $12.99</span>
-          </div>
+    <div class="banner-track" id="bannerTrack">
+      <div class="banner-slide s1 active">
+        <div class="bs-text">
+          <div class="bs-eyebrow">Productos digitales</div>
+          <h2 class="bs-title">Herramientas digitales para días con calma</h2>
+          <p class="bs-desc">Planners y dashboards que ordenan tu contenido y tu día.</p>
+          <a class="btn-primary" href="#shop" data-shop-filter="digital">Ver digitales →</a>
         </div>
-        <button class="banner-arrow left" type="button" aria-label="Slide anterior">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-        </button>
-        <button class="banner-arrow right" type="button" aria-label="Siguiente slide">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-        </button>
-        <div class="banner-dots">
-          <button class="banner-dot active" type="button" aria-label="Ir al slide 1"></button>
-          <button class="banner-dot" type="button" aria-label="Ir al slide 2"></button>
-          <button class="banner-dot" type="button" aria-label="Ir al slide 3"></button>
+        <div class="bs-media">
+          <div class="bs-media-img">
+            <img src="assets/banner-digital.webp" width="720" height="922" alt="Productos digitales" fetchpriority="high" decoding="async" onerror="this.remove()">
+          </div>
+          <span class="bs-bubble" data-bubble="digital">Desde $5.00</span>
         </div>
       </div>
+      <div class="banner-slide s2">
+        <div class="bs-text">
+          <div class="bs-eyebrow">Plantillas Notion</div>
+          <h2 class="bs-title">Tu vida, organizada en un solo lugar</h2>
+          <p class="bs-desc">CRM, finanzas, hábitos, sistemas para estudiantes y creadores — listos en segundos.</p>
+          <a class="btn-primary" href="#shop" data-shop-filter="notion">Ver plantillas →</a>
+        </div>
+        <div class="bs-media">
+          <img src="assets/banner-notion.webp" width="638" height="768" alt="Plantillas Notion" loading="lazy" decoding="async" onerror="this.remove()">
+          <span class="bs-bubble" data-bubble="templates">9 plantillas</span>
+        </div>
+      </div>
+      <div class="banner-slide s3">
+        <div class="bs-text">
+          <div class="bs-eyebrow">Productos impresos</div>
+          <h2 class="bs-title">Colorea, planea y descansa en papel</h2>
+          <p class="bs-desc">Libros para colorear y el planner 2027 — edición impresa o digital.</p>
+          <a class="btn-primary" href="#shop" data-shop-filter="print">Ver impresos →</a>
+        </div>
+        <div class="bs-media">
+          <img src="assets/banner-impresos.webp" width="614" height="768" alt="Productos impresos" loading="lazy" decoding="async" onerror="this.remove()">
+          <span class="bs-bubble" data-bubble="print">Desde $12.99</span>
+        </div>
+      </div>
+    </div>
+    <button class="banner-arrow left" type="button" aria-label="Slide anterior">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+    </button>
+    <button class="banner-arrow right" type="button" aria-label="Siguiente slide">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+    </button>
+    <div class="banner-dots">
+      <button class="banner-dot active" type="button" aria-label="Ir al slide 1"></button>
+      <button class="banner-dot" type="button" aria-label="Ir al slide 2"></button>
+      <button class="banner-dot" type="button" aria-label="Ir al slide 3"></button>
+    </div>
+  </div>
 
-  <main class="page">
+  <main class="v-wrap">
 
     <!-- HERO -->
-    <section class="section">
-
-      <!-- AVISO · LA TIENDA COMPLETA -->
-      <div class="shop-hero anim d1">
-        <h1>La tienda completa 🛍️</h1>
-        <p>Plantillas, planners, libros y herramientas digitales — todo en un solo lugar, hecho con calma.</p>
-        <p class="trust-note">🔒 Compra segura mediante PayPal, Bancolombia, Nequi y Nu</p>
-        <button class="btn-primary btn-hero" onclick="scrollToCategories()">Ver categorías ↓</button>
+    <section class="v-hero">
+      <div class="v-hero-copy">
+        <span class="v-eyebrow" id="vEyebrow">Catálogo · 2026</span>
+        <h1 id="vHeroTitle">La tienda completa,<br><em>en un solo lugar.</em></h1>
+        <p id="vHeroP">Plantillas, planners, libros y herramientas digitales. Toca cualquier producto para ver los detalles y comprar sin salir de la página.</p>
+        <p class="v-trust" id="vTrust">🔒 Compra segura por PayPal, Bancolombia, Nequi y Nu</p>
       </div>
-
-      <!-- YOUTUBE -->
-      <div class="youtube-banner anim d1" style="margin-top: 34px;">
-        <div class="youtube-thumb">
-          <video src="lofi-video.mp4" width="440" height="248" autoplay muted loop playsinline preload="metadata" poster="lofi-poster.webp" aria-label="Video de música Lofi de Alquimia Lab"></video>
-        </div>
-        <div class="youtube-text">
-          <h2>Mi Música Lofi</h2>
-          <p>Lo-Fi · Alquimia Lab</p>
-          <a href="https://www.youtube.com/channel/UCWb7zKnOw5k_XDgfUcBn9eQ" target="_blank" rel="noopener" class="btn-secondary btn-sm">Suscríbete en YouTube →</a>
-        </div>
+      <div class="v-stats" aria-label="Resumen del catálogo">
+        <div class="v-stat"><b id="statTotal">14</b><span id="statProductsLabel">productos</span></div>
+        <div class="v-stat"><b id="statFree">3</b><span id="statFreeLabel">gratis</span></div>
+        <div class="v-stat"><b id="statFrom">$4</b><span id="statFromLabel">desde</span></div>
       </div>
-
-      <!-- CATEGORÍAS -->
-      <div class="category-grid anim d1" id="categories-grid" style="margin-top: 34px;">
-        <div class="category-card" id="cat-notion">
-          <div class="category-media"><img src="notion-featured.webp" width="900" height="469" alt="Plantillas de Notion" loading="lazy" decoding="async"></div>
-          <h3>Plantillas de Notion</h3>
-          <p>Sistemas de productividad, planificación y organización personal y profesional. 9 plantillas disponibles.</p>
-          <button class="btn-primary btn-sm" onclick="openShop('notion')">Ver todo</button>
-        </div>
-        <div class="category-card" id="cat-impresos">
-          <div class="category-media"><img src="printed-featured.webp" width="900" height="470" alt="Productos impresos" loading="lazy" decoding="async"></div>
-          <h3>Productos impresos</h3>
-          <p>Libros para colorear, planners en PDF y más. Disponibles en Amazon y Gumroad.</p>
-          <button class="btn-primary btn-sm" onclick="openShop('impresos')">Ver todo</button>
-        </div>
-        <div class="category-card" id="cat-digitales">
-          <div class="category-media"><img src="products/digital-tools.webp" width="1000" height="558" alt="Productos digitales" loading="lazy" decoding="async"></div>
-          <h3>Productos digitales</h3>
-          <p>Apps, planners y herramientas digitales que traen orden tranquilo a tu contenido y vida diaria. Listos en computadora y móvil.</p>
-          <button class="btn-primary btn-sm" onclick="openShop('digitales')">Ver todo</button>
-        </div>
-      </div>
-
-      <!-- GUÍA: ¿cuál es para ti? -->
-      <div class="match-wrap anim d2">
-        <h3 class="match-title">¿Cuál es para ti?</h3>
-        <p class="match-sub">Elige tu caos:</p>
-        <div class="match-grid">
-          <div class="match-card">
-            <div class="match-emoji">🧾</div>
-            <p>Necesito un plan de contenido para mi negocio</p>
-            <button class="btn-primary btn-sm" onclick="goProduct('p-social')">Planner de Redes Sociales</button>
-          </div>
-          <div class="match-card">
-            <div class="match-emoji">🌱</div>
-            <p>Quiero calma y orden</p>
-            <button class="btn-primary btn-sm" onclick="goProduct('p-quiet')">Quiet Mind</button>
-          </div>
-          <div class="match-card">
-            <div class="match-emoji">🎨</div>
-            <p>Me relajo coloreando</p>
-            <button class="btn-primary btn-sm" onclick="goProduct('p-coloring')">Libros para colorear</button>
-          </div>
-          <div class="match-card">
-            <div class="match-emoji">📓</div>
-            <p>Quiero un planner en papel</p>
-            <button class="btn-primary btn-sm" onclick="goProduct('p-planner')">Planner 2027</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- PRODUCTOS · OCULTOS HASTA ABRIR UNA CATEGORÍA -->
-      <div class="shop-products" id="shop-products" style="display:none; margin-top:34px;">
-        <button class="btn-secondary btn-sm" onclick="openShop()" style="margin-bottom:18px;">← Atrás</button>
-        <div class="section-title"><span>Todos los productos</span></div>
-        <div class="notion-grid" id="shop">
-
-        <!-- EL DIARIO IMPERFECTO (no-Notion: modal detalles) -->
-        <div class="notion-card shop-card anim" data-cat="digital" id="p-diario" onclick="abrirProductoDetalle('p-diario')">
-          <img loading="lazy" class="notion-thumb" src="assets/ebook-portada.webp" width="900" height="1286" alt="El diario imperfecto de una creadora" decoding="async" style="height:220px;object-fit:contain;background:#e8e6f4;padding:14px;">
-          <div class="notion-info">
-            <h3>El diario imperfecto de una creadora</h3>
-            <p>La historia real de mi salto a la vida freelance — con 15 prompts para copiar y pegar, ejercicios con espacio para escribir, y una lista de lanzamiento.</p>
-            <span class="notion-price">COP 19.687+</span>
-            <div class="buy-stack">
-              <button type="button" class="btn-secondary btn-sm" onclick="event.stopPropagation(); abrirProductoDetalle('p-diario');">Ver detalles</button>
-              <a href="https://alquimialab.gumroad.com/l/Elplanimperfectodeunacredora" target="_blank" rel="noopener" class="btn-primary btn-sm" onclick="event.stopPropagation()">Pagar ahora →</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- PLANORA (no-Notion: modal detalles) -->
-        <div class="notion-card shop-card anim" data-cat="digital" id="p-planora" onclick="abrirProductoDetalle('p-planora')">
-          <img loading="lazy" class="notion-thumb" src="assets/featured-maestro.webp" width="700" height="336" alt="Planora — Organizador y planificador de redes sociales" decoding="async">
-          <div class="notion-info">
-            <span class="badge" style="background:#e5533d;color:#fff;font-size:10px;font-weight:700;padding:4px 10px;border-radius:99px;align-self:flex-start;">Nuevo</span>
-            <h3>Planora — Organizador | Planificador de Redes Sociales</h3>
-            <p>Tus ideas merecen un plan—no perderse entre notas y hojas de cálculo. Planora es una app de escritorio para Windows que te ayuda a organizar tu contenido, darle dirección a tus ideas y convertir inspiración en acción.</p>
-            <p><em>Menos caos, más espacio para crear.</em></p>
-            <span class="notion-price">$7.99</span>
-            <div class="buy-stack">
-              <button type="button" class="btn-secondary btn-sm" onclick="event.stopPropagation(); abrirProductoDetalle('p-planora');">Ver detalles</button>
-              <a href="https://alquimialab.gumroad.com/l/Planora-pro?wanted=true" target="_blank" rel="noopener" class="btn-primary btn-sm" onclick="window.gtag&&gtag('event','click_buy_planora')">Pagar ahora →</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- ALQUIMIA STUDIO (no-Notion: modal detalles) -->
-        <div class="notion-card shop-card anim" data-cat="digital" id="p-alquimia-studio" onclick="abrirProductoDetalle('p-alquimia-studio')">
-          <img loading="lazy" class="notion-thumb" src="assets/featured-alquimia.webp" width="700" height="336" alt="Alquimia Studio — Organizador de PDFs y planners digitales" decoding="async">
-          <div class="notion-info">
-            <h3>Alquimia Studio — Organizador de PDFs + 5 Planners Digitales</h3>
-            <p>Organiza y lee tus PDFs en el navegador, junto con cinco planners digitales: Calma y Orden, Anual, TDAH, Ciclo Menstrual y Semanal. Incluye modo claro y oscuro, favoritos, y herramientas de respaldo y restauración.</p>
-            <p>Tus planners y PDFs se guardan en el navegador de cada dispositivo y no se sincronizan automáticamente. Guarda una copia de respaldo para mover o restaurar tus datos. Compra única, sin suscripción mensual.</p>
-            <span class="notion-price">$9.99</span>
-            <div class="buy-stack">
-              <button type="button" class="btn-secondary btn-sm" onclick="event.stopPropagation(); abrirProductoDetalle('p-alquimia-studio');">Ver detalles</button>
-              <a href="https://alquimialab.gumroad.com/l/AlquimiaStudio?wanted=true" target="_blank" rel="noopener" class="btn-primary btn-sm" onclick="window.gtag&&gtag('event','click_buy_alquimia_studio')">Pagar ahora →</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- PLANNER 2027 (no-Notion: modal detalles) -->
-        <div class="notion-card shop-card anim" data-cat="print" id="p-planner" onclick="abrirProductoDetalle('p-planner')">
-          <img loading="lazy" class="notion-thumb" src="journal-cover.webp" alt="Planner 2027" decoding="async">
-          <div class="notion-info">
-            <h3>Planner 2027 — Calma y Orden</h3>
-            <p>Un planner minimalista para organizar tu año con calma e intención.</p>
-            <span class="notion-price">$10.99</span>
-            <div class="buy-stack">
-              <button type="button" class="btn-secondary btn-sm" onclick="event.stopPropagation(); abrirProductoDetalle('p-planner');">Ver detalles</button>
-              <a href="https://alquimialab.gumroad.com/l/bvzpd" target="_blank" rel="noopener" class="btn-primary btn-sm" onclick="event.stopPropagation()">Digital →</a>
-              <a href="https://www.amazon.com/dp/B0HJ8J6MHG" target="_blank" rel="noopener" class="btn-secondary btn-sm" onclick="event.stopPropagation()">Amazon</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- COLORING BOOKS (no-Notion: modal detalles) -->
-        <div class="notion-card shop-card anim" data-cat="print" id="p-coloring" onclick="abrirProductoDetalle('p-coloring')">
-          <img loading="lazy" class="notion-thumb" src="print-coloring.webp" alt="Libros para colorear" decoding="async">
-          <div class="notion-info">
-            <h3>Libros para colorear — Lofi Coloring</h3>
-            <p>Mismo libro en español e inglés. Edición impresa y digital.</p>
-            <span class="notion-price">$5.00</span>
-            <div class="buy-stack">
-              <button type="button" class="btn-secondary btn-sm" onclick="event.stopPropagation(); abrirProductoDetalle('p-coloring');">Ver detalles</button>
-              <a href="https://alquimialab.gumroad.com/l/LofiColoringBookAlquimia" target="_blank" rel="noopener" class="btn-primary btn-sm" onclick="event.stopPropagation()">Digital →</a>
-              <a href="https://www.amazon.com/dp/B0HBML5LCP" target="_blank" rel="noopener" class="btn-secondary btn-sm" onclick="event.stopPropagation()">Amazon</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- NOTION TEMPLATES (van directo a pagar, sin modal) -->
-
-        <!-- FREELANCER CRM -->
-        <div class="notion-card shop-card anim" data-cat="notion" id="p-crm">
-          <img loading="lazy" class="notion-thumb" src="cover-freelancer-crm.webp" alt="Freelancer CRM" decoding="async">
-          <div class="notion-info">
-            <h3>Freelancer CRM — Planner</h3>
-            <p>Sistema operativo para estructurar tu flujo de trabajo de principio a fin.</p>
-            <span class="notion-price">$9.99</span>
-            <div class="buy-stack">
-              <a href="https://www.notion.com/templates/freelancercrmplanner" target="_blank" rel="noopener" class="btn-primary btn-sm" onclick="window.gtag&&gtag('event','click_buy_freelancer_crm')">Comprar en Notion →</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- YOUTUBE CREATOR OS -->
-        <div class="notion-card shop-card anim" data-cat="notion" id="p-yt">
-          <img loading="lazy" class="notion-thumb" src="cover-youtube.webp" alt="YouTube Creator OS" decoding="async">
-          <div class="notion-info">
-            <h3>YouTube Creator OS — Planner &amp; Script</h3>
-            <p>Deja de perder ideas de video con un espacio de trabajo completo de Notion creado para creadores y productores. Trae claridad estratégica a tu canal, desde guiones largos hasta shorts virales.</p>
-            <span class="notion-price">$15</span>
-            <div class="buy-stack">
-              <a href="https://www.notion.com/templates/youtube-creator-os-automated-social-media-planner-script" target="_blank" rel="noopener" class="btn-primary btn-sm">Comprar en Notion →</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- STUDENT OS -->
-        <div class="notion-card shop-card anim" data-cat="notion" id="p-student">
-          <img loading="lazy" class="notion-thumb" src="assets/student-os-cover.webp" width="1000" height="456" alt="Student OS &amp; Study Planner" decoding="async">
-          <div class="notion-info">
-            <h3>Student OS &amp; Study Planner</h3>
-            <p>Di adiós a notas dispersas y fechas límite olvidadas con un único panel minimalista. Lleva toda tu vida estudiantil sin problemas, desde tareas diarias hasta exámenes finales.</p>
-            <span class="notion-price">$5.99</span>
-            <div class="buy-stack">
-              <a href="https://www.notion.com/templates/student-os-study-planner" target="_blank" rel="noopener" class="btn-primary btn-sm">Comprar en Notion →</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- SOCIAL MEDIA PLANNER -->
-        <div class="notion-card shop-card anim" data-cat="notion" id="p-social">
-          <img loading="lazy" class="notion-thumb" src="cover-social-media.webp" alt="Planner de Redes Sociales" decoding="async">
-          <div class="notion-info">
-            <span class="badge" style="background:#6462ab;color:#fff;font-size:10px;font-weight:700;padding:4px 10px;border-radius:99px;align-self:flex-start;">Un buen primer paso</span>
-            <h3>Planner de Redes Sociales</h3>
-            <p>Planea tus publicaciones, campañas e ideas de contenido en un solo espacio de Notion — una forma más tranquila para creadores y pequeños negocios de mostrarse en línea.</p>
-            <span class="notion-price">$4</span>
-            <div class="buy-stack">
-              <a href="https://www.notion.com/templates/social-media-planner-256" target="_blank" rel="noopener" class="btn-primary btn-sm" onclick="window.gtag&&gtag('event','click_buy_social_media_planner')">Comprar en Notion →</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- FINANCE PRO -->
-        <div class="notion-card shop-card anim" data-cat="notion" id="p-financepro">
-          <img loading="lazy" class="notion-thumb" src="cover-finance-pro.webp" alt="Finance Planner Pro" decoding="async">
-          <div class="notion-info">
-            <h3>Finance Planner Pro</h3>
-            <p>Seguimiento financiero avanzado con reportes detallados y proyecciones.</p>
-            <span class="notion-price">$9.99</span>
-            <div class="buy-stack">
-              <a href="https://www.notion.com/templates/finance-planner-pro" target="_blank" rel="noopener" class="btn-primary btn-sm">Comprar en Notion →</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- QUIET MIND (free) -->
-        <div class="notion-card shop-card anim" data-cat="notion" id="p-quiet">
-          <img loading="lazy" class="notion-thumb" src="cover-quiet-mind.webp" alt="Quiet Mind Planner" decoding="async">
-          <div class="notion-info">
-            <h3>Quiet Mind Planner</h3>
-            <p>Libera tu mente del ruido mental con un santuario minimalista diseñado para proteger tu energía y traer calma. Transforma tus rutinas diarias en un flujo suave de reflexión intencional.</p>
-            <span class="notion-price" style="color:var(--text-muted);">Gratis</span>
-            <div class="buy-stack">
-              <a href="https://www.notion.com/templates/quiet-mind-planner" target="_blank" rel="noopener" class="btn-secondary btn-sm">Descargar gratis</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- HABIT (free) -->
-        <div class="notion-card shop-card anim" data-cat="notion" id="p-habit">
-          <img loading="lazy" class="notion-thumb" src="cover-habit.webp" alt="Habit Planner" decoding="async">
-          <div class="notion-info">
-            <h3>Habit Planner</h3>
-            <p>Transforma tus hábitos sin la culpa visual de días perdidos del pasado. Un diseño de pizarra limpia para mantener tu mente clara y enfocada en tu crecimiento.</p>
-            <span class="notion-price" style="color:var(--text-muted);">Gratis</span>
-            <div class="buy-stack">
-              <a href="https://www.notion.com/templates/habit-planner" target="_blank" rel="noopener" class="btn-secondary btn-sm">Descargar gratis</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- FINANCE FREE -->
-        <div class="notion-card shop-card anim" data-cat="notion" id="p-financefree">
-          <img loading="lazy" class="notion-thumb" src="cover-finance-free.webp" alt="Finance Planner Free" decoding="async">
-          <div class="notion-info">
-            <h3>Finance Planner Free</h3>
-            <p>Organiza tus finanzas personales con un sistema visual e intuitivo.</p>
-            <span class="notion-price" style="color:var(--text-muted);">Gratis</span>
-            <div class="buy-stack">
-              <a href="https://www.notion.com/templates/finance-planner-785" target="_blank" rel="noopener" class="btn-secondary btn-sm">Descargar gratis</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- PET PLANNER -->
-        <div class="notion-card shop-card anim" data-cat="notion" id="p-pet">
-          <img loading="lazy" class="notion-thumb" src="cover-pet-planner.jpg" alt="Pet Planner" decoding="async">
-          <div class="notion-info">
-            <h3>Pet Planner</h3>
-            <p>Vacunas, visitas al veterinario, medicamentos y comida en un solo panel. Para Bonnie, Luna y cada miembro peludo.</p>
-            <span class="notion-price">$15</span>
-            <div class="buy-stack">
-              <a href="https://www.notion.com/templates/pet-planner-your-pet-s-life-in-order" target="_blank" rel="noopener" class="btn-primary btn-sm">Comprar en Notion →</a>
-            </div>
-          </div>
-        </div>
-
-        </div>
-      </div>
-
-      <!-- Modal genérico de detalles de producto (solo no-Notion) -->
-      <dialog class="studio-details-dialog producto-detalle-dialog" id="productoDetalleDialog" aria-labelledby="productoDetalleTitle">
-        <div class="studio-dialog-content">
-          <div class="studio-dialog-header">
-            <div>
-              <p class="studio-dialog-eyebrow" id="prodEyebrow"></p>
-              <h2 id="productoDetalleTitle"></h2>
-            </div>
-            <form method="dialog"><button class="studio-dialog-close" aria-label="Cerrar detalles">&times;</button></form>
-          </div>
-          <p class="studio-dialog-lead" id="prodLead"></p>
-          <div class="producto-detalle-grid">
-            <div>
-              <img id="prodImg" alt="" style="width:100%;height:auto;border-radius:16px;object-fit:cover;">
-            </div>
-            <div>
-              <div id="prodPrecio"></div>
-              <div id="prodDetalleExtra" style="margin-top:16px;line-height:1.6;color:#656282;"></div>
-              <div class="studio-dialog-actions" style="margin-top:24px;">
-                <a id="prodBtnPagar" href="pagar.html" class="btn-primary">Pagar ahora →</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </dialog>
-
-      <!-- EBOOK · HISTORIA (estilo Kore, sin cajas) -->
-      <div class="ebook-story anim d2">
-        <div>
-          <span class="story-label">Disponible ahora</span>
-          <h3>El diario imperfecto de una creadora</h3>
-          <p>La historia real de mi salto a la vida freelance — con 15 prompts para copiar y pegar, ejercicios con espacio para escribir, y una lista de lanzamiento.</p>
-          <div class="es-quote">El salto a la vida freelance, contado sin filtros.</div>
-          <a class="btn-primary" href="https://alquimialab.gumroad.com/l/Elplanimperfectodeunacredora" target="_blank" rel="noopener" style="margin-top:18px;">Comprar ahora →</a>
-        </div>
-        <div class="es-side">
-          <div class="es-book" aria-hidden="true">
-            <div class="tablet-stage">
-              <div class="tablet-glow"></div>
-              <div class="tablet-frame">
-                <div class="tablet-screen">
-                  <img loading="lazy" src="assets/ebook-portada.webp" width="900" height="1286" alt="" decoding="async">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </section>
+
+    <!-- YOUTUBE · MÚSICA LOFI -->
+    <div class="youtube-banner anim d1" style="margin-top:34px;">
+      <div class="youtube-thumb">
+        <video src="lofi-video.mp4" width="440" height="248" autoplay muted loop playsinline preload="metadata" poster="lofi-poster.webp" aria-label="Video de música Lofi de Alquimia Lab"></video>
+      </div>
+      <div class="youtube-text">
+        <h2>Mi Música Lofi</h2>
+        <p>Lo-Fi · Alquimia Lab</p>
+        <a href="https://www.youtube.com/channel/UCWb7zKnOw5k_XDgfUcBn9eQ" target="_blank" rel="noopener" class="btn-secondary btn-sm">Suscríbete en YouTube →</a>
+      </div>
+    </div>
+
+    <!-- FILTROS -->
+    <section class="v-toolbar" id="filtros" aria-label="Filtros de productos" style="margin-top:34px;">
+      <div class="v-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input type="search" id="vSearch" placeholder="Buscar producto…" aria-label="Buscar producto" autocomplete="off">
+      </div>
+      <div class="v-chips" id="vChips"></div>
+    </section>
+
+    <div class="v-meta">
+      <span id="resultCount">14 productos</span>
+      <button type="button" class="v-clear" id="clearFilters" hidden>Limpiar filtros</button>
+    </div>
+
+    <div class="v-grid" id="shop"></div>
+
+    <div class="v-empty" id="empty" hidden>
+      <b id="vEmptyTitle">No encontré ese producto</b>
+      <span id="vEmptyText">Prueba con otra palabra o mira todo el catálogo.</span>
+      <div style="margin-top:16px;"><button type="button" class="btn-primary btn-sm" id="resetEmpty">Ver todos</button></div>
+    </div>
+
+    <!-- EBOOK · HISTORIA -->
+    <div class="ebook-story anim d2">
+      <div>
+        <span class="story-label">Disponible ahora</span>
+        <h3>El diario imperfecto de una creadora</h3>
+        <p>La historia real de mi salto a la vida freelance — con 15 prompts para copiar y pegar, ejercicios con espacio para escribir, y una lista de lanzamiento.</p>
+        <div class="es-quote">El salto a la vida freelance, contado sin filtros.</div>
+        <a class="btn-primary" href="https://alquimialab.gumroad.com/l/Elplanimperfectodeunacredora" target="_blank" rel="noopener" style="margin-top:18px;">Comprar ahora →</a>
+      </div>
+      <div class="es-side">
+        <div class="es-book" aria-hidden="true">
+          <div class="tablet-stage">
+            <div class="tablet-glow"></div>
+            <div class="tablet-frame">
+              <div class="tablet-screen">
+                <img loading="lazy" src="assets/ebook-portada.webp" width="900" height="1286" alt="" decoding="async">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </main>
 
@@ -594,9 +271,27 @@
     <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   </a>
 
+  <dialog class="v-dialog" id="quickView" aria-labelledby="qvName">
+    <div class="v-dialog-inner">
+      <button type="button" class="v-close" id="qvClose" aria-label="Cerrar vista rápida">&times;</button>
+      <div class="v-dialog-grid">
+        <div class="v-dialog-media" id="qvMedia"><span class="v-emoji" aria-hidden="true">✨</span></div>
+        <div class="v-dialog-info">
+          <span class="v-dialog-eyebrow" id="qvCat"></span>
+          <h2 id="qvName"></h2>
+          <p class="v-desc" id="qvDesc"></p>
+          <div class="v-price-row" id="qvPrice"></div>
+          <div class="v-buy-row v-buy-row-modal" id="qvBuyWrap"></div>
+          <p class="v-dialog-note" id="qvNote"></p>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
   <script>
     window.addEventListener('scroll', function() {
-      document.querySelector('.nav').classList.toggle('scrolled', window.scrollY > 20);
+      var nav = document.querySelector('.nav');
+      if (nav) nav.classList.toggle('scrolled', window.scrollY > 20);
     });
 
     /* Banner carrusel */
@@ -625,103 +320,10 @@
       go(0);
       play();
     })();
-
-    /* Filtros */
-    var chips = document.querySelectorAll('.chip');
-    var cards = document.querySelectorAll('.shop-card');
-    var CAT_FILTER = { notion: 'notion', impresos: 'print', digitales: 'digital' };
-
-    function applyFilter(f) {
-      chips.forEach(function(c) { c.classList.toggle('active', c.getAttribute('data-filter') === f); });
-      cards.forEach(function(card) {
-        card.classList.toggle('hidden', !(f === 'all' || card.getAttribute('data-cat') === f));
-      });
-    }
-
-    /* Abrir/cerrar productos por categoría */
-    function openShop(cat, noScroll) {
-      var cats = document.getElementById('categories-grid');
-      var shop = document.getElementById('shop-products');
-      if (!cats || !shop) return;
-      var valid = !!CAT_FILTER[cat];
-      cats.style.display = valid ? 'none' : '';
-      shop.style.display = valid ? 'block' : 'none';
-      if (valid) {
-        applyFilter(CAT_FILTER[cat]);
-        if (history.replaceState) history.replaceState(null, '', location.pathname + location.search + '#' + cat);
-        if (!noScroll) shop.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } else {
-        applyFilter('all');
-        if (history.replaceState) history.replaceState(null, '', location.pathname + location.search);
-      }
-    }
-    function catFromHash() { return (location.hash || '').replace('#', '').toLowerCase(); }
-    window.addEventListener('hashchange', function() { openShop(catFromHash()); });
-    if (CAT_FILTER[catFromHash()]) openShop(catFromHash(), true);
-
-    function scrollToCategories() {
-      openShop();
-      var el = document.getElementById('categories-grid');
-      if (el) el.scrollIntoView({ block: 'start' });
-    }
-
-    /* Guía "¿cuál es para ti?": abre la tienda, filtra y resalta la tarjeta */
-    function goProduct(id) {
-      var card = document.getElementById(id);
-      if (!card) return;
-      var cat = card.getAttribute('data-cat');
-      var map = { notion: 'notion', print: 'impresos', digital: 'digitales' };
-      openShop(map[cat] || '', true);
-      applyFilter(cat);
-      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      card.classList.remove('flash');
-      void card.offsetWidth;
-      card.classList.add('flash');
-    }
-
-    /* ===== Modal genérico de detalles de producto (solo no-Notion) ===== */
-    function abrirProductoDetalle(id) {
-      var card = document.getElementById(id);
-      if (!card) return;
-      var dlg = document.getElementById('productoDetalleDialog');
-      if (!dlg) return;
-
-      var titleEl = card.querySelector('h3');
-      var priceEl = card.querySelector('.notion-price');
-      var descEl = card.querySelector('.notion-info p');
-      var imgEl = card.querySelector('img');
-      var cat = card.getAttribute('data-cat') || '';
-
-      document.getElementById('productoDetalleTitle').textContent = titleEl ? titleEl.textContent : '';
-      document.getElementById('prodEyebrow').textContent = cat === 'notion' ? 'Plantilla Notion' : (cat === 'print' ? 'Producto impreso' : 'Producto digital');
-      document.getElementById('prodLead').textContent = descEl ? descEl.textContent : '';
-      if (imgEl) {
-        document.getElementById('prodImg').src = imgEl.src;
-        document.getElementById('prodImg').alt = titleEl ? titleEl.textContent : '';
-      }
-
-      var precioBox = document.getElementById('prodPrecio');
-      precioBox.innerHTML = '';
-      if (priceEl) {
-        var precioTexto = priceEl.textContent.trim();
-        precioBox.innerHTML = '<span class="notion-price" style="font-size:1.2rem;font-weight:700">' + precioTexto + '</span>';
-      }
-
-      var btnPagar = document.getElementById('prodBtnPagar');
-      var pagarLink = card.querySelector('.buy-stack .btn-primary');
-      if (pagarLink) btnPagar.href = pagarLink.href;
-      else btnPagar.href = 'pagar.html';
-
-      if (dlg && !dlg.open) dlg.showModal();
-    }
-    var productoDialog = document.getElementById('productoDetalleDialog');
-    if (productoDialog) {
-      productoDialog.addEventListener('click', function(event) {
-        if (event.target === productoDialog) productoDialog.close();
-      });
-    }
   </script>
 
-  <script src="js/lang.js?v=9"></script>
+  <script src="js/lang.js?v=10"></script>
+  <script>window.SHOP = { mode: 'public' };</script>
+  <script src="js/shop.js?v=1"></script>
 </body>
 </html>
