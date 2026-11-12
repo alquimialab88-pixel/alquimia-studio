@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="stickly_bg">#F8F7FB</color>
+    <color name="stickly_primary">#6463AA</color>
+    <color name="stickly_dark">#2A2A3E</color>
+
+    <style name="Theme.Stickly" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/stickly_bg</item>
+        <item name="android:statusBarColor">@color/stickly_primary</item>
+        <item name="android:navigationBarColor">@color/stickly_dark</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowActionModeOverlay">true</item>
+    </style>
+</resources>

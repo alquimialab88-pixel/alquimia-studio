@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="800" viewBox="0 0 360 800" font-family="Roboto, Arial, sans-serif">
+  <rect id="Background" width="360" height="800" fill="#F8F7FB"/>
+
+  <g id="Home Detras Desenfocado" opacity="0.5">
+    <text x="16" y="52" font-size="24" font-weight="700" fill="#2A2A3E">Buenas tardes, Lucero 👋</text>
+    <rect x="16" y="100" width="42" height="76" rx="16" fill="#FFFFFF"/>
+    <rect x="160" y="100" width="42" height="76" rx="16" fill="#6463AA"/>
+    <rect x="16" y="232" width="328" height="52" rx="16" fill="#FFFFFF"/>
+  </g>
+
+  <g id="Sheet Crear">
+    <rect x="0" y="440" width="360" height="360" rx="28" fill="#FFFFFF"/>
+    <rect id="Handle" x="156" y="452" width="48" height="5" rx="2.5" fill="#6463AA"/>
+
+    <text id="Titulo Crear" x="24" y="496" font-size="18" font-weight="700" fill="#2A2A3E">Crear</text>
+
+    <g id="Opcion Nota">
+      <rect x="24" y="514" width="312" height="52" rx="16" fill="#F8F7FB"/>
+      <rect x="36" y="526" width="36" height="36" rx="12" fill="#EDECF8"/>
+      <text x="54" y="550" font-size="16" fill="#6463AA" text-anchor="middle">📝</text>
+      <text x="86" y="545" font-size="15" font-weight="500" fill="#2A2A3E">Nota</text>
+    </g>
+
+    <g id="Opcion Contrasena">
+      <rect x="24" y="574" width="312" height="52" rx="16" fill="#F8F7FB"/>
+      <rect x="36" y="586" width="36" height="36" rx="12" fill="#EDECF8"/>
+      <text x="54" y="610" font-size="16" fill="#4A4990" text-anchor="middle">🔒</text>
+      <text x="86" y="605" font-size="15" font-weight="500" fill="#2A2A3E">Contraseña</text>
+    </g>
+
+    <g id="Opcion Cuaderno">
+      <rect x="24" y="634" width="312" height="52" rx="16" fill="#F8F7FB"/>
+      <rect x="36" y="646" width="36" height="36" rx="12" fill="#EDECF8"/>
+      <text x="54" y="670" font-size="16" fill="#6463AA" text-anchor="middle">📒</text>
+      <text x="86" y="665" font-size="15" font-weight="500" fill="#2A2A3E">Cuaderno</text>
+    </g>
+
+    <g id="Opcion Fecha">
+      <rect x="24" y="694" width="312" height="52" rx="16" fill="#F8F7FB"/>
+      <rect x="36" y="706" width="36" height="36" rx="12" fill="#EDECF8"/>
+      <text x="54" y="730" font-size="16" fill="#6463AA" text-anchor="middle">📅</text>
+      <text x="86" y="725" font-size="15" font-weight="500" fill="#2A2A3E">Fecha</text>
+    </g>
+  </g>
+</svg>
