@@ -992,6 +992,46 @@ select.input {
 .nb-card h3 { font-size: 14.5px; font-weight: 700; line-height: 1.3; margin-top: 14px; position: relative; z-index: 1; }
 .nb-card .nb-count { font-size: 11px; color: var(--muted); font-weight: 600; margin-top: 4px; position: relative; z-index: 1; }
 
+.voice-card {
+  width: 100%;
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid rgba(232, 230, 244, .9);
+  border-radius: 20px;
+  background: linear-gradient(135deg, #F1EFFB, #EAE7F8);
+  text-align: left;
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+}
+.voice-card:active { transform: scale(.99); }
+.voice-ic {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  color: var(--primary);
+}
+.voice-ic .icon { width: 20px; height: 20px; }
+.voice-main { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.voice-main b { font-size: 13.5px; font-weight: 700; }
+.voice-main small { font-size: 11.5px; color: var(--muted); line-height: 1.35; }
+.voice-btn {
+  flex: 0 0 auto;
+  padding: 9px 15px;
+  border-radius: 12px;
+  background: #fff;
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(90, 88, 160, .1);
+}
+
 .nb-hero {
   border-radius: 22px;
   padding: 18px;
@@ -1235,6 +1275,8 @@ select.input {
 .profile-avatar {
   width: 58px;
   height: 58px;
+  border: 0;
+  padding: 0;
   border-radius: 19px;
   background: #fff;
   color: var(--primary);
@@ -1249,6 +1291,15 @@ select.input {
 }
 .profile-card h2 { font-size: 19px; letter-spacing: -.02em; position: relative; z-index: 1; }
 .profile-card p { font-size: 11.5px; color: #5C5980; margin-top: 2px; position: relative; z-index: 1; }
+.profile-chev {
+  margin-left: auto;
+  position: relative;
+  z-index: 1;
+  color: #6E6B89;
+  display: grid;
+  place-items: center;
+}
+.profile-chev .icon { width: 18px; height: 18px; }
 
 .security-cta {
   display: flex;
@@ -1460,6 +1511,30 @@ select.input {
   z-index: 2;
 }
 .onb-art .oa-badge .icon { width: 30px; height: 30px; }
+.onb-visual {
+  position: relative;
+  width: 272px;
+  height: 252px;
+  margin: 0 auto 26px;
+  display: grid;
+  place-items: center;
+}
+.onb-visual .onb-art { margin: 0; }
+.onb-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 30px;
+  opacity: 0;
+  transform: scale(.98);
+  transition: opacity .45s ease, transform .45s ease;
+  box-shadow: 0 20px 44px rgba(90, 88, 160, .24);
+  z-index: 3;
+}
+.onb-visual.has-photo .onb-photo { opacity: 1; transform: scale(1); }
+.onb-visual.has-photo .onb-art { visibility: hidden; }
 .onb-eyebrow {
   font-size: 10.5px;
   font-weight: 700;

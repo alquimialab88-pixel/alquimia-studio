@@ -33,6 +33,7 @@ export async function render(ctx) {
       '<span class="profile-avatar">' + avatar + "</span>" +
       "<span><h2>" + ui.esc(name || t("tuNombre")) + "</h2>" +
         "<p>Stickly · Alquimia Lab</p></span>" +
+      '<span class="profile-chev">' + ui.icon("chevron-right") + "</span>" +
     "</button>" +
 
     '<div class="menu-list">' +

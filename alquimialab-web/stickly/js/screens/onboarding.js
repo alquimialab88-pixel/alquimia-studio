@@ -8,9 +8,9 @@ import * as ui from "../ui.js";
 import { promptPin } from "../pin.js";
 
 const SLIDES = [
-  { title: "onb1t", text: "onb1d", icon: "note", art: "notes" },
-  { title: "onb2t", text: "onb2d", icon: "shield", art: "shield" },
-  { title: "onb3t", text: "onb3d", icon: "download", art: "install" }
+  { title: "onb1t", text: "onb1d", icon: "note", art: "notes", photo: "assets/antonio-1.png" },
+  { title: "onb2t", text: "onb2d", icon: "shield", art: "shield", photo: "assets/antonio-2.png" },
+  { title: "onb3t", text: "onb3d", icon: "download", art: "install", photo: "assets/antonio-3.png" }
 ];
 
 function art(icon, kind) {
@@ -35,6 +35,35 @@ function art(icon, kind) {
     '<span class="oa-badge">' + ui.icon(icon) + "</span></div>";
 }
 
+// Ilustración de respaldo + foto de Antonio. Si el archivo no existe,
+// se queda la ilustración y no aparece ningún icono roto.
+function visual(slide) {
+  return '<div class="onb-visual">' +
+    art(slide.icon, slide.art) +
+    '<img class="onb-photo" src="' + ui.esc(slide.photo) + '" alt="" decoding="async">' +
+  "</div>";
+}
+
+function wirePhotos(root) {
+  root.querySelectorAll(".onb-photo").forEach((img) => {
+    const wrap = img.closest(".onb-visual");
+    if (!wrap) return;
+    if (img.complete && img.naturalWidth) {
+      wrap.classList.add("has-photo");
+      return;
+    }
+    img.addEventListener("load", () => wrap.classList.add("has-photo"));
+    img.addEventListener("error", () => {
+      if (!img.dataset.retried) {
+        img.dataset.retried = "1";
+        img.src = img.src.split(".png").join(".jpg");
+      } else {
+        img.remove();
+      }
+    });
+  });
+}
+
 export async function render(ctx) {
   let step = 0;
 
@@ -44,7 +73,7 @@ export async function render(ctx) {
       return '<div class="onb">' +
         '<button type="button" class="onb-skip" data-skip>' + ui.esc(t("skip")) + "</button>" +
         '<div class="onb-body">' +
-          art(slide.icon, slide.art) +
+          visual(slide) +
           '<span class="onb-eyebrow">' + ui.esc(step === 0 ? t("onbEyebrow") : "Stickly") + "</span>" +
           "<h1>" + ui.esc(step === 0 ? t("onbTitle") : t(slide.title)) + "</h1>" +
           '<p class="onb-text">' + ui.esc(t(slide.text)) + "</p>" +
@@ -118,6 +147,7 @@ export async function render(ctx) {
           if (ok) await finish();
         });
       }
+      wirePhotos(root);
     }
 
     wire();

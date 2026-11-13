@@ -12,7 +12,7 @@ let mode = "study";
 let running = false;
 let endAt = 0;
 let cycles = 0;
-let remaining = 0;
+let remaining = null;
 let ticker = null;
 let mounted = null;
 let audioCtx = null;
@@ -35,15 +35,14 @@ try {
     cycles = Number(saved.cycles) || 0;
     running = !!saved.running;
     endAt = Number(saved.endAt) || 0;
-    remaining = Number(saved.remaining);
+    const savedRemaining = Number(saved.remaining);
+    remaining = Number.isFinite(savedRemaining) && savedRemaining > 0 ? savedRemaining : null;
   }
 } catch (e) { /* ignore */ }
 
-if (!Number.isFinite(remaining) || remaining < 0) remaining = durationFor(mode);
-if (remaining > durationFor(mode)) remaining = durationFor(mode);
 if (running && endAt <= Date.now()) {
   running = false;
-  remaining = durationFor(mode);
+  remaining = null;
 }
 
 function persist() {
@@ -55,7 +54,7 @@ function persist() {
 }
 
 function remainingNow() {
-  if (!running) return Math.max(0, remaining);
+  if (!running) return remaining == null ? durationFor(mode) : Math.max(0, remaining);
   return Math.max(0, Math.round((endAt - Date.now()) / 1000));
 }
 
@@ -214,11 +213,12 @@ function openConfig(ctx) {
 
 export async function render(ctx) {
   ensureTicker();
+  const total = durationFor(mode);
+  if (!running && (remaining == null || remaining > total)) remaining = total;
   const rem = remainingNow();
   if (running && rem <= 0) finish();
 
   const isBreak = mode === "break";
-  const total = durationFor(mode);
   const percent = (Math.max(0, remainingNow()) / total) * 100;
 
   const html =

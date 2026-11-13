@@ -221,4 +221,26 @@ export const EXTRA = {
     de: "Audio konnte nicht gespeichert werden", ja: "音声を保存できませんでした",
     zh: "无法保存音频", ko: "오디오를 저장하지 못했어요"
   },
+  voiceNotes: {
+    es: "Notas de voz", en: "Voice notes", fr: "Notes vocales", it: "Note vocali",
+    pt: "Notas de voz", de: "Sprachnotizen", ja: "音声メモ", zh: "语音笔记", ko: "음성 메모"
+  },
+  voiceHint: {
+    es: "Graba una idea antes de que se escape.", en: "Record an idea before it slips away.",
+    fr: "Enregistre une idée avant qu'elle ne file.", it: "Registra un'idea prima che scappi.",
+    pt: "Grave uma ideia antes que ela escape.", de: "Nimm eine Idee auf, bevor sie entwischt.",
+    ja: "ひらめきを忘れる前に録音しましょう。", zh: "趁灵感还在，先录下来。",
+    ko: "아이디어가 사라지기 전에 녹음하세요."
+  },
+  vaultNoPinText: {
+    es: "Crea un PIN para guardar tus contraseñas y notas privadas.",
+    en: "Create a PIN to keep your passwords and private notes safe.",
+    fr: "Crée un code PIN pour protéger tes mots de passe et notes privées.",
+    it: "Crea un PIN per proteggere password e note private.",
+    pt: "Crie um PIN para guardar suas senhas e notas privadas.",
+    de: "Erstelle eine PIN, um Passwörter und private Notizen zu schützen.",
+    ja: "PINを作成して、パスワードとプライベートノートを守りましょう。",
+    zh: "创建 PIN，保护你的密码和私密笔记。",
+    ko: "PIN을 만들면 비밀번호와 비공개 노트를 안전하게 보관할 수 있어요."
+  },
 };

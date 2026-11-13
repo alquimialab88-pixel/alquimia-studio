@@ -235,6 +235,10 @@ function openNoteSheet(options) {
 
   paintRecorder();
 
+  if (opts.record) {
+    setTimeout(() => { startRecording(); }, 450);
+  }
+
   let guardando = false;
 
   const save = async () => {
@@ -422,6 +426,13 @@ export async function render(ctx) {
         }
       });
     });
+
+    if (ctx.params.query.get("record") === "1") {
+      try { history.replaceState(null, "", "#/notebook/" + encodeURIComponent(notebook.id)); } catch (e) { /* ignore */ }
+      setTimeout(() => {
+        openNoteSheet({ notebookId: notebook.id, record: true, onDone: () => ctx.rerender() });
+      }, 280);
+    }
   }
 
   return {

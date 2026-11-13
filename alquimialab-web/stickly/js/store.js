@@ -315,6 +315,7 @@ export async function saveNotebook(input) {
     id: input.id || db.uid(),
     titulo: (input.titulo || "").trim(),
     color: input.color || "#DDD6FE",
+    voice: !!input.voice,
     timestamp: input.timestamp || Date.now()
   };
   if (!notebook.titulo) return null;

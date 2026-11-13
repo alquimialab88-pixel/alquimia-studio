@@ -83,6 +83,12 @@ export async function render(ctx) {
         "<h3>" + ui.esc(t("cuadernos")) + "</h3>" +
         "<p>" + ui.esc(t("sinCuadernos")) + "</p>" +
         '<button type="button" class="btn btn-primary" data-add-notebook>' + ui.esc(t("nuevoCuaderno")) + "</button></div>") +
+    '<button type="button" class="voice-card" data-quick-record>' +
+      '<span class="voice-ic">' + ui.icon("mic") + "</span>" +
+      '<span class="voice-main"><b>' + ui.esc(t("voiceNotes")) + "</b>" +
+        "<small>" + ui.esc(t("voiceHint")) + "</small></span>" +
+      '<span class="voice-btn">' + ui.esc(t("grabar")) + "</span>" +
+    "</button>" +
     '<button type="button" class="fab" data-add-notebook aria-label="' + ui.esc(t("nuevoCuaderno")) + '">' + ui.icon("plus") + "</button>";
 
   function mount(root) {
@@ -97,6 +103,22 @@ export async function render(ctx) {
         openNotebookSheet({ onDone: () => ctx.rerender() });
       });
     });
+
+    const quick = root.querySelector("[data-quick-record]");
+    if (quick) {
+      quick.addEventListener("click", async () => {
+        let notebook = store.state.notebooks.find((item) => item.voice);
+        if (!notebook) {
+          notebook = await store.saveNotebook({
+            titulo: t("voiceNotes"),
+            color: "#DDD6FE",
+            voice: true
+          });
+        }
+        if (!notebook) return;
+        ctx.navigate("#/notebook/" + encodeURIComponent(notebook.id) + "?record=1");
+      });
+    }
   }
 
   return { html, mount, cleanup: () => {} };

@@ -30,7 +30,7 @@ function gate(ctx, hasPin) {
       '<div class="vault-gate">' +
         '<div class="vault-icon">' + ui.icon("lock") + "</div>" +
         "<h1>" + ui.esc(hasPin ? t("pinNeeded") : t("pinNotSet")) + "</h1>" +
-        "<p>" + ui.esc(hasPin ? t("pinNeededText") : t("vaultHelp")) + "</p>" +
+        "<p>" + ui.esc(hasPin ? t("pinNeededText") : t("vaultNoPinText")) + "</p>" +
         '<button type="button" class="btn btn-primary" data-open-vault>' +
           ui.esc(hasPin ? t("desbloquear") : t("createPin")) + "</button>" +
       "</div>" +
