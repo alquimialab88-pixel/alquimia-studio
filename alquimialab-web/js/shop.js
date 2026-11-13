@@ -14,6 +14,37 @@
   /* Precio de lista (Gumroad) + precio de la promo Black Friday. */
   var PRODUCTS = [
     {
+      id: 'stickly',
+      name: 'Stickly — Tu día en orden, en un solo lugar',
+      cat: 'digital',
+      short: 'Notas, tareas, calendario, contraseñas y enfoque. Privada, offline y sin cuentas.',
+      desc: 'Stickly reúne tus notas, tareas, calendario, cuadernos, notas de voz, contraseñas y temporizador de enfoque en una sola app. Sin cuentas, sin servidores y sin suscripciones: tus datos se quedan en tu dispositivo.',
+      price: 11.99,
+      free: false,
+      soon: false,
+      img: 'assets/stickly/cover.webp',
+      fit: 'cover',
+      badge: 'Nuevo',
+      note: 'Android + Windows + iPhone/iPad y web · Pago único · Acceso inmediato',
+      link: 'https://alquimialab.gumroad.com/l/Stickly_ENG?wanted=true',
+      shots: [
+        'assets/stickly/mockup.webp',
+        'assets/stickly/shot-1.webp',
+        'assets/stickly/shot-2.webp',
+        'assets/stickly/shot-3.webp',
+        'assets/stickly/shot-4.webp',
+        'assets/stickly/shot-5.webp'
+      ],
+      features: [
+        'Notas con tablero libre estilo FigJam',
+        'Tareas y calendario: día, semana, mes y año',
+        'Cuadernos y notas de voz',
+        'Contraseñas y notas privadas con PIN y cifrado AES-256',
+        'Temporizador Pomodoro configurable',
+        'Funciona sin conexión, en 9 idiomas'
+      ]
+    },
+    {
       id: 'diario',
       name: 'El diario imperfecto de una creadora',
       cat: 'digital',
@@ -326,6 +357,20 @@
   };
 
   var EN_PRODUCTS = {
+    stickly: {
+      name: 'Stickly — Your day, in one place',
+      short: 'Notes, tasks, calendar, passwords and focus. Private, offline and no accounts.',
+      desc: 'Stickly brings your notes, tasks, calendar, notebooks, voice notes, passwords and focus timer together in one app. No accounts, no servers and no subscriptions: your data stays on your device.',
+      note: 'Android + Windows + iPhone/iPad and web · One-time purchase · Instant access',
+      features: [
+        'Notes with a free-form FigJam-style board',
+        'Tasks and calendar: day, week, month and year',
+        'Notebooks and voice notes',
+        'Passwords and private notes with PIN and AES-256 encryption',
+        'Configurable Pomodoro timer',
+        'Works offline, in 9 languages'
+      ]
+    },
     diario: {
       name: 'The Imperfect Diary of a Creator',
       short: 'The real story of my leap into freelance life, with 15 prompts and exercises.',
@@ -456,6 +501,11 @@
     if (lang === 'en' && en && en[field]) return en[field];
     return p[field] || '';
   }
+  function localizedList(p, field) {
+    var en = EN_PRODUCTS[p.id];
+    if (lang === 'en' && en && en[field] && en[field].length) return en[field];
+    return p[field] || [];
+  }
   function catLabel(cat) { return T.cats[cat] || cat; }
   function badgeLabel(p) { return (lang === 'en' && p.badge === 'Nuevo') ? 'New' : p.badge; }
 
@@ -509,6 +559,22 @@
   function mediaHTML(p) {
     if (!p.img) return '<span class="v-emoji" aria-hidden="true">' + (p.emoji || '✨') + '</span>';
     return '<img src="' + esc(p.img) + '" alt="" loading="lazy" decoding="async">';
+  }
+
+  function modalMediaHTML(p, name) {
+    if (!p.shots || !p.shots.length) return mediaHTML(p);
+    var thumbs = p.shots.map(function (src, i) {
+      return '<button type="button" class="qv-thumb' + (i === 0 ? ' active' : '') + '" data-shot="' + i +
+        '" role="tab" aria-selected="' + (i === 0) + '" aria-label="' + esc(name + ' · ' + (i + 1)) + '">' +
+        '<img src="' + esc(src) + '" alt="" loading="lazy" decoding="async"></button>';
+    }).join('');
+    return '<div class="qv-gallery">' +
+      '<button type="button" class="qv-shot" data-shot-next aria-label="' + esc(lang === 'en' ? 'Next screenshot' : 'Siguiente captura') + '">' +
+        '<img id="qvImg" src="' + esc(p.shots[0]) + '" alt="' + esc(name) + '">' +
+        '<span class="qv-counter"><b id="qvShotNum">1</b>/' + p.shots.length + '</span>' +
+      '</button>' +
+      '<div class="qv-thumbs" role="tablist" aria-label="' + esc(lang === 'en' ? 'Screenshots' : 'Capturas') + '">' + thumbs + '</div>' +
+    '</div>';
   }
 
   function cardHTML(p, feat) {
@@ -677,6 +743,23 @@
   var bfSection = $('blackFriday');
   var dlg = $('quickView');
   var currentId = null, currentFeat = false, lastTrigger = null;
+  var galleryShots = [], galleryIndex = 0;
+
+  function setShot(index) {
+    if (!galleryShots.length) return;
+    galleryIndex = ((index % galleryShots.length) + galleryShots.length) % galleryShots.length;
+    var img = $('qvImg');
+    if (img) img.src = galleryShots[galleryIndex];
+    var num = $('qvShotNum');
+    if (num) num.textContent = String(galleryIndex + 1);
+    var media = $('qvMedia');
+    if (!media) return;
+    Array.prototype.forEach.call(media.querySelectorAll('.qv-thumb'), function (btn, i) {
+      var on = i === galleryIndex;
+      btn.classList.toggle('active', on);
+      btn.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+  }
 
   if (!grid || !chipsEl || !searchEl) return;
 
@@ -725,14 +808,17 @@
     var desc = localized(p, 'desc');
     var media = $('qvMedia');
     if (media) {
-      media.className = 'v-dialog-media' + (p.fit === 'contain' ? ' contain' : '');
-      media.innerHTML = p.img
-        ? '<img id="qvImg" src="' + esc(p.img) + '" alt="' + esc(name) + '">'
-        : '<span class="v-emoji" aria-hidden="true">' + (p.emoji || '✨') + '</span>';
+      media.className = 'v-dialog-media' + (p.shots && p.shots.length ? ' has-gallery' : (p.fit === 'contain' ? ' contain' : ''));
+      media.innerHTML = modalMediaHTML(p, name);
+      galleryShots = p.shots && p.shots.length ? p.shots.slice() : [];
+      galleryIndex = 0;
     }
     txt('qvCat', catLabel(p.cat));
     txt('qvName', name);
-    txt('qvDesc', desc);
+    var feats = localizedList(p, 'features');
+    html('qvDesc', esc(desc) + (feats.length
+      ? '<ul class="v-features">' + feats.map(function (f) { return '<li>' + esc(f) + '</li>'; }).join('') + '</ul>'
+      : ''));
     html('qvPrice', priceHTML(p));
     html('qvBuyWrap', buyHTML(p, true, currentFeat));
 
@@ -751,6 +837,18 @@
 
   var qvClose = $('qvClose');
   if (qvClose) qvClose.addEventListener('click', function () { if (dlg) dlg.close(); });
+  var qvMediaEl = $('qvMedia');
+  if (qvMediaEl) {
+    qvMediaEl.addEventListener('click', function (e) {
+      if (!galleryShots.length) return;
+      var thumb = e.target.closest('[data-shot]');
+      if (thumb) {
+        setShot(Number(thumb.getAttribute('data-shot')) || 0);
+        return;
+      }
+      if (e.target.closest('[data-shot-next]')) setShot(galleryIndex + 1);
+    });
+  }
   if (dlg) {
     dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
     dlg.addEventListener('close', function () {
@@ -815,6 +913,7 @@
     gratis: 'free', free: 'free'
   };
   var HASH_PRODUCTS = {
+    'p-stickly': 'stickly',
     'p-diario': 'diario',
     'p-planora': 'planora',
     'p-alquimia-studio': 'studio',

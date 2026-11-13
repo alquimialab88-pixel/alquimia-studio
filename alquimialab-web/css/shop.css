@@ -272,6 +272,46 @@
 .v-dialog-media { aspect-ratio: 4/3; overflow: hidden; border-radius: 18px; background: #efedf8; }
 .v-dialog-media img { width: 100%; height: 100%; object-fit: cover; }
 .v-dialog-media.contain img { object-fit: contain; padding: 20px; }
+.v-dialog-media.has-gallery { aspect-ratio: auto; overflow: visible; background: transparent; }
+
+.qv-gallery { display: flex; flex-direction: column; gap: 9px; }
+.qv-shot {
+  position: relative; display: block; width: 100%; height: min(60vh, 600px);
+  padding: 0; border: 0; border-radius: 18px; overflow: hidden;
+  background: linear-gradient(160deg, #f2f0fb, #e9e6f7); cursor: zoom-in;
+}
+.qv-shot img { width: 100%; height: 100%; object-fit: contain; padding: 10px; }
+.qv-counter {
+  position: absolute; right: 10px; bottom: 10px;
+  background: rgba(31, 29, 69, .72); color: #fff;
+  border-radius: 999px; padding: 4px 10px;
+  font-size: 11px; font-weight: 700; letter-spacing: .02em;
+}
+.qv-thumbs {
+  display: flex; gap: 6px; overflow-x: auto; padding: 2px 1px 4px;
+  scrollbar-width: none;
+}
+.qv-thumbs::-webkit-scrollbar { display: none; }
+.qv-thumb {
+  flex: 0 0 56px; aspect-ratio: 5/8; padding: 0; overflow: hidden;
+  border: 2px solid transparent; border-radius: 9px;
+  background: #efedf8; cursor: pointer; opacity: .72;
+  transition: opacity .15s, border-color .15s, transform .15s;
+}
+.qv-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.qv-thumb:hover { opacity: 1; }
+.qv-thumb.active { opacity: 1; border-color: var(--purple); transform: translateY(-1px); }
+
+.v-features { list-style: none; margin: 13px 0 0; padding: 0; display: grid; gap: 6px; }
+.v-features li {
+  position: relative; padding-left: 19px;
+  font-size: 12.5px; line-height: 1.45; color: #5c598a;
+}
+.v-features li::before {
+  content: ""; position: absolute; left: 3px; top: .48em;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--purple); opacity: .8;
+}
 .v-dialog-info { padding: 6px 4px; }
 .v-dialog-eyebrow {
   display: inline-block; color: var(--purple);
@@ -320,6 +360,9 @@
   .v-quick { display: none; }
   .v-dialog-grid { grid-template-columns: 1fr; }
   .v-dialog-media { max-height: 42vh; }
+  .v-dialog-media.has-gallery { max-height: none; }
+  .qv-shot { height: 46vh; }
+  .qv-thumb { flex-basis: 48px; }
   .v-dialog .v-buy { width: 100%; }
   .v-buy-row-modal { flex-direction: column; }
 }
