@@ -92,15 +92,9 @@ export async function render(ctx) {
       "</div>";
     }
 
-    // Paso final: ofrecer PIN.
+    // Paso final: ofrecer PIN (sin ilustración).
     return '<div class="onb">' +
-      '<div class="onb-body">' +
-        '<div class="onb-art">' +
-          '<div class="oa" style="background:var(--yellow)"><span></span><span></span><span></span></div>' +
-          '<div class="oa" style="background:var(--pink)"><span></span><span></span><span></span></div>' +
-          '<div class="oa" style="background:var(--green)"><span></span><span></span><span></span></div>' +
-          '<span class="oa-badge">' + ui.icon("lock") + "</span>" +
-        "</div>" +
+      '<div class="onb-body onb-body-plain">' +
         '<span class="onb-eyebrow">' + ui.esc(t("security")) + "</span>" +
         "<h1>" + ui.esc(t("pin6")) + "</h1>" +
         '<p class="onb-text">' + ui.esc(t("onb2d")) + "</p>" +

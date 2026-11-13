@@ -28,7 +28,7 @@ export function promptPin(mode, options) {
     overlay.setAttribute("aria-modal", "true");
     overlay.innerHTML =
       '<div class="pin-top">' +
-        '<div class="pin-brand"><span class="pin-brand-mark">S</span>Stickly</div>' +
+        '<div class="pin-brand"><span class="pin-brand-mark"><img src="icons/icon-192.png" alt=""></span>Stickly</div>' +
         '<button type="button" class="icon-btn plain pin-close" aria-label="' + ui.esc(t("cerrar")) + '">' +
           ui.icon("close") + "</button>" +
       "</div>" +
