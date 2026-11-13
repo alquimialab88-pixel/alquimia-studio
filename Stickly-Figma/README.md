@@ -7,7 +7,7 @@
 1. Descomprime `Stickly-Figma-frames.zip`.
 2. En Figma: **Archivo → Importar** y elige los `.svg`, o arrástralos directamente al lienzo.
 3. Cada SVG se convierte en un frame con capas nombradas (header, tarjetas, botones, textos...).
-4. Instala la fuente **Quicksand** desde Google Fonts para que los textos se vean igual.
+4. Instala la fuente **Roboto** desde Google Fonts para que los textos se vean igual.
 5. Los colores y medidas están abajo y también dentro de cada SVG.
 
 ## Medidas base

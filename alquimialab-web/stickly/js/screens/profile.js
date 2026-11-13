@@ -9,8 +9,13 @@ import { ensureUnlocked } from "../pin.js";
 
 export async function render(ctx) {
   const name = (store.state.profile.name || "").trim();
+  const photo = store.state.profile.photo || null;
   const initial = (name ? name.charAt(0) : "S").toUpperCase();
   const pendingTasks = store.state.tasks.filter((task) => !task.hecha).length;
+
+  const avatar = photo
+    ? '<img src="' + ui.esc(photo) + '" alt="">'
+    : ui.esc(initial);
 
   const stat = (value, label) =>
     '<div class="stat-card"><b>' + value + "</b><span>" + ui.esc(label) + "</span></div>";
@@ -22,11 +27,17 @@ export async function render(ctx) {
       '<span style="width:42px"></span>' +
     "</div>" +
 
-    '<div class="profile-card">' +
-      '<span class="profile-avatar" style="width:66px;height:66px;font-size:26px">' + ui.esc(initial) + "</span>" +
-      "<span><h2>" + ui.esc(name || t("tuNombre")) + "</h2>" +
-        "<p>Stickly · Alquimia Lab</p></span>" +
+    '<div class="profile-photo-card">' +
+      '<button type="button" class="profile-avatar big" data-pick-photo aria-label="' + ui.esc(t("changePhoto")) + '">' + avatar + "</button>" +
+      "<h2>" + ui.esc(name || t("tuNombre")) + "</h2>" +
+      "<p>Stickly · Alquimia Lab</p>" +
     "</div>" +
+
+    '<div class="photo-actions">' +
+      '<button type="button" class="btn btn-ghost" data-pick-photo>' + ui.icon("image", "icon-sm") + " " + ui.esc(t("changePhoto")) + "</button>" +
+      (photo ? '<button type="button" class="btn btn-ghost" data-remove-photo>' + ui.esc(t("removePhoto")) + "</button>" : "") +
+    "</div>" +
+    '<p class="photo-hint">' + ui.icon("shield", "icon-sm") + ui.esc(t("photoHint")) + "</p>" +
 
     '<label class="field"><span>' + ui.esc(t("nombre")) + "</span>" +
       '<input id="profileName" class="input" type="text" maxlength="60" autocomplete="off" ' +
@@ -63,6 +74,19 @@ export async function render(ctx) {
       ctx.rerender();
     }
 
+    async function pickPhoto() {
+      const file = await ui.pickImage();
+      if (!file) return;
+      try {
+        const data = await ui.compressImage(file, 640);
+        await store.setPhoto(data);
+        ui.toast(t("saved"));
+        ctx.rerender();
+      } catch (e) {
+        ui.toast(t("error"));
+      }
+    }
+
     root.querySelector("[data-save-name]").addEventListener("click", saveName);
     input.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
@@ -71,6 +95,25 @@ export async function render(ctx) {
       }
     });
     root.querySelector("[data-back]").addEventListener("click", () => ctx.navigate("#/menu"));
+
+    root.querySelectorAll("[data-pick-photo]").forEach((btn) => {
+      btn.addEventListener("click", pickPhoto);
+    });
+
+    const remove = root.querySelector("[data-remove-photo]");
+    if (remove) {
+      remove.addEventListener("click", async () => {
+        const ok = await ui.confirmDialog({
+          title: t("removePhoto"),
+          ok: t("eliminar"),
+          cancel: t("cancelar"),
+          danger: true
+        });
+        if (!ok) return;
+        await store.setPhoto(null);
+        ctx.rerender();
+      });
+    }
 
     const pinBtn = root.querySelector("[data-create-pin]");
     if (pinBtn) {

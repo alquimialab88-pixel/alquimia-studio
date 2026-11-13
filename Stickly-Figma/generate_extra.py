@@ -598,7 +598,7 @@ README = """# Stickly · frames para Figma
 1. Descomprime `Stickly-Figma-frames.zip`.
 2. En Figma: **Archivo → Importar** y elige los `.svg`, o arrástralos directamente al lienzo.
 3. Cada SVG se convierte en un frame con capas nombradas (header, tarjetas, botones, textos...).
-4. Instala la fuente **Quicksand** desde Google Fonts para que los textos se vean igual.
+4. Instala la fuente **Roboto** desde Google Fonts para que los textos se vean igual.
 5. Los colores y medidas están abajo y también dentro de cada SVG.
 
 ## Medidas base
@@ -637,7 +637,7 @@ def build_index():
 <style>
   :root {{ --bg:#F8F7FB; --surface:#fff; --text:#2A2A3E; --muted:#6A6788; --line:#E8E6F4; --primary:#6463AA; }}
   * {{ box-sizing:border-box; }}
-  body {{ margin:0; padding:32px 24px 60px; font-family:Quicksand,Nunito,Arial,sans-serif; color:var(--text);
+  body {{ margin:0; padding:32px 24px 60px; font-family:Roboto,Arial,sans-serif; color:var(--text);
     background:radial-gradient(900px 500px at 100% -10%,#E6E4F6,transparent 60%),var(--bg); }}
   header {{ max-width:1180px; margin:0 auto 28px; }}
   h1 {{ margin:0 0 6px; font-size:30px; letter-spacing:-.5px; }}
@@ -656,7 +656,7 @@ def build_index():
 <header>
   <h1>Stickly · frames para Figma</h1>
   <p>15 frames SVG de 390 × 844 px, con capas nombradas y textos editables. Importa los archivos en Figma
-  (Archivo → Importar) o arrástralos al lienzo. Tipografía recomendada: Quicksand (Google Fonts).</p>
+  (Archivo → Importar) o arrástralos al lienzo. Tipografía recomendada: Roboto (Google Fonts).</p>
 </header>
 <main class="grid">{cards}
 </main>

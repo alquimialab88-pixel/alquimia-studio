@@ -40,7 +40,7 @@ C = {
     "lavender2": "#D7D3F3",
 }
 
-FONT = "Quicksand, Nunito, Arial, sans-serif"
+FONT = "Roboto, Arial, sans-serif"
 
 # Iconos del sprite de la PWA
 sprite = io.open(SPRITE, encoding="utf-8").read()
@@ -335,27 +335,47 @@ def frame_home():
     b += rect(320, 86, 50, 50, 18, "url(#gradAvatar)")
     b += text(345, 118, "I", 19, 700, "#FFFFFF", "middle")
 
-    save_card = '<g id="Tarjeta_hoy">'
-    save_card += rect(20, 168, 350, 264, 26, "url(#gradHero)")
-    save_card += '<clipPath id="clipHero"><rect x="20" y="168" width="350" height="264" rx="26"/></clipPath>'
-    save_card += '<g clip-path="url(#clipHero)">' + circle(368, 150, 70, "#FFFFFF", opacity=0.45) + '</g>' 
-    save_card += text(38, 202, "HOY", 10.5, 700, C["muted"], letter=1)
-    save_card += text(38, 226, "Cosas que debes hacer hoy", 18, 700, C["text"], letter=-0.3)
-    save_card += rect(308, 190, 42, 42, 14, "#FFFFFF")
-    save_card += icon("plus", 318, 200, 22, C["primary"])
-    save_card += task_row(36, 244, 318, "Entregar ensayo", "Literatura")
-    save_card += task_row(36, 296, 318, "Estudiar biología", "Examen el viernes")
-    save_card += task_row(36, 348, 318, "Comprar café", "Casa", True)
-    save_card += rect(36, 386, 318, 1, 0, C["primary"], opacity=0.16)
-    b += save_card + "</g>"
+    week = '<g id="Tira_semanal">'
+    days = [("L", 9, False), ("M", 10, False), ("X", 11, False), ("J", 12, True),
+            ("V", 13, False), ("S", 14, False), ("D", 15, False)]
+    for i, (letter, num, active) in enumerate(days):
+        x = 26 + i * 49
+        week += text(x + 22, 176, letter, 9.5, 700, C["primary_dark"] if active else "#6E6B89", "middle", letter=0.5)
+        if active:
+            week += circle(x + 22, 208, 19, "url(#gradPrimary)")
+            week += text(x + 22, 214, str(num), 14.5, 700, "#FFFFFF", "middle")
+        else:
+            week += circle(x + 22, 208, 19, "#FFFFFF", C["line"], 1)
+            week += text(x + 22, 214, str(num), 14.5, 700, C["text"], "middle")
+        if num in (10, 12, 13):
+            week += circle(x + 22, 236, 2, C["primary"])
+    b += week + "</g>"
 
-    stats = '<g id="Estadisticas">'
-    for i, (num, lab) in enumerate([("2", "PENDIENTES"), ("1", "COMPLETADAS"), ("5", "NOTAS")]):
-        stats += text([38, 155, 272][i], 410, num, 20, 700, C["primary_dark"])
-        stats += text([38, 155, 272][i], 423, lab, 9, 700, "#6F6C93", letter=0.4)
-    b += stats + "</g>"
+    b += text(20, 278, "HOY", 10.5, 700, C["muted"], letter=1)
+    b += text(20, 302, "Cosas que debes hacer hoy", 18, 700, C["text"], letter=-0.3)
+    b += rect(308, 266, 42, 42, 14, "#FFFFFF", C["line"])
+    b += icon("plus", 318, 276, 22, C["primary"])
+    b += task_row(20, 320, 350, "Entregar ensayo", "Literatura")
+    b += task_row(20, 374, 350, "Estudiar biología", "Examen el viernes")
+    b += task_row(20, 428, 350, "Comprar café", "Casa", True)
 
-    b += text(20, 470, "Accesos rápidos", 16, 700, C["text"], letter=-0.2)
+    b += text(20, 516, "Notas importantes", 16, 700, C["text"], letter=-0.2)
+    b += text(352, 516, "Todo", 12.5, 700, C["primary"], "end")
+
+    mini = '<g id="Notas_importantes">'
+    mini += rect(20, 532, 350, 58, 16, C["yellow"])
+    mini += circle(33, 561, 3.5, "#3B3866", opacity=0.35)
+    mini += text(46, 556, "Lista del súper", 13.5, 700, "#3B3866")
+    mini += text(46, 574, "Leche, pan y café. Comprar el viernes.", 12, 500, "#3B3866", opacity=0.8)
+    mini += icon("chevron-right", 340, 551, 18, "#3B3866", 1.8, 0.5)
+    mini += rect(20, 598, 350, 58, 16, C["pink"])
+    mini += circle(33, 627, 3.5, "#3B3866", opacity=0.35)
+    mini += text(46, 622, "Ideas para el blog", 13.5, 700, "#3B3866")
+    mini += text(46, 640, "Ordenar el diario y los prompts.", 12, 500, "#3B3866", opacity=0.8)
+    mini += icon("chevron-right", 340, 617, 18, "#3B3866", 1.8, 0.5)
+    b += mini + "</g>"
+
+    b += text(20, 682, "Accesos rápidos", 16, 700, C["text"], letter=-0.2)
     quick = [("note", "Notas", C["primary_light"], C["primary"]),
              ("book", "Cuadernos", "#FDE7F1", "#C2417A"),
              ("key", "Contraseñas", "#E3F3FC", "#267AA2"),
@@ -363,27 +383,11 @@ def frame_home():
     qg = '<g id="Accesos_rapidos">'
     for i, (ic, lab, bg, fg) in enumerate(quick):
         x = 20 + i * 88.5
-        qg += rect(x, 486, 80, 86, 18, C["surface"], C["line"])
-        qg += rect(x + 20, 499, 40, 40, 14, bg)
-        qg += icon(ic, x + 30, 509, 20, fg, 1.8)
-        qg += text(x + 40, 559, lab, 9.5, 700, C["text"], "middle")
+        qg += rect(x, 696, 80, 68, 16, C["surface"], C["line"])
+        qg += rect(x + 23, 704, 34, 34, 11, bg)
+        qg += icon(ic, x + 31, 712, 18, fg, 1.8)
+        qg += text(x + 40, 755, lab, 9, 700, C["text"], "middle")
     b += qg + "</g>"
-
-    b += text(20, 612, "Notas importantes", 16, 700, C["text"], letter=-0.2)
-    b += text(352, 612, "Todo", 12.5, 700, C["primary"], "end")
-
-    mini = '<g id="Notas_importantes">'
-    mini += rect(20, 628, 350, 58, 16, C["yellow"])
-    mini += circle(33, 657, 3.5, "#3B3866", opacity=0.35)
-    mini += text(46, 652, "Lista del súper", 13.5, 700, "#3B3866")
-    mini += text(46, 670, "Leche, pan y café. Comprar el viernes.", 12, 500, "#3B3866", opacity=0.8)
-    mini += icon("chevron-right", 340, 647, 18, "#3B3866", 1.8, 0.5)
-    mini += rect(20, 696, 350, 58, 16, C["pink"])
-    mini += circle(33, 725, 3.5, "#3B3866", opacity=0.35)
-    mini += text(46, 720, "Ideas para el blog", 13.5, 700, "#3B3866")
-    mini += text(46, 738, "Ordenar el diario y los prompts.", 12, 500, "#3B3866", opacity=0.8)
-    mini += icon("chevron-right", 340, 715, 18, "#3B3866", 1.8, 0.5)
-    b += mini + "</g>"
 
     b += tab_bar("home")
     b += home_indicator()

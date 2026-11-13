@@ -133,5 +133,92 @@ export const EXTRA = {
     fr: "Touche + pour ajouter ton premier post-it.", it: "Tocca + per aggiungere il primo post-it.",
     pt: "Toque em + para adicionar seu primeiro post-it.", de: "Tippe auf +, um den ersten Haftzettel hinzuzufügen.",
     ja: "＋をタップして最初の付箋を追加しましょう。", zh: "点 + 添加第一张便签。", ko: "+를 눌러 첫 메모를 추가하세요."
-  }
+  },
+
+  backup: {
+    es: "Copia de seguridad", en: "Backup", fr: "Sauvegarde", it: "Backup",
+    pt: "Cópia de segurança", de: "Backup", ja: "バックアップ", zh: "备份", ko: "백업"
+  },
+  changePhoto: {
+    es: "Cambiar foto", en: "Change photo", fr: "Changer la photo", it: "Cambia foto",
+    pt: "Alterar foto", de: "Foto ändern", ja: "写真を変更", zh: "更换照片", ko: "사진 변경"
+  },
+  removePhoto: {
+    es: "Quitar foto", en: "Remove photo", fr: "Retirer la photo", it: "Rimuovi foto",
+    pt: "Remover foto", de: "Foto entfernen", ja: "写真を削除", zh: "移除照片", ko: "사진 삭제"
+  },
+  photoHint: {
+    es: "Tu foto se guarda solo en este dispositivo.",
+    en: "Your photo is stored only on this device.",
+    fr: "Ta photo est stockée uniquement sur cet appareil.",
+    it: "La foto viene salvata solo su questo dispositivo.",
+    pt: "Sua foto é salva apenas neste dispositivo.",
+    de: "Dein Foto wird nur auf diesem Gerät gespeichert.",
+    ja: "写真はこの端末にのみ保存されます。",
+    zh: "照片仅保存在此设备上。",
+    ko: "사진은 이 기기에만 저장됩니다."
+  },
+  viewWelcome: {
+    es: "Ver bienvenida", en: "View welcome", fr: "Voir l'accueil", it: "Vedi benvenuto",
+    pt: "Ver boas-vindas", de: "Begrüßung ansehen", ja: "ウェルカムを見る", zh: "查看欢迎页", ko: "환영 화면 보기"
+  },
+  viewDay: {
+    es: "Día", en: "Day", fr: "Jour", it: "Giorno", pt: "Dia", de: "Tag", ja: "日", zh: "日", ko: "일"
+  },
+  viewWeek: {
+    es: "Semana", en: "Week", fr: "Semaine", it: "Settimana", pt: "Semana", de: "Woche", ja: "週", zh: "周", ko: "주"
+  },
+  viewMonth: {
+    es: "Mes", en: "Month", fr: "Mois", it: "Mese", pt: "Mês", de: "Monat", ja: "月", zh: "月", ko: "월"
+  },
+  viewYear: {
+    es: "Año", en: "Year", fr: "Année", it: "Anno", pt: "Ano", de: "Jahr", ja: "年", zh: "年", ko: "년"
+  },
+  weekOf: {
+    es: "Semana del {a} al {b}", en: "Week of {a} to {b}", fr: "Semaine du {a} au {b}",
+    it: "Settimana dal {a} al {b}", pt: "Semana de {a} a {b}", de: "Woche vom {a} bis {b}",
+    ja: "{a}〜{b}の週", zh: "{a} 至 {b} 这一周", ko: "{a} ~ {b} 주"
+  },
+  notesOfDay: {
+    es: "Notas del día", en: "Notes of the day", fr: "Notes du jour", it: "Note del giorno",
+    pt: "Notas do dia", de: "Notizen des Tages", ja: "その日のノート", zh: "当天的笔记", ko: "그날의 노트"
+  },
+  noNotesDay: {
+    es: "No hay notas de este día.", en: "No notes for this day.", fr: "Aucune note ce jour-là.",
+    it: "Nessuna nota per questo giorno.", pt: "Nenhuma nota neste dia.", de: "Keine Notizen für diesen Tag.",
+    ja: "この日のノートはありません。", zh: "这一天没有笔记。", ko: "이 날짜에는 노트가 없어요."
+  },
+  adjustTimer: {
+    es: "Ajustar tiempo", en: "Adjust time", fr: "Ajuster le temps", it: "Regola tempo",
+    pt: "Ajustar tempo", de: "Zeit anpassen", ja: "時間を調整", zh: "调整时间", ko: "시간 조정"
+  },
+  studyMinutes: {
+    es: "Minutos de estudio", en: "Study minutes", fr: "Minutes d'étude", it: "Minuti di studio",
+    pt: "Minutos de estudo", de: "Lernminuten", ja: "学習時間（分）", zh: "学习时长（分钟）", ko: "공부 시간(분)"
+  },
+  breakMinutes: {
+    es: "Minutos de descanso", en: "Break minutes", fr: "Minutes de pause", it: "Minuti di pausa",
+    pt: "Minutos de descanso", de: "Pausenminuten", ja: "休憩時間（分）", zh: "休息时长（分钟）", ko: "휴식 시간(분)"
+  },
+  apply: {
+    es: "Aplicar", en: "Apply", fr: "Appliquer", it: "Applica", pt: "Aplicar", de: "Anwenden",
+    ja: "適用", zh: "应用", ko: "적용"
+  },
+  audioSaving: {
+    es: "Preparando el audio…", en: "Preparing audio…", fr: "Préparation de l'audio…",
+    it: "Preparazione audio…", pt: "Preparando o áudio…", de: "Audio wird vorbereitet…",
+    ja: "音声を準備中…", zh: "正在准备音频…", ko: "오디오 준비 중…"
+  },
+  audioWait: {
+    es: "Espera a que termine la grabación", en: "Wait for the recording to finish",
+    fr: "Attends la fin de l'enregistrement", it: "Attendi la fine della registrazione",
+    pt: "Aguarde o fim da gravação", de: "Warte, bis die Aufnahme endet",
+    ja: "録音が終わるまでお待ちください", zh: "请等待录音结束", ko: "녹음이 끝날 때까지 기다려 주세요"
+  },
+  audioNoSave: {
+    es: "No se pudo guardar el audio", en: "Couldn't save the audio", fr: "Impossible d'enregistrer l'audio",
+    it: "Impossibile salvare l'audio", pt: "Não foi possível salvar o áudio",
+    de: "Audio konnte nicht gespeichert werden", ja: "音声を保存できませんでした",
+    zh: "无法保存音频", ko: "오디오를 저장하지 못했어요"
+  },
 };

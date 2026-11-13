@@ -6,7 +6,7 @@
 import * as db from "./db.js";
 import * as crypto from "./crypto.js";
 
-const DEFAULT_SETTINGS = { autoLock: 5 }; // minutos; 0 = nunca
+const DEFAULT_SETTINGS = { autoLock: 5, studyMin: 25, breakMin: 5 }; // minutos
 const MAX_FAILS = 5;
 const BASE_DELAY = 30; // segundos tras el quinto intento
 
@@ -17,7 +17,7 @@ export const state = {
   notebooks: [],
   notebookNotes: [],
   passwords: [],
-  profile: { name: "" },
+  profile: { name: "", photo: null },
   settings: Object.assign({}, DEFAULT_SETTINGS),
   keyWrap: null,
   key: null,
@@ -60,7 +60,7 @@ export async function init() {
   state.notebookNotes = notebookNotes.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
   state.passwords = passwords.sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0));
 
-  state.profile = await db.metaGet("profile", { name: "" });
+  state.profile = Object.assign({ name: "", photo: null }, await db.metaGet("profile", {}));
   state.settings = Object.assign({}, DEFAULT_SETTINGS, await db.metaGet("settings", {}));
   state.keyWrap = await db.metaGet("keyWrap", null);
   state.onboarding = await db.metaGet("onboarding", false);
@@ -412,6 +412,12 @@ export async function setName(name) {
   emit();
 }
 
+export async function setPhoto(photo) {
+  state.profile = Object.assign({}, state.profile, { photo: photo || null });
+  await db.metaSet("profile", state.profile);
+  emit();
+}
+
 export async function setSetting(key, value) {
   state.settings = Object.assign({}, state.settings, { [key]: value });
   await db.metaSet("settings", state.settings);
@@ -475,7 +481,7 @@ export async function importData(obj) {
   state.passwords = (data.passwords || []).slice();
 
   if (obj.profile) {
-    state.profile = Object.assign({ name: "" }, obj.profile);
+    state.profile = Object.assign({ name: "", photo: null }, obj.profile);
     await db.metaSet("profile", state.profile);
   }
   if (obj.settings) {
@@ -500,7 +506,7 @@ export async function wipeAll() {
   state.notebooks = [];
   state.notebookNotes = [];
   state.passwords = [];
-  state.profile = { name: "" };
+  state.profile = { name: "", photo: null };
   state.settings = Object.assign({}, DEFAULT_SETTINGS);
   state.keyWrap = null;
   state.key = null;

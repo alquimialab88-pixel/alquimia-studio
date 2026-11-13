@@ -1,22 +1,31 @@
 /* ==========================================================================
-   Stickly · temporizador Pomodoro
-   25 min de estudio / 5 min de descanso, con ciclos completados.
+   Stickly · temporizador Pomodoro personalizable
    ========================================================================== */
 
 import { t } from "../i18n.js";
+import * as store from "../store.js";
 import * as ui from "../ui.js";
 
-const DURATION = { study: 25 * 60, break: 5 * 60 };
 const STORE_KEY = "stickly-timer";
 
 let mode = "study";
-let remaining = DURATION.study;
 let running = false;
 let endAt = 0;
 let cycles = 0;
+let remaining = 0;
 let ticker = null;
 let mounted = null;
 let audioCtx = null;
+
+function minutesFor(which) {
+  const value = Number(store.state.settings[which === "study" ? "studyMin" : "breakMin"]);
+  if (!Number.isFinite(value) || value <= 0) return which === "study" ? 25 : 5;
+  return Math.min(which === "study" ? 180 : 60, Math.max(1, Math.round(value)));
+}
+
+function durationFor(which) {
+  return minutesFor(which) * 60;
+}
 
 /* ----- Persistencia ----- */
 try {
@@ -27,9 +36,15 @@ try {
     running = !!saved.running;
     endAt = Number(saved.endAt) || 0;
     remaining = Number(saved.remaining);
-    if (!Number.isFinite(remaining) || remaining < 0) remaining = DURATION[mode];
   }
 } catch (e) { /* ignore */ }
+
+if (!Number.isFinite(remaining) || remaining < 0) remaining = durationFor(mode);
+if (remaining > durationFor(mode)) remaining = durationFor(mode);
+if (running && endAt <= Date.now()) {
+  running = false;
+  remaining = durationFor(mode);
+}
 
 function persist() {
   try {
@@ -81,11 +96,9 @@ function vibrate() {
 function finish() {
   if (!running) return;
   running = false;
-  remaining = 0;
-  const endedStudy = mode === "study";
-  if (endedStudy) cycles += 1;
-  mode = endedStudy ? "break" : "study";
-  remaining = DURATION[mode];
+  mode = mode === "study" ? "break" : "study";
+  if (mode === "break") cycles += 1;
+  remaining = durationFor(mode);
   persist();
   beep();
   vibrate();
@@ -101,7 +114,7 @@ function updateDom() {
   const timeEl = root.querySelector(".timer-time");
   const ring = root.querySelector(".timer-ring");
   if (timeEl) timeEl.textContent = fmt(rem);
-  if (ring) ring.style.setProperty("--p", String((rem / DURATION[mode]) * 100));
+  if (ring) ring.style.setProperty("--p", String((rem / durationFor(mode)) * 100));
   if (running && rem <= 0) finish();
 }
 
@@ -113,20 +126,111 @@ function ensureTicker() {
   }, 500);
 }
 
+function openConfig(ctx) {
+  if (running) {
+    remaining = remainingNow();
+    running = false;
+    endAt = 0;
+    persist();
+  }
+
+  let study = minutesFor("study");
+  let descanso = minutesFor("break");
+
+  const sheet = ui.openSheet(
+    "<h2>" + ui.esc(t("adjustTimer")) + "</h2>" +
+    '<div class="timer-config">' +
+      '<label class="timer-config-row">' +
+        '<span>' + ui.esc(t("studyMinutes")) + "</span>" +
+        '<span class="stepper">' +
+          '<button type="button" data-step="study" data-dir="-1">−</button>' +
+          '<input id="studyMin" type="number" min="1" max="180" inputmode="numeric" value="' + study + '">' +
+          '<button type="button" data-step="study" data-dir="1">+</button>' +
+        "</span>" +
+      "</label>" +
+      '<label class="timer-config-row">' +
+        '<span>' + ui.esc(t("breakMinutes")) + "</span>" +
+        '<span class="stepper">' +
+          '<button type="button" data-step="break" data-dir="-1">−</button>' +
+          '<input id="breakMin" type="number" min="1" max="60" inputmode="numeric" value="' + descanso + '">' +
+          '<button type="button" data-step="break" data-dir="1">+</button>' +
+        "</span>" +
+      "</label>" +
+    "</div>" +
+    '<div class="preset-row">' +
+      '<button type="button" class="chip" data-preset="25,5">25 / 5</button>' +
+      '<button type="button" class="chip" data-preset="50,10">50 / 10</button>' +
+      '<button type="button" class="chip" data-preset="15,3">15 / 3</button>' +
+    "</div>" +
+    '<div class="sheet-actions">' +
+      '<button type="button" class="btn btn-ghost" data-cancel>' + ui.esc(t("cancelar")) + "</button>" +
+      '<button type="button" class="btn btn-primary" data-apply>' + ui.esc(t("apply")) + "</button>" +
+    "</div>"
+  );
+
+  const studyInput = sheet.querySelector("#studyMin");
+  const breakInput = sheet.querySelector("#breakMin");
+
+  function clamp(value, min, max) {
+    const number = Number(value);
+    if (!Number.isFinite(number)) return min;
+    return Math.min(max, Math.max(min, Math.round(number)));
+  }
+
+  sheet.querySelectorAll("[data-step]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const target = btn.getAttribute("data-step") === "study" ? studyInput : breakInput;
+      const max = target === studyInput ? 180 : 60;
+      const delta = Number(btn.getAttribute("data-dir")) * (target === studyInput ? 5 : 1);
+      target.value = String(clamp(Number(target.value) + delta, 1, max));
+    });
+  });
+
+  sheet.querySelectorAll("[data-preset]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const parts = btn.getAttribute("data-preset").split(",");
+      studyInput.value = parts[0];
+      breakInput.value = parts[1];
+    });
+  });
+
+  sheet.querySelector("[data-cancel]").addEventListener("click", () => sheet.close());
+
+  sheet.querySelector("[data-apply]").addEventListener("click", async () => {
+    const studyValue = clamp(studyInput.value, 1, 180);
+    const breakValue = clamp(breakInput.value, 1, 60);
+    await store.setSetting("studyMin", studyValue);
+    await store.setSetting("breakMin", breakValue);
+    mode = "study";
+    running = false;
+    endAt = 0;
+    remaining = durationFor("study");
+    persist();
+    sheet.close();
+    ui.toast(t("saved"));
+    ctx.rerender();
+  });
+}
+
 export async function render(ctx) {
   ensureTicker();
   const rem = remainingNow();
   if (running && rem <= 0) finish();
 
   const isBreak = mode === "break";
-  const percent = (Math.max(0, remainingNow()) / DURATION[mode]) * 100;
+  const total = durationFor(mode);
+  const percent = (Math.max(0, remainingNow()) / total) * 100;
 
   const html =
     '<div class="page-head">' +
       "<div><h1 class=\"page-title\">" + ui.esc(t("tabCronometro")) + "</h1>" +
-        '<span class="subtle">' + ui.esc(isBreak ? t("tomateDescanso") : t("estudio")) + "</span></div>" +
-      '<span class="timer-mode' + (isBreak ? " break" : "") + '">' + ui.icon(isBreak ? "clock" : "sparkles", "icon-sm") +
-        ui.esc(isBreak ? t("descanso") : t("estudio")) + "</span>" +
+        '<span class="subtle">' + ui.esc(isBreak ? t("tomateDescanso") : t("estudio")) + " · " +
+          minutesFor(mode) + " min</span></div>" +
+      '<div class="head-actions">' +
+        '<button type="button" class="icon-btn" data-config aria-label="' + ui.esc(t("adjustTimer")) + '">' + ui.icon("settings") + "</button>" +
+        '<span class="timer-mode' + (isBreak ? " break" : "") + '">' + ui.icon(isBreak ? "clock" : "sparkles", "icon-sm") +
+          ui.esc(isBreak ? t("descanso") : t("estudio")) + "</span>" +
+      "</div>" +
     "</div>" +
 
     '<div class="timer-wrap">' +
@@ -141,7 +245,7 @@ export async function render(ctx) {
         '<button type="button" class="btn-round secondary" data-reset aria-label="' + ui.esc(t("reiniciar")) + '">' +
           ui.icon("reset") + "</button>" +
         '<button type="button" class="btn-round" data-toggle aria-label="' +
-          ui.esc(running ? t("pausar") : (rem < DURATION[mode] ? t("reanudar") : t("iniciar"))) + '">' +
+          ui.esc(running ? t("pausar") : (rem < total ? t("reanudar") : t("iniciar"))) + '">' +
           ui.icon(running ? "pause" : "play") + "</button>" +
         '<button type="button" class="btn-round secondary" data-skip aria-label="' + ui.esc(t("descanso")) + '">' +
           ui.icon("arrow-right") + "</button>" +
@@ -162,7 +266,7 @@ export async function render(ctx) {
   }
 
   function start() {
-    if (remainingNow() <= 0) remaining = DURATION[mode];
+    if (remainingNow() <= 0) remaining = durationFor(mode);
     endAt = Date.now() + remainingNow() * 1000;
     running = true;
     try {
@@ -187,7 +291,7 @@ export async function render(ctx) {
   function reset() {
     running = false;
     endAt = 0;
-    remaining = DURATION[mode];
+    remaining = durationFor(mode);
     persist();
     ctx.rerender();
   }
@@ -196,7 +300,7 @@ export async function render(ctx) {
     running = false;
     endAt = 0;
     mode = next;
-    remaining = DURATION[mode];
+    remaining = durationFor(mode);
     persist();
     ctx.rerender();
   }
@@ -209,6 +313,7 @@ export async function render(ctx) {
       else start();
     });
     root.querySelector("[data-reset]").addEventListener("click", reset);
+    root.querySelector("[data-config]").addEventListener("click", () => openConfig(ctx));
     root.querySelector("[data-skip]").addEventListener("click", () => {
       setMode(mode === "study" ? "break" : "study");
     });

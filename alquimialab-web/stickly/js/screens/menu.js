@@ -19,14 +19,18 @@ function row(iconName, label, href, extra) {
 
 export async function render(ctx) {
   const name = (store.state.profile.name || "").trim();
+  const photo = store.state.profile.photo || null;
   const initial = (name ? name.charAt(0) : "S").toUpperCase();
+  const avatar = photo
+    ? '<img src="' + ui.esc(photo) + '" alt="">'
+    : ui.esc(initial);
   const lang = getLang();
 
   const html =
     '<div class="page-head"><h1 class="page-title">' + ui.esc(t("tabMenu")) + "</h1></div>" +
 
     '<button type="button" class="profile-card" data-profile style="width:100%;border:0;text-align:left">' +
-      '<span class="profile-avatar">' + ui.esc(initial) + "</span>" +
+      '<span class="profile-avatar">' + avatar + "</span>" +
       "<span><h2>" + ui.esc(name || t("tuNombre")) + "</h2>" +
         "<p>Stickly · Alquimia Lab</p></span>" +
     "</button>" +
@@ -37,6 +41,7 @@ export async function render(ctx) {
       row("book", t("cuadernos"), "#/notebooks") +
       row("key", t("contrasenas"), "#/passwords", { tone: "blue" }) +
       row("timer", t("tabCronometro"), "#/timer", { tone: "orange" }) +
+      row("download", t("backup"), "#/settings?focus=data", { tone: "green" }) +
     "</div>" +
 
     '<div class="section-head"><h2 class="section-title">' + ui.esc(t("config")) + "</h2></div>" +

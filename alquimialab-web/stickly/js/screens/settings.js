@@ -157,7 +157,7 @@ export async function render(ctx) {
       "</div>" +
     "</div>" +
 
-    '<div class="settings-section">' +
+    '<div class="settings-section" data-section="data" id="settings-data">' +
       '<h2 class="settings-title">' + ui.esc(t("data")) + "</h2>" +
       '<div class="setting-card">' +
         '<div class="setting-row" style="display:block">' +
@@ -190,6 +190,10 @@ export async function render(ctx) {
       '<h2 class="settings-title">Stickly</h2>' +
       '<div class="setting-card">' +
         installRow +
+        '<button type="button" class="setting-row" data-onboarding>' +
+          '<span class="icon-lead">' + ui.icon("sparkles") + "</span>" +
+          '<span class="label">' + ui.esc(t("viewWelcome")) + "</span>" +
+          ui.icon("chevron-right", "chev") + "</button>" +
         '<button type="button" class="setting-row" data-privacy>' +
           '<span class="icon-lead">' + ui.icon("shield") + "</span>" +
           '<span class="label">' + ui.esc(t("privacy")) + "</span>" +
@@ -277,6 +281,13 @@ export async function render(ctx) {
     }
     paintPersist();
 
+    if (ctx.params.query.get("focus") === "data") {
+      setTimeout(() => {
+        const section = root.querySelector('[data-section="data"]');
+        if (section) section.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 160);
+    }
+
     store.storageEstimate().then((estimate) => {
       const valueEl = root.querySelector("[data-storage]");
       const barEl = root.querySelector("[data-storage-bar]");
@@ -291,6 +302,8 @@ export async function render(ctx) {
         barEl.style.width = pct.toFixed(1) + "%";
       }
     });
+
+    root.querySelector("[data-onboarding]").addEventListener("click", () => ctx.navigate("#/onboarding"));
 
     root.querySelector("[data-privacy]").addEventListener("click", () => infoSheet(t("privacy"), t("privacyText")));
     root.querySelector("[data-terms]").addEventListener("click", () => infoSheet(t("terms"), t("termsText")));

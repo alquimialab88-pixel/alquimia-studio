@@ -52,6 +52,8 @@ function openNoteSheet(options) {
   let startedAt = 0;
   let tickTimer = null;
   let maxTimer = null;
+  let stopPromise = null;
+  let stopResolve = null;
 
   const sheet = ui.openSheet(
     "<h2>" + ui.esc(note ? t("editar") : t("nuevaNota")) + "</h2>" +
@@ -189,6 +191,7 @@ function openNoteSheet(options) {
 
       if (!chunks.length) {
         paintRecorder();
+        if (stopResolve) { stopResolve(); stopResolve = null; stopPromise = null; }
         return;
       }
       try {
@@ -201,6 +204,7 @@ function openNoteSheet(options) {
         ui.toast(t("audioError"));
       }
       paintRecorder();
+      if (stopResolve) { stopResolve(); stopResolve = null; stopPromise = null; }
     });
 
     recorder.start();
@@ -214,32 +218,68 @@ function openNoteSheet(options) {
   }
 
   function stopRecording() {
-    if (!recorder || recorder.state === "inactive") return;
-    try { recorder.stop(); } catch (e) { /* ignore */ }
+    if (!recorder || recorder.state === "inactive") return Promise.resolve();
+    if (stopPromise) return stopPromise;
+    stopPromise = new Promise((resolve) => {
+      stopResolve = resolve;
+      try {
+        recorder.stop();
+      } catch (e) {
+        stopResolve = null;
+        stopPromise = null;
+        resolve();
+      }
+    });
+    return stopPromise;
   }
 
   paintRecorder();
 
+  let guardando = false;
+
   const save = async () => {
+    if (guardando) return;
     const titulo = titleInput.value.trim();
     const contenido = contentInput.value.trim();
+
+    if (recording) {
+      ui.toast(t("audioSaving"));
+      await stopRecording();
+    }
+    if (recording) {
+      ui.toast(t("audioWait"));
+      return;
+    }
     if (!titulo && !contenido && !draft.audio) {
       ui.toast(t("noContent"));
       return;
     }
-    await store.saveNotebookNote({
-      id: draft.id,
-      cuadernoId: notebookId,
-      titulo,
-      contenido,
-      audio: draft.audio,
-      audioSec: draft.audioSec,
-      timestamp: note ? note.timestamp : Date.now()
-    });
-    cleanup();
-    sheet.close();
-    ui.toast(t("saved"));
-    if (opts.onDone) opts.onDone();
+
+    guardando = true;
+    try {
+      const saved = await store.saveNotebookNote({
+        id: draft.id,
+        cuadernoId: notebookId,
+        titulo,
+        contenido,
+        audio: draft.audio,
+        audioSec: draft.audioSec,
+        timestamp: note ? note.timestamp : Date.now()
+      });
+      if (!saved) {
+        ui.toast(t("noContent"));
+        return;
+      }
+      cleanup();
+      sheet.close();
+      ui.toast(t("saved"));
+      if (opts.onDone) opts.onDone();
+    } catch (e) {
+      console.error(e);
+      ui.toast(t("audioNoSave"));
+    } finally {
+      guardando = false;
+    }
   };
 
   sheet.querySelector("[data-save]").addEventListener("click", save);

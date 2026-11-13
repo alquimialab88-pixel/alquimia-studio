@@ -178,6 +178,15 @@ export function fmtMonth(date, lang) {
   }
 }
 
+export function fmtMonthShort(date, lang) {
+  try {
+    const s = new Intl.DateTimeFormat(lang, { month: "short" }).format(date);
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  } catch (e) {
+    return String(date.getMonth() + 1);
+  }
+}
+
 export function fmtLongDate(date, lang) {
   try {
     const s = new Intl.DateTimeFormat(lang, { weekday: "long", day: "numeric", month: "long" }).format(date);
