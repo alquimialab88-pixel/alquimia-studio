@@ -1,0 +1,52 @@
+{
+  "name": "stickly-desktop",
+  "productName": "Stickly",
+  "version": "1.0.0",
+  "description": "Stickly para Windows — notas, tareas y contraseñas, privadas y sin conexión.",
+  "author": "Alquimia Lab",
+  "main": "main.js",
+  "scripts": {
+    "sync": "node scripts/sync.js",
+    "start": "npm run sync && electron .",
+    "dist": "npm run sync && electron-builder --win nsis"
+  },
+  "build": {
+    "appId": "com.alquimialab.stickly.desktop",
+    "productName": "Stickly",
+    "copyright": "Copyright © 2026 Alquimia Lab",
+    "asar": true,
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "icon.ico",
+      "app/**/*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "icon.ico",
+      "artifactName": "Stickly-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Stickly",
+      "uninstallDisplayName": "Stickly",
+      "deleteAppDataOnUninstall": false
+    }
+  },
+  "devDependencies": {
+    "electron": "44.7.2",
+    "electron-builder": "^26.18.0"
+  }
+}

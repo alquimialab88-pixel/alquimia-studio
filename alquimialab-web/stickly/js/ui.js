@@ -278,6 +278,11 @@ export function downloadText(filename, text, mime) {
     window.SticklyAndroid.saveFile(filename, text);
     return;
   }
+  // En la app de escritorio se abre el diálogo nativo de guardar.
+  if (window.SticklyDesktop && typeof window.SticklyDesktop.saveFile === "function") {
+    window.SticklyDesktop.saveFile(filename, text);
+    return;
+  }
   const blob = new Blob([text], { type: mime || "application/json" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");

@@ -13,6 +13,11 @@ const SLIDES = [
   { title: "onb3t", text: "onb3d", icon: "download", art: "install", photo: "assets/antonio-3.webp" }
 ];
 
+// En la app de escritorio ya está instalada: no mostramos el paso de instalación.
+const ACTIVE_SLIDES = (window.SticklyDesktop && window.SticklyDesktop.isDesktop)
+  ? SLIDES.slice(0, 2)
+  : SLIDES;
+
 function art(icon, kind) {
   if (kind === "shield") {
     return '<div class="onb-art">' +
@@ -71,8 +76,8 @@ export async function render(ctx) {
   let step = 0;
 
   function screen() {
-    if (step < SLIDES.length) {
-      const slide = SLIDES[step];
+    if (step < ACTIVE_SLIDES.length) {
+      const slide = ACTIVE_SLIDES[step];
       return '<div class="onb">' +
         '<button type="button" class="onb-skip" data-skip>' + ui.esc(t("skip")) + "</button>" +
         '<div class="onb-body">' +
@@ -80,11 +85,11 @@ export async function render(ctx) {
           '<span class="onb-eyebrow">' + ui.esc(step === 0 ? t("onbEyebrow") : "Stickly") + "</span>" +
           "<h1>" + ui.esc(step === 0 ? t("onbTitle") : t(slide.title)) + "</h1>" +
           '<p class="onb-text">' + ui.esc(t(slide.text)) + "</p>" +
-          '<div class="onb-dots">' + SLIDES.map((_, i) =>
+          '<div class="onb-dots">' + ACTIVE_SLIDES.map((_, i) =>
             '<span class="' + (i === step ? "on" : "") + '"></span>').join("") + "</div>" +
           '<div class="onb-actions">' +
             '<button type="button" class="btn btn-primary btn-block" data-next>' +
-              ui.esc(step === SLIDES.length - 1 ? t("start") : t("next")) +
+              ui.esc(step === ACTIVE_SLIDES.length - 1 ? t("start") : t("next")) +
             "</button>" +
           "</div>" +
           '<p class="onb-foot">Stickly · Alquimia Lab · v1.0.0</p>' +
@@ -128,7 +133,7 @@ export async function render(ctx) {
       const next = root.querySelector("[data-next]");
       if (next) {
         next.addEventListener("click", () => {
-          step = Math.min(SLIDES.length, step + 1);
+          step = Math.min(ACTIVE_SLIDES.length, step + 1);
           paint();
         });
       }

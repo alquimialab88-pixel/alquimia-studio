@@ -39,8 +39,9 @@ export function isIos() {
 export function initPWA(onUpdate) {
   onUpdateReady = onUpdate;
 
-  // En el APK los archivos vienen dentro de la app: no hace falta service worker.
-  if (window.SticklyAndroid) {
+  // En el APK y en la app de escritorio los archivos vienen dentro de la app:
+  // no hace falta service worker (y evita servir versiones antiguas).
+  if (window.SticklyAndroid || window.SticklyDesktop) {
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.getRegistrations()
         .then((regs) => regs.forEach((reg) => reg.unregister()))
