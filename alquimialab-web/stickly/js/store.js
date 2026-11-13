@@ -217,17 +217,19 @@ function notePayload(input) {
 
 export async function saveNote(input) {
   const now = Date.now();
+  const prev = input.id ? state.notes.find((n) => n.id === input.id) : null;
   const base = {
     id: input.id || db.uid(),
     tipo: input.tipo || "texto",
     color: input.color || "#FEF08A",
     categoria: input.categoria || "importante",
-    x: typeof input.x === "number" ? input.x : 20,
-    y: typeof input.y === "number" ? input.y : 20,
-    ancho: input.ancho || 170,
-    alto: input.alto || 170,
+    x: typeof input.x === "number" ? input.x : (prev && typeof prev.x === "number" ? prev.x : 20),
+    y: typeof input.y === "number" ? input.y : (prev && typeof prev.y === "number" ? prev.y : 20),
+    ancho: typeof input.ancho === "number" ? input.ancho : ((prev && prev.ancho) || 170),
+    alto: typeof input.alto === "number" ? input.alto : ((prev && prev.alto) || 170),
+    pos: input.pos !== undefined ? !!input.pos : !!(prev && prev.pos),
     privada: !!input.privada,
-    createdAt: input.createdAt || now,
+    createdAt: input.createdAt || (prev && prev.createdAt) || now,
     updatedAt: now
   };
 
@@ -262,7 +264,18 @@ export async function moveNote(id, x, y) {
   if (!note) return;
   note.x = Math.max(0, Math.round(x));
   note.y = Math.max(0, Math.round(y));
+  note.pos = true;
   note.updatedAt = Date.now();
+  await db.put("notes", note);
+}
+
+export async function setNotePosition(id, x, y, ancho) {
+  const note = state.notes.find((n) => n.id === id);
+  if (!note) return;
+  note.x = Math.max(0, Math.round(x));
+  note.y = Math.max(0, Math.round(y));
+  if (typeof ancho === "number" && ancho > 0) note.ancho = Math.round(ancho);
+  note.pos = true;
   await db.put("notes", note);
 }
 

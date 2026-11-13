@@ -276,7 +276,9 @@ function miniMonth(year, month, counts, lang) {
     if (!inMonth) classes.push("out");
     if (counts.has(key)) classes.push("has");
     if (key === ui.todayKey()) classes.push("today");
-    cells += '<span class="' + classes.join(" ") + '"></span>';
+    cells += '<span class="' + classes.join(" ") + '">' +
+      (inMonth ? '<span class="mini-num">' + dayNum + "</span>" : "") +
+    "</span>";
   }
   const monthTasks = Array.from(counts.entries())
     .filter(([key]) => key.startsWith(year + "-" + ui.pad2(month + 1)))

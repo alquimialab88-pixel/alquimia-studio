@@ -243,4 +243,15 @@ export const EXTRA = {
     zh: "创建 PIN，保护你的密码和私密笔记。",
     ko: "PIN을 만들면 비밀번호와 비공개 노트를 안전하게 보관할 수 있어요."
   },
+  boardHint: {
+    es: "Mantén pulsada una nota y arrástrala a donde quieras.",
+    en: "Press and hold a note, then drag it anywhere.",
+    fr: "Maintiens une note appuyée et fais-la glisser où tu veux.",
+    it: "Tieni premuta una nota e trascinala dove vuoi.",
+    pt: "Segure uma nota e arraste-a para onde quiser.",
+    de: "Halte eine Notiz gedrückt und ziehe sie an eine beliebige Stelle.",
+    ja: "メモを長押しして、好きな場所にドラッグできます。",
+    zh: "长按便签，把它拖到任意位置。",
+    ko: "메모를 길게 눌러 원하는 곳으로 끌어다 놓으세요."
+  },
 };

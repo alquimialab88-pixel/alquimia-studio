@@ -27,6 +27,12 @@ function categoryLabel(id) {
   return found ? t(found.key) : id;
 }
 
+function stickyTilt(id) {
+  let hash = 0;
+  for (let i = 0; i < id.length; i++) hash = (hash * 31 + id.charCodeAt(i)) % 997;
+  return (((hash % 5) - 2) * 0.43).toFixed(2);
+}
+
 function noteData(note) {
   if (!note.privada) {
     return {
@@ -109,20 +115,153 @@ function stickyHtml(note) {
     ? '<img class="sticky-img" src="' + ui.esc(data.image) + '" alt="">'
     : "";
   const list = data.items.length
-    ? '<ul>' + data.items.slice(0, 4).map((item) => (
+    ? '<ul>' + data.items.slice(0, 5).map((item) => (
       '<li class="' + (item.done ? "done" : "") + '">' +
         ui.icon(item.done ? "check-circle" : "check") +
         "<span>" + ui.esc(item.text || "") + "</span></li>"
     )).join("") + "</ul>"
     : "<p>" + ui.esc(previewText(data) || t("noContent")) + "</p>";
 
-  return '<div class="sticky" role="button" tabindex="0" style="--note-c:' + ui.esc(color) + '" data-note="' + ui.esc(note.id) + '">' +
+  return '<div class="sticky" role="button" tabindex="0" style="--note-c:' + ui.esc(color) +
+      ';--tilt:' + stickyTilt(note.id) + 'deg" data-note="' + ui.esc(note.id) + '">' +
     (note.privada ? '<span class="sticky-lock">' + ui.icon("lock") + "</span>" : "") +
     image +
     "<h3>" + ui.esc(data.title) + "</h3>" +
     list +
     '<div class="sticky-meta">' + ui.esc(categoryLabel(note.categoria || "importante")) + "</div>" +
   "</div>";
+}
+
+function boardHtml(list) {
+  return '<p class="board-hint">' + ui.icon("grid", "icon-sm") + "<span>" + ui.esc(t("boardHint")) + "</span></p>" +
+    '<div class="note-board" id="noteBoard">' + list.map(stickyHtml).join("") + "</div>";
+}
+
+const BOARD_GAP = 12;
+
+function layoutBoard(root) {
+  const board = root.querySelector("#noteBoard");
+  if (!board) return;
+  const cards = Array.from(board.querySelectorAll(".sticky"));
+  if (!cards.length) {
+    board.style.height = "";
+    return;
+  }
+  const gap = BOARD_GAP;
+  const width = board.clientWidth || 320;
+  const cardW = Math.max(118, Math.min(168, Math.floor((width - gap) / 2)));
+  cards.forEach((card) => { card.style.width = cardW + "px"; });
+
+  const items = cards.map((card) => {
+    const id = card.getAttribute("data-note");
+    return {
+      card,
+      id,
+      note: store.state.notes.find((n) => n.id === id) || null,
+      height: card.offsetHeight || 150
+    };
+  });
+
+  const colY = [0, 0];
+  items.forEach((item) => {
+    if (!item.note || !item.note.pos || typeof item.note.x !== "number") return;
+    const col = item.note.x < width / 2 ? 0 : 1;
+    colY[col] = Math.max(colY[col], (item.note.y || 0) + item.height + gap);
+  });
+
+  const pending = [];
+  items.forEach((item) => {
+    const note = item.note;
+    if (note && note.pos && typeof note.x === "number" && typeof note.y === "number") {
+      const left = Math.max(0, Math.min(note.x, width - cardW));
+      item.card.style.left = left + "px";
+      item.card.style.top = Math.max(0, note.y) + "px";
+    } else {
+      const col = colY[0] <= colY[1] ? 0 : 1;
+      const left = col * (cardW + gap);
+      const top = colY[col];
+      item.card.style.left = left + "px";
+      item.card.style.top = top + "px";
+      colY[col] = top + item.height + gap;
+      if (item.id) pending.push({ id: item.id, left, top });
+    }
+    item.card.classList.add("placed");
+  });
+
+  const bottom = items.reduce((max, item) => {
+    return Math.max(max, (parseFloat(item.card.style.top) || 0) + item.height);
+  }, 0);
+  board.style.height = Math.max(320, bottom + 48) + "px";
+
+  pending.forEach((pos) => {
+    store.setNotePosition(pos.id, pos.left, pos.top, cardW).catch(() => {});
+  });
+}
+
+function wireBoard(root) {
+  const board = root.querySelector("#noteBoard");
+  if (!board) return;
+  let drag = null;
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+  board.addEventListener("dragstart", (e) => e.preventDefault());
+
+  board.addEventListener("pointerdown", (e) => {
+    const card = e.target.closest(".sticky");
+    if (!card || (e.button && e.button > 0)) return;
+    if (e.target.closest("button, a, input")) return;
+    drag = {
+      card,
+      id: card.getAttribute("data-note"),
+      pointerId: e.pointerId,
+      startX: e.clientX,
+      startY: e.clientY,
+      originX: parseFloat(card.style.left) || 0,
+      originY: parseFloat(card.style.top) || 0,
+      moved: false
+    };
+    card.classList.add("pressing");
+    try { card.setPointerCapture(e.pointerId); } catch (err) { /* ignore */ }
+  });
+
+  board.addEventListener("pointermove", (e) => {
+    if (!drag || e.pointerId !== drag.pointerId) return;
+    const dx = e.clientX - drag.startX;
+    const dy = e.clientY - drag.startY;
+    if (!drag.moved && Math.abs(dx) + Math.abs(dy) < 7) return;
+    if (!drag.moved) {
+      drag.moved = true;
+      drag.card.classList.add("dragging");
+    }
+    e.preventDefault();
+    const desiredY = drag.originY + dy;
+    const minHeight = desiredY + drag.card.offsetHeight + 40;
+    if (minHeight > board.clientHeight) board.style.height = minHeight + "px";
+    const maxX = Math.max(0, board.clientWidth - drag.card.offsetWidth);
+    const maxY = Math.max(0, board.clientHeight - drag.card.offsetHeight - 20);
+    drag.card.style.left = clamp(drag.originX + dx, 0, maxX) + "px";
+    drag.card.style.top = clamp(desiredY, 0, maxY) + "px";
+  }, { passive: false });
+
+  const finish = (e) => {
+    if (!drag || (e && e.pointerId !== drag.pointerId)) return;
+    const { card, id, moved } = drag;
+    card.classList.remove("pressing", "dragging");
+    if (moved) {
+      card.dataset.suppress = "1";
+      setTimeout(() => { delete card.dataset.suppress; }, 260);
+      store.setNotePosition(
+        id,
+        parseFloat(card.style.left) || 0,
+        parseFloat(card.style.top) || 0,
+        card.offsetWidth
+      ).catch(() => {});
+    }
+    drag = null;
+  };
+
+  board.addEventListener("pointerup", finish);
+  board.addEventListener("pointercancel", finish);
 }
 
 function bodyHtml() {
@@ -141,7 +280,7 @@ function bodyHtml() {
   if (view === "list") {
     return '<div class="notes-list">' + list.map(rowHtml).join("") + "</div>";
   }
-  return '<div class="board">' + list.map(stickyHtml).join("") + "</div>";
+  return boardHtml(list);
 }
 
 export async function render(ctx) {
@@ -182,6 +321,10 @@ export async function render(ctx) {
     body.querySelectorAll("[data-note]").forEach((card) => {
       card.addEventListener("click", (e) => {
         if (e.target.closest("[data-del]")) return;
+        if (card.dataset.suppress === "1") {
+          delete card.dataset.suppress;
+          return;
+        }
         open(card.getAttribute("data-note"));
       });
       card.addEventListener("keydown", (e) => {
@@ -191,6 +334,9 @@ export async function render(ctx) {
         }
       });
     });
+
+    wireBoard(body);
+    layoutBoard(root);
 
     body.querySelectorAll("[data-del]").forEach((btn) => {
       btn.addEventListener("click", async (e) => {
@@ -212,6 +358,8 @@ export async function render(ctx) {
       btn.addEventListener("click", () => ctx.navigate("#/note/new"));
     });
   }
+
+  let onResize = null;
 
   function mount(root) {
     const search = root.querySelector("#noteSearch");
@@ -250,7 +398,17 @@ export async function render(ctx) {
     });
 
     wireBody(root);
+
+    onResize = () => layoutBoard(root);
+    window.addEventListener("resize", onResize);
   }
 
-  return { html, mount, cleanup: () => {} };
+  return {
+    html,
+    mount,
+    cleanup: () => {
+      if (onResize) window.removeEventListener("resize", onResize);
+      onResize = null;
+    }
+  };
 }

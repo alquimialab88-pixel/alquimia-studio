@@ -1,20 +1,18 @@
 # Fotos de Antonio para la bienvenida
 
-Coloca aquí las tres fotos con estos nombres exactos:
+Las tres fotos ya están integradas en la app:
 
-| Archivo | Paso de la bienvenida | Tema sugerido |
-| --- | --- | --- |
-| `antonio-1.png` | «Tu día, en orden y en un solo lugar» | Organización: escritorio/pared con post-its, agenda y teléfono. |
-| `antonio-2.png` | «Privado de verdad» | Privacidad: Antonio con el cuaderno o el teléfono junto al pecho y un candado amable. |
-| `antonio-3.png` | «Instálala como app» | Uso en cualquier lugar: sofá o café, teléfono con Stickly, sin Wi-Fi. |
+| Archivo | Paso de la bienvenida |
+| --- | --- |
+| `antonio-1.webp` | «Tu día, en orden y en un solo lugar.» |
+| `antonio-2.webp` | «Privado de verdad.» |
+| `antonio-3.webp` | «Instálala como app.» |
 
-Recomendaciones:
+Detalles técnicos:
 
-- 1600 × 1600 px, PNG (o JPG con el mismo nombre base).
-- Fondo transparente o `#F8F7FB`.
-- Antonio centrado, con margen, misma ropa y estilo en las tres.
-- Paleta lavanda (`#EDECF8`, `#6463AA`).
-- Sin texto dentro de la imagen.
-
-Mientras no existan estos archivos, la bienvenida muestra la ilustración
-de respaldo y no aparece ningún icono roto.
+- Formato WebP con transparencia, 900 × 900 px, calidad 90 (~112–120 KB cada una).
+- La app las muestra con `object-fit: contain` sobre un resplandor lavanda suave.
+- Si un archivo falta, se intenta el mismo nombre en `.png` y luego en `.jpg`;
+  si tampoco existe, se queda la ilustración de respaldo (sin iconos rotos).
+- Para cambiarlas, sustituye los archivos manteniendo el nombre y vuelve a
+  subir la app (la caché del service worker se actualiza con cada versión).

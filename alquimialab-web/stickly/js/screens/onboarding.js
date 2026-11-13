@@ -8,9 +8,9 @@ import * as ui from "../ui.js";
 import { promptPin } from "../pin.js";
 
 const SLIDES = [
-  { title: "onb1t", text: "onb1d", icon: "note", art: "notes", photo: "assets/antonio-1.png" },
-  { title: "onb2t", text: "onb2d", icon: "shield", art: "shield", photo: "assets/antonio-2.png" },
-  { title: "onb3t", text: "onb3d", icon: "download", art: "install", photo: "assets/antonio-3.png" }
+  { title: "onb1t", text: "onb1d", icon: "note", art: "notes", photo: "assets/antonio-1.webp" },
+  { title: "onb2t", text: "onb2d", icon: "shield", art: "shield", photo: "assets/antonio-2.webp" },
+  { title: "onb3t", text: "onb3d", icon: "download", art: "install", photo: "assets/antonio-3.webp" }
 ];
 
 function art(icon, kind) {
@@ -54,9 +54,12 @@ function wirePhotos(root) {
     }
     img.addEventListener("load", () => wrap.classList.add("has-photo"));
     img.addEventListener("error", () => {
-      if (!img.dataset.retried) {
-        img.dataset.retried = "1";
-        img.src = img.src.split(".png").join(".jpg");
+      const step = Number(img.dataset.retried || "0");
+      img.dataset.retried = String(step + 1);
+      const next = [".webp", ".png", ".jpg"];
+      const current = next.findIndex((ext) => img.src.endsWith(ext));
+      if (step < 2 && current >= 0 && current < next.length - 1) {
+        img.src = img.src.split(next[current]).join(next[current + 1]);
       } else {
         img.remove();
       }
