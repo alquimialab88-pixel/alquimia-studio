@@ -125,7 +125,9 @@ function periodTitle(lang) {
   if (view === "week") {
     const start = weekStart(selectedDate());
     const end = addDays(start, 6);
-    return t("weekOf", { a: ui.fmtShortDate(start, lang), b: ui.fmtShortDate(end, lang) });
+    const a = start.getDate() + " " + ui.fmtMonthShort(start, lang);
+    const b = end.getDate() + " " + ui.fmtMonthShort(end, lang);
+    return t("weekOf", { a, b });
   }
   if (view === "year") return String(cursor.getFullYear());
   return ui.fmtMonth(cursor, lang);
@@ -307,6 +309,8 @@ export async function render(ctx) {
     selected = dateParam;
     const d = ui.parseKey(dateParam);
     cursor = new Date(d.getFullYear(), d.getMonth(), 1);
+    view = "day";
+    try { localStorage.setItem(VIEW_KEY, view); } catch (e) { /* ignore */ }
   }
 
   const total = store.state.tasks.length;
