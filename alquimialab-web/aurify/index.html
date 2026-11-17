@@ -3,22 +3,49 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#6462ab">
-  <meta name="description" content="Create polished quotes and payment receipts with automatic totals. Free bilingual tool by Alquimia Lab.">
+  <meta name="theme-color" content="#6463aa">
+  <meta name="description" content="Aurify turns your work into polished quotes and payment receipts: your brand, your client, totals that add themselves up. Free tool by Alquimia Lab.">
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <title>Alquimia Cotiza · Alquimia Lab</title>
+  <link rel="apple-touch-icon" href="icon.svg">
+  <title>Aurify · Alquimia Lab</title>
   <style>
+    @font-face {
+      font-family: "Roboto";
+      font-style: normal;
+      font-weight: 400 700;
+      font-display: swap;
+      src: url("fonts/roboto-latin.woff2") format("woff2");
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @font-face {
+      font-family: "Roboto";
+      font-style: normal;
+      font-weight: 400 700;
+      font-display: swap;
+      src: url("fonts/roboto-latin-ext.woff2") format("woff2");
+      unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
     :root {
       color-scheme: light;
-      --ink: #292743;
-      --muted: #77758e;
-      --purple: #6462ab;
-      --line: #e8e6f1;
+      --primary: #6463aa;
+      --primary-dark: #4a4990;
+      --primary-light: #edeCF8;
+      --primary-soft: #dcdbf2;
+      --gold: #c9922f;
+      --gold-light: #fbf3e2;
+      --ink: #2a2a3e;
+      --muted: #6a6788;
+      --line: #e8e6f4;
       --surface: #fff;
-      --page: #f5f4f8;
-      --font-body: "Trebuchet MS", Arial, sans-serif;
-      font-family: var(--font-body);
+      --page: #f8f7fb;
+      --purple: #6463aa;
+      --radius: 22px;
+      --shadow: 0 10px 28px rgba(90, 88, 160, .09);
+      --shadow-sm: 0 3px 12px rgba(90, 88, 160, .06);
+      --shadow-lg: 0 22px 48px rgba(90, 88, 160, .17);
+      --font: "Roboto", "Helvetica Neue", Arial, "Noto Sans", system-ui, -apple-system, sans-serif;
+      font-family: var(--font);
       color: var(--ink);
       background: var(--page);
       font-synthesis: none;
@@ -39,43 +66,49 @@
       align-items: center;
       justify-content: space-between;
       gap: 20px;
-      padding: 14px clamp(16px, 4vw, 48px);
-      border-bottom: 1px solid rgba(204, 201, 230, .7);
-      background: rgba(255, 255, 255, .9);
-      backdrop-filter: blur(14px);
+      padding: 12px clamp(16px, 4vw, 48px);
+      border-bottom: 1px solid var(--line);
+      background: rgba(248, 247, 251, .9);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
-    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; text-decoration: none; }
+    .brand { display: flex; align-items: center; gap: 11px; min-width: 0; text-decoration: none; }
     .brand-mark {
       display: grid;
-      width: 38px;
-      height: 38px;
+      width: 40px;
+      height: 40px;
       flex: 0 0 auto;
       place-items: center;
+      overflow: hidden;
       border-radius: 13px;
-      background: #efedfa;
-      color: var(--purple);
-      font-size: 21px;
+      background: linear-gradient(160deg, #7b77c6, #4a4990);
+      box-shadow: 0 6px 16px rgba(90, 88, 160, .26);
     }
+    .brand-mark svg { display: block; width: 100%; height: 100%; }
     .brand-copy { display: grid; gap: 1px; }
-    .brand-copy strong { font-family: Georgia, serif; font-size: 16px; font-weight: 500; }
+    .brand-copy strong { font-size: 17px; font-weight: 700; letter-spacing: -.02em; }
     .brand-copy small { color: var(--muted); font-size: 11px; }
     .bar-actions { display: flex; align-items: center; gap: 9px; }
     .save-state { color: var(--muted); font-size: 12px; }
     .toolbar-button, .language-button, .button-primary, .button-secondary {
       min-height: 40px;
       border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 9px 14px;
+      border-radius: 999px;
+      padding: 9px 18px;
       background: #fff;
       color: var(--ink);
+      font-size: 13px;
       font-weight: 700;
       text-decoration: none;
+      transition: border-color .16s ease, background .16s ease, color .16s ease, transform .12s ease;
     }
-    .toolbar-button:hover, .language-button:hover, .button-secondary:hover { border-color: #bdb9df; }
-    .language-button { min-width: 64px; color: var(--purple); }
-    .button-primary { border-color: var(--purple); background: var(--purple); color: #fff; }
-    .button-primary:hover { background: #535192; }
-    .button-secondary { color: var(--purple); }
+    .toolbar-button:hover, .language-button:hover, .button-secondary:hover { border-color: var(--primary-soft); background: var(--primary-light); }
+    .toolbar-button:active, .language-button:active, .button-primary:active, .button-secondary:active { transform: scale(.98); }
+    .language-button { min-width: 64px; color: var(--primary); }
+    .button-primary { border-color: var(--primary); background: var(--primary); color: #fff; box-shadow: 0 8px 18px rgba(100, 99, 170, .26); }
+    .button-primary:hover { border-color: var(--primary-dark); background: var(--primary-dark); }
+    .button-secondary { color: var(--primary); }
+    .button-danger { color: #a44d5b; }
     .button-danger { color: #a44d5b; }
 
     .workspace {
@@ -88,38 +121,38 @@
       padding: 34px clamp(16px, 4vw, 48px) 60px;
     }
     .editor { display: grid; gap: 16px; }
-    .intro { padding: 4px 2px 6px; }
+    .intro { padding: 6px 2px 8px; }
     .eyebrow {
-      margin: 0 0 8px;
-      color: var(--purple);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .13em;
+      margin: 0 0 9px;
+      color: var(--gold);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: .16em;
       text-transform: uppercase;
     }
-    h1 { margin: 0; font-family: Georgia, serif; font-size: clamp(27px, 3vw, 35px); font-weight: 500; letter-spacing: -.03em; }
-    .intro-copy { max-width: 520px; margin: 9px 0 0; color: var(--muted); font-size: 14px; line-height: 1.55; }
+    h1 { margin: 0; font-size: clamp(27px, 3vw, 36px); font-weight: 700; letter-spacing: -.035em; line-height: 1.12; }
+    .intro-copy { max-width: 520px; margin: 10px 0 0; color: var(--muted); font-size: 14px; line-height: 1.55; }
     .panel {
       min-width: 0;
       padding: 19px;
       border: 1px solid var(--line);
-      border-radius: 19px;
+      border-radius: var(--radius);
       background: var(--surface);
-      box-shadow: 0 8px 26px rgba(55, 48, 96, .045);
+      box-shadow: var(--shadow);
     }
     .panel-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 15px; }
-    .panel h2 { margin: 0; font-size: 15px; font-weight: 800; }
+    .panel h2 { margin: 0; font-size: 15px; font-weight: 700; }
     .panel-hint { margin: 5px 0 0; color: var(--muted); font-size: 12px; line-height: 1.45; }
     .field-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
     .field { display: grid; min-width: 0; gap: 6px; }
     .field-wide { grid-column: 1 / -1; }
-    .field label, .small-label { color: #595771; font-size: 11px; font-weight: 800; }
+    .field label, .small-label { color: #56547a; font-size: 11px; font-weight: 700; }
     .field input, .field select, .field textarea, .line-input {
       width: 100%;
       min-width: 0;
       min-height: 41px;
-      border: 1px solid #e6e4ee;
-      border-radius: 10px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
       outline: none;
       padding: 9px 11px;
       background: #fff;
@@ -141,7 +174,7 @@
       gap: 7px;
       align-items: center;
     }
-    .line-heading { padding: 0 1px; color: var(--muted); font-size: 10px; font-weight: 800; }
+    .line-heading { padding: 0 1px; color: var(--muted); font-size: 10px; font-weight: 700; }
     .line-row .line-input { min-height: 39px; padding: 8px; font-size: 12px; }
     .line-row input[type="number"] { text-align: right; }
     .remove-line {
@@ -162,11 +195,11 @@
     .logo-preview { width: 35px; height: 35px; object-fit: contain; border-radius: 8px; background: #f4f2f8; }
     .logo-preview[hidden] { display: none; }
     .document-warning { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.5; }
-    .privacy-note { padding: 10px 12px; border-radius: 11px; background: #f2f0fa; color: #656188; font-size: 11px; line-height: 1.5; }
+    .privacy-note { padding: 11px 13px; border-radius: 14px; background: var(--primary-light); color: #57548a; font-size: 11px; line-height: 1.5; }
 
     .preview-area { position: sticky; top: 86px; min-width: 0; }
     .preview-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 12px; color: var(--muted); font-size: 12px; }
-    .paper-wrap { padding: clamp(12px, 2.3vw, 30px); border: 1px solid #e7e4f0; border-radius: 22px; background: #eceaf2; box-shadow: 0 15px 44px rgba(51, 45, 80, .07); }
+    .paper-wrap { padding: clamp(12px, 2.3vw, 30px); border: 1px solid var(--line); border-radius: var(--radius); background: #edecf4; box-shadow: var(--shadow); }
     .paper {
       --doc-accent: #6462ab;
       --doc-font: Arial, sans-serif;
@@ -217,9 +250,10 @@
     .paper-note-content { color: #77758b; font-size: calc(11px * var(--doc-scale)); line-height: 1.6; white-space: pre-line; overflow-wrap: anywhere; }
     .paper-footer { margin-top: 42px; padding-top: 13px; border-top: 1px solid #efedf4; color: #a09daf; font-size: calc(9px * var(--doc-scale)); line-height: 1.5; text-align: center; overflow-wrap: anywhere; }
     .paper-footer:empty { display: none; }
-    .toast { position: fixed; z-index: 10; right: 18px; bottom: 18px; max-width: min(440px, calc(100vw - 36px)); padding: 12px 16px; border-radius: 12px; background: #353251; color: #fff; box-shadow: 0 8px 26px rgba(27, 24, 54, .25); font-size: 13px; }
+    .toast { position: fixed; z-index: 10; right: 18px; bottom: 18px; max-width: min(440px, calc(100vw - 36px)); padding: 12px 16px; border-radius: 14px; background: #353251; color: #fff; box-shadow: var(--shadow-lg); font-size: 13px; }
     .toast[hidden] { display: none; }
     .site-footer { padding: 0 16px 28px; color: var(--muted); font-size: 11px; text-align: center; }
+    .site-footer strong { color: var(--ink); font-weight: 700; }
 
     @media (max-width: 980px) {
       .workspace { grid-template-columns: minmax(300px, .9fr) minmax(0, 1.1fr); gap: 18px; }
@@ -269,8 +303,20 @@
 <body>
   <header class="appbar">
     <a class="brand" href="../" aria-label="Alquimia Lab home">
-      <span class="brand-mark" aria-hidden="true">✦</span>
-      <span class="brand-copy"><strong>Alquimia Lab</strong><small data-i18n="brandSubtitle">A little more calm in your business</small></span>
+      <span class="brand-mark">
+        <svg viewBox="0 0 512 512" aria-hidden="true">
+          <defs>
+            <linearGradient id="am-gold" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#F6DCA4"/>
+              <stop offset=".55" stop-color="#E0B457"/>
+              <stop offset="1" stop-color="#C08F2C"/>
+            </linearGradient>
+          </defs>
+          <circle cx="256" cy="256" r="148" fill="none" stroke="url(#am-gold)" stroke-width="36"/>
+          <circle cx="256" cy="256" r="46" fill="url(#am-gold)"/>
+        </svg>
+      </span>
+      <span class="brand-copy"><strong>Aurify</strong><small data-i18n="brandSubtitle">by Alquimia Lab</small></span>
     </a>
     <div class="bar-actions">
       <span class="save-state" id="saveState" aria-live="polite"></span>
@@ -283,9 +329,9 @@
   <main class="workspace">
     <section class="editor" aria-label="Document editor">
       <div class="intro">
-        <p class="eyebrow" data-i18n="toolLabel">A calm business tool</p>
-        <h1 data-i18n="pageTitle">Make every quote feel like you.</h1>
-        <p class="intro-copy" data-i18n="pageIntro">Create a polished quote or payment receipt, customize your brand, and let the totals take care of themselves.</p>
+        <p class="eyebrow" data-i18n="toolLabel">Quotes &amp; receipts</p>
+        <h1 data-i18n="pageTitle">Your work, turned into gold.</h1>
+        <p class="intro-copy" data-i18n="pageIntro">Create a polished quote or payment receipt with your brand, your client and totals that add themselves up.</p>
       </div>
 
       <section class="panel">
@@ -480,19 +526,20 @@
       </div>
     </section>
   </main>
-  <footer class="site-footer">Alquimia Lab · <span data-i18n="madeWith">Made with calm &amp; coffee</span></footer>
+  <footer class="site-footer"><strong>Aurify</strong> · by Alquimia Lab · <span data-i18n="madeWith">Made with calm &amp; coffee</span></footer>
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
   <script>
     (function () {
       "use strict";
 
+      /* Se mantiene la clave antigua para no perder los borradores ya guardados. */
       var STORAGE_KEY = "alquimia-cotiza-v1";
       var messages = {
         en: {
-          brandSubtitle: "A little more calm in your business", reset: "Start over", downloadPdf: "Save as PDF",
-          toolLabel: "A calm business tool", pageTitle: "Make every quote feel like you.",
-          pageIntro: "Create a polished quote or payment receipt, customize your brand, and let the totals take care of themselves.",
+          brandSubtitle: "by Alquimia Lab", reset: "Start over", downloadPdf: "Save as PDF",
+          toolLabel: "Quotes & receipts", pageTitle: "Your work, turned into gold.",
+          pageIntro: "Create a polished quote or payment receipt with your brand, your client and totals that add themselves up.",
           documentPanel: "Your document", documentHint: "Choose a quote or a simple payment receipt.",
           documentType: "Document type", quote: "Quote", receipt: "Payment receipt", documentNumber: "Document number",
           documentTitle: "Document title", date: "Date", validUntil: "Valid until", brandPanel: "Your brand",
@@ -516,16 +563,16 @@
           previewLabel: "Live preview", printHint: "Choose “Save as PDF” to download or print.",
           numberShort: "No.", preparedFor: "Prepared for", from: "From", description: "Description",
           amount: "Amount", total: "Total", madeWith: "Made with calm & coffee",
-          removeItem: "Remove item", saved: "Saved on this device", saving: "Saving…", saveError: "Could not save in this browser. Download your PDF to keep a copy.",
+          removeItem: "Remove item", saved: "Saved on this device", saving: "Saving⬦", saveError: "Could not save in this browser. Download your PDF to keep a copy.",
           resetConfirm: "Start a new document? This clears the saved draft in this browser.",
           logoError: "Choose a valid image under 10 MB.", logoSaveError: "The logo could not be processed. Try a smaller image.",
           lineDefault: "Item or service", emptyItem: "Add an item or service", untitledBusiness: "Your business",
           restoreError: "The saved draft could not be read. Start over to create a fresh document."
         },
         es: {
-          brandSubtitle: "Un poco más de calma para tu negocio", reset: "Empezar de nuevo", downloadPdf: "Guardar como PDF",
-          toolLabel: "Una herramienta para trabajar con calma", pageTitle: "Una cotización con tu estilo.",
-          pageIntro: "Crea cotizaciones o comprobantes de cobro, personaliza tu marca y deja que las sumas se hagan solas.",
+          brandSubtitle: "por Alquimia Lab", reset: "Empezar de nuevo", downloadPdf: "Guardar como PDF",
+          toolLabel: "Cotizaciones y comprobantes", pageTitle: "Tu trabajo, convertido en oro.",
+          pageIntro: "Crea una cotización o un comprobante de cobro con tu marca, tu cliente y totales que se suman solos.",
           documentPanel: "Tu documento", documentHint: "Elige una cotización o un comprobante sencillo de cobro.",
           documentType: "Tipo de documento", quote: "Cotización", receipt: "Comprobante de cobro", documentNumber: "Número de documento",
           documentTitle: "Título del documento", date: "Fecha", validUntil: "Válida hasta", brandPanel: "Tu marca",
@@ -549,7 +596,7 @@
           previewLabel: "Vista previa", printHint: "Pulsa «Guardar como PDF» para descargar o imprimir.",
           numberShort: "N.º", preparedFor: "Preparado para", from: "De", description: "Descripción",
           amount: "Importe", total: "Total", madeWith: "Hecho con calma y café",
-          removeItem: "Eliminar producto", saved: "Guardado en este dispositivo", saving: "Guardando…", saveError: "No se pudo guardar en este navegador. Descarga el PDF para conservar una copia.",
+          removeItem: "Eliminar producto", saved: "Guardado en este dispositivo", saving: "Guardando⬦", saveError: "No se pudo guardar en este navegador. Descarga el PDF para conservar una copia.",
           resetConfirm: "¿Empezar un documento nuevo? Se borrará el borrador guardado en este navegador.",
           logoError: "Elige una imagen válida de menos de 10 MB.", logoSaveError: "No se pudo procesar el logo. Prueba con una imagen más pequeña.",
           lineDefault: "Producto o servicio", emptyItem: "Añade un producto o servicio", untitledBusiness: "Tu negocio",
@@ -972,7 +1019,7 @@
       if ("serviceWorker" in navigator && location.protocol !== "file:") {
         window.addEventListener("load", function () {
           navigator.serviceWorker.register("./sw.js").catch(function (error) {
-            console.error("Alquimia Cotiza could not register offline support.", error);
+            console.error("Aurify could not register offline support.", error);
           });
         });
       }

@@ -1,5 +1,6 @@
-const CACHE_NAME = "alquimia-cotiza-v3";
-const APP_SHELL = ["./", "./index.html", "./manifest.json"];
+const CACHE_NAME = "aurify-v1";
+const OLD_PREFIXES = ["aurify-", "alquimia-cotiza-"];
+const APP_SHELL = ["./", "./index.html", "./manifest.json", "./icon.svg"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)));
@@ -9,8 +10,9 @@ self.addEventListener("install", (event) => {
 self.addEventListener("activate", (event) => {
   event.waitUntil(Promise.all([
     caches.keys().then((keys) =>
-      Promise.all(keys.filter((key) => key.startsWith("alquimia-cotiza-") && key !== CACHE_NAME)
-        .map((key) => caches.delete(key)))
+      Promise.all(keys.filter((key) =>
+        OLD_PREFIXES.some((prefix) => key.startsWith(prefix)) && key !== CACHE_NAME
+      ).map((key) => caches.delete(key)))
     ),
     self.clients.claim()
   ]));

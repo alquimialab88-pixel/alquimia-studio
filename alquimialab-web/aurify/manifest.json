@@ -1,0 +1,19 @@
+{
+  "name": "Aurify — quotes with your brand",
+  "short_name": "Aurify",
+  "description": "Turn your work into polished quotes and payment receipts, with your brand and totals that add themselves up.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f8f7fb",
+  "theme_color": "#6463aa",
+  "categories": ["business", "productivity", "finance"],
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

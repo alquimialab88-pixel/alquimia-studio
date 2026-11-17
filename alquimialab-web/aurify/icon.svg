@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Aurify">
+  <defs>
+    <linearGradient id="aurify-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7B77C6"/>
+      <stop offset="1" stop-color="#4A4990"/>
+    </linearGradient>
+    <linearGradient id="aurify-gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F6DCA4"/>
+      <stop offset=".55" stop-color="#E0B457"/>
+      <stop offset="1" stop-color="#C08F2C"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#aurify-bg)"/>
+  <circle cx="248" cy="264" r="104" fill="none" stroke="url(#aurify-gold)" stroke-width="24"/>
+  <circle cx="248" cy="264" r="30" fill="url(#aurify-gold)"/>
+  <path d="m372 132 10 27 27 10-27 10-10 27-10-27-27-10 27-10 10-27Z" fill="#F7E7C4" opacity=".92"/>
+</svg>

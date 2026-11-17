@@ -428,7 +428,7 @@
     "Print edition on Amazon and digital on Gumroad.": "Edición impresa en Amazon y digital en Gumroad.",
     "Get it": "Conseguir",
     "Explore all products": "Explorar todos los productos",
-    "Create beautiful quotes and payment receipts with automatic totals.": "Crea cotizaciones y comprobantes de cobro bonitos con totales automáticos.",
+    "Turn your work into polished quotes and payment receipts, with your brand.": "Convierte tu trabajo en cotizaciones y comprobantes de cobro con tu marca.",
     "Try the free demo": "Probar la demo gratis",
     "© 2026 Alquimia Lab · Made with calm & coffee": "© 2026 Alquimia Lab · Hecho con calma y café",
 
