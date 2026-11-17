@@ -49,6 +49,7 @@ function openNoteSheet(options) {
   let stream = null;
   let chunks = [];
   let recording = false;
+  let starting = false;
   let startedAt = 0;
   let tickTimer = null;
   let maxTimer = null;
@@ -248,7 +249,7 @@ function openNoteSheet(options) {
   }
 
   async function startRecording() {
-    if (recording) return;
+    if (recording || starting) return;
     if (!hasMicApi() || typeof MediaRecorder === "undefined") {
       recError = "audioUnsupported";
       paintRecorder();
@@ -257,15 +258,20 @@ function openNoteSheet(options) {
     }
 
     recError = "";
-    await waitNativeMic();
+    starting = true;
     try {
-      stream = await getMicStream();
-    } catch (e) {
-      console.warn("Stickly · micrófono:", (e && e.name) || e, (e && e.message) || "");
-      const permission = await micPermissionState();
-      recError = permission === "denied" ? "micBlocked" : micErrorKey(e);
-      paintRecorder();
-      return;
+      await waitNativeMic();
+      try {
+        stream = await getMicStream();
+      } catch (e) {
+        console.warn("Stickly · micrófono:", (e && e.name) || e, (e && e.message) || "");
+        const permission = await micPermissionState();
+        recError = permission === "denied" ? "micBlocked" : micErrorKey(e);
+        paintRecorder();
+        return;
+      }
+    } finally {
+      starting = false;
     }
 
     const mime = pickMime();
