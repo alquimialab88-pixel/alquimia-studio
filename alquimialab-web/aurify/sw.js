@@ -1,6 +1,16 @@
-const CACHE_NAME = "aurify-v1";
+const CACHE_NAME = "aurify-v2";
 const OLD_PREFIXES = ["aurify-", "alquimia-cotiza-"];
-const APP_SHELL = ["./", "./index.html", "./manifest.json", "./icon.svg"];
+const APP_SHELL = [
+  "./",
+  "./index.html",
+  "./manifest.json",
+  "./icon.svg",
+  "./icon-192.png",
+  "./icon-512.png",
+  "./apple-touch-icon.png",
+  "./fonts/roboto-latin.woff2",
+  "./fonts/roboto-latin-ext.woff2"
+];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)));
