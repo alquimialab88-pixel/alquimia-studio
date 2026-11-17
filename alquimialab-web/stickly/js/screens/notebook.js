@@ -105,22 +105,23 @@ function openNoteSheet(options) {
         '<button type="button" class="icon-btn danger" data-rec-stop aria-label="' + ui.esc(t("detener")) + '">' + ui.icon("stop", "icon-sm") + "</button>" +
       "</div>";
     }
-    if (recError) {
-      return '<div class="recorder rec-error">' +
-        '<span class="rec-dot err"></span>' +
-        '<div class="rec-main"><b>' + ui.esc(t(recError)) + "</b><small>" + ui.esc(t("recordHint")) + "</small></div>" +
-        '<button type="button" class="btn btn-ghost" style="min-height:38px;padding:8px 14px;font-size:12px" data-rec-start>' +
-          ui.icon("mic", "icon-sm") + " " + ui.esc(t("micRetry")) + "</button>" +
-      "</div>";
-    }
+    const errorHtml = recError
+      ? '<div class="recorder rec-error">' +
+          '<span class="rec-dot err"></span>' +
+          '<div class="rec-main"><b>' + ui.esc(t(recError)) + "</b><small>" + ui.esc(t("recordHint")) + "</small></div>" +
+          '<button type="button" class="btn btn-ghost" style="min-height:38px;padding:8px 14px;font-size:12px" data-rec-start>' +
+            ui.icon("mic", "icon-sm") + " " + ui.esc(t("micRetry")) + "</button>" +
+        "</div>"
+      : "";
     if (draft.audio) {
-      return '<div class="field"><span>' + ui.esc(t("audioNote")) + "</span>" +
+      return errorHtml + '<div class="field"><span>' + ui.esc(t("audioNote")) + "</span>" +
         '<audio controls preload="metadata" src="' + ui.esc(draft.audio) + '"></audio>' +
         '<div class="row mt-8" style="gap:8px">' +
-          '<button type="button" class="btn btn-ghost grow" data-rec-start>' + ui.icon("mic", "icon-sm") + " " + ui.esc(t("recordAgain")) + "</button>" +
+          (recError ? "" : '<button type="button" class="btn btn-ghost grow" data-rec-start>' + ui.icon("mic", "icon-sm") + " " + ui.esc(t("recordAgain")) + "</button>") +
           '<button type="button" class="btn btn-danger" data-rec-del>' + ui.esc(t("removeAudio")) + "</button>" +
         "</div></div>";
     }
+    if (errorHtml) return errorHtml;
     return '<div class="recorder">' +
       '<span class="rec-dot"></span>' +
       '<div class="rec-main"><b>' + ui.esc(t("audioNote")) + "</b><small>" + ui.esc(t("recordHint")) + "</small></div>" +
@@ -135,8 +136,9 @@ function openNoteSheet(options) {
   }
 
   function wireRecorder() {
-    const start = recBox.querySelector("[data-rec-start]");
-    if (start) start.addEventListener("click", startRecording);
+    recBox.querySelectorAll("[data-rec-start]").forEach((start) => {
+      start.addEventListener("click", startRecording);
+    });
 
     const stop = recBox.querySelector("[data-rec-stop]");
     if (stop) stop.addEventListener("click", stopRecording);
