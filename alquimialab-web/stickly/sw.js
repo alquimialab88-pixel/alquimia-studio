@@ -3,7 +3,7 @@
    Mantiene la app disponible sin conexión y sirve actualizaciones limpias.
    ========================================================================== */
 
-const VERSION = "stickly-v9";
+const VERSION = "stickly-v10";
 const SHELL = [
   "./index.html",
   "./manifest.webmanifest",

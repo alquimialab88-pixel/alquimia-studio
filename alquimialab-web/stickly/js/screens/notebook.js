@@ -198,6 +198,32 @@ function openNoteSheet(options) {
     });
   }
 
+  /* En la app de Android pedimos el permiso nativo antes de getUserMedia,
+     para que la petición del WebView no caduque con el diálogo del sistema. */
+  function waitNativeMic() {
+    return new Promise((resolve) => {
+      const bridge = window.SticklyAndroid;
+      if (!bridge || typeof bridge.pedirMicro !== "function") {
+        resolve();
+        return;
+      }
+      let listo = false;
+      const terminar = () => {
+        if (listo) return;
+        listo = true;
+        window.__sticklyMicResult = null;
+        resolve();
+      };
+      window.__sticklyMicResult = () => terminar();
+      setTimeout(terminar, 8000);
+      try {
+        bridge.pedirMicro();
+      } catch (e) {
+        terminar();
+      }
+    });
+  }
+
   async function getMicStream() {
     const tries = [
       { audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true } },
@@ -231,6 +257,7 @@ function openNoteSheet(options) {
     }
 
     recError = "";
+    await waitNativeMic();
     try {
       stream = await getMicStream();
     } catch (e) {

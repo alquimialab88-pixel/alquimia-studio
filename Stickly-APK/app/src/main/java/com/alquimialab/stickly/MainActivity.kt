@@ -30,6 +30,8 @@ class MainActivity : ComponentActivity() {
     private lateinit var webView: WebView
     private var fileCallback: ValueCallback<Array<Uri>>? = null
     private var pendingPermission: PermissionRequest? = null
+    private var microPendienteJs = false
+    private var microYaPedido = false
 
     private val selectorArchivos = registerForActivityResult(
         ActivityResultContracts.OpenDocument()
@@ -43,10 +45,27 @@ class MainActivity : ComponentActivity() {
     ) { concedido ->
         val solicitud = pendingPermission
         pendingPermission = null
-        if (concedido && solicitud != null) {
-            solicitud.grant(solicitud.resources)
-        } else {
-            solicitud?.deny()
+        if (solicitud != null) {
+            try {
+                if (concedido) solicitud.grant(solicitud.resources) else solicitud.deny()
+            } catch (e: Exception) {
+                /* La petición del WebView pudo cancelarse mientras se mostraba el diálogo. */
+            }
+        }
+        if (microPendienteJs) {
+            microPendienteJs = false
+            avisarMicroJs(concedido)
+        }
+    }
+
+    private fun avisarMicroJs(concedido: Boolean) {
+        try {
+            webView.evaluateJavascript(
+                "window.__sticklyMicResult && window.__sticklyMicResult($concedido)",
+                null
+            )
+        } catch (e: Exception) {
+            /* El WebView aún no está listo; el JS seguirá con su propio intento. */
         }
     }
 
@@ -101,9 +120,29 @@ class MainActivity : ComponentActivity() {
                     PackageManager.PERMISSION_GRANTED
                 ) {
                     request.grant(request.resources)
-                } else {
-                    pendingPermission = request
+                    return
+                }
+                /* Si ya pedimos el permiso y el usuario lo negó, no insistimos:
+                   el JS mostrará el aviso con el camino a los ajustes. */
+                if (microYaPedido) {
+                    try {
+                        request.deny()
+                    } catch (e: Exception) {
+                        /* sin efecto */
+                    }
+                    return
+                }
+                pendingPermission = request
+                microYaPedido = true
+                try {
                     permisoAudio.launch(Manifest.permission.RECORD_AUDIO)
+                } catch (e: Exception) {
+                    pendingPermission = null
+                    try {
+                        request.deny()
+                    } catch (ignorado: Exception) {
+                        /* sin efecto */
+                    }
                 }
             }
 
@@ -207,6 +246,32 @@ class MainActivity : ComponentActivity() {
     /* ===== Puente para compartir copias de seguridad ===== */
 
     private inner class Bridge {
+        /**
+         * Pide el permiso de micrófono ANTES de que el WebView llame a getUserMedia.
+         * Evita que la petición del WebView caduque mientras se muestra el diálogo del sistema.
+         */
+        @JavascriptInterface
+        fun pedirMicro() {
+            runOnUiThread {
+                val concedido = checkSelfPermission(Manifest.permission.RECORD_AUDIO) ==
+                    PackageManager.PERMISSION_GRANTED
+                when {
+                    concedido -> avisarMicroJs(true)
+                    microYaPedido -> avisarMicroJs(false)
+                    else -> {
+                        microYaPedido = true
+                        microPendienteJs = true
+                        try {
+                            permisoAudio.launch(Manifest.permission.RECORD_AUDIO)
+                        } catch (e: Exception) {
+                            microPendienteJs = false
+                            avisarMicroJs(false)
+                        }
+                    }
+                }
+            }
+        }
+
         @JavascriptInterface
         fun saveFile(nombre: String, contenido: String) {
             runOnUiThread {
