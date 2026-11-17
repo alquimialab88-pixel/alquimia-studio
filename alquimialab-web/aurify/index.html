@@ -90,7 +90,40 @@
     .brand-copy small { color: var(--muted); font-size: 11px; }
     .bar-actions { display: flex; align-items: center; gap: 9px; }
     .save-state { color: var(--muted); font-size: 12px; }
-    .toolbar-button, .language-button, .button-primary, .button-secondary {
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    .language-picker { position: relative; display: inline-flex; }
+    .language-picker select {
+      min-height: 40px;
+      padding: 9px 34px 9px 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background-color: #fff;
+      color: var(--primary);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.2;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      transition: border-color .16s ease, background-color .16s ease;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236463aa' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+    }
+    .language-picker select:hover { border-color: var(--primary-soft); background-color: var(--primary-light); }
+    .language-picker select:focus-visible { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(100, 99, 170, .16); }
+    .toolbar-button, .button-primary, .button-secondary {
       min-height: 40px;
       border: 1px solid var(--line);
       border-radius: 999px;
@@ -102,9 +135,8 @@
       text-decoration: none;
       transition: border-color .16s ease, background .16s ease, color .16s ease, transform .12s ease;
     }
-    .toolbar-button:hover, .language-button:hover, .button-secondary:hover { border-color: var(--primary-soft); background: var(--primary-light); }
-    .toolbar-button:active, .language-button:active, .button-primary:active, .button-secondary:active { transform: scale(.98); }
-    .language-button { min-width: 64px; color: var(--primary); }
+    .toolbar-button:hover, .button-secondary:hover { border-color: var(--primary-soft); background: var(--primary-light); }
+    .toolbar-button:active, .button-primary:active, .button-secondary:active { transform: scale(.98); }
     .button-primary { border-color: var(--primary); background: var(--primary); color: #fff; box-shadow: 0 8px 18px rgba(100, 99, 170, .26); }
     .button-primary:hover { border-color: var(--primary-dark); background: var(--primary-dark); }
     .button-secondary { color: var(--primary); }
@@ -262,7 +294,7 @@
     }
     @media (max-width: 760px) {
       .appbar { position: relative; flex-wrap: wrap; padding: 11px 15px; }
-      .bar-actions { width: 100%; justify-content: flex-end; }
+      .bar-actions { width: 100%; flex-wrap: wrap; row-gap: 8px; justify-content: flex-end; }
       .save-state { margin-right: auto; }
       .workspace { display: flex; flex-direction: column; padding: 24px 14px 40px; }
       .editor, .preview-area { width: 100%; }
@@ -279,7 +311,8 @@
     }
     @media (max-width: 420px) {
       .brand-copy small { display: none; }
-      .toolbar-button, .language-button { min-height: 38px; padding: 8px 10px; font-size: 12px; }
+      .toolbar-button { min-height: 38px; padding: 8px 10px; font-size: 12px; }
+      .language-picker select { min-height: 38px; padding: 8px 30px 8px 12px; font-size: 12px; }
       .field-grid { gap: 10px; }
       .line-heading, .line-row { grid-template-columns: minmax(70px, 1fr) 48px minmax(62px, .68fr) 24px; gap: 4px; }
       .line-row .line-input { padding: 7px 5px; font-size: 11px; }
@@ -320,7 +353,20 @@
     </a>
     <div class="bar-actions">
       <span class="save-state" id="saveState" aria-live="polite"></span>
-      <button class="language-button" id="languageToggle" type="button" aria-label="Change language">ES</button>
+      <label class="language-picker">
+        <span class="sr-only" data-i18n="languageLabel">Language</span>
+        <select id="languageSelect">
+          <option value="es">Español</option>
+          <option value="en">English</option>
+          <option value="fr">Français</option>
+          <option value="it">Italiano</option>
+          <option value="pt">Português</option>
+          <option value="de">Deutsch</option>
+          <option value="ja">日本語</option>
+          <option value="zh">中文</option>
+          <option value="ko">한국어</option>
+        </select>
+      </label>
       <button class="toolbar-button" id="resetButton" type="button" data-i18n="reset">Start over</button>
       <button class="button-primary" id="printButton" type="button" data-i18n="downloadPdf">Save as PDF</button>
     </div>
@@ -529,6 +575,7 @@
   <footer class="site-footer"><strong>Aurify</strong> · by Alquimia Lab · <span data-i18n="madeWith">Made with calm &amp; coffee</span></footer>
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
+  <script src="lang.js"></script>
   <script>
     (function () {
       "use strict";
@@ -537,7 +584,7 @@
       var STORAGE_KEY = "alquimia-cotiza-v1";
       var messages = {
         en: {
-          brandSubtitle: "by Alquimia Lab", reset: "Start over", downloadPdf: "Save as PDF",
+          brandSubtitle: "by Alquimia Lab", languageLabel: "Language", reset: "Start over", downloadPdf: "Save as PDF",
           toolLabel: "Quotes & receipts", pageTitle: "Your work, turned into gold.",
           pageIntro: "Create a polished quote or payment receipt with your brand, your client and totals that add themselves up.",
           documentPanel: "Your document", documentHint: "Choose a quote or a simple payment receipt.",
@@ -562,15 +609,15 @@
           privacy: "Your document details stay in this browser. This tool creates simple commercial documents, not tax invoices or electronic fiscal invoices.",
           previewLabel: "Live preview", printHint: "Choose “Save as PDF” to download or print.",
           numberShort: "No.", preparedFor: "Prepared for", from: "From", description: "Description",
-          amount: "Amount", total: "Total", madeWith: "Made with calm & coffee",
-          removeItem: "Remove item", saved: "Saved on this device", saving: "Saving⬦", saveError: "Could not save in this browser. Download your PDF to keep a copy.",
+          amount: "Amount", total: "Total", madeWith: "Made with calm & coffee", limitItems: "You can add up to 100 items.",
+          removeItem: "Remove item", saved: "Saved on this device", saving: "Saving…", saveError: "Could not save in this browser. Download your PDF to keep a copy.",
           resetConfirm: "Start a new document? This clears the saved draft in this browser.",
           logoError: "Choose a valid image under 10 MB.", logoSaveError: "The logo could not be processed. Try a smaller image.",
           lineDefault: "Item or service", emptyItem: "Add an item or service", untitledBusiness: "Your business",
           restoreError: "The saved draft could not be read. Start over to create a fresh document."
         },
         es: {
-          brandSubtitle: "por Alquimia Lab", reset: "Empezar de nuevo", downloadPdf: "Guardar como PDF",
+          brandSubtitle: "por Alquimia Lab", languageLabel: "Idioma", reset: "Empezar de nuevo", downloadPdf: "Guardar como PDF",
           toolLabel: "Cotizaciones y comprobantes", pageTitle: "Tu trabajo, convertido en oro.",
           pageIntro: "Crea una cotización o un comprobante de cobro con tu marca, tu cliente y totales que se suman solos.",
           documentPanel: "Tu documento", documentHint: "Elige una cotización o un comprobante sencillo de cobro.",
@@ -595,8 +642,8 @@
           privacy: "Los datos del documento se guardan en este navegador. Esta herramienta crea documentos comerciales sencillos, no facturas fiscales ni electrónicas.",
           previewLabel: "Vista previa", printHint: "Pulsa «Guardar como PDF» para descargar o imprimir.",
           numberShort: "N.º", preparedFor: "Preparado para", from: "De", description: "Descripción",
-          amount: "Importe", total: "Total", madeWith: "Hecho con calma y café",
-          removeItem: "Eliminar producto", saved: "Guardado en este dispositivo", saving: "Guardando⬦", saveError: "No se pudo guardar en este navegador. Descarga el PDF para conservar una copia.",
+          amount: "Importe", total: "Total", madeWith: "Hecho con calma y café", limitItems: "Puedes añadir hasta 100 productos.",
+          removeItem: "Eliminar producto", saved: "Guardado en este dispositivo", saving: "Guardando…", saveError: "No se pudo guardar en este navegador. Descarga el PDF para conservar una copia.",
           resetConfirm: "¿Empezar un documento nuevo? Se borrará el borrador guardado en este navegador.",
           logoError: "Elige una imagen válida de menos de 10 MB.", logoSaveError: "No se pudo procesar el logo. Prueba con una imagen más pequeña.",
           lineDefault: "Producto o servicio", emptyItem: "Añade un producto o servicio", untitledBusiness: "Tu negocio",
@@ -604,8 +651,30 @@
         }
       };
 
+      /* Traducciones de los demás idiomas (lang.js), con el inglés como respaldo. */
+      var otrosIdiomas = window.AURIFY_I18N || {};
+      Object.keys(otrosIdiomas).forEach(function (codigo) {
+        messages[codigo] = otrosIdiomas[codigo];
+      });
+      var IDIOMAS = Object.keys(messages);
+
+      function idiomaSoportado(codigo) {
+        return IDIOMAS.indexOf(String(codigo || "").toLowerCase().split("-")[0]) !== -1
+          ? String(codigo).toLowerCase().split("-")[0]
+          : "";
+      }
+
+      function idiomaInicial() {
+        var lista = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || "en"];
+        for (var i = 0; i < lista.length; i++) {
+          var encontrado = idiomaSoportado(lista[i]);
+          if (encontrado) return encontrado;
+        }
+        return "en";
+      }
+
       var defaultState = {
-        language: (navigator.language || "").toLowerCase().indexOf("es") === 0 ? "es" : "en",
+        language: idiomaInicial(),
         kind: "quote",
         title: "",
         number: "COT-001",
@@ -651,7 +720,7 @@
               unitPrice: validNumber(item.unitPrice, 0)
             };
           });
-          if (restored.language !== "es" && restored.language !== "en") restored.language = defaultState.language;
+          if (!idiomaSoportado(restored.language)) restored.language = defaultState.language;
           if (restored.kind !== "receipt") restored.kind = "quote";
           if (!/^#[0-9a-f]{6}$/i.test(restored.color)) restored.color = defaultState.color;
           if (!["sans", "serif", "round", "system"].includes(restored.font)) restored.font = "sans";
@@ -691,8 +760,8 @@
         document.querySelectorAll("[data-i18n-placeholder]").forEach(function (element) {
           element.placeholder = text(element.getAttribute("data-i18n-placeholder"));
         });
-        byId("languageToggle").textContent = state.language === "en" ? "ES" : "EN";
-        byId("languageToggle").setAttribute("aria-label", state.language === "en" ? "Cambiar a español" : "Switch to English");
+        byId("languageSelect").value = state.language;
+        byId("languageSelect").setAttribute("aria-label", text("languageLabel"));
         byId("logoFile").setAttribute("aria-label", text("logo"));
         renderLines();
         updatePreview();
@@ -728,7 +797,7 @@
 
       function formatMoney(value) {
         try {
-          return new Intl.NumberFormat(state.language === "es" ? "es" : "en", {
+          return new Intl.NumberFormat(state.language, {
             style: "currency",
             currency: state.currency,
             maximumFractionDigits: 2
@@ -742,7 +811,7 @@
         if (!value) return "";
         var parts = value.split("-").map(Number);
         if (parts.length !== 3 || parts.some(function (part) { return !part; })) return value;
-        return new Intl.DateTimeFormat(state.language === "es" ? "es" : "en", {
+        return new Intl.DateTimeFormat(state.language, {
           year: "numeric", month: "short", day: "numeric", timeZone: "UTC"
         }).format(new Date(Date.UTC(parts[0], parts[1] - 1, parts[2])));
       }
@@ -942,7 +1011,7 @@
 
       byId("addLineButton").addEventListener("click", function () {
         if (state.items.length >= 100) {
-          showToast(state.language === "es" ? "Puedes añadir hasta 100 productos." : "You can add up to 100 items.");
+          showToast(text("limitItems"));
           return;
         }
         state.items.push({ description: "", quantity: 1, unitPrice: 0 });
@@ -952,10 +1021,11 @@
         byId("lineItems").lastElementChild.querySelector("input").focus();
       });
 
-      byId("languageToggle").addEventListener("click", function () {
+      byId("languageSelect").addEventListener("change", function (event) {
         var oldDefault = state.kind === "receipt" ? text("receipt") : text("quote");
         var usesDefaultTitle = !state.title.trim() || state.title === oldDefault;
-        state.language = state.language === "en" ? "es" : "en";
+        var nuevo = idiomaSoportado(event.target.value) || "en";
+        state.language = nuevo;
         if (usesDefaultTitle) state.title = "";
         applyLanguage();
         if (usesDefaultTitle) byId("documentTitle").value = text(state.kind === "receipt" ? "receipt" : "quote");

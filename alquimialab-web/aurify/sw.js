@@ -1,8 +1,9 @@
-const CACHE_NAME = "aurify-v2";
+const CACHE_NAME = "aurify-v3";
 const OLD_PREFIXES = ["aurify-", "alquimia-cotiza-"];
 const APP_SHELL = [
   "./",
   "./index.html",
+  "./lang.js",
   "./manifest.json",
   "./icon.svg",
   "./icon-192.png",
