@@ -32,8 +32,6 @@
       --primary-dark: #4a4990;
       --primary-light: #edeCF8;
       --primary-soft: #dcdbf2;
-      --gold: #c9922f;
-      --gold-light: #fbf3e2;
       --ink: #2a2a3e;
       --muted: #6a6788;
       --line: #e8e6f4;
@@ -74,17 +72,12 @@
     }
     .brand { display: flex; align-items: center; gap: 11px; min-width: 0; text-decoration: none; }
     .brand-mark {
-      display: grid;
+      display: block;
       width: 40px;
       height: 40px;
       flex: 0 0 auto;
-      place-items: center;
-      overflow: hidden;
-      border-radius: 13px;
-      background: linear-gradient(160deg, #7b77c6, #4a4990);
-      box-shadow: 0 6px 16px rgba(90, 88, 160, .26);
+      filter: drop-shadow(0 4px 10px rgba(90, 88, 160, .28));
     }
-    .brand-mark svg { display: block; width: 100%; height: 100%; }
     .brand-copy { display: grid; gap: 1px; }
     .brand-copy strong { font-size: 17px; font-weight: 700; letter-spacing: -.02em; }
     .brand-copy small { color: var(--muted); font-size: 11px; }
@@ -156,7 +149,7 @@
     .intro { padding: 6px 2px 8px; }
     .eyebrow {
       margin: 0 0 9px;
-      color: var(--gold);
+      color: var(--primary);
       font-size: 10.5px;
       font-weight: 700;
       letter-spacing: .16em;
@@ -336,19 +329,7 @@
 <body>
   <header class="appbar">
     <a class="brand" href="../" aria-label="Alquimia Lab home">
-      <span class="brand-mark">
-        <svg viewBox="0 0 512 512" aria-hidden="true">
-          <defs>
-            <linearGradient id="am-gold" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#F6DCA4"/>
-              <stop offset=".55" stop-color="#E0B457"/>
-              <stop offset="1" stop-color="#C08F2C"/>
-            </linearGradient>
-          </defs>
-          <circle cx="256" cy="256" r="148" fill="none" stroke="url(#am-gold)" stroke-width="36"/>
-          <circle cx="256" cy="256" r="46" fill="url(#am-gold)"/>
-        </svg>
-      </span>
+      <img class="brand-mark" src="icon-192.png" alt="" width="40" height="40">
       <span class="brand-copy"><strong>Aurify</strong><small data-i18n="brandSubtitle">by Alquimia Lab</small></span>
     </a>
     <div class="bar-actions">
