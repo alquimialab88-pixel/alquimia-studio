@@ -1,0 +1,52 @@
+{
+  "name": "aurify-desktop",
+  "productName": "Aurify",
+  "version": "1.0.0",
+  "description": "Aurify para Windows: cotizaciones y comprobantes con tu marca, sin conexión.",
+  "author": "Alquimia Lab",
+  "main": "main.js",
+  "scripts": {
+    "sync": "node scripts/sync.js",
+    "start": "npm run sync && electron .",
+    "dist": "npm run sync && electron-builder --win nsis"
+  },
+  "build": {
+    "appId": "com.alquimialab.aurify.desktop",
+    "productName": "Aurify",
+    "copyright": "Copyright © 2026 Alquimia Lab",
+    "asar": true,
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "icon.ico",
+      "app/**/*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "icon.ico",
+      "artifactName": "Aurify-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Aurify",
+      "uninstallDisplayName": "Aurify",
+      "deleteAppDataOnUninstall": false
+    }
+  },
+  "devDependencies": {
+    "electron": "44.7.2",
+    "electron-builder": "^26.18.0"
+  }
+}

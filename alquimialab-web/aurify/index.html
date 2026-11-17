@@ -776,8 +776,7 @@
         byId(id).textContent = value || "";
       }
 
-      function formatMoney(value) {
-        try {
+      function formatMoney(value) {        try {
           return new Intl.NumberFormat(state.language, {
             style: "currency",
             currency: state.currency,
@@ -799,6 +798,14 @@
 
       function lineTotal(item) {
         return validNumber(item.quantity, 0) * validNumber(item.unitPrice, 0);
+      }
+
+      /* Nombre sugerido para el PDF (solo en la app de escritorio). */
+      function nombreArchivo() {
+        var tipo = state.kind === "receipt" ? "recibo" : "cotizacion";
+        var partes = [tipo, String(state.number || "").trim(), String(state.businessName || "").trim()]
+          .filter(function (parte) { return parte; });
+        return (partes.join("-") || "Aurify") + ".pdf";
       }
 
       function renderLines() {
@@ -1045,7 +1052,27 @@
         reader.readAsDataURL(file);
       });
 
-      byId("printButton").addEventListener("click", function () { window.print(); });
+      byId("printButton").addEventListener("click", function () {
+        var escritorio = window.AurifyDesktop;
+        if (escritorio && typeof escritorio.savePdf === "function") {
+          try {
+            escritorio.savePdf(nombreArchivo());
+          } catch (error) {
+            window.print();
+          }
+          return;
+        }
+        var android = window.AurifyAndroid;
+        if (android && typeof android.printPage === "function") {
+          try {
+            android.printPage();
+          } catch (error) {
+            window.print();
+          }
+          return;
+        }
+        window.print();
+      });
       byId("resetButton").addEventListener("click", function () {
         if (!window.confirm(text("resetConfirm"))) return;
         state = Object.assign({}, defaultState, {

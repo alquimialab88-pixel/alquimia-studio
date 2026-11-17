@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="aurify_bg">#F8F7FB</color>
+    <color name="aurify_primary">#6463AA</color>
+    <color name="aurify_dark">#2A2A3E</color>
+
+    <style name="Theme.Aurify" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/aurify_bg</item>
+        <item name="android:statusBarColor">@color/aurify_primary</item>
+        <item name="android:navigationBarColor">@color/aurify_dark</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowActionModeOverlay">true</item>
+    </style>
+</resources>

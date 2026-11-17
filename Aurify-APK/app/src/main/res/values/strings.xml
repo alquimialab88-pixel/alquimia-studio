@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Aurify</string>
+    <string name="print_job">Documento de Aurify</string>
+    <string name="print_error">No se pudo abrir el guardado de PDF</string>
+</resources>
