@@ -42,6 +42,54 @@ export const EXTRA = {
     pt: "Este navegador não pode gravar áudio.", de: "Dieser Browser kann kein Audio aufnehmen.",
     ja: "このブラウザでは音声を録音できません。", zh: "此浏览器无法录制音频。", ko: "이 브라우저에서는 오디오를 녹음할 수 없어요."
   },
+  micRetry: {
+    es: "Reintentar", en: "Try again", fr: "Réessayer", it: "Riprova",
+    pt: "Tentar de novo", de: "Erneut versuchen", ja: "再試行", zh: "重试", ko: "다시 시도"
+  },
+  privateVisible: {
+    es: "El título se ve en las listas; el contenido se cifra",
+    en: "Title shows in lists; content is encrypted",
+    fr: "Le titre apparaît dans les listes ; le contenu est chiffré",
+    it: "Il titolo appare negli elenchi; il contenuto è cifrato",
+    pt: "O título aparece nas listas; o conteúdo é criptografado",
+    de: "Der Titel erscheint in Listen; der Inhalt wird verschlüsselt",
+    ja: "タイトルは一覧に表示され、内容は暗号化されます",
+    zh: "标题会显示在列表中，内容会加密",
+    ko: "제목은 목록에 표시되고 내용은 암호화됩니다"
+  },
+  micBlocked: {
+    es: "El micrófono está bloqueado. Permite el acceso en los ajustes del navegador o de la app.",
+    en: "Microphone access is blocked. Allow it in your browser or app settings.",
+    fr: "L'accès au micro est bloqué. Autorise-le dans les réglages du navigateur ou de l'app.",
+    it: "L'accesso al microfono è bloccato. Consentilo nelle impostazioni del browser o dell'app.",
+    pt: "O acesso ao microfone está bloqueado. Permita-o nas configurações do navegador ou do app.",
+    de: "Der Mikrofonzugriff ist blockiert. Erlaube ihn in den Browser- oder App-Einstellungen.",
+    ja: "マイクへのアクセスがブロックされています。ブラウザまたはアプリの設定で許可してください。",
+    zh: "麦克风访问已被阻止。请在浏览器或应用设置中允许。",
+    ko: "마이크 접근이 차단되어 있어요. 브라우저 또는 앱 설정에서 허용해 주세요."
+  },
+  micNotFound: {
+    es: "No encontramos un micrófono. Conéctalo y vuelve a intentar.",
+    en: "No microphone found. Connect one and try again.",
+    fr: "Aucun micro détecté. Connecte-en un et réessaie.",
+    it: "Nessun microfono trovato. Collegalo e riprova.",
+    pt: "Nenhum microfone encontrado. Conecte um e tente de novo.",
+    de: "Kein Mikrofon gefunden. Schließe eines an und versuche es erneut.",
+    ja: "マイクが見つかりません。接続してから再試行してください。",
+    zh: "未找到麦克风。请连接后重试。",
+    ko: "마이크를 찾을 수 없어요. 연결한 뒤 다시 시도해 주세요."
+  },
+  micBusy: {
+    es: "Otra app está usando el micrófono. Ciérrala y vuelve a intentar.",
+    en: "Another app is using the microphone. Close it and try again.",
+    fr: "Une autre app utilise le micro. Ferme-la et réessaie.",
+    it: "Un'altra app sta usando il microfono. Chiudila e riprova.",
+    pt: "Outro app está usando o microfone. Feche-o e tente de novo.",
+    de: "Eine andere App verwendet das Mikrofon. Schließe sie und versuche es erneut.",
+    ja: "別のアプリがマイクを使用中です。閉じてから再試行してください。",
+    zh: "另一个应用正在使用麦克风。请关闭后重试。",
+    ko: "다른 앱이 마이크를 사용 중이에요. 닫고 다시 시도해 주세요."
+  },
   prevMonth: {
     es: "Mes anterior", en: "Previous month", fr: "Mois précédent", it: "Mese precedente",
     pt: "Mês anterior", de: "Vorheriger Monat", ja: "前の月", zh: "上个月", ko: "이전 달"
@@ -244,14 +292,14 @@ export const EXTRA = {
     ko: "PIN을 만들면 비밀번호와 비공개 노트를 안전하게 보관할 수 있어요."
   },
   boardHint: {
-    es: "Mantén pulsada una nota y arrástrala a donde quieras.",
-    en: "Press and hold a note, then drag it anywhere.",
-    fr: "Maintiens une note appuyée et fais-la glisser où tu veux.",
-    it: "Tieni premuta una nota e trascinala dove vuoi.",
-    pt: "Segure uma nota e arraste-a para onde quiser.",
-    de: "Halte eine Notiz gedrückt und ziehe sie an eine beliebige Stelle.",
-    ja: "メモを長押しして、好きな場所にドラッグできます。",
-    zh: "长按便签，把它拖到任意位置。",
-    ko: "메모를 길게 눌러 원하는 곳으로 끌어다 놓으세요."
+    es: "Mantén pulsada una nota para moverla y arrastra su esquina para cambiar el tamaño.",
+    en: "Press and hold a note to move it, and drag its corner to resize.",
+    fr: "Maintiens une note pour la déplacer et fais glisser son coin pour la redimensionner.",
+    it: "Tieni premuta una nota per spostarla e trascina l'angolo per ridimensionarla.",
+    pt: "Segure uma nota para movê-la e arraste o canto para redimensionar.",
+    de: "Halte eine Notiz zum Verschieben und ziehe ihre Ecke zum Größenändern.",
+    ja: "メモを長押しで移動、角をドラッグでサイズ変更できます。",
+    zh: "长按便签可移动，拖动角落可调整大小。",
+    ko: "메모를 길게 눌러 이동하고, 모서리를 끌어 크기를 조절하세요."
   },
 };

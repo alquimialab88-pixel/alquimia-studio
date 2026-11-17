@@ -158,7 +158,7 @@ export async function render(ctx) {
     '<div class="switch-row">' +
       '<span class="menu-icon">' + ui.icon(draft.privada ? "lock" : "unlock") + "</span>" +
       '<span class="switch-main"><b>' + ui.esc(t("notaPrivada")) + "</b>" +
-        "<small>" + ui.esc(draft.privada ? t("privateHint") : t("marcarPrivada")) + "</small></span>" +
+        "<small>" + ui.esc(draft.privada ? t("privateVisible") : t("marcarPrivada")) + "</small></span>" +
       '<button type="button" class="switch' + (draft.privada ? " on" : "") + '" role="switch" ' +
         'aria-checked="' + (draft.privada ? "true" : "false") + '" data-private aria-label="' + ui.esc(t("notaPrivada")) + '"></button>' +
     "</div>" +
@@ -288,7 +288,7 @@ export async function render(ctx) {
       const iconBox = root.querySelector(".switch-row .menu-icon");
       if (iconBox) iconBox.innerHTML = ui.icon(draft.privada ? "lock" : "unlock");
       const small = root.querySelector(".switch-row small");
-      if (small) small.textContent = draft.privada ? t("privateHint") : t("marcarPrivada");
+      if (small) small.textContent = draft.privada ? t("privateVisible") : t("marcarPrivada");
     }
 
     switchBtn.addEventListener("click", async () => {

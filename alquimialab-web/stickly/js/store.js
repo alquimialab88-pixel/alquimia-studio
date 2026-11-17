@@ -167,7 +167,14 @@ async function openPrivate() {
   for (const note of state.notes) {
     if (!note.privada || !note.enc) continue;
     const data = await crypto.decryptJSON(state.key, note.enc);
-    if (data) state.openNotes.set(note.id, data);
+    if (!data) continue;
+    state.openNotes.set(note.id, data);
+    /* Notas privadas antiguas: guardamos el título en claro para poder
+       mostrarlo en las listas sin revelar el contenido. */
+    if (!note.title && data.title) {
+      note.title = data.title;
+      await db.put("notes", note);
+    }
   }
   for (const row of state.passwords) {
     const data = await crypto.decryptJSON(state.key, row.enc);
@@ -227,6 +234,7 @@ export async function saveNote(input) {
     y: typeof input.y === "number" ? input.y : (prev && typeof prev.y === "number" ? prev.y : 20),
     ancho: typeof input.ancho === "number" ? input.ancho : ((prev && prev.ancho) || 170),
     alto: typeof input.alto === "number" ? input.alto : ((prev && prev.alto) || 170),
+    tam: !!(prev && prev.tam),
     pos: input.pos !== undefined ? !!input.pos : !!(prev && prev.pos),
     privada: !!input.privada,
     createdAt: input.createdAt || (prev && prev.createdAt) || now,
@@ -236,6 +244,9 @@ export async function saveNote(input) {
   const payload = notePayload(input);
   if (base.privada) {
     if (!state.key) throw new Error("locked");
+    /* El título queda visible en las listas; el contenido y la imagen
+       siguen cifrados dentro de `enc`. */
+    base.title = payload.title;
     base.enc = await crypto.encryptJSON(state.key, payload);
     state.openNotes.set(base.id, payload);
   } else {
@@ -269,12 +280,14 @@ export async function moveNote(id, x, y) {
   await db.put("notes", note);
 }
 
-export async function setNotePosition(id, x, y, ancho) {
+export async function setNotePosition(id, x, y, ancho, alto, sized) {
   const note = state.notes.find((n) => n.id === id);
   if (!note) return;
   note.x = Math.max(0, Math.round(x));
   note.y = Math.max(0, Math.round(y));
   if (typeof ancho === "number" && ancho > 0) note.ancho = Math.round(ancho);
+  if (typeof alto === "number" && alto > 0) note.alto = Math.round(alto);
+  if (sized) note.tam = true;
   note.pos = true;
   await db.put("notes", note);
 }

@@ -27,10 +27,11 @@ function previewOf(payload) {
 function notePreview(note) {
   if (note.privada) {
     const payload = store.noteView(note);
-    if (!payload) {
-      return { title: t("notaPrivada"), text: t("privateHint"), locked: true };
-    }
-    return { title: payload.title || t("notaPrivada"), text: previewOf(payload), locked: false };
+    return {
+      title: (payload && payload.title) || note.title || t("notaPrivada"),
+      text: "",
+      locked: true
+    };
   }
   return { title: note.title || t("titlePlaceholder"), text: previewOf(note), locked: false };
 }
@@ -104,7 +105,7 @@ export async function render(ctx) {
       return '<button type="button" class="mini-note" style="--note-c:' + ui.esc(color) + '" data-note="' + ui.esc(note.id) + '">' +
         '<span class="mini-dot"></span>' +
         '<span class="mini-main"><h3>' + ui.esc(preview.title) + "</h3>" +
-          "<p>" + ui.esc(preview.text || t("noContent")) + "</p></span>" +
+          (preview.locked ? "" : "<p>" + ui.esc(preview.text || t("noContent")) + "</p>") + "</span>" +
         (preview.locked ? ui.icon("lock", "icon-sm") : ui.icon("chevron-right", "icon-sm")) +
       "</button>";
     }).join("")

@@ -66,14 +66,11 @@ function notesForDay(key) {
 function noteTitle(note) {
   if (!note.privada) return note.title || t("titlePlaceholder");
   const payload = store.noteView(note);
-  return payload && payload.title ? payload.title : t("notaPrivada");
+  return note.title || (payload && payload.title) || t("notaPrivada");
 }
 
 function notePreview(note) {
-  if (note.privada) {
-    const payload = store.noteView(note);
-    return payload ? (payload.content || "").replace(/\s+/g, " ").trim() : t("privateHint");
-  }
+  if (note.privada) return "";
   if (note.tipo === "checklist" && Array.isArray(note.items) && note.items.length) {
     const done = note.items.filter((item) => item.done).length;
     return done + "/" + note.items.length + " · " + (note.items[0].text || "");
@@ -105,7 +102,7 @@ function noteCard(note) {
     '<span class="note-mini-color"></span>' +
     '<span class="note-mini-main">' +
       "<b>" + ui.esc(noteTitle(note)) + "</b>" +
-      "<small>" + ui.esc(notePreview(note) || t("noContent")) + "</small>" +
+      (note.privada ? "" : "<small>" + ui.esc(notePreview(note) || t("noContent")) + "</small>") +
     "</span>" +
     (note.privada ? ui.icon("lock", "icon-sm") : ui.icon("chevron-right", "icon-sm")) +
   "</button>";

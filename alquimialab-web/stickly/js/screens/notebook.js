@@ -54,6 +54,7 @@ function openNoteSheet(options) {
   let maxTimer = null;
   let stopPromise = null;
   let stopResolve = null;
+  let recError = "";
 
   const sheet = ui.openSheet(
     "<h2>" + ui.esc(note ? t("editar") : t("nuevaNota")) + "</h2>" +
@@ -104,6 +105,14 @@ function openNoteSheet(options) {
         '<button type="button" class="icon-btn danger" data-rec-stop aria-label="' + ui.esc(t("detener")) + '">' + ui.icon("stop", "icon-sm") + "</button>" +
       "</div>";
     }
+    if (recError) {
+      return '<div class="recorder rec-error">' +
+        '<span class="rec-dot err"></span>' +
+        '<div class="rec-main"><b>' + ui.esc(t(recError)) + "</b><small>" + ui.esc(t("recordHint")) + "</small></div>" +
+        '<button type="button" class="btn btn-ghost" style="min-height:38px;padding:8px 14px;font-size:12px" data-rec-start>' +
+          ui.icon("mic", "icon-sm") + " " + ui.esc(t("micRetry")) + "</button>" +
+      "</div>";
+    }
     if (draft.audio) {
       return '<div class="field"><span>' + ui.esc(t("audioNote")) + "</span>" +
         '<audio controls preload="metadata" src="' + ui.esc(draft.audio) + '"></audio>' +
@@ -148,15 +157,85 @@ function openNoteSheet(options) {
     if (el) el.textContent = fmtDuration((Date.now() - startedAt) / 1000);
   }
 
+  async function micPermissionState() {
+    try {
+      if (!navigator.permissions || !navigator.permissions.query) return "";
+      const result = await navigator.permissions.query({ name: "microphone" });
+      return (result && result.state) || "";
+    } catch (e) {
+      return "";
+    }
+  }
+
+  function micErrorKey(err) {
+    const name = (err && err.name) || "";
+    if (name === "NotAllowedError" || name === "SecurityError" || name === "PermissionDeniedError") return "micBlocked";
+    if (name === "NotFoundError" || name === "DevicesNotFoundError") return "micNotFound";
+    if (name === "NotReadableError" || name === "TrackStartError" || name === "AbortError") return "micBusy";
+    if (name === "OverconstrainedError" || name === "ConstraintNotSatisfiedError") return "micNotFound";
+    return "permisoAudio";
+  }
+
+  function hasMicApi() {
+    return !!(
+      (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) ||
+      navigator.getUserMedia ||
+      navigator.webkitGetUserMedia ||
+      navigator.mozGetUserMedia
+    );
+  }
+
+  function legacyMic(constraints) {
+    return new Promise((resolve, reject) => {
+      const legacy = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+      if (!legacy) {
+        reject(new Error("unsupported"));
+        return;
+      }
+      legacy.call(navigator, constraints, resolve, reject);
+    });
+  }
+
+  async function getMicStream() {
+    const tries = [
+      { audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true } },
+      { audio: true }
+    ];
+    let last = null;
+    for (const constraints of tries) {
+      try {
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+          return await navigator.mediaDevices.getUserMedia(constraints);
+        }
+        return await legacyMic(constraints);
+      } catch (e) {
+        last = e;
+        const name = (e && e.name) || "";
+        /* Si el permiso está bloqueado o no hay dispositivo, no insistimos. */
+        if (name === "NotAllowedError" || name === "SecurityError" ||
+            name === "NotFoundError" || name === "NotReadableError") break;
+      }
+    }
+    throw last;
+  }
+
   async function startRecording() {
-    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia || typeof MediaRecorder === "undefined") {
+    if (recording) return;
+    if (!hasMicApi() || typeof MediaRecorder === "undefined") {
+      recError = "audioUnsupported";
+      paintRecorder();
       ui.toast(t("audioUnsupported"));
       return;
     }
+
+    recError = "";
     try {
-      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      stream = await getMicStream();
     } catch (e) {
-      ui.toast(t("permisoAudio"));
+      console.warn("Stickly · micrófono:", (e && e.name) || e, (e && e.message) || "");
+      const permission = await micPermissionState();
+      recError = permission === "denied" ? "micBlocked" : micErrorKey(e);
+      paintRecorder();
       return;
     }
 
@@ -166,7 +245,8 @@ function openNoteSheet(options) {
     } catch (e) {
       stream.getTracks().forEach((track) => track.stop());
       stream = null;
-      ui.toast(t("audioUnsupported"));
+      recError = "audioUnsupported";
+      paintRecorder();
       return;
     }
 
