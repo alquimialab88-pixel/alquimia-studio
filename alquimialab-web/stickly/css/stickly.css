@@ -2381,3 +2381,113 @@ dialog.dialog::backdrop { background: rgba(28, 27, 50, .46); backdrop-filter: bl
   pointer-events: none;
 }
 .timer-ring { position: relative; }
+
+/* ============ Escritorio (ventana ancha) ============ */
+
+.side-brand { display: none; }
+
+@media (min-width: 900px) {
+  body {
+    background: var(--bg);
+    scrollbar-color: #D5D2E6 transparent;
+  }
+
+  #app {
+    max-width: none;
+    margin: 0;
+    padding-left: 252px;
+    background: var(--bg);
+    box-shadow: none;
+  }
+
+  .view {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 36px 48px 60px;
+  }
+  .view.no-nav { padding-bottom: 60px; }
+
+  /* La barra inferior se convierte en barra lateral */
+  .tabbar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: 252px;
+    max-width: none;
+    transform: none;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 3px;
+    padding: 16px 14px 18px;
+    background: #fff;
+    border-top: 0;
+    border-right: 1px solid var(--line);
+    border-radius: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    overflow-y: auto;
+  }
+  .tabbar[hidden] { display: none; }
+
+  .side-brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 6px 8px 16px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .side-brand img {
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    box-shadow: 0 4px 12px rgba(90, 88, 160, .22);
+  }
+  .side-brand div { display: grid; gap: 1px; min-width: 0; }
+  .side-brand strong { font-size: 15.5px; letter-spacing: -.02em; }
+  .side-brand span { font-size: 11px; color: var(--muted); }
+
+  .tab {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 12px;
+    min-height: 44px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #5F5C7C;
+  }
+  .tab .icon { width: 20px; height: 20px; flex: 0 0 auto; }
+  .tab:hover { background: var(--primary-light); color: var(--primary-dark); }
+  .tab.active { background: var(--primary-light); color: var(--primary-dark); font-weight: 700; }
+
+  /* En escritorio la barra lateral ya tiene Inicio, Notas, Calendario y Cuadernos */
+  .menu-list .menu-row[href="#/notes"],
+  .menu-list .menu-row[href="#/calendar"],
+  .menu-list .menu-row[href="#/notebooks"] { display: none; }
+
+  /* Las hojas inferiores pasan a ser ventanas centrales */
+  .sheet-backdrop { align-items: center; padding: 28px; }
+  .sheet {
+    max-width: 560px;
+    max-height: 84vh;
+    border-radius: 24px;
+    padding: 24px 26px;
+    box-shadow: 0 34px 80px rgba(28, 27, 50, .30);
+    animation: modalIn .18s ease both;
+  }
+  .sheet-grip { display: none; }
+  .sheet-backdrop.closing .sheet { animation: fadeOut .14s ease both; }
+
+  @keyframes modalIn {
+    from { transform: translateY(10px) scale(.985); opacity: .4; }
+    to { transform: none; opacity: 1; }
+  }
+}
+
+@media (min-width: 1280px) {
+  .board { columns: 3; }
+}
