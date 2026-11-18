@@ -7,11 +7,19 @@ y probada**; Stickly sigue apagada esperando su `product_id`.
 
 | App | Puerta | Probada con clave real | `data-productos` |
 |---|---|---|---|
-| Aurify | ✅ encendida (2026-11-18) | ✅ sí, compra de prueba | `6F0E4C97-B72A4E69-A11BF6C4-AF6517E7,PcQRNBVxRjhvIi-bjuVQLQ==` |
+| Aurify | ✅ encendida (2026-11-18) | ✅ sí, compra de prueba | `PcQRNBVxRjhvIi-bjuVQLQ==,KG9il-bIF_ziDlu1MpeBMg==` |
 | Stickly | ⏳ apagada | — | vacío |
 
-En Aurify van los dos formatos del ID a propósito: la app los prueba en orden hasta que
-alguno responda que sí, así no importa cuál use Gumroad internamente.
+Los dos IDs de Aurify son los de sus dos fichas, confirmados leyendo las páginas públicas:
+
+| Ficha | URL | `product_id` |
+|---|---|---|
+| Español | `alquimialab.gumroad.com/l/Aurify_ESP` | `PcQRNBVxRjhvIi-bjuVQLQ==` |
+| Inglés | `alquimialab.gumroad.com/l/Aurify_ENG` | `KG9il-bIF_ziDlu1MpeBMg==` |
+
+El botón “Comprar en Gumroad” de la puerta elige la ficha según el idioma de la app
+(`data-compra` = español, `data-compra-en` = inglés). Si alguien puso la app en otro
+idioma, va a la inglesa.
 
 > **No reembolses la compra de prueba.** El código desactiva la licencia de las compras
 > reembolsadas, así que esa clave dejaría de entrar. Si algún día la reembolsas, entra
