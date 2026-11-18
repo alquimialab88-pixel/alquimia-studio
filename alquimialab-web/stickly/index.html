@@ -9,7 +9,7 @@
   <meta name="theme-color" content="#6463AA">
   <meta name="color-scheme" content="light">
   <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self'; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'; worker-src 'self'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' data: blob:; connect-src 'self' https://api.gumroad.com; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'; worker-src 'self'">
   <title>Stickly · Alquimia Lab</title>
 
   <link rel="manifest" href="manifest.webmanifest">
@@ -25,6 +25,17 @@
   <link rel="stylesheet" href="css/stickly.css">
 </head>
 <body>
+
+  <!-- Puerta de licencia. Se enciende sola al rellenar data-productos con los
+       product_id de Gumroad (ES y EN). Sin ellos queda apagada. Probar con ?licencia=1 -->
+  <script src="js/licencia.js"
+    data-app="stickly"
+    data-nombre="Stickly"
+    data-logo="icons/icon-192.png"
+    data-compra="https://alquimialab.gumroad.com/l/Stickly_ENG?wanted=true"
+    data-email="hola@alquimialab.com"
+    data-productos=""
+    data-maestras="0z9twgj,1s52p8u,0qit7g2"></script>
 
   <!-- ============ Sprite de iconos ============ -->
   <svg xmlns="http://www.w3.org/2000/svg" class="sprite" aria-hidden="true" focusable="false">
