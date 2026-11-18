@@ -14,6 +14,35 @@
   /* Precio de lista (Gumroad) + precio de la promo Black Friday. */
   var PRODUCTS = [
     {
+      id: 'aurify',
+      name: 'Aurify — Cotizaciones y recibos para tu marca',
+      cat: 'digital',
+      short: 'Cotizaciones y comprobantes con tu logo y tus colores. PDF en A4, listo en un minuto.',
+      desc: 'Aurify convierte tu trabajo en cotizaciones y comprobantes de cobro: tu logo, tu color, hasta 100 productos y totales que se calculan solos. Exporta un PDF limpio en A4 y compártelo por WhatsApp, correo o impresión. Sin cuentas, sin servidores y sin suscripciones: tus datos se quedan en tu dispositivo.',
+      price: 11.99,
+      free: false,
+      soon: false,
+      img: 'assets/aurify/shot-1.webp',
+      fit: 'cover',
+      badge: 'Nuevo',
+      note: 'Windows + Android + iPhone/iPad y web · Pago único · 9 idiomas',
+      link: 'https://alquimialab.gumroad.com/l/Aurify_ESP?wanted=true',
+      shots: [
+        'assets/aurify/shot-1.webp',
+        'assets/aurify/shot-2.webp',
+        'assets/aurify/shot-3.webp',
+        'assets/aurify/shot-4.webp'
+      ],
+      features: [
+        'Cotizaciones y comprobantes de cobro, con número, fecha y vigencia',
+        'Tu marca en el documento: logo, color, tipografía y tamaño del texto',
+        'Hasta 100 productos con totales que se calculan solos',
+        'PDF en A4 en un clic, listo para WhatsApp o correo',
+        '8 monedas y 9 idiomas',
+        'Funciona sin conexión y sin cuentas'
+      ]
+    },
+    {
       id: 'stickly',
       name: 'Stickly — Tu día en orden, en un solo lugar',
       cat: 'digital',
@@ -26,7 +55,7 @@
       fit: 'cover',
       badge: 'Nuevo',
       note: 'Android + Windows + iPhone/iPad y web · Pago único · Acceso inmediato',
-      link: 'https://alquimialab.gumroad.com/l/Stickly_ENG?wanted=true',
+      link: 'https://alquimialab.gumroad.com/l/Stickly_ESP?wanted=true',
       shots: [
         'assets/stickly/mockup.webp',
         'assets/stickly/shot-1.webp',
@@ -357,11 +386,33 @@
   };
 
   var EN_PRODUCTS = {
+    aurify: {
+      name: 'Aurify — Branded quotes and receipts',
+      short: 'Quotes and receipts with your logo and your colours. A4 PDF, ready in a minute.',
+      desc: 'Aurify turns your work into quotes and payment receipts: your logo, your colour, up to 100 items and totals that add themselves up. Export a clean A4 PDF and share it over WhatsApp, email or print. No accounts, no servers and no subscriptions: your data stays on your device.',
+      note: 'Windows + Android + iPhone/iPad and web · One-time purchase · 9 languages',
+      link: 'https://alquimialab.gumroad.com/l/Aurify_ENG?wanted=true',
+      shots: [
+        'assets/aurify/en-shot-1.webp',
+        'assets/aurify/en-shot-2.webp',
+        'assets/aurify/en-shot-3.webp',
+        'assets/aurify/en-shot-4.webp'
+      ],
+      features: [
+        'Quotes and payment receipts, with number, date and validity',
+        'Your brand in the document: logo, colour, typography and text size',
+        'Up to 100 items with totals that add themselves up',
+        'One-click A4 PDF, ready for WhatsApp or email',
+        '8 currencies and 9 languages',
+        'Works offline and without accounts'
+      ]
+    },
     stickly: {
       name: 'Stickly — Your day, in one place',
       short: 'Notes, tasks, calendar, passwords and focus. Private, offline and no accounts.',
       desc: 'Stickly brings your notes, tasks, calendar, notebooks, voice notes, passwords and focus timer together in one app. No accounts, no servers and no subscriptions: your data stays on your device.',
       note: 'Android + Windows + iPhone/iPad and web · One-time purchase · Instant access',
+      link: 'https://alquimialab.gumroad.com/l/Stickly_ENG?wanted=true',
       features: [
         'Notes with a free-form FigJam-style board',
         'Tasks and calendar: day, week, month and year',
@@ -532,7 +583,7 @@
     }
     return [{
       label: p.free ? T.download : T.buy,
-      link: promo || p.link,
+      link: promo || localized(p, 'link') || p.link,
       primary: !(p.free || p.soon)
     }];
   }
@@ -562,16 +613,17 @@
   }
 
   function modalMediaHTML(p, name) {
-    if (!p.shots || !p.shots.length) return mediaHTML(p);
-    var thumbs = p.shots.map(function (src, i) {
+    var shots = localizedList(p, 'shots');
+    if (!shots.length) return mediaHTML(p);
+    var thumbs = shots.map(function (src, i) {
       return '<button type="button" class="qv-thumb' + (i === 0 ? ' active' : '') + '" data-shot="' + i +
         '" role="tab" aria-selected="' + (i === 0) + '" aria-label="' + esc(name + ' · ' + (i + 1)) + '">' +
         '<img src="' + esc(src) + '" alt="" loading="lazy" decoding="async"></button>';
     }).join('');
     return '<div class="qv-gallery">' +
       '<button type="button" class="qv-shot" data-shot-next aria-label="' + esc(lang === 'en' ? 'Next screenshot' : 'Siguiente captura') + '">' +
-        '<img id="qvImg" src="' + esc(p.shots[0]) + '" alt="' + esc(name) + '">' +
-        '<span class="qv-counter"><b id="qvShotNum">1</b>/' + p.shots.length + '</span>' +
+        '<img id="qvImg" src="' + esc(shots[0]) + '" alt="' + esc(name) + '">' +
+        '<span class="qv-counter"><b id="qvShotNum">1</b>/' + shots.length + '</span>' +
       '</button>' +
       '<div class="qv-thumbs" role="tablist" aria-label="' + esc(lang === 'en' ? 'Screenshots' : 'Capturas') + '">' + thumbs + '</div>' +
     '</div>';
@@ -808,9 +860,10 @@
     var desc = localized(p, 'desc');
     var media = $('qvMedia');
     if (media) {
-      media.className = 'v-dialog-media' + (p.shots && p.shots.length ? ' has-gallery' : (p.fit === 'contain' ? ' contain' : ''));
+      var shotsQv = localizedList(p, 'shots');
+      media.className = 'v-dialog-media' + (shotsQv.length ? ' has-gallery' : (p.fit === 'contain' ? ' contain' : ''));
       media.innerHTML = modalMediaHTML(p, name);
-      galleryShots = p.shots && p.shots.length ? p.shots.slice() : [];
+      galleryShots = shotsQv.slice();
       galleryIndex = 0;
     }
     txt('qvCat', catLabel(p.cat));
@@ -832,7 +885,7 @@
     txt('qvNote', note);
 
     if (dlg.showModal) { if (!dlg.open) dlg.showModal(); }
-    else { window.location.href = p.link; }
+    else { window.location.href = localized(p, 'link') || p.link; }
   }
 
   var qvClose = $('qvClose');
