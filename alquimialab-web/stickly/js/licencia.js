@@ -14,7 +14,8 @@
        data-app="aurify"                 nombre corto (se usa como sal y prefijo)
        data-nombre="Aurify"              nombre visible
        data-logo="icon-192.png"          icono de la tarjeta
-       data-compra="https://…?wanted=true"
+       data-compra="https://…?wanted=true"     ficha en español
+       data-compra-en="https://…?wanted=true"  ficha en inglés (opcional)
        data-email="hola@alquimialab.com"
        data-productos="id1,id2"          product_id de Gumroad (varios: ES y EN)
        data-maestras="hash1,hash2"       claves maestras (solo hashes)
@@ -37,6 +38,7 @@
   var NOMBRE = D.nombre || APP.charAt(0).toUpperCase() + APP.slice(1);
   var LOGO = D.logo || "";
   var COMPRA = D.compra || "";
+  var COMPRA_EN = D.compraEn || "";
   var CORREO = D.email || "hola@alquimialab.com";
   var PRODUCTOS = lista(D.productos);
   var MAESTRAS = lista(D.maestras);
@@ -337,8 +339,11 @@
       : "";
 
     var enlaces = [];
-    if (COMPRA) {
-      enlaces.push('<a href="' + escapar(COMPRA) + '" target="_blank" rel="noopener">' + escapar(texto("buy")) + "</a>");
+    /* Cada ficha de Gumroad tiene su idioma: si la app está en español va a la
+       ficha española, y en cualquier otro idioma a la inglesa (si existe). */
+    var destinoCompra = IDIOMA !== "es" && COMPRA_EN ? COMPRA_EN : COMPRA;
+    if (destinoCompra) {
+      enlaces.push('<a href="' + escapar(destinoCompra) + '" target="_blank" rel="noopener">' + escapar(texto("buy")) + "</a>");
     }
     enlaces.push('<a href="https://gumroad.com/library" target="_blank" rel="noopener">' + escapar(texto("where")) + "</a>");
     if (CORREO) {
