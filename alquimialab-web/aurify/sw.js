@@ -1,4 +1,4 @@
-const CACHE_NAME = "aurify-v7";
+const CACHE_NAME = "aurify-v8";
 const OLD_PREFIXES = ["aurify-", "alquimia-cotiza-"];
 const APP_SHELL = [
   "./",
