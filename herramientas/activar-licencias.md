@@ -17,10 +17,14 @@ Las apps de Windows y Android **no piden clave**: tu compra ya las cubre.
 
 ## Encenderla (5 minutos, una vez por producto)
 
-1. **Gumroad → Products → tu producto → Content** y activa
-   **“Generate a unique license key per sale”**.
-2. En ese mismo bloque aparece el **product_id** (un texto tipo
+1. **Gumroad → Products → tu producto → Content**. En el editor pulsa **Insert**
+   (o el menú `⋯`) y elige **License key**. Aparece un bloque; arrástralo a donde
+   quieras que el comprador lo vea (arriba, antes de los archivos).
+   Ojo: ya no es un interruptor en “Customize the buyer's experience”, ahora es un
+   bloque de contenido. Si no aparece, es que ese producto no es digital.
+2. En ese bloque, abre el desplegable y copia el **product_id** (un texto tipo
    `32-nPAicqbLj8B_WswVlMw==`). También está en **Share → API**.
+   Deja apagado “Allow customers to choose number of seats per license purchased”.
 3. Pégalo en el HTML de la app:
 
    `alquimialab-web/aurify/index.html`
