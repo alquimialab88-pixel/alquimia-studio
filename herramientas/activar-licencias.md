@@ -1,7 +1,21 @@
 # Activar la puerta de licencia
 
-Las dos apps web (Aurify y Stickly) ya traen la puerta puesta, **apagada**. Se enciende
-cuando les dices cuáles son tus productos de Gumroad.
+Las dos apps web (Aurify y Stickly) ya traen la puerta puesta. Aurify está **encendida
+y probada**; Stickly sigue apagada esperando su `product_id`.
+
+## Estado actual
+
+| App | Puerta | Probada con clave real | `data-productos` |
+|---|---|---|---|
+| Aurify | ✅ encendida (2026-11-18) | ✅ sí, compra de prueba | `6F0E4C97-B72A4E69-A11BF6C4-AF6517E7,PcQRNBVxRjhvIi-bjuVQLQ==` |
+| Stickly | ⏳ apagada | — | vacío |
+
+En Aurify van los dos formatos del ID a propósito: la app los prueba en orden hasta que
+alguno responda que sí, así no importa cuál use Gumroad internamente.
+
+> **No reembolses la compra de prueba.** El código desactiva la licencia de las compras
+> reembolsadas, así que esa clave dejaría de entrar. Si algún día la reembolsas, entra
+> con una maestra.
 
 ## Cómo funciona
 
