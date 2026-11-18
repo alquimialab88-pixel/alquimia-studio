@@ -8,7 +8,18 @@ y probada**; Stickly sigue apagada esperando su `product_id`.
 | App | Puerta | Probada con clave real | `data-productos` |
 |---|---|---|---|
 | Aurify | ✅ encendida (2026-11-18) | ✅ sí, compra de prueba | `PcQRNBVxRjhvIi-bjuVQLQ==,KG9il-bIF_ziDlu1MpeBMg==` |
-| Stickly | ⏳ apagada | — | vacío |
+| Stickly | ✅ encendida (2026-11-18) | ⏳ pendiente compra de prueba | `3h-q9F5GH2Uqa3v8xu89Pw==,cScqjara0LDSFJeilz9oRQ==` |
+
+Stickly tiene también dos fichas publicadas. La española ya tiene las licencias activas y su
+puerta encendida; la inglesa **todavía no**, así que sus claves aún no existen:
+
+| Ficha | URL | `product_id` | Licencias |
+|---|---|---|---|
+| Español | `alquimialab.gumroad.com/l/Stickly_ESP` | `3h-q9F5GH2Uqa3v8xu89Pw==` | ✅ |
+| Inglés | `alquimialab.gumroad.com/l/Stickly_ENG` | `cScqjara0LDSFJeilz9oRQ==` | ❌ falta el bloque |
+
+Para la inglesa: **Content → Insert → License key** (bloque arriba de los archivos). El ID ya
+está puesto en el código, así que en cuanto exista el bloque las claves inglesas entran solas.
 
 Los dos IDs de Aurify son los de sus dos fichas, confirmados leyendo las páginas públicas:
 

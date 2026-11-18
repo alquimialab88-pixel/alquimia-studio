@@ -198,7 +198,7 @@
     }
   };
 
-  var IDIOMA = detectarIdioma();
+  var IDIOMA = idiomaPreferido();
   var T = TEXTOS[IDIOMA] || TEXTOS.en;
 
   function texto(clave) {
@@ -207,13 +207,14 @@
   }
 
   /* El idioma elegido en la app manda sobre el del navegador: si alguien puso
-     la app en inglés, la ficha de compra también va en inglés. */
-  function idiomaParaCompra() {
+     la app en inglés, la tarjeta y la ficha de compra también van en inglés.
+     Así el texto y el enlace nunca se contradicen. */
+  function idiomaPreferido() {
     try {
       var guardado = localStorage.getItem("alquimia-lang");
       if (guardado === "es" || guardado === "en") return guardado;
     } catch (e) { /* ignore */ }
-    return IDIOMA;
+    return detectarIdioma();
   }
 
   function detectarIdioma() {
@@ -349,9 +350,9 @@
       : "";
 
     var enlaces = [];
-    /* Cada ficha de Gumroad tiene su idioma: si la app está en español va a la
-       ficha española, y en cualquier otro idioma a la inglesa (si existe). */
-    var destinoCompra = idiomaParaCompra() !== "es" && COMPRA_EN ? COMPRA_EN : COMPRA;
+    /* Cada ficha de Gumroad tiene su idioma: en español va a la ficha española,
+       y en cualquier otro idioma a la inglesa (si existe). */
+    var destinoCompra = IDIOMA !== "es" && COMPRA_EN ? COMPRA_EN : COMPRA;
     if (destinoCompra) {
       enlaces.push('<a href="' + escapar(destinoCompra) + '" target="_blank" rel="noopener">' + escapar(texto("buy")) + "</a>");
     }
