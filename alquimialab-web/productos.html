@@ -98,6 +98,25 @@
       .tablet-frame { width:230px; }
       .tablet-glow { width:260px; height:260px; }
     }
+
+    /* Black Friday */
+    .bf-banner {
+      display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+      margin: 26px 0 6px; padding: 16px 20px;
+      background: linear-gradient(120deg, #efecfd, #e3defa);
+      border: 1px solid #d8d1f4; border-radius: 16px;
+      color: #3a3768; font-size: 14.5px; line-height: 1.45;
+    }
+    .bf-banner[hidden] { display: none; }
+    .bf-banner p { margin: 0; }
+    .bf-banner .bf-tag {
+      background: #6463aa; color: #fff; font-weight: 700; font-size: 11.5px;
+      letter-spacing: .09em; text-transform: uppercase;
+      padding: 7px 12px; border-radius: 999px; white-space: nowrap;
+    }
+    .bf-banner .bf-en { display: none; }
+    html[lang="en"] .bf-banner .bf-es { display: none; }
+    html[lang="en"] .bf-banner .bf-en { display: block; }
   </style>
 </head>
 <body>
@@ -222,6 +241,13 @@
       <div class="v-chips" id="vChips"></div>
     </section>
 
+    <!-- BLACK FRIDAY -->
+    <div class="bf-banner" id="bfBanner" hidden>
+      <span class="bf-tag">Black Friday</span>
+      <p class="bf-es"><b>50 % de descuento</b> en planners y apps hasta el <b>28 de noviembre</b>. El descuento ya está aplicado en cada botón — código <b>BLACKFRIDAY88</b>.</p>
+      <p class="bf-en"><b>50% off</b> planners and apps until <b>November 28</b>. The discount is already applied on every button — code <b>BLACKFRIDAY88</b>.</p>
+    </div>
+
     <div class="v-meta">
       <span id="resultCount">14 productos</span>
       <button type="button" class="v-clear" id="clearFilters" hidden>Limpiar filtros</button>
@@ -320,7 +346,7 @@
   </script>
 
   <script src="js/lang.js?v=10"></script>
-  <script>window.SHOP = { mode: 'public' };</script>
-  <script src="js/shop.js?v=3"></script>
+  <script>window.SHOP = { mode: 'public', promo: true };</script>
+  <script src="js/shop.js?v=4"></script>
 </body>
 </html>

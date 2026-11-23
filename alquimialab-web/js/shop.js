@@ -9,7 +9,7 @@
 
   var CFG = window.SHOP || {};
   var MODE = CFG.mode === 'private' ? 'private' : 'public';
-  var PROMO_ALLOWED = MODE === 'private';
+  var PROMO_ALLOWED = MODE === 'private' || CFG.promo === true;
 
   /* Precio de lista (Gumroad) + precio de la promo Black Friday. */
   var PRODUCTS = [
@@ -29,6 +29,7 @@
       note: 'Windows + Android + iPhone/iPad y web · Pago único · 9 idiomas',
       link: 'https://alquimialab.gumroad.com/l/Aurify_ESP?wanted=true',
       bfLink: 'https://alquimialab.gumroad.com/l/Aurify_ESP/BLACKFRIDAY88',
+      bfLinkEn: 'https://alquimialab.gumroad.com/l/Aurify_ENG/BLACKFRIDAY88',
       shots: [
         'assets/aurify/shot-1.webp',
         'assets/aurify/shot-2.webp',
@@ -60,6 +61,7 @@
       note: 'Android + Windows + iPhone/iPad y web · Pago único · Acceso inmediato',
       link: 'https://alquimialab.gumroad.com/l/Stickly_ESP?wanted=true',
       bfLink: 'https://alquimialab.gumroad.com/l/Stickly_ESP/BLACKFRIDAY88',
+      bfLinkEn: 'https://alquimialab.gumroad.com/l/Stickly_ENG/BLACKFRIDAY88',
       shots: [
         'assets/stickly/mockup.webp',
         'assets/stickly/shot-1.webp',
@@ -772,6 +774,9 @@
     html('bfCode', T.bfCode);
     var prev = $('bfPreview');
     if (prev) prev.hidden = !PROMO_PREVIEW;
+
+    var banner = $('bfBanner');
+    if (banner) banner.hidden = !PROMO_ON;
 
     bubbles();
     renderBF();
