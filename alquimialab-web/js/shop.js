@@ -20,6 +20,7 @@
       short: 'Cotizaciones y comprobantes con tu logo y tus colores. PDF en A4, listo en un minuto.',
       desc: 'Aurify convierte tu trabajo en cotizaciones y comprobantes de cobro: tu logo, tu color, hasta 100 productos y totales que se calculan solos. Exporta un PDF limpio en A4 y compártelo por WhatsApp, correo o impresión. Sin cuentas, sin servidores y sin suscripciones: tus datos se quedan en tu dispositivo.',
       price: 11.99,
+      salePrice: 5.99,
       free: false,
       soon: false,
       img: 'assets/aurify/shot-1.webp',
@@ -27,6 +28,7 @@
       badge: 'Nuevo',
       note: 'Windows + Android + iPhone/iPad y web · Pago único · 9 idiomas',
       link: 'https://alquimialab.gumroad.com/l/Aurify_ESP?wanted=true',
+      bfLink: 'https://alquimialab.gumroad.com/l/Aurify_ESP/BLACKFRIDAY88',
       shots: [
         'assets/aurify/shot-1.webp',
         'assets/aurify/shot-2.webp',
@@ -49,6 +51,7 @@
       short: 'Notas, tareas, calendario, contraseñas y enfoque. Privada, offline y sin cuentas.',
       desc: 'Stickly reúne tus notas, tareas, calendario, cuadernos, notas de voz, contraseñas y temporizador de enfoque en una sola app. Sin cuentas, sin servidores y sin suscripciones: tus datos se quedan en tu dispositivo.',
       price: 11.99,
+      salePrice: 5.99,
       free: false,
       soon: false,
       img: 'assets/stickly/cover.webp',
@@ -56,6 +59,7 @@
       badge: 'Nuevo',
       note: 'Android + Windows + iPhone/iPad y web · Pago único · Acceso inmediato',
       link: 'https://alquimialab.gumroad.com/l/Stickly_ESP?wanted=true',
+      bfLink: 'https://alquimialab.gumroad.com/l/Stickly_ESP/BLACKFRIDAY88',
       shots: [
         'assets/stickly/mockup.webp',
         'assets/stickly/shot-1.webp',
@@ -131,14 +135,12 @@
       short: 'Un planner minimalista para ordenar tu año con calma e intención.',
       desc: 'Un planner minimalista para organizar tu año con calma e intención. Edición impresa o digital, con espacio para tus metas, proyectos y rituales del día a día.',
       price: 10.99,
-      salePrice: 5.49,
       free: false,
       soon: false,
       img: 'journal-cover.webp',
       fit: 'contain',
       badge: '',
       link: 'https://alquimialab.gumroad.com/l/bvzpd',
-      bfLink: 'https://alquimialab.gumroad.com/l/bvzpd/BLACKFRIDAY88',
       links: [
         { label: 'Digital', link: 'https://alquimialab.gumroad.com/l/bvzpd', primary: true },
         { label: 'Amazon', link: 'https://www.amazon.com/dp/B0HJ8J6MHG', primary: false }
@@ -151,14 +153,12 @@
       short: 'El mismo libro en español e inglés. Edición impresa y digital.',
       desc: 'El mismo libro en español e inglés, con ilustraciones lofi para colorear y desconectar. Disponible en edición impresa y digital.',
       price: 5,
-      salePrice: 2.5,
       free: false,
       soon: false,
       img: 'print-coloring.webp',
       fit: 'cover',
       badge: '',
       link: 'https://alquimialab.gumroad.com/l/LofiColoringBookAlquimia',
-      bfLink: 'https://alquimialab.gumroad.com/l/LofiColoringBookAlquimia/BLACKFRIDAY88',
       links: [
         { label: 'Digital', link: 'https://alquimialab.gumroad.com/l/LofiColoringBookAlquimia', primary: true },
         { label: 'Amazon', link: 'https://www.amazon.com/dp/B0HBML5LCP', primary: false }
@@ -308,8 +308,9 @@
       from: 'desde',
       bfTag: 'Black Friday',
       bfTitle: 'Black Friday: <b>50%</b> en estos productos digitales',
-      bfSub: 'Solo del 12 al 28 de noviembre · Pago único · Sin suscripción',
-      bfNote: 'El 50% se aplica automáticamente al comprar desde aquí. La edición impresa en Amazon mantiene su precio.',
+      bfSub: 'Solo hasta el 28 de noviembre · Pago único · Sin suscripción',
+      bfNote: 'El 50% se aplica automáticamente al comprar desde aquí.',
+      bfCode: '¿Quieres el 50% en plantillas Notion? Usa el código <b>BLACKFRIDAY26</b> al comprar.',
       bfPreview: 'Vista previa · La promo no está activa ahora, el código no aplica descuento.',
       search: 'Buscar producto…',
       filters: { all: 'Todos', digital: 'Digitales', print: 'Impresos', notion: 'Notion', free: 'Gratis' },
@@ -353,8 +354,9 @@
       from: 'from',
       bfTag: 'Black Friday',
       bfTitle: 'Black Friday: <b>50%</b> off these digital products',
-      bfSub: 'November 12–28 only · One-time payment · No subscription',
-      bfNote: 'The 50% discount is applied automatically when you buy from here. The print edition on Amazon keeps its own price.',
+      bfSub: 'Until November 28 only · One-time payment · No subscription',
+      bfNote: 'The 50% discount is applied automatically when you check out from here.',
+      bfCode: 'Want 50% off Notion templates? Use the code <b>BLACKFRIDAY26</b> at checkout.',
       bfPreview: 'Preview · The promo is not active right now, so the code will not apply a discount.',
       search: 'Search products…',
       filters: { all: 'All', digital: 'Digital', print: 'Print', notion: 'Notion', free: 'Free' },
@@ -679,8 +681,11 @@
       return;
     }
     if (bfSection) bfSection.hidden = false;
+    var bfOrder = ['studio', 'planora', 'aurify', 'stickly'];
     bfGrid.innerHTML = PRODUCTS.filter(function (p) {
       return typeof p.salePrice === 'number';
+    }).sort(function (a, b) {
+      return bfOrder.indexOf(a.id) - bfOrder.indexOf(b.id);
     }).map(function (p) { return cardHTML(p, true); }).join('');
   }
 
@@ -764,6 +769,7 @@
     html('bfTitle', T.bfTitle);
     txt('bfSub', T.bfSub);
     txt('bfNote', T.bfNote);
+    html('bfCode', T.bfCode);
     var prev = $('bfPreview');
     if (prev) prev.hidden = !PROMO_PREVIEW;
 

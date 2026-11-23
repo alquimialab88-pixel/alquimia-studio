@@ -113,6 +113,16 @@
 .v-bf .v-buy.btn-primary { background: linear-gradient(135deg,#ff8a3d,#e85d04); border-color: #e85d04; color: #fff; }
 .v-bf .v-buy.btn-primary:hover { transform: none; box-shadow: 0 8px 18px rgba(232,93,4,.34); }
 .v-bf-note { margin: 14px 0 0; color: #6b6890; font-size: 11.5px; line-height: 1.5; }
+.v-bf-code {
+  margin: 16px 0 0; padding: 13px 16px; text-align: center;
+  border: 1.5px dashed #c9c4ee; border-radius: 14px;
+  background: #f6f4ff; color: #3b3866;
+  font-size: 13.5px; line-height: 1.55;
+}
+.v-bf-code b {
+  display: inline-block; background: #6462ab; color: #fff;
+  padding: 3px 10px; border-radius: 8px; letter-spacing: .04em; font-size: 13px;
+}
 
 .v-toolbar { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin: 26px 0 14px; }
 .v-search { position: relative; flex: 1 1 260px; max-width: 360px; }
