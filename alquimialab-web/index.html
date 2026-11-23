@@ -29,7 +29,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=23">
+  <link rel="stylesheet" href="css/style.css?v=24">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6568715444285154" crossorigin="anonymous"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y8Z50HWV3J"></script>
 <script>
@@ -130,6 +130,141 @@
       </div>
     </div>
   </section>
+
+  <!-- 5 · DESTACADOS (carrusel actual) -->
+  <section class="section section-band-white feat-section">
+    <div class="feat-wrap">
+      <div class="section-title anim"><span>Featured</span></div>
+    </div>
+
+
+    <!-- Caja morada tipo Kore · alterna Lofi ↔ Kore -->
+    <div class="promo-rotator anim d1" id="promoRotator">
+      <div class="promo-slide is-on">
+        <div class="promo-text">
+          <span class="promo-badge">🎧 Lofi · Alquimia Lab</span>
+          <h3>The soundtrack of your calm</h3>
+          <p>15 mixes for studying, working, and breathing for a while. Made with calm by Alquimia Lab.</p>
+          <a href="https://www.youtube.com/@LofiAlquimiaLab88" target="_blank" rel="noopener" class="btn-lofi">Listen on YouTube →</a>
+        </div>
+        <a href="https://www.youtube.com/@LofiAlquimiaLab88" target="_blank" rel="noopener" class="promo-media promo-media--lofi">
+          <img src="lofi-poster.webp" width="440" height="248" alt="Lofi Alquimia Lab on YouTube" loading="lazy" decoding="async">
+          <span class="lofi-play" aria-hidden="true">▶</span>
+        </a>
+      </div>
+      <div class="promo-slide">
+        <div class="promo-text">
+          <span class="promo-badge" data-i18n="Now on Google Play · by Alquimia Lab">Now on Google Play · by Alquimia Lab</span>
+          <h3><em>Your space of calm</em>, in an app</h3>
+          <p>Your calm space: tasks, habits, notes, diary, lo‑fi music and an AI assistant — all in one app.</p>
+          <p class="promo-sub" data-i18n="Android · Available now">Android · Available now</p>
+          <a href="https://play.google.com/store/apps/details?id=com.alquimialab.kore" class="promo-btn" data-i18n="Download Kore →" onclick="window.gtag&&gtag('event','click_download_kore')" target="_blank" rel="noopener">Download Kore →</a>
+        </div>
+        <div class="promo-media">
+          <div class="promo-glow"></div>
+          <div class="home-phone-float promo-phone">
+            <div class="promo-phone-frame">
+              <div class="promo-phone-notch"></div>
+              <div class="promo-phone-screen">
+                <img src="assets/kore-screenshot.jpg" alt="Kore on Samsung Galaxy S24 Ultra" loading="lazy" decoding="async">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="promo-slide">
+        <div class="promo-text">
+          <span class="promo-badge">🖤 Black Friday · Hasta el 28 de nov</span>
+          <h3><em>50%</em> en tus favoritos</h3>
+          <p>Planora, Alquimia Studio, Aurify y Stickly a mitad de precio. Solo desde la vitrina.</p>
+          <p class="promo-sub">Pago único · Sin suscripción</p>
+          <a href="vitrina" class="promo-btn">Ver ofertas →</a>
+        </div>
+        <div class="promo-media promo-bf-visual" aria-hidden="true">
+          <img src="assets/bf-panda.webp" alt="" class="promo-bf-img" decoding="async">
+        </div>
+      </div>
+      <div class="promo-dots">
+        <button type="button" class="promo-dot is-on" aria-label="Lofi slide"></button>
+        <button type="button" class="promo-dot" aria-label="Kore slide"></button>
+        <button type="button" class="promo-dot" aria-label="Black Friday slide"></button>
+      </div>
+    </div>
+
+    <div class="feat-wrap">
+    <div class="featured-scroll">
+      <div class="featured-track" id="featuredTrack">
+        <a href="productos#p-stickly" class="featured-card">
+          <img src="assets/stickly/cover.webp" width="1400" height="1050" alt="Stickly app on a tablet" class="featured-thumb" loading="lazy" decoding="async">
+          <div class="featured-info">
+            <h3>Stickly</h3>
+            <p>Notes, tasks, calendar, passwords and focus. Private, offline and no accounts — on Android, Windows, iPhone/iPad and web.</p>
+            <span class="btn-primary btn-sm">New · View</span>
+          </div>
+        </a>
+        <a href="productos#p-alquimia-studio" class="featured-card">
+          <img src="assets/alquimia-studio/screenshots/studio-overview.png?v=1" alt="Alquimia Studio home screen with the PDF library and five planners" class="featured-thumb" loading="lazy" decoding="async">
+          <div class="featured-info">
+            <h3>Alquimia Studio</h3>
+            <p>Organize and read PDFs, plus five digital planners. Includes favorites and backup tools, with no monthly subscription.</p>
+            <span class="btn-primary btn-sm">Buy</span>
+          </div>
+        </a>
+        <a href="aurify/" class="featured-card" onclick="window.gtag&&gtag('event','click_aurify_demo')">
+          <img src="aurify/icon.svg" alt="Aurify" class="featured-thumb" loading="lazy" decoding="async">
+          <div class="featured-info">
+            <h3>Aurify</h3>
+            <p data-i18n="Turn your work into polished quotes and payment receipts, with your brand.">Turn your work into polished quotes and payment receipts, with your brand.</p>
+            <span class="btn-primary btn-sm" data-i18n="Try the free demo">Try the free demo</span>
+          </div>
+        </a>
+        <a href="productos#p-planora" class="featured-card">
+          <img src="assets/featured-maestro.webp" width="700" height="336" alt="Planora for Windows" class="featured-thumb" loading="lazy" decoding="async">
+          <div class="featured-info">
+            <h3>Planora</h3>
+            <p>Plan your content, organize multiple brands, and turn ideas into action with Planora for Windows.</p>
+            <span class="btn-primary btn-sm">View</span>
+          </div>
+        </a>
+        <a href="productos#notion" class="featured-card">
+          <img src="featured-quietmind.webp" alt="Quiet Mind Planner" class="featured-thumb" loading="lazy" decoding="async">
+          <div class="featured-info">
+            <h3>Quiet Mind Planner</h3>
+            <p>Free your mind from mental noise with a minimalist sanctuary designed to protect your energy and bring calm.</p>
+            <span class="btn-primary btn-sm">View</span>
+          </div>
+        </a>
+        <a href="productos#notion" class="featured-card">
+          <img src="featured-youtube.webp" alt="YouTube Creator OS" class="featured-thumb" loading="lazy" decoding="async">
+          <div class="featured-info">
+            <h3>YouTube Creator OS</h3>
+            <p>Stop losing video ideas with a comprehensive Notion workspace built for creators.</p>
+            <span class="btn-primary btn-sm">View</span>
+          </div>
+        </a>
+        <a href="productos#impresos" class="featured-card">
+          <img src="featured-coloring.webp" alt="Lofi Coloring Books" class="featured-thumb" loading="lazy" decoding="async">
+          <div class="featured-info">
+            <h3>Lofi Coloring Books</h3>
+            <p>Coloring books with a lofi aesthetic and designs that invite you to unwind.</p>
+            <span class="btn-primary btn-sm">View</span>
+          </div>
+        </a>
+        <a href="productos#notion" class="featured-card">
+          <img src="featured-social.webp" alt="Social Media Planner" class="featured-thumb" loading="lazy" decoding="async">
+          <div class="featured-info">
+            <h3>Social Media Planner</h3>
+            <p>Plan your content, strategy and metrics in one calm Notion workspace.</p>
+            <span class="btn-primary btn-sm">View</span>
+          </div>
+        </a>      </div>
+    </div>
+    </div>
+  </section>
+
+  
+
+  <!--
 
   <!-- 1b · NEWSLETTER -->
   <section id="kit-band" class="section section-band-lilac" style="padding-top:56px;padding-bottom:56px;">
@@ -487,142 +622,7 @@
     </div>
   </section>
 
-  <!-- 5 · DESTACADOS (carrusel actual) -->
-  <section class="section section-band-white feat-section">
-    <div class="feat-wrap">
-      <div class="section-title anim"><span>Featured</span></div>
-    </div>
-
-
-    <!-- Caja morada tipo Kore · alterna Lofi ↔ Kore -->
-    <div class="promo-rotator anim d1" id="promoRotator">
-      <div class="promo-slide is-on">
-        <div class="promo-text">
-          <span class="promo-badge">🎧 Lofi · Alquimia Lab</span>
-          <h3>The soundtrack of your calm</h3>
-          <p>15 mixes for studying, working, and breathing for a while. Made with calm by Alquimia Lab.</p>
-          <a href="https://www.youtube.com/@LofiAlquimiaLab88" target="_blank" rel="noopener" class="btn-lofi">Listen on YouTube →</a>
-        </div>
-        <a href="https://www.youtube.com/@LofiAlquimiaLab88" target="_blank" rel="noopener" class="promo-media promo-media--lofi">
-          <img src="lofi-poster.webp" width="440" height="248" alt="Lofi Alquimia Lab on YouTube" loading="lazy" decoding="async">
-          <span class="lofi-play" aria-hidden="true">▶</span>
-        </a>
-      </div>
-      <div class="promo-slide">
-        <div class="promo-text">
-          <span class="promo-badge" data-i18n="Now on Google Play · by Alquimia Lab">Now on Google Play · by Alquimia Lab</span>
-          <h3><em>Your space of calm</em>, in an app</h3>
-          <p>Your calm space: tasks, habits, notes, diary, lo‑fi music and an AI assistant — all in one app.</p>
-          <p class="promo-sub" data-i18n="Android · Available now">Android · Available now</p>
-          <a href="https://play.google.com/store/apps/details?id=com.alquimialab.kore" class="promo-btn" data-i18n="Download Kore →" onclick="window.gtag&&gtag('event','click_download_kore')" target="_blank" rel="noopener">Download Kore →</a>
-        </div>
-        <div class="promo-media">
-          <div class="promo-glow"></div>
-          <div class="home-phone-float promo-phone">
-            <div class="promo-phone-frame">
-              <div class="promo-phone-notch"></div>
-              <div class="promo-phone-screen">
-                <img src="assets/kore-screenshot.jpg" alt="Kore on Samsung Galaxy S24 Ultra" loading="lazy" decoding="async">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="promo-slide">
-        <div class="promo-text">
-          <span class="promo-badge">🖤 Black Friday · Hasta el 28 de nov</span>
-          <h3><em>50%</em> en tus favoritos</h3>
-          <p>Planora, Alquimia Studio, Aurify y Stickly a mitad de precio. Solo desde la vitrina.</p>
-          <p class="promo-sub">Pago único · Sin suscripción</p>
-          <a href="vitrina" class="promo-btn">Ver ofertas →</a>
-        </div>
-        <div class="promo-media promo-bf-visual" aria-hidden="true">
-          <img src="assets/bf-panda.webp" alt="" class="promo-bf-img" decoding="async">
-          <span class="promo-bf-score">
-            <span class="promo-bf-big">50%</span>
-            <span class="promo-bf-off">OFF</span>
-          </span>
-        </div>
-      </div>
-      <div class="promo-dots">
-        <button type="button" class="promo-dot is-on" aria-label="Lofi slide"></button>
-        <button type="button" class="promo-dot" aria-label="Kore slide"></button>
-        <button type="button" class="promo-dot" aria-label="Black Friday slide"></button>
-      </div>
-    </div>
-
-    <div class="feat-wrap">
-    <div class="featured-scroll">
-      <div class="featured-track" id="featuredTrack">
-        <a href="productos#p-stickly" class="featured-card">
-          <img src="assets/stickly/cover.webp" width="1400" height="1050" alt="Stickly app on a tablet" class="featured-thumb" loading="lazy" decoding="async">
-          <div class="featured-info">
-            <h3>Stickly</h3>
-            <p>Notes, tasks, calendar, passwords and focus. Private, offline and no accounts — on Android, Windows, iPhone/iPad and web.</p>
-            <span class="btn-primary btn-sm">New · View</span>
-          </div>
-        </a>
-        <a href="productos#p-alquimia-studio" class="featured-card">
-          <img src="assets/alquimia-studio/screenshots/studio-overview.png?v=1" alt="Alquimia Studio home screen with the PDF library and five planners" class="featured-thumb" loading="lazy" decoding="async">
-          <div class="featured-info">
-            <h3>Alquimia Studio</h3>
-            <p>Organize and read PDFs, plus five digital planners. Includes favorites and backup tools, with no monthly subscription.</p>
-            <span class="btn-primary btn-sm">Buy</span>
-          </div>
-        </a>
-        <a href="aurify/" class="featured-card" onclick="window.gtag&&gtag('event','click_aurify_demo')">
-          <img src="aurify/icon.svg" alt="Aurify" class="featured-thumb" loading="lazy" decoding="async">
-          <div class="featured-info">
-            <h3>Aurify</h3>
-            <p data-i18n="Turn your work into polished quotes and payment receipts, with your brand.">Turn your work into polished quotes and payment receipts, with your brand.</p>
-            <span class="btn-primary btn-sm" data-i18n="Try the free demo">Try the free demo</span>
-          </div>
-        </a>
-        <a href="productos#p-planora" class="featured-card">
-          <img src="assets/featured-maestro.webp" width="700" height="336" alt="Planora for Windows" class="featured-thumb" loading="lazy" decoding="async">
-          <div class="featured-info">
-            <h3>Planora</h3>
-            <p>Plan your content, organize multiple brands, and turn ideas into action with Planora for Windows.</p>
-            <span class="btn-primary btn-sm">View</span>
-          </div>
-        </a>
-        <a href="productos#notion" class="featured-card">
-          <img src="featured-quietmind.webp" alt="Quiet Mind Planner" class="featured-thumb" loading="lazy" decoding="async">
-          <div class="featured-info">
-            <h3>Quiet Mind Planner</h3>
-            <p>Free your mind from mental noise with a minimalist sanctuary designed to protect your energy and bring calm.</p>
-            <span class="btn-primary btn-sm">View</span>
-          </div>
-        </a>
-        <a href="productos#notion" class="featured-card">
-          <img src="featured-youtube.webp" alt="YouTube Creator OS" class="featured-thumb" loading="lazy" decoding="async">
-          <div class="featured-info">
-            <h3>YouTube Creator OS</h3>
-            <p>Stop losing video ideas with a comprehensive Notion workspace built for creators.</p>
-            <span class="btn-primary btn-sm">View</span>
-          </div>
-        </a>
-        <a href="productos#impresos" class="featured-card">
-          <img src="featured-coloring.webp" alt="Lofi Coloring Books" class="featured-thumb" loading="lazy" decoding="async">
-          <div class="featured-info">
-            <h3>Lofi Coloring Books</h3>
-            <p>Coloring books with a lofi aesthetic and designs that invite you to unwind.</p>
-            <span class="btn-primary btn-sm">View</span>
-          </div>
-        </a>
-        <a href="productos#notion" class="featured-card">
-          <img src="featured-social.webp" alt="Social Media Planner" class="featured-thumb" loading="lazy" decoding="async">
-          <div class="featured-info">
-            <h3>Social Media Planner</h3>
-            <p>Plan your content, strategy and metrics in one calm Notion workspace.</p>
-            <span class="btn-primary btn-sm">View</span>
-          </div>
-        </a>      </div>
-    </div>
-    </div>
-  </section>
-
-  <!-- 5a · KITS DE DISEÑO -->
+<!-- 5a · KITS DE DISEÑO -->
   <section class="section section-band-lilac home-kits">
     <div class="section-title anim"><span>Kits de diseño</span></div>
     <p class="home-kits-sub anim">Tu marca, lista para destacar — de cero a increíble en tiempo récord.</p>
@@ -658,7 +658,6 @@
     <p class="home-kits-note anim">Cada kit es un proyecto único: se paga una sola vez, no es suscripción. Cupos limitados de lanzamiento.</p>
     <div class="home-kits-cta anim"><a href="kits" class="btn-primary">Ver todos los kits →</a></div>
   </section>
-
   <!-- 5b · MORE FROM THE BLOG · invita a explorar más -->
   <section class="section">
     <div class="section-title anim"><span>More from the blog</span></div>
