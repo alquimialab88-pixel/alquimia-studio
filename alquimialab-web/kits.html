@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <script>(function(){try{var p=location.pathname,n=p;if(/\/index\.html$/i.test(n))n=n.replace(/index\.html$/i,'');else if(/\.html$/i.test(n))n=n.replace(/\.html$/i,'');if(n!==p)history.replaceState(null,'',n+location.search+location.hash);}catch(e){}})();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Kits de diseño express de Alquimia Lab: social media, branding y diseño web. Tu marca lista para destacar, de cero a increíble en tiempo récord.">
+  <meta name="theme-color" content="#f2f2f2">
+  <link rel="canonical" href="https://alquimialab.app/kits">
+  <meta name="color-scheme" content="light">
+  <meta name="p:domain_verify" content="873c3dceab38058f2ad57c008b30e2ee"/>
+  <title>Kits de diseño · Alquimia Lab</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=21">
+  <style>
+    .kits-hero { text-align:center; padding: 40px 20px 10px; position:relative; }
+    .kits-badge {
+      display:inline-flex; align-items:center; gap:8px;
+      background:#6462ab; color:#fff; font-size:12px; font-weight:700;
+      letter-spacing:.08em; text-transform:uppercase;
+      padding:9px 18px; border-radius:99px;
+      box-shadow:0 8px 20px rgba(100,98,171,.28);
+    }
+    .kits-hero h1 {
+      font-family:'Eternalo', Georgia, serif;
+      font-weight:400; font-size:clamp(38px,6vw,64px);
+      line-height:1.05; color:#3b3866; margin:22px 0 10px;
+      letter-spacing:-.5px;
+    }
+    .kits-hero h1 em {
+      font-style:italic; color:#8a87ad;
+      font-family:'Georgia', serif;
+    }
+    .kits-hero .kits-sub {
+      display:inline-block; background:#fff; color:#3b3866;
+      font-size:clamp(14px,2vw,17px); font-weight:600;
+      padding:11px 24px; border-radius:99px;
+      box-shadow:0 6px 18px rgba(59,56,102,.08);
+      margin-top:6px;
+    }
+    .kits-grid {
+      display:grid; grid-template-columns:repeat(3,1fr);
+      gap:clamp(16px,3vw,28px); align-items:end;
+      max-width:1040px; margin:48px auto 0; padding:0 20px;
+    }
+    .kit-card {
+      position:relative; text-align:center;
+      background:linear-gradient(180deg,#f1effa 0%,#e8e5f6 100%);
+      border:1px solid #d9d5ee;
+      border-radius:140px 140px 24px 24px;
+      padding:0 24px 28px;
+      box-shadow:0 14px 34px rgba(74,74,133,.10);
+      transition:transform .25s ease, box-shadow .25s ease;
+    }
+    .kit-card:hover { transform:translateY(-6px); box-shadow:0 22px 44px rgba(74,74,133,.18); }
+    .kit-top {
+      background:linear-gradient(180deg,#6f6cbb 0%,#5b58a4 100%);
+      color:#fff; border-radius:140px 140px 0 0;
+      padding:38px 18px 22px; margin:0 -24px;
+    }
+    .kit-top h2 { font-size:clamp(17px,2vw,21px); font-weight:700; line-height:1.2; margin:0; }
+    .kit-body { padding-top:22px; }
+    .kit-body p { color:#5c598a; font-size:14.5px; line-height:1.55; min-height:66px; margin:0 0 18px; }
+    .kit-price { color:#3b3866; margin-bottom:6px; }
+    .kit-price small { display:block; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#8a87ad; }
+    .kit-price b { font-family:'Eternalo', Georgia, serif; font-size:46px; font-weight:400; line-height:1; }
+    .kit-price span { font-size:13px; font-weight:700; color:#8a87ad; }
+    .kit-note { font-size:11.5px; color:#8a87ad; margin:10px 0 16px; }
+    .kit-cta { display:inline-flex; width:100%; justify-content:center; }
+    .kits-footnote {
+      text-align:center; max-width:680px; margin:38px auto 0; padding:0 20px;
+      color:#6b6890; font-size:13.5px; line-height:1.65;
+    }
+    .kits-steps { max-width:1040px; margin:64px auto 0; padding:0 20px; }
+    .kits-steps h2 { text-align:center; font-size:clamp(24px,3.4vw,34px); color:#3b3866; margin-bottom:28px; }
+    .kits-steps-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .kits-step {
+      background:#fff; border:1px solid #e8e6f4; border-radius:18px;
+      padding:22px 20px; text-align:center;
+      box-shadow:0 8px 22px rgba(74,74,133,.06);
+    }
+    .kits-step .n {
+      display:inline-flex; width:34px; height:34px; align-items:center; justify-content:center;
+      border-radius:50%; background:#efedfb; color:#6462ab; font-weight:800; margin-bottom:10px;
+    }
+    .kits-step h3 { font-size:16px; color:#3b3866; margin-bottom:6px; }
+    .kits-step p { font-size:13.5px; color:#6b6890; line-height:1.55; }
+    .kits-faq { max-width:760px; margin:56px auto 0; padding:0 20px; }
+    .kits-faq h2 { text-align:center; font-size:clamp(22px,3vw,30px); color:#3b3866; margin-bottom:20px; }
+    .kits-faq details {
+      background:#fff; border:1px solid #e8e6f4; border-radius:14px;
+      padding:16px 18px; margin-bottom:10px;
+    }
+    .kits-faq summary { cursor:pointer; font-weight:700; color:#3b3866; font-size:14.5px; }
+    .kits-faq p { margin-top:10px; font-size:13.5px; color:#6b6890; line-height:1.6; }
+    .kits-final { text-align:center; margin:64px auto 40px; padding:0 20px; }
+    .kits-final h2 { font-family:'Eternalo', Georgia, serif; font-weight:400; font-size:clamp(30px,4.5vw,44px); color:#3b3866; margin-bottom:10px; }
+    .kits-final p { color:#6b6890; margin-bottom:20px; }
+    @media(max-width:820px) {
+      .kits-grid { grid-template-columns:1fr; max-width:420px; gap:26px; }
+      .kit-card { border-radius:90px 90px 22px 22px; }
+      .kit-top { border-radius:90px 90px 0 0; padding-top:30px; }
+      .kits-steps-grid { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body class="page-v2">
+
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="./" class="nav-logo">Alquimia Lab</a>
+    <div class="nav-links">
+      <a href="./">Home</a>
+      <div class="nav-dd">
+        <a href="portafolio">Portfolio <span class="nav-dd-arrow">▾</span></a>
+        <div class="nav-dd-menu">
+          <a href="portafolio#projects" class="nav-dd-featured">Projects <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          <a href="portafolio#about">About Me</a>
+          <a href="portafolio#experience">Work Experience</a>
+          <a href="portafolio#education">Education</a>
+          <a href="pay">Pay here 💜</a>
+        </div>
+      </div>
+      <a href="productos">Products</a>
+      <a href="kits" class="active">Kits</a>
+      <a href="kore/">Kore</a>
+      <a href="blog">Blog</a>
+      <a href="contacto">Contact</a>
+    </div>
+    <button id="langToggle" class="lang-toggle" type="button" aria-label="Switch language" title="ES / EN">ES | EN</button>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="kits-hero anim">
+      <span class="kits-badge">Cupos limitados de lanzamiento</span>
+      <h1>Tu marca, lista para <em>destacar</em></h1>
+      <span class="kits-sub">De cero a increíble, en tiempo récord</span>
+    </section>
+
+    <!-- KITS -->
+    <section class="kits-grid" aria-label="Kits de diseño">
+      <article class="kit-card anim d1">
+        <div class="kit-top"><h2>Kit Social<br>Express</h2></div>
+        <div class="kit-body">
+          <p>5 plantillas para posts y stories + guía de estilo para que tu feed se vea coherente desde el primer día.</p>
+          <div class="kit-price"><small>Desde</small><b>$30</b> <span>USD</span></div>
+          <div class="kit-note">5 plantillas · guía de estilo</div>
+          <a class="btn-primary kit-cta" href="https://wa.me/573104108483?text=Hola%20Isabel%2C%20me%20interesa%20el%20Kit%20Social%20Express%20(30%20USD)" target="_blank" rel="noopener" onclick="window.gtag&&gtag('event','click_kit_social')">Escríbeme y hablamos</a>
+        </div>
+      </article>
+
+      <article class="kit-card anim d2">
+        <div class="kit-top"><h2>Kit Branding<br>Express</h2></div>
+        <div class="kit-body">
+          <p>Logo principal + secundario, paleta de color y tipografías: la base visual de tu marca, lista para usar.</p>
+          <div class="kit-price"><small>Desde</small><b>$90</b> <span>USD</span></div>
+          <div class="kit-note">Logo + paleta + tipografías</div>
+          <a class="btn-primary kit-cta" href="https://wa.me/573104108483?text=Hola%20Isabel%2C%20me%20interesa%20el%20Kit%20Branding%20Express%20(90%20USD)" target="_blank" rel="noopener" onclick="window.gtag&&gtag('event','click_kit_branding')">Escríbeme y hablamos</a>
+        </div>
+      </article>
+
+      <article class="kit-card anim d3">
+        <div class="kit-top"><h2>Kit Diseño<br>Web Express</h2></div>
+        <div class="kit-body">
+          <p>Diseño web limpio y adaptable a celular y PC, para que tu negocio se vea profesional desde el primer clic.</p>
+          <div class="kit-price"><small>Desde</small><b>$150</b> <span>USD</span></div>
+          <div class="kit-note">Diseño responsive · 1 página</div>
+          <a class="btn-primary kit-cta" href="https://wa.me/573104108483?text=Hola%20Isabel%2C%20me%20interesa%20el%20Kit%20Dise%C3%B1o%20Web%20Express%20(150%20USD)" target="_blank" rel="noopener" onclick="window.gtag&&gtag('event','click_kit_web')">Escríbeme y hablamos</a>
+        </div>
+      </article>
+    </section>
+
+    <p class="kits-footnote">Precios en USD, desde. Cada proyecto se cotiza según lo que necesites: escríbeme y te propongo el alcance exacto. Los cupos de lanzamiento son limitados.</p>
+
+    <!-- CÓMO FUNCIONA -->
+    <section class="kits-steps">
+      <h2>¿Cómo funciona?</h2>
+      <div class="kits-steps-grid">
+        <div class="kits-step">
+          <span class="n">1</span>
+          <h3>Me escribes</h3>
+          <p>Cuéntame qué necesitas y para cuándo. Te digo si el kit encaja o si hace falta algo más.</p>
+        </div>
+        <div class="kits-step">
+          <span class="n">2</span>
+          <h3>Propuesta y pago</h3>
+          <p>Te envío alcance, precio y fecha de entrega. Confirmas y empezamos.</p>
+        </div>
+        <div class="kits-step">
+          <span class="n">3</span>
+          <h3>Recibes tu kit</h3>
+          <p>Archivos listos para usar, con una ronda de ajustes incluida.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="kits-faq">
+      <h2>Preguntas rápidas</h2>
+      <details>
+        <summary>¿Los precios son fijos?</summary>
+        <p>Son precios "desde". Dependen del alcance: número de piezas, urgencia o si necesitas adaptaciones extra. Te confirmo el total antes de empezar.</p>
+      </details>
+      <details>
+        <summary>¿Cuánto tarda?</summary>
+        <p>El Kit Social suele estar en 2–3 días, el Branding en 5–7 días y el Web en 7–10 días, según la cantidad de ajustes.</p>
+      </details>
+      <details>
+        <summary>¿Puedo combinar kits?</summary>
+        <p>Sí. Si necesitas branding + web, o social + branding, te armo un paquete a medida.</p>
+      </details>
+      <details>
+        <summary>¿Cómo pago?</summary>
+        <p>Por PayPal o transferencia (Bancolombia, Nequi o Nu). Te comparto los datos al confirmar el proyecto.</p>
+      </details>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="kits-final">
+      <h2>¿Empezamos?</h2>
+      <p>Escríbeme por WhatsApp y hablemos de tu marca.</p>
+      <a class="btn-primary" href="https://wa.me/573104108483?text=Hola%20Isabel%2C%20quiero%20informaci%C3%B3n%20sobre%20los%20kits%20de%20dise%C3%B1o" target="_blank" rel="noopener">Escríbeme y hablamos →</a>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">&copy; 2026 Alquimia Lab &middot; Hecho con calma y café &middot; <a href="politica-privacidad">Política de Privacidad</a> &middot; <a href="terminos">Términos de Servicio</a></footer>
+
+  <!-- WHATSAPP -->
+  <a href="https://wa.me/573104108483" target="_blank" rel="noopener" class="whatsapp-float" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script>
+    window.addEventListener('scroll', function() {
+      document.querySelector('.nav').classList.toggle('scrolled', window.scrollY > 20);
+    });
+  </script>
+  <script src="js/lang.js?v=9" defer></script>
+</body>
+</html>

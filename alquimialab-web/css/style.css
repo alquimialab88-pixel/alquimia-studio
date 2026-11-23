@@ -2891,3 +2891,17 @@ input[type="reset"],
 [role="button"] {
   border-radius: 12px !important;
 }
+
+/* ===== Barra de avisos ===== */
+.announce-bar {
+  display: flex; align-items: center; justify-content: center;
+  flex-wrap: wrap; gap: 8px 14px;
+  background: #3b3866; color: #fff;
+  padding: 9px 16px; font-size: 13px; line-height: 1.4;
+  text-align: center;
+}
+.announce-bar b { color: #e3dfff; }
+.announce-bar a { color: #fff; font-weight: 800; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.45); }
+.announce-bar a:hover { border-bottom-color: #fff; }
+.announce-sep { opacity: .45; }
+@media (max-width: 560px) { .announce-bar { font-size: 12px; padding: 8px 12px; } .announce-sep { display: none; } }
