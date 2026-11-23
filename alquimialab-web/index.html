@@ -29,7 +29,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=21">
+  <link rel="stylesheet" href="css/style.css?v=22">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6568715444285154" crossorigin="anonymous"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y8Z50HWV3J"></script>
 <script>
@@ -91,7 +91,6 @@
         </div>
       </div>
       <a href="productos">Products</a>
-      <a href="kits">Kits</a>
       <a href="kore/">Kore</a>
       <a href="blog">Blog</a>
       <a href="contacto">Contact</a>
@@ -494,12 +493,6 @@
       <div class="section-title anim"><span>Featured</span></div>
     </div>
 
-    <!-- AVISO BLACK FRIDAY -->
-    <a class="bf-strip anim d1" href="vitrina">
-      <span class="bf-strip-tag">🖤 Black Friday</span>
-      <span class="bf-strip-text"><b>50%</b> en Planora, Alquimia Studio, Aurify y Stickly · hasta el 28 de nov</span>
-      <span class="bf-strip-go">Ver ofertas →</span>
-    </a>
 
     <!-- Caja morada tipo Kore · alterna Lofi ↔ Kore -->
     <div class="promo-rotator anim d1" id="promoRotator">
@@ -535,9 +528,24 @@
           </div>
         </div>
       </div>
+      <div class="promo-slide">
+        <div class="promo-text">
+          <span class="promo-badge">🖤 Black Friday · Hasta el 28 de nov</span>
+          <h3><em>50%</em> en tus favoritos</h3>
+          <p>Planora, Alquimia Studio, Aurify y Stickly a mitad de precio. Solo desde la vitrina.</p>
+          <p class="promo-sub">Pago único · Sin suscripción</p>
+          <a href="vitrina" class="promo-btn">Ver ofertas →</a>
+        </div>
+        <div class="promo-media promo-bf-visual" aria-hidden="true">
+          <span class="promo-bf-big">50%</span>
+          <span class="promo-bf-off">OFF</span>
+          <small>Planora · Studio<br>Aurify · Stickly</small>
+        </div>
+      </div>
       <div class="promo-dots">
         <button type="button" class="promo-dot is-on" aria-label="Lofi slide"></button>
         <button type="button" class="promo-dot" aria-label="Kore slide"></button>
+        <button type="button" class="promo-dot" aria-label="Black Friday slide"></button>
       </div>
     </div>
 
@@ -616,25 +624,34 @@
   <section class="section section-band-lilac home-kits">
     <div class="section-title anim"><span>Kits de diseño</span></div>
     <p class="home-kits-sub anim">Tu marca, lista para destacar — de cero a increíble en tiempo récord.</p>
-    <div class="home-kits-grid anim d1">
-      <a class="home-kit" href="kits">
-        <span class="home-kit-tag">Social</span>
-        <h3>Kit Social Express</h3>
-        <p>5 plantillas para posts y stories + guía de estilo para un feed coherente.</p>
-        <span class="home-kit-price"><small>Desde</small>$30 <em>USD</em></span>
-      </a>
-      <a class="home-kit" href="kits">
-        <span class="home-kit-tag">Branding</span>
-        <h3>Kit Branding Express</h3>
-        <p>Logo principal y secundario, paleta de color y tipografías de tu marca.</p>
-        <span class="home-kit-price"><small>Desde</small>$90 <em>USD</em></span>
-      </a>
-      <a class="home-kit" href="kits">
-        <span class="home-kit-tag">Web</span>
-        <h3>Kit Diseño Web Express</h3>
-        <p>Diseño web limpio y adaptable a celular y PC, listo para tu negocio.</p>
-        <span class="home-kit-price"><small>Desde</small>$150 <em>USD</em></span>
-      </a>
+    <div class="kits-grid home-kits-grid anim d1">
+      <article class="kit-card">
+        <div class="kit-top"><h2>Kit Social<br>Express</h2></div>
+        <div class="kit-body">
+          <p>5 plantillas para posts y stories + guía de estilo.</p>
+          <div class="kit-price"><small>Desde</small><b>$30</b> <span>USD</span></div>
+          <div class="kit-note">5 plantillas · guía de estilo</div>
+          <a class="btn-primary kit-cta" href="kits">Ver detalles</a>
+        </div>
+      </article>
+      <article class="kit-card">
+        <div class="kit-top"><h2>Kit Branding<br>Express</h2></div>
+        <div class="kit-body">
+          <p>Logo principal y secundario, paleta y tipografías.</p>
+          <div class="kit-price"><small>Desde</small><b>$90</b> <span>USD</span></div>
+          <div class="kit-note">Logo + paleta + tipografías</div>
+          <a class="btn-primary kit-cta" href="kits">Ver detalles</a>
+        </div>
+      </article>
+      <article class="kit-card">
+        <div class="kit-top"><h2>Kit Diseño<br>Web Express</h2></div>
+        <div class="kit-body">
+          <p>Diseño web limpio y adaptable a celular y PC.</p>
+          <div class="kit-price"><small>Desde</small><b>$150</b> <span>USD</span></div>
+          <div class="kit-note">Diseño responsive · 1 página</div>
+          <a class="btn-primary kit-cta" href="kits">Ver detalles</a>
+        </div>
+      </article>
     </div>
     <p class="home-kits-note anim">Cada kit es un proyecto único: se paga una sola vez, no es suscripción. Cupos limitados de lanzamiento.</p>
     <div class="home-kits-cta anim"><a href="kits" class="btn-primary">Ver todos los kits →</a></div>
