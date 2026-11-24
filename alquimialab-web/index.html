@@ -921,9 +921,11 @@
     .kore-sticky-x { flex: 0 0 auto; background: transparent; border: none; color: #fff; font-size: 20px; cursor: pointer; opacity: .8; padding: 4px 8px; }
     .bf-sticky { background: linear-gradient(135deg, #2e2b52, #4a3b8c); }
     .bf-sticky .kore-sticky-btn { background: #ffd23f; color: #2e2b52; border-radius: 10px; }
+    .kore-sticky.bf-sticky { bottom: 84px; }
     .whatsapp-float { bottom: 84px !important; }
-    @media (min-width: 720px) { .kore-sticky { left: 24px; right: auto; bottom: 24px; max-width: 560px; } }
+    @media (min-width: 720px) { .kore-sticky { left: 24px; right: auto; bottom: 24px; max-width: 560px; } .kore-sticky.bf-sticky { bottom: 104px; } }
     @media (max-width: 719px) {
+      .whatsapp-float { bottom: 164px !important; }
       .kore-sticky { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 12px; padding: 12px 14px; }
       .kore-sticky span { grid-column: 1; }
       .kore-sticky-btn { grid-column: 1; justify-self: start; max-width: 100%; white-space: normal; }
@@ -934,6 +936,11 @@
     <span>🖤 Black Friday: <b>50%</b> en digitales hasta el 28 de nov</span>
     <a href="vitrina" class="kore-sticky-btn" onclick="window.gtag&&gtag('event','click_sticky_black_friday')">Ver ofertas →</a>
     <button type="button" class="kore-sticky-x" aria-label="Cerrar" onclick="document.getElementById('bfSticky').remove()">×</button>
+  </div>
+  <div id="koreSticky" class="kore-sticky" role="region" aria-label="Kore app">
+    <span data-i18n="🦊 Kore is now on Google Play!">🦊 Kore is now on Google Play!</span>
+    <a href="https://play.google.com/store/apps/details?id=com.alquimialab.kore" target="_blank" rel="noopener" class="kore-sticky-btn" data-i18n="Download Kore" onclick="window.gtag&&gtag('event','click_sticky_download_kore')">Download Kore</a>
+    <button type="button" class="kore-sticky-x" aria-label="Close" onclick="document.getElementById('koreSticky').remove()">×</button>
   </div>
 
   <!-- WHATSAPP -->
