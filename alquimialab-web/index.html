@@ -919,6 +919,8 @@
     .kore-sticky span { flex: 0 0 auto; white-space: nowrap; }
     .kore-sticky-btn { flex: 0 0 auto; background: #ffd97a; color: #4a3b8c; font-weight: 700; padding: 10px 16px; text-align: center; text-decoration: none; white-space: nowrap; }
     .kore-sticky-x { flex: 0 0 auto; background: transparent; border: none; color: #fff; font-size: 20px; cursor: pointer; opacity: .8; padding: 4px 8px; }
+    .bf-sticky { background: linear-gradient(135deg, #2e2b52, #4a3b8c); }
+    .bf-sticky .kore-sticky-btn { background: #ffd23f; color: #2e2b52; border-radius: 10px; }
     .whatsapp-float { bottom: 84px !important; }
     @media (min-width: 720px) { .kore-sticky { left: 24px; right: auto; bottom: 24px; max-width: 560px; } }
     @media (max-width: 719px) {
@@ -928,10 +930,10 @@
       .kore-sticky-x { grid-column: 2; grid-row: 1 / 3; align-self: center; }
     }
   </style>
-  <div id="koreSticky" class="kore-sticky" role="region" aria-label="Kore app">
-    <span data-i18n="🦊 Kore is now on Google Play!">🦊 Kore is now on Google Play!</span>
-    <a href="https://play.google.com/store/apps/details?id=com.alquimialab.kore" target="_blank" rel="noopener" class="kore-sticky-btn" data-i18n="Download Kore" onclick="window.gtag&&gtag('event','click_sticky_download_kore')">Download Kore</a>
-    <button type="button" class="kore-sticky-x" aria-label="Close" onclick="document.getElementById('koreSticky').remove()">×</button>
+  <div id="bfSticky" class="kore-sticky bf-sticky" role="region" aria-label="Black Friday">
+    <span>🖤 Black Friday: <b>50%</b> en digitales hasta el 28 de nov</span>
+    <a href="vitrina" class="kore-sticky-btn" onclick="window.gtag&&gtag('event','click_sticky_black_friday')">Ver ofertas →</a>
+    <button type="button" class="kore-sticky-x" aria-label="Cerrar" onclick="document.getElementById('bfSticky').remove()">×</button>
   </div>
 
   <!-- WHATSAPP -->
