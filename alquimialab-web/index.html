@@ -29,7 +29,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=25">
+  <link rel="stylesheet" href="css/style.css?v=26">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6568715444285154" crossorigin="anonymous"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y8Z50HWV3J"></script>
 <script>
@@ -698,6 +698,19 @@
         </div>
         <div class="testimonial-home-quote">
           <span class="testimonial-home-mark" aria-hidden="true">&ldquo;</span>
+          <p>I wanted to thank you for the help with my personal branding — I got great reception on the posts...</p>
+          <span class="testimonial-result" style="display:inline-block;margin:4px 0 2px;font-weight:800;color:#6462ab;font-size:13.5px;" data-i18n="+3 new clients in one week">+3 clientes nuevos en una semana</span>
+          <button type="button" class="testimonial-readmore" onclick="openTestimonial('jm')">Read full review &rarr;</button>
+          <div class="testimonial-home-author" style="margin-top:16px;">
+            <div class="testimonial-home-avatar">JM</div>
+            <div>
+              <strong>Jean Marco Marte</strong>
+              <span>Software Development &amp; Systems</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-home-quote">
+          <span class="testimonial-home-mark" aria-hidden="true">&ldquo;</span>
           <p>¡Qué bueno que te elegí! Me encantó y me liberó de mi mayor problema al publicar.</p>
           <span class="testimonial-result" style="display:inline-block;margin:4px 0 2px;font-weight:800;color:#6462ab;font-size:13.5px;" data-i18n="It freed me from my biggest publishing problem">It freed me from my biggest publishing problem</span>
           <button type="button" class="testimonial-readmore" onclick="openTestimonial('gr')">Read full review &rarr;</button>
@@ -710,12 +723,28 @@
           </div>
         </div>
       </div>
+      <div class="testimonial-nav">
+        <button type="button" class="testimonial-arrow" id="tPrev" aria-label="Anterior">←</button>
+        <button type="button" class="testimonial-arrow" id="tNext" aria-label="Siguiente">→</button>
+      </div>
+      <script>
+      (function(){
+        var q = document.querySelector('.testimonial-home-quotes');
+        if (!q) return;
+        function step(dir){ q.scrollBy({ left: dir * q.clientWidth * 0.8, behavior: 'smooth' }); }
+        var p = document.getElementById('tPrev'), n = document.getElementById('tNext');
+        if (p) p.addEventListener('click', function(){ step(-1); });
+        if (n) n.addEventListener('click', function(){ step(1); });
+      })();
+      </script>
       <div class="testimonial-home-brands">
         <span class="testimonial-home-brands-label">Trusted by teams &amp; founders</span>
         <div class="testimonial-home-brand-row">
           <span class="testimonial-home-brand">Grolow Studio</span>
           <span class="testimonial-home-brand-dot">·</span>
           <span class="testimonial-home-brand">Stephania Daniel</span>
+          <span class="testimonial-home-brand-dot">·</span>
+          <span class="testimonial-home-brand">Jean Marco Marte</span>
         </div>
       </div>
     </div>
