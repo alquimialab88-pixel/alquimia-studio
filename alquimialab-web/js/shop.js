@@ -49,15 +49,15 @@
       id: 'stickly',
       name: 'Stickly — Tu día en orden, en un solo lugar',
       cat: 'digital',
-      short: 'Notas, tareas, calendario, contraseñas y enfoque. Privada, offline y sin cuentas.',
-      desc: 'Stickly reúne tus notas, tareas, calendario, cuadernos, notas de voz, contraseñas y temporizador de enfoque en una sola app. Sin cuentas, sin servidores y sin suscripciones: tus datos se quedan en tu dispositivo.',
+      short: '¿5 apps abiertas y ninguna te organiza? Abre UNA y ten tu día en calma. Sin cuenta. Sin suscripción.',
+      desc: '¿Tienes 5 apps abiertas y ninguna te organiza? Stickly reúne notas, tareas, calendario, contraseñas, notas de voz y Pomodoro en una sola app. Sin cuentas, sin servidores, sin suscripción: pago único y tus datos se quedan en tu dispositivo.',
       price: 11.99,
       salePrice: 5.99,
       free: false,
       soon: false,
       img: 'assets/stickly/cover.webp',
       fit: 'cover',
-      badge: 'Nuevo',
+      badge: 'Más vendido',
       note: 'Android + Windows + iPhone/iPad y web · Pago único · Acceso inmediato',
       link: 'https://alquimialab.gumroad.com/l/Stickly_ESP?wanted=true',
       bfLink: 'https://alquimialab.gumroad.com/l/Stickly_ESP/BLACKFRIDAY88',
@@ -562,18 +562,33 @@
     return p[field] || [];
   }
   function catLabel(cat) { return T.cats[cat] || cat; }
-  function badgeLabel(p) { return (lang === 'en' && p.badge === 'Nuevo') ? 'New' : p.badge; }
+  function badgeLabel(p) {
+    if (lang === 'en') {
+      if (p.badge === 'Nuevo') return 'New';
+      if (p.badge === 'Más vendido') return 'Bestseller';
+    }
+    return p.badge;
+  }
 
+  function copPrice(usd) {
+    if (!usd) return 0;
+    return Math.ceil((usd * 4150) / 1000) * 1000 - 100;
+  }
+  function fmtCop(n) {
+    return '$' + Number(n).toLocaleString('es-CO');
+  }
   function priceHTML(p) {
     if (p.priceLabel) return '<span class="v-price v-price-label">' + esc(p.priceLabel) + '</span>';
     if (p.soon) return '<span class="v-price v-soon">' + esc(T.soonPrice) + '</span>';
     if (p.free) return '<span class="v-price v-free">' + esc(T.freePrice) + '</span>';
     var price = shownPrice(p), old = shownOld(p);
-    var out = '<span class="v-price">' + fmt(price) + '</span>';
+    var out = '<span class="v-price">' + fmt(price) + ' USD</span>';
     if (old && old > price) {
       out += '<s class="v-old">' + fmt(old) + '</s>';
       out += '<span class="v-off">-' + Math.round((1 - price / old) * 100) + '%</span>';
     }
+    var cop = copPrice(price);
+    if (cop > 0) out += '<span class="v-cop">/ ' + fmtCop(cop) + ' COP</span>';
     return out;
   }
 
@@ -594,6 +609,20 @@
   function extLink(link) { return /^https?:/i.test(link) ? ' target="_blank" rel="noopener"' : ''; }
 
   function buyHTML(p, modal, feat) {
+    var price = shownPrice(p);
+    var cop = copPrice(price);
+    var isPaid = !p.free && !p.soon && price > 0;
+    if (isPaid) {
+      var gum = promoLink(p) || localized(p, 'link') || p.link;
+      var name = localized(p, 'name');
+      var wa = 'https://wa.me/573104108483?text=' + encodeURIComponent('Hola, quiero ' + name + ' con el 50% Black Friday');
+      var labelA = (lang === 'en' ? 'Buy with Card' : 'Comprar con Tarjeta') + ' - ' + fmt(price) + ' USD';
+      var labelB = (lang === 'en' ? 'Colombia: Pay with Nequi / PSE' : 'Colombia: Paga con Nequi / PSE') + ' - ' + fmtCop(cop) + ' COP';
+      return '<div class="v-buy-row v-buy-row-split' + (modal ? ' v-buy-row-modal' : '') + '">' +
+        '<a class="btn-sm btn-primary v-buy" href="' + esc(gum) + '" target="_blank" rel="noopener">' + esc(labelA) + '</a>' +
+        '<a class="btn-sm btn-secondary v-buy" href="' + esc(wa) + '" target="_blank" rel="noopener">' + esc(labelB) + '</a>' +
+        '</div>';
+    }
     var links = linksFor(p);
     if (feat) {
       links = [{
@@ -633,12 +662,12 @@
     '</div>';
   }
 
-  function cardHTML(p, feat) {
+  function cardHTML(p, feat, big) {
     var name = localized(p, 'name');
     var short = localized(p, 'short');
     var cat = feat ? T.cats.digital : catLabel(p.cat);
     return '' +
-      '<article class="v-card">' +
+      '<article class="v-card' + (big ? ' v-card--feature' : '') + '">' +
         '<button type="button" class="v-media' + (p.fit === 'contain' ? ' contain' : '') + '" data-qv="' + p.id + '">' +
           mediaHTML(p) +
           '<span class="v-sr">' + esc(name) + '</span>' +
@@ -668,8 +697,19 @@
 
   function render() {
     var list = PRODUCTS.filter(matches);
-    grid.innerHTML = list.map(function (p) { return cardHTML(p, false); }).join('');
     var q = searchEl.value.trim();
+    if (activeCat === 'all' && !q) {
+      var stickly = list.filter(function (p) { return p.id === 'stickly'; })[0];
+      var freeList = list.filter(function (p) { return p.free && p.id !== 'stickly'; });
+      var restList = list.filter(function (p) { return !p.free && p.id !== 'stickly'; });
+      var html = '';
+      if (stickly) html += cardHTML(stickly, false, true);
+      if (freeList.length) html += '<div class="v-sec-title">' + (lang === 'en' ? 'Try Free First' : 'Prueba gratis primero') + '</div>' + freeList.map(function (p) { return cardHTML(p, false); }).join('');
+      if (restList.length) html += '<div class="v-sec-title">' + (lang === 'en' ? 'More calm tools' : 'Más herramientas en calma') + '</div>' + restList.map(function (p) { return cardHTML(p, false); }).join('');
+      grid.innerHTML = html;
+    } else {
+      grid.innerHTML = list.map(function (p) { return cardHTML(p, false); }).join('');
+    }
     resultEl.textContent = list.length + ' ' + (list.length === 1 ? T.resultOne : T.resultMany) +
       (q ? T.resultFor + '“' + q + '”' : '');
     emptyEl.hidden = list.length !== 0;
@@ -753,6 +793,10 @@
     txt('statProductsLabel', T.products);
     txt('statFreeLabel', T.freeLabel);
     txt('statFromLabel', T.from);
+    var stTotal = $('statTotal');
+    if (stTotal) stTotal.textContent = PRODUCTS.length;
+    var stFree = $('statFree');
+    if (stFree) stFree.textContent = PRODUCTS.filter(function (p) { return p.free; }).length;
 
     if (searchEl) {
       searchEl.placeholder = T.search;

@@ -398,3 +398,22 @@
 }
 #shop, #filtros { scroll-margin-top: 84px; }
 
+
+/* ===== Vitrina: precios COP, Stickly destacado y doble pago ===== */
+.v-cop { display: inline-block; font-size: 11px; font-weight: 700; color: #8a87ad; margin-left: 4px; }
+.v-card--feature { grid-column: span 2; }
+.v-card--feature .v-media { aspect-ratio: 16 / 9; }
+.v-card--feature .v-body { padding: 20px 22px 22px; }
+.v-sec-title {
+  grid-column: 1 / -1; margin: 18px 0 2px; padding-top: 18px;
+  border-top: 1px solid #e8e6f4;
+  font-size: 12px; font-weight: 800; letter-spacing: .14em;
+  text-transform: uppercase; color: #6462ab;
+}
+.v-buy-row-split { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.v-buy-row-split .v-buy { font-size: 11px; padding: 9px 10px; text-align: center; }
+@media (max-width: 720px) {
+  .v-card--feature { grid-column: auto; }
+  .v-card--feature .v-media { aspect-ratio: 4 / 3; }
+  .v-buy-row-split { grid-template-columns: 1fr; }
+}
