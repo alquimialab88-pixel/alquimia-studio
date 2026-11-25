@@ -21,6 +21,8 @@
     "I create calm tools for busy minds. Notion templates & apps to organize your day. No subscriptions. No accounts. Just calm.": "Creo herramientas en calma para mentes ocupadas. Sin suscripciones. Sin cuentas. Solo calma.",
     "+3 new clients in one week": "+3 clientes nuevos en una semana",
     "It freed me from my biggest publishing problem": "Me liberó de mi mayor problema al publicar",
+    "Web design · Alquimia Lab": "Diseño web · Alquimia Lab",
+    "Author": "Autora",
     "AI": "IA",
     "My rules for working with AI": "Mis reglas para trabajar con IA",
     "The calm version is smaller than you think. You don't need every area of life in one place - you need one entry point that tells you where to look, and three areas you actually check every day.": "La versión tranquila es más pequeña de lo que crees. No necesitas cada área de la vida en un lugar: necesitas un punto de entrada que te diga dónde mirar, y tres áreas que realmente revisas cada día.",
