@@ -1,4 +1,4 @@
-const CACHE = 'plan-maestro-pwa-v2';
+const CACHE = 'plan-maestro-pwa-v3';
 const FILES = ['./index.html', './manifest.json', './icons/favicon.svg', './icons/icon-192.png', './icons/icon-512.png'];
 
 self.addEventListener('install', event => {

@@ -377,7 +377,7 @@ body.compact .post-ctrl .date-in{padding:4px 6px;font-size:11px}
         <button type="button" id="pmActivateBtn" data-i18n="Activar">Activar</button>
       </div>
       <p id="pmLicenseError"></p>
-      <p class="pm-license-hint"><span data-i18n="¿No tienes código?">¿No tienes código?</span> <a href="https://alquimialab.gumroad.com/l/PlantillaPlanMaestro" target="_blank" rel="noopener" data-i18n="Consíguelo aquí">Consíguelo aquí</a></p>
+      <p class="pm-license-hint"><span data-i18n="¿No tienes código?">¿No tienes código?</span> <a id="pmBuyLink" href="https://alquimialab.gumroad.com/l/Planora" target="_blank" rel="noopener" data-i18n="Consíguelo aquí">Consíguelo aquí</a></p>
     </div>
     <div id="pmLangStep" style="display:none">
       <p class="pm-license-info" data-i18n="Elige tu idioma">Elige tu idioma</p>
@@ -2283,6 +2283,17 @@ if('serviceWorker' in navigator){
     });
   });
 }
+</script>
+<script>
+(function () {
+  try {
+    var idioma = (navigator.language || "es").toLowerCase();
+    var enlace = document.getElementById("pmBuyLink");
+    if (enlace && idioma.indexOf("en") === 0) {
+      enlace.href = "https://alquimialab.gumroad.com/l/Planora-pro";
+    }
+  } catch (e) { /* ignore */ }
+})();
 </script>
 </body>
 </html>
