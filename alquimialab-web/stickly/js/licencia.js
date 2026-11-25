@@ -56,7 +56,7 @@
   var TEXTOS = {
     es: {
       title: "Activa tu copia de {app}",
-      lead: "Pega la clave que te llegó por correo cuando la compraste en Gumroad. Solo hace falta una vez.",
+      lead: "Pega la clave que te llegó por correo cuando compraste la app (Gumroad o Payhip). Solo hace falta una vez.",
       placeholder: "Tu clave de compra",
       action: "Activar",
       checking: "Comprobando la clave…",
@@ -72,7 +72,7 @@
     },
     en: {
       title: "Activate your copy of {app}",
-      lead: "Paste the key from your Gumroad receipt. You only need to do this once.",
+      lead: "Paste the key from your Gumroad or Payhip receipt. You only need to do this once.",
       placeholder: "Your purchase key",
       action: "Activate",
       checking: "Checking your key…",
