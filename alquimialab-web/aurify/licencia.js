@@ -18,6 +18,7 @@
        data-compra-en="https://…?wanted=true"  ficha en inglés (opcional)
        data-email="hola@alquimialab.com"
        data-productos="id1,id2"          product_id de Gumroad (varios: ES y EN)
+       data-payhip="prod_sk_…"           clave secreta del producto en Payhip (opcional)
        data-maestras="hash1,hash2"       claves maestras (solo hashes)
        data-nativo="SticklyDesktop"      globales extra que indican app nativa
      ></script>
@@ -41,6 +42,7 @@
   var COMPRA_EN = D.compraEn || "";
   var CORREO = D.email || "hola@alquimialab.com";
   var PRODUCTOS = lista(D.productos);
+  var PAYHIP = D.payhip || "";
   var MAESTRAS = lista(D.maestras);
   var NATIVOS = lista(D.nativo);
 
@@ -460,7 +462,7 @@
       }
     }
 
-    if (!PRODUCTOS.length) {
+    if (!PRODUCTOS.length && !PAYHIP) {
       return Promise.resolve({ ok: false, tipo: "sin-config" });
     }
 
@@ -471,7 +473,7 @@
     var indice = 0;
 
     function siguiente() {
-      if (indice >= PRODUCTOS.length) return Promise.resolve({ ok: false, tipo: "invalida" });
+      if (indice >= PRODUCTOS.length) return conPayhip();
       var producto = PRODUCTOS[indice++];
       return pedir(producto, codigo).then(function (respuesta) {
         if (respuesta && respuesta.success) {
@@ -485,7 +487,45 @@
       });
     }
 
+    /* Si no era de Gumroad, se prueba la tienda de Payhip. */
+    function conPayhip() {
+      if (!PAYHIP) return Promise.resolve({ ok: false, tipo: "invalida" });
+      return pedirPayhip(codigo);
+    }
+
     return siguiente();
+  }
+
+  function pedirPayhip(codigo) {
+    var control = null;
+    var temporizador = null;
+    if (typeof AbortController === "function") {
+      control = new AbortController();
+      temporizador = setTimeout(function () { control.abort(); }, 12000);
+    }
+
+    var url = "https://payhip.com/api/v2/license/verify?license_key=" + encodeURIComponent(codigo);
+
+    return fetch(url, {
+      method: "GET",
+      headers: { "product-secret-key": PAYHIP },
+      signal: control ? control.signal : undefined,
+    }).then(function (respuesta) {
+      if (temporizador) clearTimeout(temporizador);
+      if (!respuesta.ok && respuesta.status !== 200) {
+        return { ok: false, tipo: "invalida" };
+      }
+      return respuesta.json().catch(function () { return {}; }).then(function (datos) {
+        var d = datos && datos.data;
+        if (d && d.enabled !== false && d.license_key) {
+          return { ok: true, modo: "payhip" };
+        }
+        return { ok: false, tipo: "invalida" };
+      });
+    }, function (error) {
+      if (temporizador) clearTimeout(temporizador);
+      throw error;
+    });
   }
 
   function pedir(producto, codigo) {
