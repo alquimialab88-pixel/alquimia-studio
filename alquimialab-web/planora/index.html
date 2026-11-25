@@ -373,7 +373,7 @@ body.compact .post-ctrl .date-in{padding:4px 6px;font-size:11px}
     <div id="pmLicenseForm">
       <p class="pm-license-info" data-i18n="Ingresa tu código de acceso para activar">Ingresa tu código de acceso para activar</p>
       <div class="pm-license-row">
-        <input type="text" id="pmLicenseInput" placeholder="XXXX-XXXX-XXXX-XXXX" maxlength="19" autocomplete="off">
+        <input type="text" id="pmLicenseInput" placeholder="XXXX-XXXX-XXXX-XXXX" maxlength="40" autocomplete="off">
         <button type="button" id="pmActivateBtn" data-i18n="Activar">Activar</button>
       </div>
       <p id="pmLicenseError"></p>
@@ -2199,8 +2199,67 @@ function pmValid(code){
   var input=base.slice(0,4)+'-'+base.slice(4,8)+'-'+base.slice(8,12);
   return clean.endsWith(pmHash(input).slice(-4));
 }
+/* --- Tiendas: Gumroad y Payhip ------------------------------------------ */
+var PM_GUMROAD=['hCSSRFL4ULLacP6mfbY78w==','Sso01VHNe7hI0UG7Gs5RdA=='];
+var PM_PAYHIP=''; /* se rellena cuando exista el producto en Payhip */
+var PM_OK='plan-maestro-license-ok';
+
 function pmStored(){
-  try{return pmValid(localStorage.getItem(PM_KEY)||'');}catch(e){return false;}
+  try{
+    if(localStorage.getItem(PM_OK)==='1')return true;
+    return pmValid(localStorage.getItem(PM_KEY)||'');
+  }catch(e){return false;}
+}
+
+function pmGuardar(valor){
+  try{
+    localStorage.setItem(PM_KEY,valor||'');
+    localStorage.setItem(PM_OK,'1');
+    return true;
+  }catch(e){
+    console.warn('Could not save activation:',e);
+    return false;
+  }
+}
+
+function pmGumroad(id,clave){
+  var cuerpo=new URLSearchParams();
+  cuerpo.set('product_id',id);
+  cuerpo.set('license_key',clave);
+  cuerpo.set('increment_uses_count','false');
+  return fetch('https://api.gumroad.com/v2/licenses/verify',{method:'POST',body:cuerpo})
+    .then(function(r){return r.json().catch(function(){return {};});})
+    .then(function(d){
+      if(!d||!d.success)return false;
+      var c=d.purchase||{};
+      return !(c.refunded||c.chargebacked);
+    });
+}
+
+function pmPayhip(clave){
+  if(!PM_PAYHIP)return Promise.resolve(false);
+  return fetch('https://payhip.com/api/v2/license/verify?license_key='+encodeURIComponent(clave),{
+    headers:{'product-secret-key':PM_PAYHIP}
+  })
+    .then(function(r){return r.json().catch(function(){return {};});})
+    .then(function(d){
+      var x=d&&d.data;
+      return !!(x&&x.license_key&&x.enabled!==false);
+    });
+}
+
+function pmTienda(clave){
+  var i=0;
+  function siguiente(){
+    if(i>=PM_GUMROAD.length){
+      return pmPayhip(clave).catch(function(){return false;});
+    }
+    var id=PM_GUMROAD[i++];
+    return pmGumroad(id,clave)
+      .then(function(ok){return ok?true:siguiente();})
+      .catch(function(){return siguiente();});
+  }
+  return siguiente();
 }
 function bootApp(){
   loadStore();
@@ -2227,24 +2286,46 @@ document.addEventListener('DOMContentLoaded',function initLicenseGate(){
   var btn=document.getElementById('pmActivateBtn');
   var err=document.getElementById('pmLicenseError');
   input.addEventListener('input',function(){
-    var v=input.value.replace(/[^A-Za-z0-9]/g,'').toUpperCase();
-    var f=v.match(/.{1,4}/g);
-    input.value=f?f.join('-'):v;
+    /* Se respeta el formato de cada tienda: Gumroad y Payhip ya traen guiones. */
+    input.value=input.value.replace(/[^A-Za-z0-9\-]/g,'').toUpperCase();
   });
   btn.addEventListener('click',function(){
-    if(pmValid(input.value.trim())){
-      try{localStorage.setItem(PM_KEY,input.value.trim());}
-      catch(e){
-        console.warn('Could not save activation:',e);
+    var valor=input.value.trim();
+    if(!valor)return;
+    err.style.display='none';
+
+    /* 1. Códigos propios de Planora (los que ya existen). */
+    if(pmValid(valor)){
+      if(pmGuardar(valor))finishActivation();
+      else{
         err.textContent=t('No se pudo guardar la activación en este dispositivo.');
         err.style.display='block';
-        return;
       }
-      finishActivation();
-    }else{
-      err.textContent=t('Código inválido. Verifica e intenta de nuevo.');
-      err.style.display='block';
+      return;
     }
+
+    /* 2. Claves de Gumroad o Payhip. */
+    btn.disabled=true;
+    err.textContent=t('Comprobando…');
+    err.style.display='block';
+
+    pmTienda(valor).then(function(ok){
+      btn.disabled=false;
+      if(ok){
+        if(pmGuardar(valor))finishActivation();
+        else{
+          err.textContent=t('No se pudo guardar la activación en este dispositivo.');
+          err.style.display='block';
+        }
+      }else{
+        err.textContent=t('Código inválido. Verifica e intenta de nuevo.');
+        err.style.display='block';
+      }
+    }).catch(function(){
+      btn.disabled=false;
+      err.textContent=t('Sin conexión. La primera activación necesita internet.');
+      err.style.display='block';
+    });
   });
   input.addEventListener('keypress',function(e){ if(e.key==='Enter') btn.click(); });
 });
