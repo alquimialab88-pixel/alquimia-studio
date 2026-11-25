@@ -2,8 +2,8 @@
   "name": "Planora · Alquimia Lab",
   "short_name": "Planora",
   "description": "Tu parrilla de contenido interactiva",
-  "start_url": "./index.html",
-  "scope": "./",
+  "start_url": "../planora/index.html",
+  "scope": "../planora/",
   "display": "standalone",
   "background_color": "#F7F5FB",
   "theme_color": "#6462AB",
@@ -27,6 +27,9 @@
       "purpose": "any"
     }
   ],
-  "categories": ["productivity", "utilities"],
+  "categories": [
+    "productivity",
+    "utilities"
+  ],
   "lang": "es"
 }
