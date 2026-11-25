@@ -16,7 +16,7 @@
        data-logo="icon-192.png"          icono de la tarjeta
        data-compra="https://…?wanted=true"     ficha en español
        data-compra-en="https://…?wanted=true"  ficha en inglés (opcional)
-       data-email="hola@alquimialab.com"
+       data-email="alquimialab88@gmail.com"
        data-productos="id1,id2"          product_id de Gumroad (varios: ES y EN)
        data-payhip="prod_sk_…"           clave secreta del producto en Payhip (opcional)
        data-maestras="hash1,hash2"       claves maestras (solo hashes)
@@ -40,7 +40,7 @@
   var LOGO = D.logo || "";
   var COMPRA = D.compra || "";
   var COMPRA_EN = D.compraEn || "";
-  var CORREO = D.email || "hola@alquimialab.com";
+  var CORREO = D.email || "alquimialab88@gmail.com";
   var PRODUCTOS = lista(D.productos);
   var PAYHIP = D.payhip || "";
   var MAESTRAS = lista(D.maestras);
