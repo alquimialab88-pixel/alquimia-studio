@@ -29,7 +29,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=27">
+  <link rel="stylesheet" href="css/style.css?v=28">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6568715444285154" crossorigin="anonymous"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y8Z50HWV3J"></script>
 <script>
@@ -681,11 +681,11 @@
 
   <!-- 6 · PRUEBA SOCIAL (Opción C) -->
   <section class="section section-band-lilac">
-    <div class="section-title anim"><span>What they say</span></div>
+    <div class="section-title anim"><span data-i18n="What our clients say">What our clients say</span></div>
     <div class="testimonial-home anim d1">
       <div class="testimonial-home-quotes">
-        <div class="testimonial-home-quote">
-          <span class="testimonial-home-mark" aria-hidden="true">&ldquo;</span>
+        <div class="testimonial-home-quote is-active">
+          <div class="testimonial-stars" aria-label="5 de 5">★★★★★</div>
           <p>Ahhhhhhhh no lo supero, amo mi página. ¡Muchísimas gracias! ❤️❤️❤️❤️</p>
           <span class="testimonial-result" style="display:inline-block;margin:4px 0 2px;font-weight:800;color:#6462ab;font-size:13.5px;" data-i18n="Web design · Alquimia Lab">Diseño web · Alquimia Lab</span>
           <div class="testimonial-home-author" style="margin-top:16px;">
@@ -695,9 +695,10 @@
               <span data-i18n="Author">Author</span>
             </div>
           </div>
+          <span class="testimonial-quote-big" aria-hidden="true">”</span>
         </div>
         <div class="testimonial-home-quote">
-          <span class="testimonial-home-mark" aria-hidden="true">&ldquo;</span>
+          <div class="testimonial-stars" aria-label="5 de 5">★★★★★</div>
           <p>I wanted to thank you for the help with my personal branding — I got great reception on the posts...</p>
           <span class="testimonial-result" style="display:inline-block;margin:4px 0 2px;font-weight:800;color:#6462ab;font-size:13.5px;" data-i18n="+3 new clients in one week">+3 clientes nuevos en una semana</span>
           <button type="button" class="testimonial-readmore" onclick="openTestimonial('jm')">Read full review &rarr;</button>
@@ -708,9 +709,10 @@
               <span>Software Development &amp; Systems</span>
             </div>
           </div>
+          <span class="testimonial-quote-big" aria-hidden="true">”</span>
         </div>
         <div class="testimonial-home-quote">
-          <span class="testimonial-home-mark" aria-hidden="true">&ldquo;</span>
+          <div class="testimonial-stars" aria-label="5 de 5">★★★★★</div>
           <p>¡Qué bueno que te elegí! Me encantó y me liberó de mi mayor problema al publicar.</p>
           <span class="testimonial-result" style="display:inline-block;margin:4px 0 2px;font-weight:800;color:#6462ab;font-size:13.5px;" data-i18n="It freed me from my biggest publishing problem">It freed me from my biggest publishing problem</span>
           <button type="button" class="testimonial-readmore" onclick="openTestimonial('gr')">Read full review &rarr;</button>
@@ -721,6 +723,7 @@
               <span>grolow.studio &middot; Web for Business</span>
             </div>
           </div>
+          <span class="testimonial-quote-big" aria-hidden="true">”</span>
         </div>
       </div>
       <div class="testimonial-nav">
@@ -731,10 +734,29 @@
       (function(){
         var q = document.querySelector('.testimonial-home-quotes');
         if (!q) return;
-        function step(dir){ q.scrollBy({ left: dir * q.clientWidth * 0.8, behavior: 'smooth' }); }
+        var quotes = [].slice.call(q.querySelectorAll('.testimonial-home-quote'));
+        function setActive(){
+          var center = q.scrollLeft + q.clientWidth / 2;
+          var best = 0, dist = Infinity;
+          quotes.forEach(function(el, i){
+            var c = el.offsetLeft + el.offsetWidth / 2;
+            var d = Math.abs(c - center);
+            if (d < dist) { dist = d; best = i; }
+          });
+          quotes.forEach(function(el, i){ el.classList.toggle('is-active', i === best); });
+        }
+        q.addEventListener('scroll', function(){ requestAnimationFrame(setActive); }, { passive: true });
+        function step(dir){
+          var idx = 0;
+          quotes.forEach(function(el, i){ if (el.classList.contains('is-active')) idx = i; });
+          var next = Math.max(0, Math.min(quotes.length - 1, idx + dir));
+          var el = quotes[next];
+          q.scrollTo({ left: el.offsetLeft - (q.clientWidth - el.offsetWidth) / 2, behavior: 'smooth' });
+        }
         var p = document.getElementById('tPrev'), n = document.getElementById('tNext');
         if (p) p.addEventListener('click', function(){ step(-1); });
         if (n) n.addEventListener('click', function(){ step(1); });
+        setActive();
       })();
       </script>
       <div class="testimonial-home-brands">
@@ -796,7 +818,7 @@
     </div>
   </footer>
 
-  <script src="js/lang.js?v=11" defer></script>
+  <script src="js/lang.js?v=12" defer></script>
   <script>
     /* Featured carousel auto-scroll */
     (function(){
