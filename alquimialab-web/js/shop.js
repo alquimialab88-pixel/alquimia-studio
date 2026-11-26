@@ -311,8 +311,8 @@
       bfTag: 'Black Friday',
       bfTitle: 'Black Friday: <b>50%</b> en estos productos digitales',
       bfSub: 'Solo hasta el 28 de noviembre · Pago único · Sin suscripción',
-      bfNote: 'El 50% se aplica automáticamente al comprar desde aquí.',
-      bfCode: '¿Quieres el 50% en plantillas Notion? Usa el código <b>BLACKFRIDAY88</b> al comprar.',
+      bfNote: 'Los productos digitales de esta sección ya tienen el 50% aplicado al comprar desde aquí.',
+      bfCode: 'Plantillas Notion: usa el código <b>BLACKFRIDAY88</b> al comprar.',
       bfPreview: 'Vista previa · La promo no está activa ahora, el código no aplica descuento.',
       guarantee: 'Garantía de 14 días · Pago único',
       cdD: 'Días', cdH: 'Horas', cdM: 'Min', cdS: 'Seg',
@@ -359,8 +359,8 @@
       bfTag: 'Black Friday',
       bfTitle: 'Black Friday: <b>50%</b> off these digital products',
       bfSub: 'Until November 28 only · One-time payment · No subscription',
-      bfNote: 'The 50% discount is applied automatically when you check out from here.',
-      bfCode: 'Want 50% off Notion templates? Use the code <b>BLACKFRIDAY88</b> at checkout.',
+      bfNote: 'Digital products in this section already include 50% off when you buy from here.',
+      bfCode: 'Notion templates: use the code <b>BLACKFRIDAY88</b> at checkout.',
       bfPreview: 'Preview · The promo is not active right now, so the code will not apply a discount.',
       guarantee: '14-day guarantee · One-time payment',
       cdD: 'Days', cdH: 'Hours', cdM: 'Min', cdS: 'Sec',
@@ -730,7 +730,7 @@
     if (bfSection) bfSection.hidden = false;
     var bfOrder = ['studio', 'planora', 'aurify', 'stickly'];
     bfGrid.innerHTML = PRODUCTS.filter(function (p) {
-      return typeof p.salePrice === 'number';
+      return typeof p.salePrice === 'number' && p.id !== 'stickly';
     }).sort(function (a, b) {
       return bfOrder.indexOf(a.id) - bfOrder.indexOf(b.id);
     }).map(function (p) { return cardHTML(p, true); }).join('');
