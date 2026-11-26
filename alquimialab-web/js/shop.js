@@ -314,6 +314,8 @@
       bfNote: 'El 50% se aplica automáticamente al comprar desde aquí.',
       bfCode: '¿Quieres el 50% en plantillas Notion? Usa el código <b>BLACKFRIDAY88</b> al comprar.',
       bfPreview: 'Vista previa · La promo no está activa ahora, el código no aplica descuento.',
+      guarantee: 'Garantía de 14 días · Pago único',
+      cdD: 'Días', cdH: 'Horas', cdM: 'Min', cdS: 'Seg',
       search: 'Buscar producto…',
       filters: { all: 'Todos', digital: 'Digitales', print: 'Impresos', notion: 'Notion', free: 'Gratis' },
       resultOne: 'producto',
@@ -360,6 +362,8 @@
       bfNote: 'The 50% discount is applied automatically when you check out from here.',
       bfCode: 'Want 50% off Notion templates? Use the code <b>BLACKFRIDAY88</b> at checkout.',
       bfPreview: 'Preview · The promo is not active right now, so the code will not apply a discount.',
+      guarantee: '14-day guarantee · One-time payment',
+      cdD: 'Days', cdH: 'Hours', cdM: 'Min', cdS: 'Sec',
       search: 'Search products…',
       filters: { all: 'All', digital: 'Digital', print: 'Print', notion: 'Notion', free: 'Free' },
       resultOne: 'product',
@@ -680,6 +684,7 @@
           '<p class="v-short">' + esc(short) + '</p>' +
           '<div class="v-price-row">' + priceHTML(p) + '</div>' +
           buyHTML(p, false, feat) +
+          ((!p.free && !p.soon && p.price > 0) ? '<p class="v-guarantee">✓ ' + (lang === 'en' ? '14-day guarantee · One-time payment' : 'Garantía de 14 días · Pago único') + '</p>' : '') +
         '</div>' +
       '</article>';
   }
@@ -777,6 +782,31 @@
     if (b3) b3.textContent = T.bubblePrint;
   }
 
+  var cdTimer = null;
+  function startCountdown() {
+    var el = $('bfCountdown');
+    if (!el) return;
+    if (!PROMO_ON) { el.hidden = true; return; }
+    el.hidden = false;
+    if (cdTimer) clearInterval(cdTimer);
+    function tick() {
+      var diff = PROMO_END.getTime() - Date.now();
+      if (diff <= 0) { el.hidden = true; if (cdTimer) clearInterval(cdTimer); cdTimer = null; return; }
+      var d = Math.floor(diff / 86400000); diff -= d * 86400000;
+      var h = Math.floor(diff / 3600000); diff -= h * 3600000;
+      var m = Math.floor(diff / 60000); diff -= m * 60000;
+      var s = Math.floor(diff / 1000);
+      function two(n) { return (n < 10 ? '0' : '') + n; }
+      el.innerHTML =
+        '<div><b>' + two(d) + '</b><span>' + T.cdD + '</span></div>' +
+        '<div><b>' + two(h) + '</b><span>' + T.cdH + '</span></div>' +
+        '<div><b>' + two(m) + '</b><span>' + T.cdM + '</span></div>' +
+        '<div><b>' + two(s) + '</b><span>' + T.cdS + '</span></div>';
+    }
+    tick();
+    cdTimer = setInterval(tick, 1000);
+  }
+
   function applyStatic() {
     document.documentElement.lang = lang;
     var hero = MODE === 'private'
@@ -816,6 +846,8 @@
     txt('bfSub', T.bfSub);
     txt('bfNote', T.bfNote);
     html('bfCode', T.bfCode);
+    var g = $('bfGuarantee');
+    if (g) g.textContent = '✓ ' + T.guarantee;
     var prev = $('bfPreview');
     if (prev) prev.hidden = !PROMO_PREVIEW;
 
@@ -824,6 +856,7 @@
 
     bubbles();
     renderBF();
+    startCountdown();
     updateLangButton();
   }
 
